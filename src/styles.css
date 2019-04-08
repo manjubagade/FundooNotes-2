@@ -6,9 +6,9 @@ div.sm.jumbotron{
     color: aliceblue;
 }
 button.btn-submit{
-    background-color: rgb(235, 226, 215);
+    background-color: crimson;
     color: slateblue;
-    width: 100%;
+    width: 10%;
 }
 button.btn-submit:focus,button.btn-submit:hover{
     background-color: royalblue;
