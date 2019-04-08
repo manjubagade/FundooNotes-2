@@ -1,20 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-div.sm.jumbotron{
-    margin: 0px;
-    padding:0rem;
-    background-color: royalblue;
-    color: aliceblue;
-}
-button.btn-submit{
-    background-color: crimson;
-    color: slateblue;
-    width: 10%;
-}
-button.btn-submit:focus,button.btn-submit:hover{
-    background-color: royalblue;
-
-}
-input.ng-invalide.ng-dirty{
-    border-bottom-color: crimson !important;
-box-shadow: 0 1px 0 0 crimson !important;
-}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }

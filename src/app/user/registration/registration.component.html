@@ -7,6 +7,7 @@
       <div class="form-group">
         <label>Email</label>
         <input class="form-control" formControlName="Email">
+        <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">This field is mandatory.</label>
         <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Invalid email address.</label>
       </div>
       <div class="form-group">
@@ -19,7 +20,7 @@
           <label>Password</label>
           <input type="password" class="form-control" formControlName="Password">
           <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">This field is mandatory.</label>
-          <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Minimum 4 characters required.</label>
+          <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Minimum 3 characters required.</label>
         </div>
         <div class="form-group required">
           <label>Confirm Password</label>

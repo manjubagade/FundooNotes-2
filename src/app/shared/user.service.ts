@@ -12,10 +12,10 @@ export class UserService {
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
-    Email: ['', Validators.email],
+    Email: ['', [Validators.required, Validators.email]],
     FirstName: [''],
     Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(4)]],
+      Password: ['', [Validators.required, Validators.minLength(3)]],
       ConfirmPassword: ['', Validators.required]
     }, { validator: this.comparePasswords })
 
