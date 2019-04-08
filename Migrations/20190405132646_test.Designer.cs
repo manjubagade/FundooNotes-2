@@ -11,7 +11,7 @@ namespace FundooNotesBackEnd.Migrations
 {
     [DbContext(typeof(RegistrationControl))]
     [Migration("20190405132646_test")]
-    partial class test
+    partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

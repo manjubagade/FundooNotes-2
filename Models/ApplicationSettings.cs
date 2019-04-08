@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoginControl.cs" company="Bridgelabz">
+// <copyright file="ApplicationSettings.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
@@ -12,24 +12,16 @@ namespace FundooNotesBackEnd.Models
     using System.Threading.Tasks;
 
     /// <summary>
-    /// LoginControl Class
+    /// ApplicationSettings class
     /// </summary>
-    public class LoginControl
+    public class ApplicationSettings
     {
         /// <summary>
-        /// Gets or sets the name of the user.
+        /// Gets or sets the JWT secret.
         /// </summary>
         /// <value>
-        /// The name of the user.
+        /// The JWT secret.
         /// </value>
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        /// <value>
-        /// The password.
-        /// </value>
-        public string Password { get; set; }
+        public string JWT_Secret { get; set; }
     }
 }
