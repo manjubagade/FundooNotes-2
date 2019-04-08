@@ -67,6 +67,7 @@ namespace FundooNotesBackEnd.Controllers
         {
             try
             {
+                ////Assign Variables
                 var applicationUser = new ApplicationUser()
                 {
                     FirstName = userRegistration.FirstName,
@@ -74,7 +75,8 @@ namespace FundooNotesBackEnd.Controllers
                     UserName = userRegistration.UserName
                 };
                 try
-                { 
+                {
+                    ////Encrypted Password Assign Here
                     var result = await this.userManager.CreateAsync(applicationUser, userRegistration.Password);
                     return this.Ok(result);
                 }
@@ -98,7 +100,9 @@ namespace FundooNotesBackEnd.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginControl control)
         {
+            ////Checking Name
             var user = await this.userManager.FindByNameAsync(control.UserName);
+            ////Checking Name And Password
             if (user != null && await this.userManager.CheckPasswordAsync(user, control.Password))
             {
                 var tokenDesciptor = new SecurityTokenDescriptor

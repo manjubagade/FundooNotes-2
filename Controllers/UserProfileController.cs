@@ -46,6 +46,7 @@ namespace FundooNotesBackEnd.Controllers
         [Authorize]
         public async Task<object> GetUserProfile()
         {
+            ////Get As Per Valide UserId
             string userId = User.Claims.First(c => c.Type == "UserId").Value;
             var user = await this.userManager.FindByIdAsync(userId);
             return new
