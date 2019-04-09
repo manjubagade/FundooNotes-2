@@ -62,8 +62,8 @@ namespace FundooNotesBackEnd.Controllers
         /// <param name="userRegistration">The user registration.</param>
         /// <returns>The object</returns>
         [HttpPost]
-        [Route("Register")]
-        public async Task<object> PostUserApplication(UserRegistration userRegistration)
+        [Route("register")]
+        public async Task<IActionResult> PostUserApplication(UserRegistration userRegistration)
         {
             try
             {
@@ -74,16 +74,9 @@ namespace FundooNotesBackEnd.Controllers
                     Email = userRegistration.Email,
                     UserName = userRegistration.UserName
                 };
-                try
-                {
                     ////Encrypted Password Assign Here
                     var result = await this.userManager.CreateAsync(applicationUser, userRegistration.Password);
                     return this.Ok(result);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
             }
             catch (Exception e)
             {
@@ -97,7 +90,7 @@ namespace FundooNotesBackEnd.Controllers
         /// <param name="control">The control.</param>
         /// <returns>The IActionResult</returns>
         [HttpPost]
-        [Route("Login")]
+        [Route("login")]
         public async Task<IActionResult> Login(LoginControl control)
         {
             ////Checking Name

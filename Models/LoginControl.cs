@@ -8,6 +8,7 @@ namespace FundooNotesBackEnd.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace FundooNotesBackEnd.Models
         /// <value>
         /// The name of the user.
         /// </value>
+        [Required]
         public string UserName { get; set; }
 
         /// <summary>
@@ -30,6 +32,7 @@ namespace FundooNotesBackEnd.Models
         /// <value>
         /// The password.
         /// </value>
+        [Required]
         public string Password { get; set; }
     }
 }

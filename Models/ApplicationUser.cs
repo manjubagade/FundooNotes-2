@@ -27,5 +27,21 @@ namespace FundooNotesBackEnd.Models
         /// </value>
         [Column(TypeName = "nvarchar(150)")]
         public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the creation date.
+        /// </summary>
+        /// <value>
+        /// The creation date.
+        /// </value>
+        public DateTime? CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modification date.
+        /// </summary>
+        /// <value>
+        /// The last modification date.
+        /// </value>
+        public DateTime? ModifiedDate { get; set; }
     }
 }
