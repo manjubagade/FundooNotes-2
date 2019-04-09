@@ -11,7 +11,7 @@ export class UserService {
   readonly BaseURI = 'http://localhost:55410/api';
 
   formModel = this.fb.group({
-    UserName: ['', Validators.required],
+    UserName: ['', Validators.required,],
     Email: ['', [Validators.required, Validators.email]],
     FirstName: [''],
     Passwords: this.fb.group({
@@ -40,11 +40,11 @@ export class UserService {
       FirstName: this.formModel.value.FirstName,
       Password: this.formModel.value.Passwords.Password
     };
-    return this.http.post(this.BaseURI + '/User/Register', body);
+    return this.http.post(this.BaseURI + '/User/register', body);
   }
 
   login(formData) {
-    return this.http.post(this.BaseURI + '/User/Login', formData);
+    return this.http.post(this.BaseURI + '/User/login', formData);
   }
 
   getUserProfile() {
