@@ -12,6 +12,8 @@ body {
   height: 100vh;
   tab-size: 0px;
   table-layout: auto;
+  text-align: left;
+    background-color: antiquewhite;
   
 }
 table{
@@ -23,7 +25,8 @@ table{
 form{
   border-color: #ed5558;
   color: #39ace7;
-  background-color:burlywood;
+  background-color: antiquewhite;
+
 }
  
 a {
