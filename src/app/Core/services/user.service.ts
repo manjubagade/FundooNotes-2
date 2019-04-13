@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
@@ -41,6 +41,20 @@ export class UserService {
       Password: this.formModel.value.Passwords.Password
     };
     return this.http.post(this.BaseURI + '/User/register', body);
+  }
+
+  ForgotPassword() {
+    var body = {
+      Email: this.formModel.value.email,
+    };
+    return this.http.post(this.BaseURI + '/User/forgotpassword',body);
+  }
+
+  resetpassword() {
+    var body = {
+      Email: this.formModel.value.Email,
+    };
+    return this.http.post(this.BaseURI + '/User/forgotpassword', body);
   }
 
   login(formData) {

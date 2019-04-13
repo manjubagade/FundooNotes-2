@@ -4,15 +4,17 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
-import { RegistrationComponent } from './user/registration/registration.component';
-import { UserService } from './services/user.service';
-import { LoginComponent } from './user/login/login.component';
-import { HomeComponent } from './home/home.component';
+import { UserComponent } from './Core/Components/user/user.component';
+import { RegistrationComponent } from './Core/Components/user/registration/registration.component';
+import { UserService } from './Core/services/user.service';
+import { LoginComponent } from './Core/Components/user/login/login.component';
+import { HomeComponent } from './Core/Components/home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ForgotPasswordComponent } from './Core/Components/user/forgot-password/forgot-password.component';
+import { ModelComponent } from './Core/Models/model/model.component';
+import { ResetpasswordComponent } from './Core/Components/user/resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UserComponent,
     RegistrationComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ForgotPasswordComponent,
+    ModelComponent,
+    ResetpasswordComponent,
   ],
   imports: [
     BrowserModule,
