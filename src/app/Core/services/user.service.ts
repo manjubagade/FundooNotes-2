@@ -45,16 +45,16 @@ export class UserService {
 
   ForgotPassword() {
     var body = {
-      Email: this.formModel.value.email,
+      Email: this.formModel.value.Email,
     };
     return this.http.post(this.BaseURI + '/User/forgotpassword',body);
   }
 
-  resetpassword() {
+  Resetpassword() {
     var body = {
       Email: this.formModel.value.Email,
     };
-    return this.http.post(this.BaseURI + '/User/forgotpassword', body);
+    return this.http.post(this.BaseURI + '/User/resetpassword', body);
   }
 
   login(formData) {
@@ -65,5 +65,4 @@ export class UserService {
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(this.BaseURI + '/UserProfile',{headers:tokenHeader});
   }
-
 }

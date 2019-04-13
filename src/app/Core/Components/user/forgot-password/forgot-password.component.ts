@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 export class ForgotPasswordComponent implements OnInit {
   formModel = {
     Email:''
-
   }
   constructor(public service: UserService, private toastr: ToastrService,private router:Router) { }
 
@@ -24,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
         if (res.succeeded) {
           this.service.formModel.reset();
           this.toastr.success('Valide Email');
-         
+         /* this.router.navigate[("/user/resetpassword")];*/
     }
 }
 )}
