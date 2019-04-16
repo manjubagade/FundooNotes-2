@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/Core/services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-resetpassword',
@@ -18,13 +19,18 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
     this.service.formModel.reset();
   }
-  onSubmit() {
-    this.service.Resetpassword().subscribe(
+  onSubmit(form: NgForm) {
+    this.service.Resetpassword(form.value).subscribe(
       (res: any) => {
         if (res.succeeded) {
-          this.service.formModel.reset();
-        }
-    },
-  
+         this.service.formModel.reset();
+    }
+},
+err => {
+  if (err.status == 400)
+    this.toastr.error('User does Not Exist');
+  else
+    console.log(err);
+}
     )}
   }

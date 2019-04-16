@@ -17,14 +17,18 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit() {
   }
-  onSubmit(form:NgForm) {
-    this.service.ForgotPassword().subscribe(
+  onSubmit(form: NgForm) {
+    this.service.ForgotPassword(form.value).subscribe(
       (res: any) => {
         if (res.succeeded) {
-          this.service.formModel.reset();
-          this.toastr.success('Valide Email');
-         /* this.router.navigate[("/user/resetpassword")];*/
+         this.service.formModel.reset();
     }
+},
+err => {
+  if (err.status == 400)
+    this.toastr.error('User does Not Exist');
+  else
+    console.log(err);
 }
 )}
 }

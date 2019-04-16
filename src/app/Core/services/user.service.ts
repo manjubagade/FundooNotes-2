@@ -43,18 +43,14 @@ export class UserService {
     return this.http.post(this.BaseURI + '/User/register', body);
   }
 
-  ForgotPassword() {
-    var body = {
-      Email: this.formModel.value.Email,
-    };
-    return this.http.post(this.BaseURI + '/User/forgotpassword',body);
+  ForgotPassword(formData) {
+   
+    return this.http.post(this.BaseURI + '/User/forgotpassword', formData);
   }
 
-  Resetpassword() {
-    var body = {
-      Email: this.formModel.value.Email,
-    };
-    return this.http.post(this.BaseURI + '/User/resetpassword', body);
+  Resetpassword(formData) {
+   
+    return this.http.post(this.BaseURI + '/User/resetpassword', formData);
   }
 
   login(formData) {
