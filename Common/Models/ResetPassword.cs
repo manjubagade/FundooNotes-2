@@ -23,6 +23,14 @@ namespace Common.Models
         public string Password { get; set; }
 
         /// <summary>
+        /// Gets or sets the confirm password.
+        /// </summary>
+        /// <value>
+        /// The confirm password.
+        /// </value>
+        public string ConfirmPassword { get; set; }
+
+        /// <summary>
         /// Gets or sets the code.
         /// </summary>
         /// <value>

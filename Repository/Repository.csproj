@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FundooNotesBackEnd\FundooNotesBackEnd.csproj" />
+    <ProjectReference Include="..\FundooNotesBackEnd\FundooNotes.csproj" />
   </ItemGroup>
 
 </Project>

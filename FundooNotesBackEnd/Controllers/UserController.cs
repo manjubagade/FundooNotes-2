@@ -78,6 +78,8 @@ namespace FundooNotesBackEnd.Controllers
                 };
                     ////Encrypted Password Assign Here
                     var result = await this.userManager.CreateAsync(applicationUser, userRegistration.Password);
+                var token1 = this.userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                   var confirm =await this.userManager.ConfirmEmailAsync(token1);
                     return this.Ok(result);
             }
             catch (Exception e)
@@ -137,9 +139,11 @@ namespace FundooNotesBackEnd.Controllers
             try
             {
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackurl = "http://localhost:55410/api/User/resetpassword?UserId=" + user.Id+"&code="+code+"&Email="+user.Email;
-               var result= await ResetPassword(user.Id,code,user.Email);
-                //await ResetPassword(user.Id,"Reset Password","Please reset your password by clicking <a href=\""+callbackurl+"\">here</a>");
+                var callbackurl = "http://localhost:4200/user/resetpassword?UserId=" + user.Id+"&code="+code;
+               // var result= await ResetPassword(user.Id,callbackurl,user.Email);
+              
+                Services.EmailSender email = new Services.EmailSender();
+                var result = email.SendEmail(user.Id, callbackurl, user.Email);
                 return Ok(new { });
             }
             catch
@@ -155,21 +159,20 @@ namespace FundooNotesBackEnd.Controllers
         /// <returns>Result IActionResult</returns>
         [HttpPost]
         [Route("resetpassword")]
-        public async Task<IActionResult> ResetPassword(string id,string code,string Email)
+        public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var user = await userManager.FindByEmailAsync(Email);
+            var user = await userManager.FindByEmailAsync(resetPassword.Email);
             if(user==null)
             {
                 return BadRequest("Email Not Valid");
             }
-            EmailSender emailSender = new EmailSender();
-            Services.EmailSender email = new Services.EmailSender();
-            var result = email.SendEmail(code);
-            if (result.IsCompletedSuccessfully)
+            
+            var result = await userManager.ResetPasswordAsync(user,resetPassword.Code,resetPassword.Password);
+            if (result.Succeeded)
             {
                 return Ok();
             }
