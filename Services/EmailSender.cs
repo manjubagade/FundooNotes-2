@@ -9,7 +9,7 @@
 
     public class EmailSender : IEmailSender
     {
-        public Task SendEmail(string userId,string code,string Email)
+        public Task SendEmail(string userId,string Email,string subject,string body)
         {
             SmtpClient client = new SmtpClient();
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -23,9 +23,9 @@
             msg.From = new MailAddress(fromaddress);
             msg.To.Add(new MailAddress(Email));
 
-            msg.Subject = "Forgot Password";
+            msg.Subject = subject;
             msg.IsBodyHtml = true;
-            msg.Body = "Please reset your password by clicking here: <a href=\"" + code + "\">link</a>";
+            msg.Body = body;
             client.EnableSsl = true;
             client.Send(msg);
             return Task.FromResult(0);

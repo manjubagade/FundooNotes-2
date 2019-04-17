@@ -7,6 +7,6 @@ namespace Services.Interfaces
 {
     public interface IEmailSender
     {
-       Task SendEmail(string userId,string code,string Email);
+       Task SendEmail(string userId, string Email, string subject, string body);
     }
 }

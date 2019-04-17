@@ -15,6 +15,7 @@ namespace FundooNotesBackEnd.Controllers
     using System.Threading.Tasks;
     using Common.Models;
     using FundooNotesBackEnd.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -78,14 +79,36 @@ namespace FundooNotesBackEnd.Controllers
                 };
                     ////Encrypted Password Assign Here
                     var result = await this.userManager.CreateAsync(applicationUser, userRegistration.Password);
-                var token1 = this.userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
-                   var confirm =await this.userManager.ConfirmEmailAsync(token1);
-                    return this.Ok(result);
+                if (result.Succeeded)
+                {
+                    var user = await this.userManager.FindByNameAsync(userRegistration.UserName);
+                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                    string callBackUrl = Url.Link("ConfirmEmail", new { userName = user, code = code });
+                    Services.EmailSender email = new Services.EmailSender();
+                    await email.SendEmail(user.Id, userRegistration.Email, "Confirm your account", $"Please confirm your account by clicking this link: < a href =\"" + callBackUrl + "\">Link</a>");
+                }
+                return this.Ok(result);
             }
             catch (Exception e)
             {
                 throw e;
             }
+        }
+
+        [Route("ConfirmEmail", Name = "ConfirmEmail")]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userName, string code)
+        {
+            
+            var user = await this.userManager.FindByNameAsync(userName);
+            if (user == null || code == null)
+            {
+                return this.NotFound();
+            }
+
+            var result = await this.userManager.ConfirmEmailAsync(user, code);
+            return this.Ok(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         /// <summary>
@@ -143,7 +166,7 @@ namespace FundooNotesBackEnd.Controllers
                // var result= await ResetPassword(user.Id,callbackurl,user.Email);
               
                 Services.EmailSender email = new Services.EmailSender();
-                var result = email.SendEmail(user.Id, callbackurl, user.Email);
+                var result = email.SendEmail(user.Id, user.Email,"forgot Password", $"Please reset your password by clicking this link: < a href =\"" + callbackurl + "\">Link</a>");
                 return Ok(new { });
             }
             catch
@@ -170,8 +193,8 @@ namespace FundooNotesBackEnd.Controllers
             {
                 return BadRequest("Email Not Valid");
             }
-            
-            var result = await userManager.ResetPasswordAsync(user,resetPassword.Code,resetPassword.Password);
+            var code = await userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await userManager.ResetPasswordAsync(user,code,resetPassword.Password);
             if (result.Succeeded)
             {
                 return Ok();
