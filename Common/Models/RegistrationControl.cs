@@ -11,6 +11,7 @@ namespace FundooNotesBackEnd.Models
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,14 @@ namespace FundooNotesBackEnd.Models
         /// The application.
         /// </value>
         public DbSet<ApplicationUser> Application { get; set; }
+
+        /// <summary>
+        /// Gets or sets the get notes.
+        /// </summary>
+        /// <value>
+        /// The get notes.
+        /// </value>
+        public DbSet<Notes> GetNotes { get; set; }
 
         /// <summary>
         /// Asynchronously saves all changes made in this context to the database.

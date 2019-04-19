@@ -85,7 +85,8 @@ namespace FundooNotesBackEnd.Controllers
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     string callBackUrl = Url.Link("ConfirmEmail", new { userName = user, code = code });
                     Services.EmailSender email = new Services.EmailSender();
-                    await email.SendEmail(user.Id, userRegistration.Email, "Confirm your account", $"Please confirm your account by clicking this link: < a href =\"" + callBackUrl + "\">Link</a>");
+                    await email.SendEmail(user.Id, userRegistration.Email, "Confirm your account", $"Please confirm your account by clicking this link: < a href =\"" + callBackUrl + "\" ></a>");
+                    
                 }
                 return this.Ok(result);
             }

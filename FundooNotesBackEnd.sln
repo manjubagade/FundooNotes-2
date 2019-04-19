@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooNotes", "FundooNotesB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{78D3A7C0-5228-4410-9920-15CA72D1EC67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{E0F0F800-AB50-494D-A5D3-706E1F31E9F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "Services\BusinessLayer.csproj", "{E0F0F800-AB50-494D-A5D3-706E1F31E9F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{A8ADBA24-112B-4F58-B01B-500CE576EC6D}"
 EndProject

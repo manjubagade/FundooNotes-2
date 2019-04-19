@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace Common.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class ResetPassword
     {
         /// <summary>
