@@ -14,9 +14,9 @@
       </div>
       <div class="form-group">
         <label>Full Name</label>
-        <input class="form-control" formControlName="FirstName" placeholder="Full Name" pattern="[a-zA-Z ]+[a-zA-Z]" required>
-        <label class="text-danger" *ngIf="service.formModel.get('FirstName').touched && service.formModel.get('FirstName').errors?.pattern">Enter Valide FullName</label>
-        <label class="text-danger" *ngIf="service.formModel.get('FirstName').touched && service.formModel.get('FirstName').errors?.required">This field is mandatory.</label>
+        <input class="form-control" formControlName="FullName" placeholder="Full Name" pattern="[a-zA-Z ]+[a-zA-Z]" required>
+        <label class="text-danger" *ngIf="service.formModel.get('FullName').touched && service.formModel.get('FullName').errors?.pattern">Enter Valide FullName</label>
+        <label class="text-danger" *ngIf="service.formModel.get('FullName').touched && service.formModel.get('FullName').errors?.required">This field is mandatory.</label>
       </div>
       <div formGroupName="Passwords">
         <div class="form-group required">
