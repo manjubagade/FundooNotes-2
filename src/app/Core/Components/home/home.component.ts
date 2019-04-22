@@ -19,4 +19,5 @@ export class HomeComponent implements OnInit {
     alert("successfully logout");
     this.router.navigate(['/user/login']);
   }
+  
 }

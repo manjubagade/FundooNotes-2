@@ -14,7 +14,6 @@ body {
   table-layout: auto;
   text-align: left;
     background-color:ivory;
-  
 }
 table{
   table-layout: auto;
@@ -197,4 +196,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .basic-container {
   padding: 30px;
+}
+.example-sidenav-container {
+  
+  flex: 1;
 }
