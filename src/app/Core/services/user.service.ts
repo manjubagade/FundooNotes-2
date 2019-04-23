@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:44372/api';
-
-  
 
   formModel = this.fb.group({
     UserName: ['', Validators.required,],
@@ -43,25 +41,25 @@ export class UserService {
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password
     };
-    return this.http.post(this.BaseURI + '/User/register', body);
+    return this.http.post(environment.BaseURI + '/User/register', body);
   }
 
   ForgotPassword(formData) {
    
-    return this.http.post(this.BaseURI + '/User/forgotpassword', formData);
+    return this.http.post(environment.BaseURI + '/User/forgotpassword', formData);
   }
 
   Resetpassword(formData) {
    
-    return this.http.post(this.BaseURI + '/User/resetpassword', formData);
+    return this.http.post(environment.BaseURI + '/User/resetpassword', formData);
   }
 
   login(formData) {
-    return this.http.post(this.BaseURI + '/User/login', formData);
+    return this.http.post(environment.BaseURI + '/User/login', formData);
   }
 
   getUserProfile() {
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
-    return this.http.get(this.BaseURI + '/UserProfile',{headers:tokenHeader});
+    return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
   }
 }

@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styles: []
+  styleUrls: [ './home.component.css']
 })
 export class HomeComponent implements OnInit {
- 
+  mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-  fillerNav = Array(50).fill(0).map((_, i) => 'Nav Item ${i + 1}');
-  constructor(private router:Router) { }
+  
+  constructor(private router:Router,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher) { 
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
   
   ngOnInit() {
   }
@@ -19,5 +25,6 @@ export class HomeComponent implements OnInit {
     alert("successfully logout");
     this.router.navigate(['/user/login']);
   }
-  
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
 }

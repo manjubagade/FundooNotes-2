@@ -1,53 +1,39 @@
- <mat-sidenav-container class="sidenav contaier">
-<mat-sidenav
-#drawer
-class="sidenav"
-fixedInViewport="true"
->
-
-
-<mat-nav-list>
-  <a mat-list-item href=".">Notes</a>
-  <i class="material-icons">
-      notifications_none
-      
-  <a mat-list-item href=".">Reminders</a></i><br>
-  <i class="material-icons">delete
-  <a mat-list-item href=".">Trash</a></i>
-</mat-nav-list>
-</mat-sidenav>
-<mat-sidenav-content >
-  <mat-toolbar color="primary">
-    <button
-    type="button"
-    aria-label="toggle sidenav"
-    mat-icon-button
-    (click)="drawer.toggle()"
-   >
-   <mat-icon>menu</mat-icon>
-  </button>
-  <span>FundooNotes</span>
-  <div class="form-inline md-form form-sm active-pink active-pink-2" >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <img class="logo" src="/assets/download.png">
+      <h1 class="example-app-name">FundooNotes</h1>
       <div class="searchbar">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <mat-icon [ngStyle]="{'color':'black'}">search</mat-icon>
-      
-        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"
-          mdbInput>
+          <mat-icon [ngStyle]="{'color':'black'}">search</mat-icon>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+     </div>
+        <div fxLayout="row" fxLayoutGap="65px">
+            <button mat-icon-button >
+                <mat-icon aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}">refresh
+                </mat-icon>
+           </button>
         </div>
+        <div class="style">
+           <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+        </div>
+        <hr>
+    </mat-toolbar>
+    
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+            <a mat-list-item routerLink=".">Notes</a>
+            <a mat-list-item routerLink="."><mat-icon>notifications_none</mat-icon>
+              <span class="nav-caption">Reminders</span>
+          </a>
+          <a mat-list-item routerLink="."><mat-icon>delete</mat-icon>
+          <span>Trash</span>
+          </a>
+         
+        </mat-nav-list>
+      </mat-sidenav>
      
-      </div>
-      <div fxLayout="row" fxLayoutGap="65px">
-          <button mat-icon-button >
-              <mat-icon aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}">refresh
-                 
-              </mat-icon>
-         </button>
-      </div>
-      <div class="style">
-         <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
-      </div>
-</mat-toolbar>
-<ng-content></ng-content>
-</mat-sidenav-content>
-</mat-sidenav-container>      
+    </mat-sidenav-container>
+  </div>

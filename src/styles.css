@@ -13,7 +13,7 @@ body {
   tab-size: 0px;
   table-layout: auto;
   text-align: left;
-    background-color:ivory;
+    background-color:white;
 }
 table{
   table-layout: auto;
@@ -183,7 +183,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-toolbar.mat-primary {
   background: white;
-  color: black;
+  color: rgb(95, 99, 99);
 }
 .btn-danger {
   color: #fff;
@@ -198,6 +198,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 30px;
 }
 .example-sidenav-container {
-  
   flex: 1;
 }

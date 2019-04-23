@@ -21,6 +21,8 @@ import{  MatSidenavModule,MatTabsModule,
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
   import { FlexLayoutModule } from '@angular/flex-layout';
+  import {MediaMatcher} from '@angular/cdk/layout';
+
 
 @NgModule({
   declarations: [
