@@ -17,7 +17,10 @@ height: 20px;
 width: 50%;
 }
 .w-75 {
-    width: 277%!important;
+    width: 459%!important;
+}
+.ml-3, .mx-3 {
+  margin-left: 2rem!important;
 }
 
 body {
@@ -74,4 +77,67 @@ html, body {
     display: block;
     z-index: 3;
     visibility: collapse;
+}
+.devider{
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+  background-color:rgb(95, 99, 99);
+  opacity: 0.5;
+}
+.mat-raised-button {
+  box-sizing: border-box;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 62;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 6px;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 30px;
+  border-radius: 4px;
+  overflow: visible;
+  transform: translate3d(0,0,0);
+  transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+}
+.searchbar
+{
+  margin-right: 10px;
+}
+.main {
+  width: 50%;
+  margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+.basic-container {
+  padding: 30px;
+  
 }

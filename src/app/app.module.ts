@@ -16,8 +16,9 @@ import { ForgotPasswordComponent } from './Core/Components/user/forgot-password/
 import { ModelComponent } from './Core/Models/model/model.component';
 import { ResetpasswordComponent } from './Core/Components/user/resetpassword/resetpassword.component';
 import{  MatSidenavModule,MatTabsModule,
-  MatToolbarModule,MatIconModule,MatListModule,  MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
-  MatTooltipModule } from '@angular/material';
+  MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
+  MatTooltipModule, 
+  MatExpansionPanel,MatExpansionModule} from '@angular/material';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
   import { FlexLayoutModule } from '@angular/flex-layout';
@@ -51,6 +52,7 @@ import{  MatSidenavModule,MatTabsModule,
     NgMatSearchBarModule,
     MatCardModule,
     MatButtonModule,
+    MatExpansionModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,

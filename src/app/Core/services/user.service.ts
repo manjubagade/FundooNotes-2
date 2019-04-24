@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
+  [x: string]: any;
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 

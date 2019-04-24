@@ -179,7 +179,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: inherit!important;
 }
 .style{
-  margin-left: 67%
+  margin-left: 50%;
 }
 .mat-toolbar.mat-primary {
   background: white;
