@@ -11,6 +11,8 @@ namespace FundooApi
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using BusinessLayer;
+    using BusinessLayer.Interfaces;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -23,6 +25,8 @@ namespace FundooApi
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
+    using RepositoryLayer.Interface;
+    using RepositoryLayer.Services;
 
     /// <summary>
     /// Startup class
@@ -71,6 +75,18 @@ namespace FundooApi
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
+            });
+
+            services.Configure<EmailSender>(this.Configuration.GetSection("EmailSender"));
+            services.AddTransient<IApplicationUserOperations, ApplicationUserOperations>();
+            services.AddTransient<IUserDataOperations, UserDataOperations>();
+            services.Configure<EmailSender>(this.Configuration);
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = "localhost";
+                option.InstanceName = "master";
             });
 
             var key = Encoding.UTF8.GetBytes(this.Configuration["ApplicationSettings:JWT_Secret"].ToString());

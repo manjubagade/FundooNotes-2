@@ -1,4 +1,5 @@
 ﻿using FundooApi;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,12 @@ namespace BusinessLayer.Interfaces
 {
     public interface IApplicationUserOperations
     {
-        Task RegisterData(UserRegistration userRegistration);
+         Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel);
+
+         Task<string> LoginAsync(LoginControl loginControlmodel);
+     
+         bool ForgotPasswordAsync(ForgotPassword forgotPasswordmodel);
+      
+         bool ResetPasswordAsync(ResetPassword resetPasswordmodel);
     }
 }

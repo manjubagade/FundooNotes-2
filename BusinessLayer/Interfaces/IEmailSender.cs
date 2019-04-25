@@ -7,6 +7,6 @@ namespace BusinessLayer
 {
     public interface IEmailSender
     {
-       Task SendEmail(string userId, string Email, string subject, string body);
+        Task SendEmailAsync(string Email, string subject, string body);
     }
 }

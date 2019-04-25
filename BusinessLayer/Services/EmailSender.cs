@@ -7,7 +7,7 @@
 
     public class EmailSender : IEmailSender
     {
-        public Task SendEmail(string userId, string Email, string subject, string body)
+        public Task SendEmailAsync(string Email, string subject, string body)
         {
             SmtpClient client = new SmtpClient();
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -28,5 +28,7 @@
             client.Send(msg);
             return Task.FromResult(0);
         }
+
+        
     }
 }
