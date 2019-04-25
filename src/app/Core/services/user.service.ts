@@ -47,12 +47,12 @@ export class UserService {
 
   ForgotPassword(formData) {
    
-    return this.http.post(environment.BaseURI + '/User/forgotpassword', formData);
+    return this.http.post(environment.BaseURI + '/User/forgotPassword', formData);
   }
 
   Resetpassword(formData) {
    
-    return this.http.post(environment.BaseURI + '/User/resetpassword', formData);
+    return this.http.post(environment.BaseURI + '/User/resetPassword', formData);
   }
 
   login(formData) {
