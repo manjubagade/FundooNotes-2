@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Interfaces
 {
-    interface INotes
+    public interface INotes
     {
         Task<int> Create(Notes notesModel);
 

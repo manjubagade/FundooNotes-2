@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer
+﻿namespace BusinessLayer.Services
 {
     using Microsoft.Extensions.Configuration;
     using System;
@@ -28,7 +28,5 @@
             client.Send(msg);
             return Task.FromResult(0);
         }
-
-        
     }
 }

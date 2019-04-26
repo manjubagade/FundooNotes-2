@@ -14,13 +14,13 @@ namespace BusinessLayer.Interfaces
     {
         private readonly IUserDataOperations applicationRepository;
 
-        private readonly IEmailSender emailSender;
+      //  private readonly IEmailSender emailSender;
 
 
-        public ApplicationUserOperations(IUserDataOperations applicationRepository,IEmailSender emailSender)
+        public ApplicationUserOperations(IUserDataOperations applicationRepository)
         {
             this.applicationRepository = applicationRepository;
-            this.emailSender = emailSender;
+           // this.emailSender = emailSender;
         }
 
         public async Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel)
@@ -42,7 +42,7 @@ namespace BusinessLayer.Interfaces
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(forgotPasswordmodel);
                 var callbackUrl = "http://localhost:4200/resetpassword?code=" + code;
-                this.emailSender.SendEmailAsync(forgotPasswordmodel.Email, "Reset Password", $"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">here</a>");
+                //this.emailSender.SendEmailAsync(forgotPasswordmodel.Email, "Reset Password", $"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">here</a>");
                 return true;
             }
             else

@@ -22,7 +22,7 @@ namespace FundooApi
         /// The user identifier.
         /// </value>
         [Key]
-        public string UserId { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
@@ -39,5 +39,29 @@ namespace FundooApi
         /// The description.
         /// </value>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
+        public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modified date.
+        /// </summary>
+        /// <value>
+        /// The modified date.
+        /// </value>
+        public DateTime ModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        /// <value>
+        /// The user identifier.
+        /// </value>
+        public Guid UserId { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace FundooApi
     using System.Threading.Tasks;
     using BusinessLayer;
     using BusinessLayer.Interfaces;
+    using BusinessLayer.Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -77,11 +78,14 @@ namespace FundooApi
                 options.Password.RequiredLength = 3;
             });
 
-            services.Configure<EmailSender>(this.Configuration.GetSection("EmailSender"));
+          //  services.Configure<EmailSender>(this.Configuration.GetSection("EmailSender"));
             services.AddTransient<IApplicationUserOperations, ApplicationUserOperations>();
             services.AddTransient<IUserDataOperations, UserDataOperations>();
-            services.Configure<EmailSender>(this.Configuration);
-            services.AddTransient<IEmailSender, EmailSender>();
+            //services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<INotes, NotesCreation>();
+            services.AddTransient<IRepositoryNotes, CreateNotes>();
+           
+           // services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDistributedRedisCache(option =>
             {
