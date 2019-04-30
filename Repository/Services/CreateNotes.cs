@@ -1,12 +1,12 @@
-﻿using FundooApi;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RepositoryLayer.Services
+﻿namespace RepositoryLayer.Services
 {
+    using FundooApi;
+    using RepositoryLayer.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class CreateNotes : IRepositoryNotes
     {
         private readonly RegistrationControl registrationControl;
@@ -18,15 +18,22 @@ namespace RepositoryLayer.Services
 
         public void AddNotes(Notes notes)
         {
-            var addnotes = new Notes()
+            try
+            { 
+                   var addnotes = new Notes()
+                   {
+                      UserId = notes.UserId,
+                      Title = notes.Title,
+                      Description = notes.Description,
+                      CreatedDate = notes.CreatedDate,
+                      ModifiedDate = notes.ModifiedDate
+                   };
+                   var result = this.registrationControl.GetNotes.Add(addnotes);
+            }
+            catch(Exception e)
             {
-                UserId = notes.UserId,
-                Title = notes.Title,
-                Description = notes.Description,
-                CreatedDate = notes.CreatedDate,
-                ModifiedDate = notes.ModifiedDate
-            };
-            var result = this.registrationControl.GetNotes.Add(addnotes);
+                throw new Exception(e.Message);
+            }
         }
 
         public Task<int> SaveChangesAsync()

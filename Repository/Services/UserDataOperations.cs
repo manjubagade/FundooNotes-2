@@ -60,7 +60,7 @@
                     var cacheKey = token;
                     this.distributedCache.GetString(cacheKey);
                     this.distributedCache.SetString(cacheKey, token);
-
+                
                     string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
                     return jsonString;
                 }
