@@ -17,13 +17,15 @@ import { ModelComponent } from './Core/Models/model/model.component';
 import { ResetpasswordComponent } from './Core/Components/user/resetpassword/resetpassword.component';
 import{  MatSidenavModule,MatTabsModule,
   MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
-  MatTooltipModule, 
+  MatTooltipModule, MatInputModule,
   MatExpansionPanel,MatExpansionModule, MatOption} from '@angular/material';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
   import { FlexLayoutModule } from '@angular/flex-layout';
   import {MediaMatcher} from '@angular/cdk/layout';
-  
+  import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotesComponent } from './Core/Components/notes/notes.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,18 +36,21 @@ import{  MatSidenavModule,MatTabsModule,
     ForgotPasswordComponent,
     ModelComponent,
     ResetpasswordComponent,
+    NotesComponent,
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatTabsModule,
+    MatInputModule,
     MatToolbarModule,
     MatTooltipModule,
     NgMatSearchBarModule,
@@ -59,7 +64,6 @@ import{  MatSidenavModule,MatTabsModule,
       progressBar: true
     }),
     FormsModule,
-  
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,

@@ -7,6 +7,7 @@ import { LoginComponent } from './Core/Components/user/login/login.component';
 import { HomeComponent } from './Core/Components/home/home.component';
 import { ForgotPasswordComponent } from './Core/Components/user/forgot-password/forgot-password.component';
 import { ResetpasswordComponent } from './Core/Components/user/resetpassword/resetpassword.component';
+import { NotesComponent } from './Core/Components/notes/notes.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -19,7 +20,12 @@ const routes: Routes = [
       { path: 'resetpassword', component: ResetpasswordComponent }
     ]
   },
-  {path:'home',component:HomeComponent,canActivate:[AuthGuard]}
+  { path:'home',component:HomeComponent,canActivate:[AuthGuard],
+   children:[
+     { path:'', redirectTo:'./notes', pathMatch:'full'}
+   ]
+  
+} 
 ];
 
 @NgModule({
