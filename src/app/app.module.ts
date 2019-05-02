@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule, FormControl } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -18,13 +18,16 @@ import { ResetpasswordComponent } from './Core/Components/user/resetpassword/res
 import{  MatSidenavModule,MatTabsModule,
   MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
   MatTooltipModule, MatInputModule,
-  MatExpansionPanel,MatExpansionModule, MatOption} from '@angular/material';
+  MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule} from '@angular/material';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
   import { FlexLayoutModule } from '@angular/flex-layout';
   import {MediaMatcher} from '@angular/cdk/layout';
   import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotesComponent } from './Core/Components/notes/notes.component';
+import { RemindersComponent } from './Core/Components/reminders/reminders.component';
+import { ArchiveComponent } from './Core/Components/archive/archive.component';
+import { TrashComponent } from './Core/Components/trash/trash.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { NotesComponent } from './Core/Components/notes/notes.component';
     ModelComponent,
     ResetpasswordComponent,
     NotesComponent,
+    RemindersComponent,
+    ArchiveComponent,
+    TrashComponent,
    
   ],
   imports: [
@@ -51,7 +57,9 @@ import { NotesComponent } from './Core/Components/notes/notes.component';
     MatListModule,
     MatTabsModule,
     MatInputModule,
+    MatFormFieldModule,
     MatToolbarModule,
+
     MatTooltipModule,
     NgMatSearchBarModule,
     MatCardModule,

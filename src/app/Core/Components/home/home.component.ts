@@ -5,6 +5,7 @@ import { Services } from '@angular/core/src/view';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/internal/operators/first';
+import { HttpBackend } from '@angular/common/http';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { first } from 'rxjs/internal/operators/first';
   styleUrls: [ './home.component.css']
 })
 export class HomeComponent implements OnInit {
-  users: UserService[] = [];
+  
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   spinner: any;
   
-  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher) {
+  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,userService:UserService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
