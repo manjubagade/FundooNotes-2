@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -63,7 +64,10 @@ export class UserService {
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
   }
-  AddNotes(formData){
-    return this.http.post(environment.BaseURI + '/Notes/addNotes', formData);
+  AddNotes(formData,UserId){
+    formData.UserId=UserId;
+    console.log(formData);
+      
+        return this.http.post(environment.BaseURI + '/Notes/addNotes',formData ,UserId);
   }
 }

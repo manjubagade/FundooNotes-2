@@ -178,9 +178,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .ml-3, .mx-3 {
   margin-left: inherit!important;
 }
-.style{
-  margin-left: 50%;
-}
 .mat-toolbar.mat-primary {
   background: white;
   color: rgb(95, 99, 99);

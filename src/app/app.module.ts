@@ -28,6 +28,8 @@ import { NotesComponent } from './Core/Components/notes/notes.component';
 import { RemindersComponent } from './Core/Components/reminders/reminders.component';
 import { ArchiveComponent } from './Core/Components/archive/archive.component';
 import { TrashComponent } from './Core/Components/trash/trash.component';
+import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component';
+import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { TrashComponent } from './Core/Components/trash/trash.component';
     RemindersComponent,
     ArchiveComponent,
     TrashComponent,
+    MainnoteComponent,
+    DisplayNotesComponent,
    
   ],
   imports: [

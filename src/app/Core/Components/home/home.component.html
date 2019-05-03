@@ -4,33 +4,35 @@
 
     <div fxFlex='3'> <button  mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button></div>
       <img class="logo" src="/assets/download.png">
-     <div fxFlex='10'> <h1 class="example-app-name" >FundooNotes</h1></div>
+     <div fxFlex='10'> <h1 class="example-app-name" >{{ Header }}</h1></div>
      
     <div fxflex='50'>
       <mat-form-field  appearance="outline" [style.fontsize.px]="2" class="search">
         <button mat-icon-button>
-          <div>
+         <div>
           <mat-icon fxLayoutAlign="center center">search</mat-icon>
         </div>
         </button>
         <input fxflex='90' matInput placeholder="search.." class="searchkey" autocomplete="off">
       </mat-form-field>
     </div>
-        <div  class="refreshbutton"  fxFlex='10' fxLayoutAlign="end center">
-            <button mat-icon-button>
-                <mat-icon aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}" (click)="refresh()">refresh
+    <div class="ref">
+        <div fxFlex='100' fxLayoutAlign="end center">
+            <button mat-icon-button class="refreshbutton">
+                <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}" (click)="refresh()">refresh
                 </mat-icon>
            </button>
         </div>
+      </div>
         <div class="settingButton" fxFlex='10' >
             <button mat-icon-button  fxLayoutAlign="end center" >
-                <mat-icon aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">settings
+                <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">settings
                 </mat-icon>
            </button>
            
         </div>
     
-        <div class="style">
+        <div class="Logout">
             <button mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">A</button>
             <div class="Dropdown" style="top:10px">
             <ul class="dropdown-menu">
@@ -52,9 +54,9 @@
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <div class="mat-drawer-inner-container">
         <mat-nav-list>
-            <a mat-list-item routerLink="./notes" ><mat-icon fxFlex='26'>lightbulb_outline</mat-icon>Notes</a>
+            <a mat-list-item routerLink="./note" (click)="Header='Notes'"><mat-icon fxFlex='26'>lightbulb_outline</mat-icon>Notes</a>
             <div class="RemidersIcon">
-            <a mat-list-item routerLink="./reminders"  ><mat-icon fxFlex='26'>notifications_none</mat-icon>
+            <a mat-list-item routerLink="./reminders" (click)="Header='Reminders'" ><mat-icon fxFlex='26'>notifications_none</mat-icon>
               <span class="nav-caption">Reminders</span>
           </a>
         </div>
@@ -69,12 +71,18 @@
 
         <div class="devider"></div>
         <div class="archive">
-        <a mat-list-item routerLink="." ><mat-icon fxFlex='26'>archive_outline</mat-icon>archive</a>
+        <a mat-list-item routerLink="./archieve" (click)="Header='Archieve'"><mat-icon fxFlex='26'>archive_outline</mat-icon>archive</a>
       </div>
-          <a mat-list-item routerLink="."><mat-icon fxFlex='26'>delete</mat-icon>
+          <a mat-list-item routerLink="./trash" (click)="Header='Trash'"><mat-icon fxFlex='26'>delete</mat-icon>
           <span>Trash</span>
           </a>
         </mat-nav-list>
       </div>
       </mat-sidenav>
+      <mat-sidenav-content>
+        
+          <router-outlet></router-outlet>
+
+      </mat-sidenav-content>
+
     </mat-sidenav-container>

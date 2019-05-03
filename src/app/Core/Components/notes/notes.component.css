@@ -2,6 +2,7 @@
     padding: 30px;
 }
 .example-card{
+    margin-left: 250px;
     height: auto;
-    width: auto;
+    width: 600px;
 }

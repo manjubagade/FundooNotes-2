@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-notes',
@@ -15,23 +16,27 @@ export class NotesComponent implements OnInit {
     title : new FormControl(),
     Description : new FormControl(),
    });
-   
-
-  constructor(private router:Router,public service:UserService,private toastr: ToastrService) { }
+  constructor(private router:Router,public service:UserService,private toastr: ToastrService) { 
+  }
 
   ngOnInit() {
   }
   
   AddNotes() {
-    var token=localStorage.getItem('token');
-  var jwt_token=jwt_decode(token);
-  console.log(jwt_token.UserID);
-  //localStorage.setItem("UserID",jwt_token.UserID)
-  //this.token_id=localStorage.getItem("UserID")
-
-    this.service.AddNotes(this.form.value).subscribe(
+    try {
+      var token=localStorage.getItem('token');  
+    // console.log(token)
+      var jwt_token=jwt_decode(token);
+      console.log(jwt_token.UserID);
+      localStorage.setItem("UserId",jwt_token.UserID);
+      var UserId=localStorage.getItem("UserId");
+     // console.log(this.notes);
+    } catch (error) {
+      console.log('invalid token format', error);
+    }
+    this.service.AddNotes(this.form.value,UserId).subscribe(
       (res: any) => {
-        console.log(this.form.value);
+        //console.log(token_id);
         this.router.navigateByUrl('/home');
       },
       err => {

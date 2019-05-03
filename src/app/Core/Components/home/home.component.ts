@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   spinner: any;
-  
+  Header='FundooNotes';
   constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,userService:UserService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
     }
   onLogout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('UserID');
     alert("successfully logout");
     this.router.navigate(['/user/login']);
   }

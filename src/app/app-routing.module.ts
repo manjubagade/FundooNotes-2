@@ -9,6 +9,10 @@ import { ForgotPasswordComponent } from './Core/Components/user/forgot-password/
 import { ResetpasswordComponent } from './Core/Components/user/resetpassword/resetpassword.component';
 import { NotesComponent } from './Core/Components/notes/notes.component';
 import { RemindersComponent } from './Core/Components/reminders/reminders.component';
+import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component';
+import { ArchiveComponent } from './Core/Components/archive/archive.component';
+import { TrashComponent } from './Core/Components/trash/trash.component';
+import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -21,15 +25,48 @@ const routes: Routes = [
       { path: 'resetpassword', component: ResetpasswordComponent }
     ]
   },
-  { path:'home',component:HomeComponent,canActivate:[AuthGuard]},
+  { path:'home',component:HomeComponent,canActivate:[AuthGuard]
+,children:[
   {
-    path:'home',
-   children:[
-     { path:'notes', redirectTo:'./notes',pathMatch:'full'},
-     { path:'notes',component:NotesComponent },
-     { path: 'reminders', component: RemindersComponent }
-   ]
-  }
+    path:'',
+    redirectTo:'note',
+    pathMatch:'full'
+  },
+{
+  path:'note',
+  component:MainnoteComponent
+},
+
+{ 
+  path: 'reminders', 
+  component: RemindersComponent
+ },
+{
+  path:'archieve',
+  component:ArchiveComponent
+},
+{
+  path:'trash',
+  component:TrashComponent
+},
+{
+  path:'Display',
+  component:DisplayNotesComponent
+}
+  
+]
+
+
+},
+  // {
+  //   path:'home',
+  //  children:[
+  //    { path:'notes', redirectTo:'./notes',pathMatch:'full'},
+    
+     
+  //    { path: 'reminders', component: RemindersComponent }
+  //  ]
+  // }
 ];
 
 @NgModule({
