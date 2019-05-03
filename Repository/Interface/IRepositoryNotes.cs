@@ -1,4 +1,11 @@
-﻿using FundooApi;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IRepositoryNotes.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+
+using FundooApi;
 using System;
 using System.Collections.Generic;
 using System.Text;

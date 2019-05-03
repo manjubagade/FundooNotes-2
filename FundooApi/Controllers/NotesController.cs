@@ -1,4 +1,10 @@
-﻿namespace FundooApi.Controllers
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="NotesController.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+namespace FundooApi.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -43,6 +49,7 @@
             {
                 Console.WriteLine(e.Message);
                 return this.BadRequest();
+
             }
         }
 

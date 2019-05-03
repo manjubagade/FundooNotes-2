@@ -1,4 +1,10 @@
-﻿using System;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationUserOperations.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;

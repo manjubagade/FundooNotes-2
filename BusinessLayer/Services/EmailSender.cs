@@ -1,4 +1,10 @@
-﻿namespace BusinessLayer.Services
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="EmailSender.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+namespace BusinessLayer.Services
 {
     using Microsoft.Extensions.Configuration;
     using System;

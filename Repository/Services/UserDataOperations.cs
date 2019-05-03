@@ -1,4 +1,11 @@
-﻿namespace RepositoryLayer.Services
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserDataOperations.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+
+namespace RepositoryLayer.Services
 {
     using System;
     using System.Collections.Generic;

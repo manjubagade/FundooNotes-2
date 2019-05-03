@@ -1,4 +1,11 @@
-﻿using FundooApi;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IUserDataOperations.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+
+using FundooApi;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

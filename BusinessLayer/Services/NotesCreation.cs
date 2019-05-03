@@ -1,4 +1,10 @@
-﻿using BusinessLayer.Interfaces;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="NotesCreation.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
+using BusinessLayer.Interfaces;
 using FundooApi;
 using RepositoryLayer.Interface;
 using System;
@@ -19,7 +25,7 @@ namespace BusinessLayer.Services
 
         public IList<Notes> AccessNotes(Guid userId)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public Task<int> Change(Notes notesModel, int id)

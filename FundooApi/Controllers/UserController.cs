@@ -250,6 +250,9 @@ namespace FundooNotesBackEnd.Controllers
             try
             {
                 var result = await applicationUserOperation.LoginAsync(loginControlModel);
+                if(result==null){
+                    return "Invalide userName And Password";
+                }
                 return result;
             }
             catch (Exception e)
