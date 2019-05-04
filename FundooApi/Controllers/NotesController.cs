@@ -20,15 +20,15 @@ namespace FundooApi.Controllers
         /// <summary>
         /// The notes creation
         /// </summary>
-        private readonly INotes notesCreation;
+        private readonly INotes notesHandler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotesController"/> class.
         /// </summary>
-        /// <param name="notesCreation">The notes creation.</param>
-        public NotesController(INotes notesCreation)
+        /// <param name="notesHandler">The notes creation.</param>
+        public NotesController(INotes notesHandler)
         {
-            this.notesCreation = notesCreation;
+            this.notesHandler = notesHandler;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace FundooApi.Controllers
         {
             try
             {
-                var result = await this.notesCreation.Create(notesModel);
+                var result = await this.notesHandler.Create(notesModel);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace FundooApi.Controllers
         {
             try
             {
-                var result = await this.notesCreation.Delete(id);
+                var result = await this.notesHandler.Delete(id);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -86,7 +86,7 @@ namespace FundooApi.Controllers
         {
             try
             {
-                var result = await this.notesCreation.Change(notesModel, id);
+                var result = await this.notesHandler.Change(notesModel, id);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -107,7 +107,7 @@ namespace FundooApi.Controllers
         {
             try
             {
-                IList<Notes> note = this.notesCreation.AccessNotes(userId);
+                IList<Notes> note = this.notesHandler.AccessNotes(userId);
                 return this.Ok(note);
             }
             catch (Exception e)

@@ -83,6 +83,11 @@ namespace RepositoryLayer.Services
             return result;
         }
 
+        /// <summary>
+        /// Resets the password asynchronous.
+        /// </summary>
+        /// <param name="resetPasswordmodel">The reset passwordmodel.</param>
+        /// <returns>Result for reset</returns>
         public async Task<object> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
             var userEmail = await this.userManager.FindByEmailAsync(resetPasswordmodel.Email);

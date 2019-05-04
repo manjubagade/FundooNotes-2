@@ -23,9 +23,14 @@ namespace BusinessLayer.Services
             this.repositoryNotes = repositoryNotes;
         }
 
-        public IList<Notes> AccessNotes(Guid userId)
+        /// <summary>
+        /// Accesses the notes.
+        /// </summary>
+        /// <param name="UserId">The user identifier.</param>
+        /// <returns>The List</returns>
+        public IList<Notes> AccessNotes(Guid UserId)
         {
-            return null;
+            return this.repositoryNotes.ViewNotes(UserId);
         }
 
         public Task<int> Change(Notes notesModel, int id)
