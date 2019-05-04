@@ -1,3 +1,18 @@
-<p>
-  display-notes works!
-</p>
+<div [ngClass]="main" fxLayoutGap='0%' fxLayout='row' fxLayout='row wrap' style="margin-top:10px">
+    <div class="loop" *ngFor="let note of cards">
+      <mat-card class="note" [style.background-color]=note.color>
+        <div (click)="openDialog(note)" class="element.style">
+          <!-- <div>
+            <img src="{{note.image}}" class="notesImage" />
+          </div> -->
+          <div>
+            <mat-card-title class="titleinput">{{note.title}}</mat-card-title>
+          </div>
+          <div>
+            <mat-card-content class="noteinput ">{{note.description}}</mat-card-content>
+          </div>
+        </div>
+        <app-icon [cards]="note"></app-icon>
+      </mat-card>
+    </div>
+  </div>

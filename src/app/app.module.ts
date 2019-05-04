@@ -30,6 +30,7 @@ import { ArchiveComponent } from './Core/Components/archive/archive.component';
 import { TrashComponent } from './Core/Components/trash/trash.component';
 import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component';
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
+import { IconComponent } from './Core/Components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DisplayNotesComponent } from './Core/Components/display-notes/display-n
     TrashComponent,
     MainnoteComponent,
     DisplayNotesComponent,
+    IconComponent,
    
   ],
   imports: [

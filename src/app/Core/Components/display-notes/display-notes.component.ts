@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { Toast, ToastrService } from 'ngx-toastr';
+import { Console } from '@angular/core/src/console';
 
 @Component({
   selector: 'app-display-notes',
@@ -7,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayNotesComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private service:UserService, route:Router,private toastr:ToastrService) { 
+  }
+  @Input() cards;
   ngOnInit() {
   }
 

@@ -64,10 +64,15 @@ export class UserService {
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
   }
+
   AddNotes(formData,UserId){
-    formData.UserId=UserId;
-    console.log(formData);
-      
+        formData.UserId=UserId;
         return this.http.post(environment.BaseURI + '/Notes/addNotes',formData ,UserId);
   }
+
+  getNotesById(UserId: string) {
+    
+    return this.http.get(environment.BaseURI + '/Notes/viewNotes/'+UserId);
+}
+
 }

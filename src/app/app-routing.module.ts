@@ -13,6 +13,7 @@ import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component
 import { ArchiveComponent } from './Core/Components/archive/archive.component';
 import { TrashComponent } from './Core/Components/trash/trash.component';
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
+import { IconComponent } from './Core/Components/icon/icon.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -52,6 +53,10 @@ const routes: Routes = [
 {
   path:'Display',
   component:DisplayNotesComponent
+},
+{
+  path:'icon',
+  component:IconComponent
 }
   
 ]
