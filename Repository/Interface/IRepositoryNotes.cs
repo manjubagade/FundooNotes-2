@@ -18,5 +18,7 @@ namespace RepositoryLayer.Interface
         void AddNotes(Notes notes);
         Task<int> SaveChangesAsync();
         IList<Notes> ViewNotes(Guid userId);
+        Task<int> DeleteNotes(int id);
+        void UpdateNotes(Notes notes, int id);
     }
 }

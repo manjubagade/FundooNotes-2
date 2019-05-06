@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(RegistrationControl))]
-    [Migration("20190420072802_ChangeDefaultcolumnName")]
-    partial class ChangeDefaultcolumnName
+    [Migration("20190506121934_GetNotes")]
+    partial class GetNotes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,18 +21,41 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Common.Models.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Images");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("FundooApi.Notes", b =>
                 {
-                    b.Property<string>("UserId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
 
                     b.Property<string>("Description");
 
+                    b.Property<DateTime>("ModifiedDate");
+
                     b.Property<string>("Title");
 
-                    b.HasKey("UserId");
+                    b.Property<Guid>("UserId");
 
-                    b.ToTable("GetNotes");
+                    b.HasKey("Id");
+
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -22,7 +22,7 @@ namespace FundooApi
         /// The user identifier.
         /// </value>
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the description.

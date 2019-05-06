@@ -11,7 +11,7 @@ namespace BusinessLayer.Services
     using System.Net.Mail;
     using System.Threading.Tasks;
 
-    public class EmailSender : IEmailSender
+    public class EmailSenders : IEmailSender
     {
         public Task SendEmailAsync(string Email, string subject, string body)
         {

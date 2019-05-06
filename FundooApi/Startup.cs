@@ -84,6 +84,7 @@ namespace FundooApi
             //services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<INotes, NotesCreation>();
             services.AddTransient<IRepositoryNotes, CreateNotes>();
+            services.AddTransient<IEmailSender, EmailSenders>();
            
            // services.AddTransient<IEmailSender, EmailSender>();
 

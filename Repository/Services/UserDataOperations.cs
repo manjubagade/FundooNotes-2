@@ -90,9 +90,9 @@ namespace RepositoryLayer.Services
         /// <returns>Result for reset</returns>
         public async Task<object> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
-            var userEmail = await this.userManager.FindByEmailAsync(resetPasswordmodel.Email);
-            var token = await this.userManager.GeneratePasswordResetTokenAsync(userEmail);
-            var result = await this.userManager.ResetPasswordAsync(userEmail, token, resetPasswordmodel.Password);
+            var userName = await this.userManager.FindByEmailAsync(resetPasswordmodel.UserName);
+            var token = await this.userManager.GeneratePasswordResetTokenAsync(userName);
+            var result = await this.userManager.ResetPasswordAsync(userName, token, resetPasswordmodel.Password);
             return result;
         }
 

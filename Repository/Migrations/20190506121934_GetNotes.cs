@@ -1,10 +1,10 @@
-﻿namespace RepositoryLayer.Migrations
-{
-    using System;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class Initial : Migration
+namespace RepositoryLayer.Migrations
+{
+    public partial class GetNotes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(nullable: true)
                 },
@@ -52,16 +52,34 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "GetNotes",
+                name: "Images",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    Images = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GetNotes", x => x.UserId);
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,7 +246,10 @@
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GetNotes");
+                name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

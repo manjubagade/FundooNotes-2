@@ -35,7 +35,9 @@ namespace BusinessLayer.Services
 
         public Task<int> Change(Notes notesModel, int id)
         {
-            throw new NotImplementedException();
+            this.repositoryNotes.UpdateNotes(notesModel,id);
+            var result = this.repositoryNotes.SaveChangesAsync();
+            return result;
         }
 
         public Task<int> Create(Notes notesModel)
@@ -47,7 +49,7 @@ namespace BusinessLayer.Services
 
         public Task<int> Delete(int id)
         {
-            throw new NotImplementedException();
+            return this.repositoryNotes.DeleteNotes(id);
         }
     }
 }
