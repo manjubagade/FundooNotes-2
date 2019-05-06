@@ -18,14 +18,21 @@
     </div>
     <div class="ref">
         <div fxFlex='100' fxLayoutAlign="end center">
-            <button mat-icon-button class="refreshbutton">
+            <button mat-icon-button class="togle">
                 <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}" (click)="refresh()">refresh
                 </mat-icon>
            </button>
         </div>
       </div>
+      <div class="settingButton" fxFlex='10' >
+        <button mat-icon-button class="togle" fxLayoutAlign="end center" >
+            <mat-icon class="grid" aria-label="grid Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}">view_agenda
+            </mat-icon>
+       </button>
+    </div>
+      
         <div class="settingButton" fxFlex='10' >
-            <button mat-icon-button  fxLayoutAlign="end center" >
+            <button class="togle" mat-icon-button  fxLayoutAlign="end center" >
                 <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">settings
                 </mat-icon>
            </button>
@@ -33,7 +40,7 @@
         </div>
     
         <div class="Logout">
-            <button mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">A</button>
+            <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">A</button>
             <div class="Dropdown" style="top:10px">
             <ul class="dropdown-menu">
               <li class="devider"></li>

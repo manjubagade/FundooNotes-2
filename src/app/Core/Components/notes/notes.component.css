@@ -1,8 +1,27 @@
 .Notes{
     padding: 30px;
+    outline: none;
 }
 .example-card{
     margin-left: 250px;
     height: auto;
     width: 600px;
+    outline: none;
+}
+.take_a_note{
+    outline: none;
+    border: none;
+}
+.cards{
+    outline: none;
+    border: none;
+}
+.card{
+    outline: none;
+    border: none;
+}
+.title
+{
+    outline: none;
+    border: none;
 }

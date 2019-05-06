@@ -1,18 +1,23 @@
 <form [formGroup]="form">
 <div class="Notes">
 <mat-card class="example-card"> 
+
   <div *ngIf="!isOpen" (click)= "isOpen=true" >
   <input class="take_a_note" formControlName="Description" type="text" style="width: 560px; outline: none" placeholder="Take a note..." aria-label="Take a note" >
   </div>
-  <div *ngIf=isOpen>
+
+  <div *ngIf=isOpen class="card">
   <!-- <img class="image" mat-card-image src="{{picture.url}}" alt="photo"> -->
-  <textarea formControlName="title" style="width: 560px; outline: none" placeholder="Title"></textarea>
-  <textarea formControlName="Description" style="width: 560px; outline: none" placeholder="Take a note..."></textarea>
-  <div>
-
-  <button mat-button (click)="isOpen=false" style="left:12cm" (click)="AddNotes()">close</button>
-
+  <div class="cards">
+  <textarea class="title" formControlName="title" style="width: 560px; outline: none" placeholder="Title"></textarea>
+  <textarea class="title" formControlName="Description" style="width: 560px; outline: none" placeholder="Take a note..."></textarea>
   </div>
+ 
+
+  <div>
+  <button mat-button (click)="isOpen=false" style="left:12cm" (click)="AddNotes()">close</button>
+  </div>
+  
   </div>
   </mat-card>
 </div>

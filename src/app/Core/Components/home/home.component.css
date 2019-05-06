@@ -194,3 +194,11 @@ button, input, optgroup, select, textarea {
   min-width: 0;
   width: 356px;
 }
+.Logout{
+  border: none;
+  outline: none;
+}
+.togle{
+  border: none;
+  outline: none;
+}
