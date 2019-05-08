@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   }
   
   ngOnInit() {
-    
     }
   onLogout(){
     localStorage.removeItem('token');

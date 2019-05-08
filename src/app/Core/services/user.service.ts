@@ -74,5 +74,8 @@ export class UserService {
     
     return this.http.get(environment.BaseURI + '/Notes/viewNotes/'+UserId);
 }
+UpdateNotes(formData,id){
+ return this.http.put(environment.BaseURI+ '/Notes/updateNotes/' +formData,id);
+}
 
 }

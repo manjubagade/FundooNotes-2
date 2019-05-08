@@ -2,13 +2,13 @@
   
     <mat-toolbar color="primary" class="example-toolbar"  fxLayout="row"  >
 
-    <div fxFlex='3'> <button  mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button></div>
+    <div fxFlex='3'> <button class="togle" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button></div>
       <img class="logo" src="/assets/download.png">
      <div fxFlex='10'> <h1 class="example-app-name" >{{ Header }}</h1></div>
      
     <div fxflex='50'>
       <mat-form-field  appearance="outline" [style.fontsize.px]="2" class="search">
-        <button mat-icon-button>
+        <button class="togle" mat-icon-button>
          <div>
           <mat-icon fxLayoutAlign="center center">search</mat-icon>
         </div>
@@ -21,6 +21,7 @@
             <button mat-icon-button class="togle">
                 <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}" (click)="refresh()">refresh
                 </mat-icon>
+                
            </button>
         </div>
       </div>

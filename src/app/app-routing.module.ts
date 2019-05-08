@@ -14,6 +14,7 @@ import { ArchiveComponent } from './Core/Components/archive/archive.component';
 import { TrashComponent } from './Core/Components/trash/trash.component';
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 import { IconComponent } from './Core/Components/icon/icon.component';
+import { EditComponent } from './Core/Components/edit/edit.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -57,21 +58,16 @@ const routes: Routes = [
 {
   path:'icon',
   component:IconComponent
-}
-  
+},
+
 ]
 
-
 },
-  // {
-  //   path:'home',
-  //  children:[
-  //    { path:'notes', redirectTo:'./notes',pathMatch:'full'},
-    
-     
-  //    { path: 'reminders', component: RemindersComponent }
-  //  ]
-  // }
+
+{
+  path : 'edit',
+  component : EditComponent
+}
 ];
 
 @NgModule({

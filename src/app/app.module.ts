@@ -19,6 +19,7 @@ import{  MatSidenavModule,MatTabsModule,
   MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
   MatTooltipModule, MatInputModule,
   MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule} from '@angular/material';
+  import {MatDialogModule} from '@angular/material/dialog';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
   import { FlexLayoutModule } from '@angular/flex-layout';
@@ -31,6 +32,7 @@ import { TrashComponent } from './Core/Components/trash/trash.component';
 import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component';
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 import { IconComponent } from './Core/Components/icon/icon.component';
+import { EditComponent } from './Core/Components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { IconComponent } from './Core/Components/icon/icon.component';
     MainnoteComponent,
     DisplayNotesComponent,
     IconComponent,
+    EditComponent,
    
   ],
   imports: [
@@ -65,7 +68,7 @@ import { IconComponent } from './Core/Components/icon/icon.component';
     MatInputModule,
     MatFormFieldModule,
     MatToolbarModule,
-
+    MatDialogModule,
     MatTooltipModule,
     NgMatSearchBarModule,
     MatCardModule,

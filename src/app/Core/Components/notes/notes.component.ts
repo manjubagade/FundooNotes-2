@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as jwt_decode from 'jwt-decode';
 import { Token } from '@angular/compiler';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-notes',

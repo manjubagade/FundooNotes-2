@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Console } from '@angular/core/src/console';
+import { UserComponent } from '../user/user.component';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'app-display-notes',
@@ -10,11 +13,26 @@ import { Console } from '@angular/core/src/console';
   styleUrls: ['./display-notes.component.css']
 })
 export class DisplayNotesComponent implements OnInit {
+  
 
-  constructor(private service:UserService, route:Router,private toastr:ToastrService) { 
+  constructor(private service:UserService, route:Router,private toastr:ToastrService,public dialog: MatDialog) { 
   }
   @Input() cards;
   ngOnInit() {
   }
+  openDialog(note){
+    console.log(note);
+    // const dialogRef = this.dialog.open(EditNotes);
+    const dialogRef = this.dialog.open(EditComponent,
+      {
+      data:note,
+      // height:auto,
+      // width:'auto
+  });
+  dialogRef.afterClosed().subscribe(result => {
 
+// console.log("execute")
+this.service.UpdateNotes(note,note.id);
+  })
+  }
 }
