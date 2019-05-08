@@ -6,6 +6,7 @@
 // ---------------------------------------------------------------------------------------------------------------------------
 
 using FundooApi;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,9 +17,15 @@ namespace RepositoryLayer.Interface
     public interface IRepositoryNotes
     {
         void AddNotes(Notes notes);
+
         Task<int> SaveChangesAsync();
+
         IList<Notes> ViewNotes(Guid userId);
+
         Task<int> DeleteNotes(int id);
+
         void UpdateNotes(Notes notes, int id);
+
+        string Image(IFormFile file, int id);
     }
 }

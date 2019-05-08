@@ -6,6 +6,7 @@
 // ---------------------------------------------------------------------------------------------------------------------------
 using BusinessLayer.Interfaces;
 using FundooApi;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,14 @@ namespace BusinessLayer.Services
             return this.repositoryNotes.ViewNotes(UserId);
         }
 
+        public string AddImage(IFormFile file, int id)
+        {
+            return this.repositoryNotes.Image(file,id);
+        }
+
         public Task<int> Change(Notes notesModel, int id)
         {
+            
             this.repositoryNotes.UpdateNotes(notesModel,id);
             var result = this.repositoryNotes.SaveChangesAsync();
             return result;
@@ -42,9 +49,16 @@ namespace BusinessLayer.Services
 
         public Task<int> Create(Notes notesModel)
         {
+            try
+            {
             this.repositoryNotes.AddNotes(notesModel);
             var result = this.repositoryNotes.SaveChangesAsync();
             return result;
+            }
+            catch
+            {
+                return this.repositoryNotes.SaveChangesAsync();
+            }
         }
 
         public Task<int> Delete(int id)

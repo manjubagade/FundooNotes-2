@@ -16,5 +16,7 @@ namespace BusinessLayer.Interfaces
          bool ForgotPasswordAsync(ForgotPassword forgotPasswordmodel);
       
          bool ResetPasswordAsync(ResetPassword resetPasswordmodel);
+
+        
     }
 }

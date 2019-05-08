@@ -11,6 +11,7 @@ namespace FundooApi.Controllers
     using System.Linq;
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -74,6 +75,23 @@ namespace FundooApi.Controllers
             }
         }
 
+
+        //[HttpPost]
+        //[Route("image/{Id}")]
+        //public IActionResult AddImage(IFormFile file,int Id)
+        //{
+        //   // if (file == null)
+        //   // {
+        //   //     return this.BadRequest();
+        //   // }
+        //   //else
+        //   // {
+        //        return null;
+        //   //   //  var result = this.notesHandler.AddImage(file, id);
+        //   //    // return this.Ok(new { result });
+        //   // }
+        //}
+
         /// <summary>
         /// Updates the notes.
         /// </summary>
@@ -115,6 +133,20 @@ namespace FundooApi.Controllers
                 Console.WriteLine(e.Message);
                 return this.BadRequest();
             }
+        }
+
+        [HttpPost]
+        [Route("image/{Id}")]
+        public IActionResult Image(IFormFile file, int id)
+        {
+            if (file == null)
+            {
+                return this.NotFound("The file couldn't be found");
+            }
+
+            // var result = this.notesBusiness.Image(file, id);
+            // return this.Ok(new { result });
+            return null;
         }
     }
 }

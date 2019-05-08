@@ -63,5 +63,21 @@ namespace FundooApi
         /// The user identifier.
         /// </value>
         public Guid UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the image.
+        /// </summary>
+        /// <value>
+        /// The image.
+        /// </value>
+        public string Image { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color.
+        /// </summary>
+        /// <value>
+        /// The color.
+        /// </value>
+        public string Color { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FundooApi;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,8 +16,9 @@ namespace BusinessLayer.Interfaces
 
        
         Task<int> Change(Notes notesModel, int id);
-
        
         IList<Notes> AccessNotes(Guid userId);
+
+        string AddImage(IFormFile file, int id);
     }
 }

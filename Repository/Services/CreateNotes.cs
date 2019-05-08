@@ -7,6 +7,8 @@
 
 namespace RepositoryLayer.Services
 {
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using FundooApi;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -105,9 +107,35 @@ namespace RepositoryLayer.Services
             return result;
         }
 
-        public string Image(IFormFile file)
+        /// <summary>
+        /// Images the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>string</returns>
+        public string Image(IFormFile file, int id)
         {
-            return null;
+            var stream = file.OpenReadStream();
+            var name = file.FileName;
+            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("dc1kbrrhk", "383789512449669", "fqD5389o6BAzQiFaUk56zQzsYyM");
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(name, stream)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+            var data = this.registrationControl.Notes.Where(t => t.Id == id).FirstOrDefault();
+             data.Image = uploadResult.Uri.ToString();
+            int result = 0;
+            try
+            {
+                result = this.registrationControl.SaveChanges();
+                return data.Image;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
