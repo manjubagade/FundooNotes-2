@@ -39,7 +39,7 @@ namespace RepositoryLayer.Services
         public void AddNotes(Notes notes)
         {
             try
-            { 
+            {
                    //// Add Notes
                    var addnotes = new Notes()
                    {
@@ -77,6 +77,7 @@ namespace RepositoryLayer.Services
             Notes notes = this.registrationControl.Notes.Where<Notes>(c => c.Id == id).FirstOrDefault();
             notes.Title = model.Title;
             notes.Description = model.Description;
+            notes.Image = model.Image;
         }
 
         /// <summary>
@@ -117,15 +118,15 @@ namespace RepositoryLayer.Services
         {
             var stream = file.OpenReadStream();
             var name = file.FileName;
-            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("dc1kbrrhk", "383789512449669", "fqD5389o6BAzQiFaUk56zQzsYyM");
-            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+            Account account = new Account("dc1kbrrhk", "383789512449669", "fqD5389o6BAzQiFaUk56zQzsYyM");
+            Cloudinary cloudinary = new Cloudinary(account);
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(name, stream)
             };
             var uploadResult = cloudinary.Upload(uploadParams);
             var data = this.registrationControl.Notes.Where(t => t.Id == id).FirstOrDefault();
-             data.Image = uploadResult.Uri.ToString();
+            data.Image = uploadResult.Uri.ToString();
             int result = 0;
             try
             {
@@ -138,4 +139,4 @@ namespace RepositoryLayer.Services
             }
         }
     }
-}
+ }

@@ -35,6 +35,11 @@ namespace RepositoryLayer.Services
             this.distributedCache = distributedCache;
         }
 
+        /// <summary>
+        /// Registers the specified user registration.
+        /// </summary>
+        /// <param name="userRegistration">The user registration.</param>
+        /// <returns></returns>
         public Task Register(UserRegistration userRegistration)
         {
             ////Assign Variables
@@ -49,6 +54,11 @@ namespace RepositoryLayer.Services
             return result;
         }
 
+        /// <summary>
+        /// Logins the specified login controlmodel.
+        /// </summary>
+        /// <param name="loginControlmodel">The login controlmodel.</param>
+        /// <returns></returns>
         public async Task<string> Login(LoginControl loginControlmodel)
         {
            
@@ -77,6 +87,11 @@ namespace RepositoryLayer.Services
                 }
             }
 
+        /// <summary>
+        /// Finds the by email asynchronous.
+        /// </summary>
+        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <returns></returns>
         public Task FindByEmailAsync(ForgotPassword forgotPasswordmodel)
         {
             var result = this.userManager.FindByEmailAsync(forgotPasswordmodel.Email);
@@ -96,6 +111,11 @@ namespace RepositoryLayer.Services
             return result;
         }
 
+        /// <summary>
+        /// Generates the password reset token asynchronous.
+        /// </summary>
+        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <returns></returns>
         public async Task<string> GeneratePasswordResetTokenAsync(ForgotPassword forgotPasswordmodel)
         {
             var result = await this.userManager.FindByEmailAsync(forgotPasswordmodel.Email);

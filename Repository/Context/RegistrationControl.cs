@@ -45,6 +45,8 @@ namespace FundooApi
         /// </value>
         public DbSet<Notes> Notes { get; set; }
 
+        public DbSet<Label> Labels { get; set; }
+
         public DbSet<Image> Images { get; set; }
 
         /// <summary>

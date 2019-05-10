@@ -5,25 +5,53 @@
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
 
-using FundooApi;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace RepositoryLayer.Interface
 {
+    using FundooApi;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// IUserDataOperations for Handling User Operations
+    /// </summary>
     public interface IUserDataOperations
     {
+        /// <summary>
+        /// Registers the specified user registration.
+        /// </summary>
+        /// <param name="userRegistration">The user registration.</param>
+        /// <returns></returns>
         Task Register(UserRegistration userRegistration);
 
+        /// <summary>
+        /// Logins the specified login controlmodel.
+        /// </summary>
+        /// <param name="loginControlmodel">The login controlmodel.</param>
+        /// <returns></returns>
         Task<string> Login(LoginControl loginControlmodel);
 
+        /// <summary>
+        /// Finds the by email asynchronous.
+        /// </summary>
+        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <returns></returns>
         Task FindByEmailAsync(ForgotPassword forgotPasswordmodel);
 
+        /// <summary>
+        /// Generates the password reset token asynchronous.
+        /// </summary>
+        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <returns></returns>
         Task<string> GeneratePasswordResetTokenAsync(ForgotPassword forgotPasswordmodel);
 
+        /// <summary>
+        /// Resets the password asynchronous.
+        /// </summary>
+        /// <param name="resetPasswordmodel">The reset passwordmodel.</param>
+        /// <returns></returns>
         Task<object> ResetPasswordAsync(ResetPassword resetPasswordmodel);
     }
 }

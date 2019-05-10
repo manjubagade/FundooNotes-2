@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="INotes.cs" company="Bridgelabz">
+// <copyright file="ILabel.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
@@ -7,22 +7,24 @@
 
 namespace BusinessLayer.Interfaces
 {
-
-    using FundooApi;
-    using Microsoft.AspNetCore.Http;
+    using Common.Models;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface INotes
+    /// <summary>
+    /// Interface ILabel in Business Layer
+    /// </summary>
+    public interface ILabel
     {
+
         /// <summary>
         /// Creates the specified notes model.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
+        /// <param name="LabelModel">The notes model.</param>
         /// <returns></returns>
-        Task<int> Create(Notes notesModel);
+        Task<int> Create(Label LabelModel);
 
         /// <summary>
         /// Deletes the specified identifier.
@@ -34,24 +36,16 @@ namespace BusinessLayer.Interfaces
         /// <summary>
         /// Changes the specified notes model.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
+        /// <param name="LabelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        Task<int> Change(Notes notesModel, int id);
+        Task<int> Change(Label LabelModel, int id);
 
         /// <summary>
         /// Accesses the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        IList<Notes> AccessNotes(Guid userId);
-
-        /// <summary>
-        /// Adds the image.
-        /// </summary>
-        /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        string AddImage(IFormFile file, int id);
+        IList<Label> AccessLabel(Guid userId);
     }
 }

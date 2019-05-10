@@ -66,7 +66,7 @@ namespace FundooApi
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<RegistrationControl>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_0);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             ////Password Authorization
             services.Configure<IdentityOptions>(options =>
@@ -85,8 +85,9 @@ namespace FundooApi
             services.AddTransient<INotes, NotesCreation>();
             services.AddTransient<IRepositoryNotes, CreateNotes>();
             services.AddTransient<IEmailSender, EmailSenders>();
-           
-           // services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ILabel, BusinessLabel>();
+            services.AddTransient<IRepositoryLabel, LabelHandler>();
+         
 
             services.AddDistributedRedisCache(option =>
             {

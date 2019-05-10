@@ -1,9 +1,10 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="NotesController.cs" company="Bridgelabz">
+// <copyright file="LabelController.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
+
 namespace FundooApi.Controllers
 {
     using System;
@@ -11,61 +12,53 @@ namespace FundooApi.Controllers
     using System.Linq;
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
+    using Common.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class NotesController : ControllerBase
+    public class LabelController : ControllerBase
     {
-        /// <summary>
-        /// The notes creation
-        /// </summary>
-        private readonly INotes notesHandler;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NotesController"/> class.
-        /// </summary>
-        /// <param name="notesHandler">The notes creation.</param>
-        public NotesController(INotes notesHandler)
+        private readonly ILabel label;
+        public LabelController(ILabel label)
         {
-            this.notesHandler = notesHandler;
+            this.label = label;
         }
 
         /// <summary>
-        /// Creates the notes.
+        /// Creates the label.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
-        /// <returns>return result</returns>
+        /// <param name="labelmodel">The labelmodel.</param>
+        /// <returns></returns>
         [HttpPost]
-        [Route("addNotes")]
-        public async Task<IActionResult> CreateNotes(Notes notesModel)
+        [Route("add")]
+        public async Task<IActionResult> CreateLabel(Label labelmodel)
         {
             try
             {
-                var result = await this.notesHandler.Create(notesModel);
+                var result = await this.label.Create(labelmodel);
                 return this.Ok(result);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return this.BadRequest();
+              throw new Exception(e.Message);
 
             }
         }
 
         /// <summary>
-        /// Deletes the notes.
+        /// Deletes the Label.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
         [HttpDelete]
         [Route("delete/{id}")]
-        public async Task<IActionResult> DeleteNotes(int id)
+        public async Task<IActionResult> DeleteLabel(int id)
         {
             try
             {
-                var result = await this.notesHandler.Delete(id);
+                var result = await this.label.Delete(id);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -82,12 +75,12 @@ namespace FundooApi.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
         [HttpPut]
-        [Route("updateNotes/{id}")]
-        public async Task<IActionResult> UpdateNotes(Notes notesModel, int id)
+        [Route("updateLabel/{id}")]
+        public async Task<IActionResult> UpdateLabel(Label labelModel, int id)
         {
             try
             {
-                var result = await this.notesHandler.Change(notesModel, id);
+                var result = await this.label.Change(labelModel, id);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -101,15 +94,15 @@ namespace FundooApi.Controllers
         /// Views all.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns>return notes</returns>
+        /// <returns>return Label</returns>
         [HttpGet]
-        [Route("viewNotes/{UserId}")]
+        [Route("viewLabel/{UserId}")]
         public IActionResult ViewAll(Guid userId)
         {
             try
             {
-                IList<Notes> note = this.notesHandler.AccessNotes(userId);
-                return this.Ok(note);
+                IList<Label> label = this.label.AccessLabel(userId);
+                return this.Ok(label);
             }
             catch (Exception e)
             {
@@ -117,18 +110,6 @@ namespace FundooApi.Controllers
                 return this.BadRequest();
             }
         }
-
-        [HttpPost]
-        [Route("image/{id}")]
-        public IActionResult Image(IFormFile file, int id)
-        {
-            if (file == null)
-            {
-                return this.NotFound("The file couldn't be found");
-            }
-
-            var result = this.notesHandler.AddImage(file, id);
-            return this.Ok(new { result });
-        }
+        
     }
 }

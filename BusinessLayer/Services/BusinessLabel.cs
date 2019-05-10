@@ -1,12 +1,13 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="NotesCreation.cs" company="Bridgelabz">
+// <copyright file="BusinessLabel.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
+
 using BusinessLayer.Interfaces;
-using FundooApi;
-using Microsoft.AspNetCore.Http;
+using Common.Models;
+using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
-    public class NotesCreation : INotes
+    public class BusinessLabel : ILabel
     {
-        private readonly IRepositoryNotes repositoryNotes;
+        private readonly IRepositoryLabel repositoryLabel;
 
-        public NotesCreation(IRepositoryNotes repositoryNotes)
+        public BusinessLabel(IRepositoryLabel repositoryLabel)
         {
-            this.repositoryNotes = repositoryNotes;
+            this.repositoryLabel = repositoryLabel;
         }
 
         /// <summary>
@@ -29,24 +30,22 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Notes> AccessNotes(Guid UserId)
+        public IList<Label> AccessLabel(Guid UserId)
         {
-            return this.repositoryNotes.ViewNotes(UserId);
+            return this.repositoryLabel.ViewLabel(UserId);
         }
-
-        
 
         /// <summary>
         /// Changes the specified notes model.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
+        /// <param name="LabelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Task<int> Change(Notes notesModel, int id)
+        public Task<int> Change(Label LabelModel, int id)
         {
-            
-            this.repositoryNotes.UpdateNotes(notesModel,id);
-            var result = this.repositoryNotes.SaveChangesAsync();
+
+            this.repositoryLabel.UpdateLabel(LabelModel, id);
+            var result = this.repositoryLabel.SaveChangesAsync();
             return result;
         }
 
@@ -55,17 +54,18 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <returns></returns>
-        public Task<int> Create(Notes notesModel)
+        public Task<int> Create(Label LabelModel)
         {
             try
             {
-            this.repositoryNotes.AddNotes(notesModel);
-            var result = this.repositoryNotes.SaveChangesAsync();
-            return result;
+                 this.repositoryLabel.AddLabel(LabelModel);
+                
+                var result = this.repositoryLabel.SaveChangesAsync();
+                return result;
             }
-            catch
+            catch(Exception e)
             {
-                return this.repositoryNotes.SaveChangesAsync();
+                throw new Exception(e.Message);
             }
         }
 
@@ -76,19 +76,8 @@ namespace BusinessLayer.Services
         /// <returns></returns>
         public Task<int> Delete(int id)
         {
-            return this.repositoryNotes.DeleteNotes(id);
+            return this.repositoryLabel.DeleteLabel(id);
         }
-
-        /// <summary>
-        /// Adds the image.
-        /// </summary>
-        /// <param name="file">The file.</param>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        public string AddImage(IFormFile file, int id)
-        {
-
-            return this.repositoryNotes.Image(file, id);
-        }
+     
     }
 }
