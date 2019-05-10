@@ -3,6 +3,8 @@
     margin-top:15px;
     margin-left: 25px;
     flex-wrap: wrap;
+    height: auto;
+    width: auto;
 }
 .inputArea{
     border: none;

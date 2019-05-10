@@ -30,7 +30,10 @@ export class RegistrationComponent implements OnInit {
         switch (element.code) {
         case 'DuplicateUserName':
         this.toastr.error('Username is already taken','Registration failed.');
+        case 'DuplicateEmail':
+        this.toastr.error('Email is already taken','Registration failed.');
         break; 
+        
         default:
         this.toastr.error(element.description,'Registration failed.');
         break;

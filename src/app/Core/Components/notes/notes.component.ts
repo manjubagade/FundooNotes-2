@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as jwt_decode from 'jwt-decode';
 import { Token } from '@angular/compiler';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { NoteService } from '../../services/NoteService/note.service';
 
 @Component({
   selector: 'app-notes',
@@ -17,7 +18,7 @@ export class NotesComponent implements OnInit {
     title : new FormControl(),
     Description : new FormControl(),
    });
-  constructor(private router:Router,public service:UserService,private toastr: ToastrService) { 
+  constructor(private router:Router,public service:NoteService,private toastr: ToastrService) { 
   }
 
   ngOnInit() {

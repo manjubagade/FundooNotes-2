@@ -1,15 +1,25 @@
 <button mat-button>
 <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>add_alert</mat-icon>
 </button>
+
 <button mat-button>
 <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>color_lens</mat-icon>
 </button>
-<button mat-button (click)="UpLoadImage()">
-<mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>image</mat-icon>
-</button>
+
+<button mat-button (click)="file.click(file)"> 
+<input type="file" #file  style="display:none;" (change)="uploadFile(file.files)">
+ <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>image</mat-icon>
+<br/>
+</button> 
+  
 <button mat-button>
 <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>archive</mat-icon>
 </button>
-<button mat-button>
+
+<button mat-button data-toggle="dropdown">
 <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="center center">more_vert</mat-icon>
+<ul class="dropdown-menu">
+      <li><button mat-raised-button (click)="Delete(cards)">Delete Note</button></li>
+      <li><button mat-raised-button  routerLink=".">Add Label</button></li>
+    </ul>
 </button>

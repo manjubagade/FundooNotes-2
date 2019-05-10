@@ -1,55 +1,18 @@
-<!-- <div>
-<div class="loop" *ngFor="let note of cards">
-    <mat-card class="note" [style.background-color]=note.color>
-      <div (click)="openDialog(note)" class="element.style">
-        <div>
-          <img src="{{note.image}}" class="notesImage" />
-        </div> 
-        
-    <div>
-         <textarea mat-dialog-title class="inputArea ">{{note.title}}</textarea>
-        </div>
-        <div>
-            <textarea mat-dialog-content class="inputArea ">{{note.description}}</textarea>
-        </div>
-      
-      </div>
-      <app-icon [cards]="note"></app-icon>
-    </mat-card>
-  </div> 
-</div> -->
-<!-- <div> -->
-    <!-- <div class="loop" *ngFor="let note of cards"> -->
-  <!-- <h1 mat-dialog-title>{{note.title}}</h1>
-<div mat-dialog-content>
-  {{ note.description}}
-  <mat-form-field>
-    <input matInput placeholder="Title">
-  </mat-form-field>
-</div> -->
-<!-- <div mat-dialog-actions> -->
-  
-  <!-- <button mat-button (click)="Edit">Cancle</button> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
-<form [formGroup]="form">
 <mat-card [style.background-color]=note.color>
 
 <div>
-    <!-- <div>
+    <div>
       <img src="{{note.image}}" class="notesImage" />
-    </div> -->
+    </div>
     
     <div>
-     <textarea mat-card-title class="inputArea" >{{note.title}}</textarea>
+     <textarea class="textArea" mat-card-title class="inputArea" [(ngModel)]='note.title' ></textarea>
     </div>
     <div>
-        <textarea mat-card-content class="inputArea" >{{note.description}}</textarea>
+        <textarea mat-card-content class="inputArea" [(ngModel)]='note.description'></textarea>
     </div>
   
   </div>
   <app-icon [cards]="note"></app-icon>
   <button mat-button (click)="Update()">Cancle</button>
 </mat-card>
-</form>

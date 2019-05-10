@@ -33,6 +33,7 @@ import { MainnoteComponent } from './Core/Components/mainnote/mainnote.component
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 import { IconComponent } from './Core/Components/icon/icon.component';
 import { EditComponent } from './Core/Components/edit/edit.component';
+import { LabelComponent } from './Core/Components/label/label.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { EditComponent } from './Core/Components/edit/edit.component';
     DisplayNotesComponent,
     IconComponent,
     EditComponent,
+    LabelComponent,
    
   ],
   imports: [

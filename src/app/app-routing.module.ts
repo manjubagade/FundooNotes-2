@@ -15,6 +15,7 @@ import { TrashComponent } from './Core/Components/trash/trash.component';
 import { DisplayNotesComponent } from './Core/Components/display-notes/display-notes.component';
 import { IconComponent } from './Core/Components/icon/icon.component';
 import { EditComponent } from './Core/Components/edit/edit.component';
+import { LabelComponent } from './Core/Components/label/label.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -67,6 +68,10 @@ const routes: Routes = [
 {
   path : 'edit',
   component : EditComponent
+},
+{
+  path : 'label',
+  component : LabelComponent
 }
 ];
 

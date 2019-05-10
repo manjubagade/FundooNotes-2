@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { single } from 'rxjs/operators';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserService {
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   formModel = this.fb.group({
-    UserName: ['', Validators.required,],
+    UserName: ['', Validators.required],
     Email: ['', [Validators.required, Validators.email]],
     FullName: [''],
     Passwords: this.fb.group({
@@ -47,12 +48,10 @@ export class UserService {
   }
 
   ForgotPassword(formData) {
-   
     return this.http.post(environment.BaseURI + '/User/forgotPassword', formData);
   }
 
   Resetpassword(formData) {
-   
     return this.http.post(environment.BaseURI + '/User/resetPassword', formData);
   }
 
@@ -64,18 +63,5 @@ export class UserService {
     var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
   }
-
-  AddNotes(formData,UserId){
-        formData.UserId=UserId;
-        return this.http.post(environment.BaseURI + '/Notes/addNotes',formData ,UserId);
-  }
-
-  getNotesById(UserId: string) {
-    
-    return this.http.get(environment.BaseURI + '/Notes/viewNotes/'+UserId);
-}
-UpdateNotes(formData,id){
- return this.http.put(environment.BaseURI+ '/Notes/updateNotes/' +formData,id);
-}
 
 }
