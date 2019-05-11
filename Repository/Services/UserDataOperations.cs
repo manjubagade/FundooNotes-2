@@ -62,7 +62,7 @@ namespace RepositoryLayer.Services
         public async Task<string> Login(LoginControl loginControlmodel)
         {
            
-                var user = await this.userManager.FindByNameAsync(loginControlmodel.UserName);
+                var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
                 if (user != null && await this.userManager.CheckPasswordAsync(user, loginControlmodel.Password))
                 {
                     var tokenDescriptor = new SecurityTokenDescriptor

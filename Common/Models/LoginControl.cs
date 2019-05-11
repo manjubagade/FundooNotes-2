@@ -24,7 +24,8 @@ namespace FundooApi
         /// The name of the user.
         /// </value>
         [Required]
-        public string UserName { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the password.
@@ -33,6 +34,7 @@ namespace FundooApi
         /// The password.
         /// </value>
         [Required]
+        [MinLength(5)]
         public string Password { get; set; }
     }
 }

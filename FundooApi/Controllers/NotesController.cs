@@ -122,7 +122,7 @@ namespace FundooApi.Controllers
         [Route("image/{id}")]
         public IActionResult Image(IFormFile file, int id)
         {
-            if (file == null)
+            if (file == null) //business Layer
             {
                 return this.NotFound("The file couldn't be found");
             }

@@ -252,7 +252,7 @@ namespace FundooNotesBackEnd.Controllers
             {
                 var result = await applicationUserOperation.LoginAsync(loginControlModel);
                 if(result==null){
-                    return "Invalide userName And Password";
+                    return "Invalide Email And Password";
                 }
                 return result;
             }

@@ -40,7 +40,7 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                   //// Add Notes
+                   //// Adding Notes in database
                    var addnotes = new Notes()
                    {
                       UserId = notes.UserId,
@@ -78,6 +78,7 @@ namespace RepositoryLayer.Services
             notes.Title = model.Title;
             notes.Description = model.Description;
             notes.Image = model.Image;
+            notes.Color = model.Color;
         }
 
         /// <summary>
@@ -98,8 +99,12 @@ namespace RepositoryLayer.Services
             this.distributedCache.SetString(cacheKey, note.ToString());
             return note.ToArray();
         }
-        
 
+        /// <summary>
+        /// Deletes the notes.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Result in Int</returns>
         public async Task<int> DeleteNotes(int id)
         {
             Notes notes = await this.registrationControl.Notes.FindAsync(id);
@@ -113,7 +118,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns>string</returns>
+        /// <returns>Result in string</returns>
         public string Image(IFormFile file, int id)
         {
             var stream = file.OpenReadStream();

@@ -22,25 +22,50 @@ namespace BusinessLayer.Interfaces
 
         private readonly IEmailSender emailSender;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationUserOperations"/> class.
+        /// </summary>
+        /// <param name="applicationRepository">The application repository.</param>
+        /// <param name="email">The email.</param>
         public ApplicationUserOperations(IUserDataOperations applicationRepository,IEmailSender email)
         {
             this.applicationRepository = applicationRepository;
             this.emailSender = email;
         }
 
+        /// <summary>
+        /// Posts the application user asynchronous.
+        /// </summary>
+        /// <param name="userRegistrationmodel">The user registrationmodel.</param>
+        /// <returns>
+        /// bool result
+        /// </returns>
         public async Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel)
         {
           await this.applicationRepository.Register(userRegistrationmodel);
             return true;
         }
 
+        /// <summary>
+        /// Logins the asynchronous.
+        /// </summary>
+        /// <param name="loginControlmodel">The login controlmodel.</param>
+        /// <returns>
+        /// bool result
+        /// </returns>
         public async Task<string> LoginAsync(LoginControl loginControlmodel)
         {
             string jsonstring = await applicationRepository.Login(loginControlmodel);
             return jsonstring;
         }
 
+        /// <summary>
+        /// Forgots the password asynchronous.
+        /// </summary>
+        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <returns>
+        /// bool result
+        /// </returns>
         public bool ForgotPasswordAsync(ForgotPassword forgotPasswordmodel)
         {
             var result = this.applicationRepository.FindByEmailAsync(forgotPasswordmodel);

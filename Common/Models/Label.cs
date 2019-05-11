@@ -29,5 +29,21 @@ namespace Common.Models
         /// The labels.
         /// </value>
         public string Labels { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
+        public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the modified date.
+        /// </summary>
+        /// <value>
+        /// The modified date.
+        /// </value>
+        public DateTime ModifiedDate { get; set; }
     }
 }

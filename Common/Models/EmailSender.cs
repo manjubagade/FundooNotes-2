@@ -8,6 +8,7 @@ namespace FundooApi
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     public class EmailSender
@@ -18,6 +19,7 @@ namespace FundooApi
         /// <value>
         /// From address.
         /// </value>
+        [Required]
         public string FromAddress { get; set; }
 
         /// <summary>
@@ -26,6 +28,7 @@ namespace FundooApi
         /// <value>
         /// The SMTP client.
         /// </value>
+        [Required]
         public string SmtpClient { get; set; }
 
         /// <summary>
@@ -34,6 +37,7 @@ namespace FundooApi
         /// <value>
         /// The user identifier.
         /// </value>
+        [Required]
         public string UserId { get; set; }
 
         /// <summary>
@@ -42,6 +46,7 @@ namespace FundooApi
         /// <value>
         /// The password.
         /// </value>
+        [Required]
         public string Password { get; set; }
 
         /// <summary>
@@ -50,6 +55,7 @@ namespace FundooApi
         /// <value>
         /// The SMTP port.
         /// </value>
+        [Required]
         public string SMTPPort { get; set; }
 
         /// <summary>
@@ -58,6 +64,7 @@ namespace FundooApi
         /// <value>
         ///   <c>true</c> if [enable SSL]; otherwise, <c>false</c>.
         /// </value>
+        [Required]
         public bool EnableSSL { get; set; }
     }
 }
