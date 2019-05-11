@@ -18,7 +18,7 @@ import { ResetpasswordComponent } from './Core/Components/user/resetpassword/res
 import{  MatSidenavModule,MatTabsModule,
   MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
   MatTooltipModule, MatInputModule,
-  MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule} from '@angular/material';
+  MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule, MatMenuModule} from '@angular/material';
   import {MatDialogModule} from '@angular/material/dialog';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
@@ -77,6 +77,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     MatButtonModule,
     MatExpansionModule,
     FlexLayoutModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     ToastrModule.forRoot({

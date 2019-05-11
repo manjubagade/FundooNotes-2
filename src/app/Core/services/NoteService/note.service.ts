@@ -33,8 +33,19 @@ export class NoteService {
     console.log("In Service Delete" + id);
     return this.http.delete(environment.BaseURI + '/Notes/delete/' + id);
   }
+
   UploadImage(formData){
   console.log("In Service UploadImage"+formData);
   }
+
+AddLabel(Label,UserId){
+return this.http.post(environment.BaseURI+ '/Label/add/', Label,UserId);
+}
+
+SetColor(card,id){
+  
+   console.log("In Service"+id,card);
+   return this.http.put(environment.BaseURI+ '/Notes/updateNotes/'+id, card)
+}
 
 }

@@ -1,3 +1,8 @@
-<p>
-  label works!
-</p>
+<mat-form-field>
+  <div class="Done">
+    <button mat-icon-button><mat-icon>done</mat-icon></button>
+    </div>
+    <input matInput [(ngModel)]="Label" placeholder="Create New Label" autofocus='false'>
+</mat-form-field>
+
+<button mat-button (click)="AddLabel(Label)" fxLayoutAlign="center end">Done</button>

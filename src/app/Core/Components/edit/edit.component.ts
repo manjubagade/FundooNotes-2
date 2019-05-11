@@ -17,15 +17,19 @@ export class EditComponent implements OnInit {
    note;
 title;
 description;
+image;
+
   ngOnInit() {
     console.log(this.data);
     this.note=this.data;
     this.title=this.note.title;
     this.description=this.note.description;
+    this.image=this.note.image;
+    
   }
   Update(){
     console.log(this.data);
-    if(this.title!==this.note.title ||  this.description!=this.note.description){
+    if(this.title!==this.note.title ||  this.description!=this.note.description || this.image!=this.note.image){
       console.log("it entered here");
       this.dialog.close('change');
     }

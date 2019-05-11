@@ -17,8 +17,10 @@ export class IconComponent implements OnInit {
   public message: string;
  
   @Output() public onUploadFinished = new EventEmitter();
+  @Output() public setColor=new EventEmitter();
   constructor(private route:Router,private service:NoteService,private http:HttpClient) { }
   @Input() cards;
+  color;
   ngOnInit() {
   }
 
@@ -41,7 +43,7 @@ console.log(err);
 public uploadFile = (files) => {
   if (files.length === 0) {
     console.log(files);
-   return}
+   return }
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
@@ -59,4 +61,17 @@ public uploadFile = (files) => {
       }
     });
   }
+  // setcolor(color,cards){
+  //   this.service.SetColor(color,this.cards);
+  // }
+  setcolor(color,cards)
+{
+  this.cards.color=color;
+  
+this.service.SetColor(this.cards,this.cards.id).subscribe(data =>{
+
+},err =>{
+console.log(err);
+})
+}
 }

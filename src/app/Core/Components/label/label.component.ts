@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { NoteService } from '../../services/NoteService/note.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-label',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./label.component.css']
 })
 export class LabelComponent implements OnInit {
-
-  constructor() { }
+Label;
+  constructor(public dialog: MatDialogRef<LabelComponent>, @Inject(MAT_DIALOG_DATA) public data,public service:NoteService) { }
 
   ngOnInit() {
+    this.Label=this.Label;
   }
-
+  AddLabel(){
+    console.log(this.Label);
+    this.dialog.close();
+  }
 }

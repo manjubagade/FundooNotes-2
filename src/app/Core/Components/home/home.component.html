@@ -37,7 +37,6 @@
                 <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}" data-toggle="dropdown">settings
                 </mat-icon>
            </button>
-           
         </div>
     
         <div class="Logout">
@@ -73,9 +72,11 @@
           <div> 
           <mat-card-title>LABELS</mat-card-title>
         </div>
+
         <div class=" EditLabelIcon">
-        <a mat-list-item routerLink="/label"><mat-icon fxFlex='26'>create_outline</mat-icon>Edit Labels</a>
-      </div>
+        <a mat-list-item (click)="openDialog()"><mat-icon fxFlex='26'>create_outline</mat-icon>Edit Labels</a>
+        </div>
+      
 
         <div class="devider"></div>
         <div class="archive">

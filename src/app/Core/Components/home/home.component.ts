@@ -6,6 +6,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/internal/operators/first';
 import { HttpBackend } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { EditComponent } from '../edit/edit.component';
+import { LabelComponent } from '../label/label.component';
 
 
 @Component({
@@ -19,7 +22,7 @@ export class HomeComponent implements OnInit {
   private _mobileQueryListener: () => void;
   spinner: any;
   Header='FundooNotes';
-  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,userService:UserService) {
+  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,userService:UserService,public dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -36,5 +39,31 @@ export class HomeComponent implements OnInit {
   refresh() {
     window.location.reload();
     this.spinner.show();
+}
+
+openDialog(Label){
+  console.log(Label);
+  const dialogRef=this.dialog.open(LabelComponent,{
+    // var UserId= localStorage.getItem('UserId');
+    // this.service.AddLabel(this.Label,UserId).subscribe(data =>{
+    //   console.log("In AddLabel"+UserId);
+    //   console.log(data);
+    //   // this.Delete.emit({});
+    //   },err =>{
+    //   console.log(err);
+    //   })
+  
+   
+  });
+ dialogRef.afterClosed().subscribe(result => {
+   if(result==='change'){
+     console.log("In Home Component");
+    console.log("take action here");
+  }
+   else{
+   
+ console.log("execute");
+ }
+ })
 }
 }

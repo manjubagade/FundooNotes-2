@@ -30,6 +30,7 @@ export class RegistrationComponent implements OnInit {
         switch (element.code) {
         case 'DuplicateUserName':
         this.toastr.error('Username is already taken','Registration failed.');
+        break;
         case 'DuplicateEmail':
         this.toastr.error('Email is already taken','Registration failed.');
         break; 
@@ -43,6 +44,7 @@ export class RegistrationComponent implements OnInit {
       },
     
       err => {
+
         console.log(err);
       });
     

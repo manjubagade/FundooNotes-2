@@ -1,4 +1,8 @@
 .textArea{
     border: none;
-    outline: transparent;
+    outline: none;
+}
+.notesImage{
+height: auto;
+width: 560px;
 }

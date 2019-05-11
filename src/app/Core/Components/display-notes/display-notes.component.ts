@@ -30,8 +30,8 @@ export class DisplayNotesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditComponent,
       {
       data:note,
-      // height:auto,
-      // width:'auto
+      //  height:auto,
+      //  width:'auto
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result==='change'){

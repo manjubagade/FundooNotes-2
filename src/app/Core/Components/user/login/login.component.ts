@@ -12,7 +12,7 @@ import { empty } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   formModel = {
-    UserName: '',
+    Email: '',
     Password: ''
   }
   constructor(private service: UserService, private router: Router, private toastr: ToastrService) { }
@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
       },
       err => {
         if (err.status == 400)
-          this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+          this.toastr.error('Incorrect Email or password.', 'Authentication failed.');
         else if(err.ok==false){
-          this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+          this.toastr.error('Incorrect Email or password.', 'Authentication failed.');
         }
         else
           console.log(err);
