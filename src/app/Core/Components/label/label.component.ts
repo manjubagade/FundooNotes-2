@@ -8,14 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./label.component.css']
 })
 export class LabelComponent implements OnInit {
-Label;
+// Label;
   constructor(public dialog: MatDialogRef<LabelComponent>, @Inject(MAT_DIALOG_DATA) public data,public service:NoteService) { }
 
   ngOnInit() {
-    this.Label=this.Label;
+    // this.Label=this.Label;
   }
-  AddLabel(){
-    console.log(this.Label);
-    this.dialog.close();
+  AddLabel(label){
+    console.log(">>>>>>>>>>>>>>>>>>>>>>",label);
+    
+    console.log("In LAbel Component" ,label);
+    this.dialog.close(label);
   }
 }

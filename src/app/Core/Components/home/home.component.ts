@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Services } from '@angular/core/src/view';
@@ -9,6 +9,9 @@ import { HttpBackend } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { EditComponent } from '../edit/edit.component';
 import { LabelComponent } from '../label/label.component';
+import { NoteService } from '../../services/NoteService/note.service';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs'
 
 
 @Component({
@@ -17,18 +20,21 @@ import { LabelComponent } from '../label/label.component';
   styleUrls: [ './home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+ 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   spinner: any;
   Header='FundooNotes';
-  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,userService:UserService,public dialog: MatDialog) {
+  constructor(private router:Router,spinner: NgxSpinnerService,changeDetectorRef: ChangeDetectorRef,media:MediaMatcher,public userService:UserService,public service:NoteService, public dialog: MatDialog, private toastr: ToastrService) {
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-  
+  @Input() cards;
+  Label;
   ngOnInit() {
+    this.Label=this.Label;
     }
   onLogout(){
     localStorage.removeItem('token');
@@ -41,8 +47,7 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
 }
 
-openDialog(Label){
-  console.log(Label);
+openDialog(){
   const dialogRef=this.dialog.open(LabelComponent,{
     // var UserId= localStorage.getItem('UserId');
     // this.service.AddLabel(this.Label,UserId).subscribe(data =>{
@@ -52,18 +57,24 @@ openDialog(Label){
     //   },err =>{
     //   console.log(err);
     //   })
-  
    
   });
  dialogRef.afterClosed().subscribe(result => {
    if(result==='change'){
-     console.log("In Home Component");
+     console.log("In Home Component",result);
     console.log("take action here");
   }
    else{
-   
- console.log("execute");
+     var UserId=localStorage.getItem('UserId');
+   console.log("Result="+result,UserId);
+ console.log("in Home Label execute",result);
+ this.service.AddLabel(result,UserId).subscribe(data =>{
+  console.log(">>>>>>>>>>>>>>>>>>>>>>",data);
+  // this.Delete.emit({});
+  },err =>{
+  console.log(err);
+  })
  }
- })
+})
 }
 }

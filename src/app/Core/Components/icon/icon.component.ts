@@ -69,7 +69,7 @@ public uploadFile = (files) => {
   this.cards.color=color;
   
 this.service.SetColor(this.cards,this.cards.id).subscribe(data =>{
-
+this.setColor.emit(this.setcolor);
 },err =>{
 console.log(err);
 })

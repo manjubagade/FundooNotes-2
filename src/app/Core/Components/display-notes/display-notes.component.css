@@ -5,6 +5,8 @@
     flex-wrap: wrap;
     height: auto;
     width: auto;
+    border: none;
+    outline: none;
 }
 .inputArea{
     border: none;

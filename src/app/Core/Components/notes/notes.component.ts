@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -7,6 +7,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Token } from '@angular/compiler';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-notes',
@@ -20,7 +21,8 @@ export class NotesComponent implements OnInit {
    });
   constructor(private router:Router,public service:NoteService,private toastr: ToastrService) { 
   }
-
+  color;
+  @Input() cards;
   ngOnInit() {
   }
   
@@ -39,8 +41,6 @@ export class NotesComponent implements OnInit {
 
     this.service.AddNotes(this.form.value,UserId).subscribe(
       (res: any) => {
-        //console.log(token_id);
-        // this.service.DisplayNotes(UserId);
         this.router.navigateByUrl('/home');
       },
       err => {
@@ -50,5 +50,7 @@ export class NotesComponent implements OnInit {
           console.log(err);
       }
     );
+
+    
   }
 }
