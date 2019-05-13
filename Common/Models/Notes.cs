@@ -31,6 +31,7 @@ namespace FundooApi
         /// <value>
         /// The description.
         /// </value>
+        
         public string Title { get; set; }
 
         /// <summary>

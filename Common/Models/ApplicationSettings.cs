@@ -22,6 +22,7 @@ namespace FundooApi
         /// <value>
         /// The JWT secret.
         /// </value>
+       
         public string JWT_Secret { get; set; }
     }
 }

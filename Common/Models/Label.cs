@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Common.Models
@@ -19,7 +20,6 @@ namespace Common.Models
         /// <value>
         /// The user identifier.
         /// </value>
-
         public Guid UserId { get; set; }
 
         /// <summary>
@@ -28,6 +28,7 @@ namespace Common.Models
         /// <value>
         /// The labels.
         /// </value>
+       
         public string Labels { get; set; }
 
         /// <summary>

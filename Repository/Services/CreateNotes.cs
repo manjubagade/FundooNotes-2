@@ -38,22 +38,26 @@ namespace RepositoryLayer.Services
         /// <exception cref="Exception"></exception>
         public void AddNotes(Notes notes)
         {
-            try
+            if (notes.Title != null || notes.Description!=null)
             {
-                   //// Adding Notes in database
-                   var addnotes = new Notes()
-                   {
-                      UserId = notes.UserId,
-                      Title = notes.Title,
-                      Description = notes.Description,
-                      CreatedDate = notes.CreatedDate,
-                      ModifiedDate = notes.ModifiedDate
-                   };
-                   var result = this.registrationControl.Notes.Add(addnotes);
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
+                try
+                {
+                    //// Adding Notes in database
+                    var addnotes = new Notes()
+                    {
+                        UserId = notes.UserId,
+                        Title = notes.Title,
+                        Description = notes.Description,
+                        CreatedDate = notes.CreatedDate,
+                        ModifiedDate = notes.ModifiedDate
+                    };
+                    var result = this.registrationControl.Notes.Add(addnotes);
+                }
+
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
             }
         }
 

@@ -8,6 +8,7 @@ namespace FundooApi
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     public class ResetPassword
@@ -18,11 +19,13 @@ namespace FundooApi
         /// <value>
         /// The email.
         /// </value>
+        [Required]
         public string Email { get; set; }
 
         /// <summary>
         /// UserName
         /// </summary>
+        [Required]
         public string UserName { get; set; }
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace FundooApi
         /// <value>
         /// The password.
         /// </value>
+        [Required]
         public string Password { get; set; }
 
         /// <summary>
@@ -39,6 +43,7 @@ namespace FundooApi
         /// <value>
         /// The confirm password.
         /// </value>
+        [Required]
         public string ConfirmPassword { get; set; }
 
         /// <summary>

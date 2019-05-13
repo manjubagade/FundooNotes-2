@@ -28,6 +28,7 @@ namespace Common.Models
         /// <value>
         /// The images.
         /// </value>
+        [Required]
         public string Images { get; set; }
 
         /// <summary>

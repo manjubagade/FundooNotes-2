@@ -43,7 +43,6 @@ namespace FundooApi.Controllers
             catch (Exception e)
             {
               throw new Exception(e.Message);
-
             }
         }
 
