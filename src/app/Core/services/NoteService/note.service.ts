@@ -17,8 +17,6 @@ export class NoteService {
 
   AddNotes(formData, UserId) {
     formData.UserId = UserId;
-    console.log(">>>>>>>>>>>>>>>>",formData,UserId);
-    
     return this.http.post(environment.BaseURI + '/Notes/addNotes', formData, UserId);
   }
 
@@ -39,19 +37,21 @@ export class NoteService {
   // UploadImage(formData){
   // console.log("In Service UploadImage"+formData);
   // }
-  AddLabel(formData, UserId) {
-    // formData.UserId = UserId;
-    console.log("In Add fvgggfvvvvvvvvvvvvvvvvv" + formData, UserId);
-    return this.http.post('https://localhost:44372/api/Label/add/' , formData, UserId);
+  AddLabel(label) {
+    console.log("In Service AddLabel fvgggfvvvvvvvvvvvvvvvvv" + label);
+    return this.http.post(environment.BaseURI+ '/Label/add',label);
   }
-
-  // AddLabel(formData) {
-  //   console.log("In Label"+formData);
-  //   return this.http.post(environment.BaseURI + '/Label/add',formData);
-  // }
 
   SetColor(card, id) {
     console.log("In Service" + id, card);
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
+  }
+  getLabelsById(UserId: string){
+    return this.http.get(environment.BaseURI + '/Label/viewLabel/' + UserId);
+  }
+  deleteLabel(id){
+    console.log("................"+id);
+    return this.http.delete(environment.BaseURI + '/Label/delete/' + id);
+
   }
 }

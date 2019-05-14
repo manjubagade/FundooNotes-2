@@ -5,12 +5,14 @@
           <div>
             <img src="{{note.image}}" class="notesImage" />
           </div>
+          <div>
           <div class="inputArea">
            <textarea mat-card-title class="inputArea ">{{note.title}}</textarea>
           </div>
           <div class="inputArea"> 
               <textarea mat-card-content class="inputArea ">{{note.description}}</textarea>
           </div>
+        </div>
         </div>
         <app-icon [cards]="note"></app-icon>
       </mat-card>

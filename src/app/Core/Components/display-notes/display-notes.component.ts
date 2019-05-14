@@ -16,7 +16,6 @@ import { NoteService } from '../../services/NoteService/note.service';
   styleUrls: ['./display-notes.component.css']
 })
 export class DisplayNotesComponent implements OnInit {
-   
 
   constructor(private service:NoteService, route:Router,private toastr:ToastrService,public dialog: MatDialog) { 
   }
