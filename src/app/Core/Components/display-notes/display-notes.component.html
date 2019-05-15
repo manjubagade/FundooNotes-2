@@ -1,18 +1,18 @@
-<div [ngClass]="main" fxLayoutGap='0%' fxLayout='row' fxLayout='row wrap' style="margin-top:10px">
+<div fxLayoutGap='0%'  fxLayout={{css}} style="margin-top:10px">
     <div class="loop" *ngFor="let note of cards">
-      <mat-card class="note" [style.background-color]=note.color>
+      <mat-card class="note" [style.background-color]=note.color >
         <div (click)="openDialog(note)" class="element.style">
           <div>
             <img src="{{note.image}}" class="notesImage" />
           </div>
-          <div>
+          
           <div class="inputArea">
-           <textarea mat-card-title class="inputArea ">{{note.title}}</textarea>
+           <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
           </div>
           <div class="inputArea"> 
-              <textarea mat-card-content class="inputArea ">{{note.description}}</textarea>
+              <mat-card-content class="inputArea">{{note.description}}</mat-card-content>
           </div>
-        </div>
+        
         </div>
         <app-icon [cards]="note"></app-icon>
       </mat-card>

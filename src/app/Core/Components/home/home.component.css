@@ -1,6 +1,6 @@
-.ref{
+/* .ref{
   margin-left: 300px;
-}
+} */
 .settingButton{
   margin-left: 12px;
 }
@@ -121,11 +121,10 @@ html, body {
   transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
 }
 
-.search{
-  margin-left: 100px;
-  
-  width: 500px;
-}
+/* .search{
+  margin-left: 100px; */
+  /* width: 500px;
+} */
 .main {
   width: 50%;
   margin: 50px auto;

@@ -18,6 +18,7 @@ export class NotesComponent implements OnInit {
   form=new FormGroup({
     title : new FormControl(),
     Description : new FormControl(),
+    
    });
   constructor(private router:Router,public service:NoteService,private toastr: ToastrService) { 
   }

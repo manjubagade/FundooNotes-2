@@ -2,26 +2,26 @@
 
   <mat-toolbar color="primary" class="example-toolbar" fxLayout="row">
 
-    <div fxFlex='3'> <button class="togle" mat-icon-button (click)="snav.toggle()">
+    <div> <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10'>
         <mat-icon>menu</mat-icon>
       </button></div>
     <img class="logo" src="/assets/download.png">
     <div fxFlex='10'>
-      <h1 class="example-app-name">{{ Header }}</h1>
+      <h1 class="example-app-name" >{{ Header }}</h1>
     </div>
 
-    <div fxflex='50'>
-      <mat-form-field appearance="outline" [style.fontsize.px]="2" class="search">
+    <div fxHide.xs=true fxFlexOffset='10' fxLayout="row"  fxFlex='50'>
+      <mat-form-field appearance="outline" [style.fontsize.px]="2"  class="search">
         <button class="togle" mat-icon-button>
           <div>
             <mat-icon fxLayoutAlign="center center">search</mat-icon>
           </div>
         </button>
-        <input fxflex='90' matInput placeholder="search.." class="searchkey" autocomplete="off">
+        <input matInput placeholder="search.." class="searchkey" autocomplete="off">
       </mat-form-field>
     </div>
-    <div class="ref">
-      <div fxFlex='100' fxLayoutAlign="end center">
+    <div fxFlexOffset='40' fxFlexOffset.md='15' fxFlexOffset.sm='20' fxFlexOffset.xs='15' class="ref">
+      <div fxLayoutAlign="end center" fxLayout="row">
         <button mat-icon-button class="togle">
           <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}"
             (click)="refresh()">refresh
@@ -29,16 +29,16 @@
         </button>
       </div>
     </div>
-
-    <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()'>
+ <div fxFlex="10" >
+    <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()' fxFlex="row" >
       <mat-icon>grid_view</mat-icon>
     </button>
 
-    <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()'>
+    <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()' fxFlex="row">
       <mat-icon>list_view</mat-icon>
     </button>
-
-    <div class="settingButton" fxFlex='10'>
+  </div>
+    <div class="settingButton" fxLayout="row" fxFlex='10' >
       <button class="togle" mat-icon-button fxLayoutAlign="end center">
         <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
           data-toggle="dropdown">settings
@@ -46,7 +46,7 @@
       </button>
     </div>
 
-    <div class="Logout">
+    <div class="Logout" fxFlex="row" >
       <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
         data-toggle="dropdown">A</button>
       <div class="Dropdown" style="top:10px">
@@ -112,3 +112,4 @@
     </mat-sidenav-content>
 
   </mat-sidenav-container>
+  </div>

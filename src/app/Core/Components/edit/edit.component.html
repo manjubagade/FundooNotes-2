@@ -1,4 +1,4 @@
-<mat-card [style.background-color]=note.color>
+<mat-card [style.background-color]=note.color fxLayout="row"  fxFlex="100">
 
 <div>
     <div>
@@ -6,11 +6,11 @@
     </div>
     
     <div>
-     <textarea mat-card-title class="textArea" [(ngModel)]='note.title' ></textarea>
+     <mat-card-title class="textArea" [(ngModel)]='note.title' ></mat-card-title>
     </div>
     
     <div>
-        <textarea mat-card-content class="textArea" [(ngModel)]='note.description'></textarea>
+        <mat-card-content mat-card-content class="textArea" [(ngModel)]='note.description'></mat-card-content>
     </div>
   
   </div>

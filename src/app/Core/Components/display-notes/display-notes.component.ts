@@ -8,6 +8,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { EditComponent } from '../edit/edit.component';
 import { IconComponent } from '../icon/icon.component';
 import { NoteService } from '../../services/NoteService/note.service';
+import { DataService } from '../../services/DataService/data.service';
 
 
 @Component({
@@ -17,12 +18,22 @@ import { NoteService } from '../../services/NoteService/note.service';
 })
 export class DisplayNotesComponent implements OnInit {
 
-  constructor(private service:NoteService, route:Router,private toastr:ToastrService,public dialog: MatDialog) { 
+  constructor(private service:NoteService,private dataService:DataService, route:Router,private toastr:ToastrService,public dialog: MatDialog) { 
   }
+  grid;
   @Input() cards;
+  flag=true;
+css='row wrap'
   ngOnInit() {
+    this.dataService.currentMessage.subscribe(data => {
+      console.log(data);
+      
+       
+ this.css=data?'row wrap':'column'
+
+      this.flag=data;
+      });
   }
- 
   openDialog(note){
     console.log(note);
     // const dialogRef = this.dialog.open(EditNotes);

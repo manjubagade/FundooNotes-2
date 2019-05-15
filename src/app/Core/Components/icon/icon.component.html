@@ -1,61 +1,77 @@
 <button mat-button class="togle">
-<mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>add_alert</mat-icon>
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>add_alert</mat-icon>
 </button>
 
 <button mat-button [matMenuTriggerFor]="MenuColors" class="togle">
-<mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>color_lens</mat-icon>
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>color_lens</mat-icon>
 </button>
 
-<button mat-button (click)="file.click(file)" class="togle"> 
-<input type="file" #file  style="display:none;" (change)="uploadFile(file.files)">
- <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>image</mat-icon>
-<br/>
-</button> 
-  
+<button mat-button (click)="file.click(file)" class="togle">
+      <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>image</mat-icon>
+      <br />
+</button>
+
 <button mat-button class="togle">
-<mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>archive</mat-icon>
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlex='15'>archive</mat-icon>
 </button>
 
-<button mat-button data-toggle="dropdown" class="togle">
-<mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="center center">more_vert</mat-icon>
-<ul class="dropdown-menu">
-      <li><button mat-raised-button (click)="Delete(cards)">Delete Note</button></li>
-      <li><button mat-raised-button >Add Label</button></li>
-    </ul>
-</button>
+<button mat-button class="togle" [matMenuTriggerFor]="menu" >
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="center center">more_vert</mat-icon>
 
-      <mat-menu #MenuColors="matMenu">
-    <div fxLayout="row">
-          <button mat-mini-fab (click)="setcolor('rgb(147, 235, 235)',card)" class="color"
-          style="background-color:rgb(147, 235, 235);outline: none">
-          </button>
-          <button mat-mini-fab (click)="setcolor('rgb(169, 140, 240)',card)" class="color"
-          style="background-color:rgb(169, 140, 240);outline: none">
-          </button>
-          <button mat-mini-fab (click)="setcolor('rgb(23, 201, 103)',card)" class="color"
-          style="background-color:rgb(23, 201, 103);outline: none">
-          </button>
-    </div>
-    <div fxLayout="row">
-        <button mat-mini-fab (click)="setcolor('rgb(190, 124, 23)',card)" class="color"
-        style="background-color:rgb(190, 124, 23);outline: none">
-        </button>
-        <button mat-mini-fab (click)="setcolor('rgb(69, 13, 212)',card)" class="color"
-        style="background-color:rgb(69, 13, 212);outline: none">
-        </button>
-        <button mat-mini-fab (click)="setcolor('rgb(182, 23, 169)',card)" class="color"
-        style="background-color:rgb(182, 23, 169);outline: none">
-        </button>
-  </div>
-  <div fxLayout="row">
-      <button mat-mini-fab (click)="setcolor('rgb(19, 187, 27)',card)" class="color"
-      style="background-color:rgb(19, 187, 27);outline: none">
-      </button>
-      <button mat-mini-fab (click)="setcolor('rgb(189, 181, 181)',card)" class="color"
-      style="background-color:rgb(189, 181, 181);outline: none">
-      </button>
-      <button mat-mini-fab (click)="setcolor('rgb(13, 129, 129)',card)" class="color"
-      style="background-color:rgb(13, 129, 129);outline: none">
-      </button>
+
+      <mat-menu #menu="matMenu" #more>
+            <div>
+                  <button mat-menu-item (click)="Delete(cards)">Delete</button>
+            </div>
+
+            <div *ngIf="flag==true">
+                  <button mat-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="label" [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
+            </div>
+      </mat-menu>
+
+</button>
+<div>
+      <mat-menu #label="matMenu">
+            <div>
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+            </div>
+      </mat-menu>
 </div>
-  </mat-menu>
+
+<mat-menu #MenuColors="matMenu">
+      <div fxLayout="row">
+            <button mat-mini-fab (click)="setcolor('rgb(147, 235, 235)',card)" class="color"
+                  style="background-color:rgb(147, 235, 235);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(169, 140, 240)',card)" class="color"
+                  style="background-color:rgb(169, 140, 240);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(23, 201, 103)',card)" class="color"
+                  style="background-color:rgb(23, 201, 103);outline: none">
+            </button>
+      </div>
+      <div fxLayout="row">
+            <button mat-mini-fab (click)="setcolor('rgb(190, 124, 23)',card)" class="color"
+                  style="background-color:rgb(190, 124, 23);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(69, 13, 212)',card)" class="color"
+                  style="background-color:rgb(69, 13, 212);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(182, 23, 169)',card)" class="color"
+                  style="background-color:rgb(182, 23, 169);outline: none">
+            </button>
+      </div>
+      <div fxLayout="row">
+            <button mat-mini-fab (click)="setcolor('rgb(19, 187, 27)',card)" class="color"
+                  style="background-color:rgb(19, 187, 27);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(189, 181, 181)',card)" class="color"
+                  style="background-color:rgb(189, 181, 181);outline: none">
+            </button>
+            <button mat-mini-fab (click)="setcolor('rgb(13, 129, 129)',card)" class="color"
+                  style="background-color:rgb(13, 129, 129);outline: none">
+            </button>
+      </div>
+</mat-menu>

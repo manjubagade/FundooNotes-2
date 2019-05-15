@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   changeView() {
     this.view = !this.view;
-    this.dataService.gridview();
+    this.dataService.changeMessage(this.view);
   }
 
   openDialog() {

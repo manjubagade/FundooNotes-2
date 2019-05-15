@@ -1,24 +1,30 @@
-.Notes{
-    padding: 30px;
-    outline: none;
-}
-.example-card{
-    margin-left: 250px;
-    height: auto;
-    width: 600px;
-    outline: none;
-}
+
+@media only screen and (max-width: 600px) {
+     
+    }
+
+    .Notes{
+        padding: 30px;
+        outline: none;
+        display: flex;
+    }
+
+    .example-card{
+       
+        height: auto;
+        width: 600px;
+        outline: none;
+        display: flex;
+    }
+  
 .take_a_note{
-    outline: none;
-    border: none;
-}
-.cards{
     outline: none;
     border: none;
 }
 .card{
     outline: none;
     border: none;
+    display: flex;
 }
 .title
 {

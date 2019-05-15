@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, mixinColor } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -15,19 +15,16 @@ import { environment } from 'src/environments/environment';
 export class IconComponent implements OnInit {
   public progress: number;
   public message: string;
- 
+  
+ flag=true
   @Output() public onUploadFinished = new EventEmitter();
   @Output() public setColor=new EventEmitter();
   constructor(private route:Router,private service:NoteService,private http:HttpClient) { }
   @Input() cards;
-  color;
+  
+   color;
   ngOnInit() {
   }
-
-  // Delete(cards){
-  //  console.log(this.cards.id);
-  //   this.service.DeleteNote(this.cards.id);
-  // }
 
   Delete(card)
 {

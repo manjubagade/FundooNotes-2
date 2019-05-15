@@ -1,4 +1,5 @@
-    <form [formGroup]="service.formModel" bgolor="red" autocomplete="off" (submit)="onSubmit()">
+<mat-card class="front">
+   <form [formGroup]="service.formModel" bgolor="red" autocomplete="off" (submit)="onSubmit()">
       <div class="form-group required">
         <label>Username</label>
         <input class="form-control" formControlName="UserName" placeholder="UserName" pattern="[a-zA-Z]+[a-zA-Z0-9]*">
@@ -38,3 +39,4 @@
         </div>
       </div>
     </form>
+    </mat-card>

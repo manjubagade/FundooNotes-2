@@ -197,3 +197,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .example-sidenav-container {
   flex: 1;
 }
+.front{
+  width:auto;
+  height: auto;
+}
