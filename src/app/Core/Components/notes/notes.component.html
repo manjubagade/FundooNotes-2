@@ -1,25 +1,24 @@
 <form [formGroup]="form">
-  <div class="Notes">
+  <div class="Notes" [ngStyle.xs]="{'margin-top': '30px' }">
     <mat-card class="example-card" fxFlexOffset='25' fxFlexOffset.sm='10'>
 
-      <div *ngIf="!isOpen" (click)="isOpen=true" class="notes" fxLayout="row" fxFlex="100">
-        <input class="take_a_note" formControlName="Description" type="text" 
-          placeholder="Take a note..." aria-label="Take a note">
+      <div *ngIf="!isOpen" (click)="isOpen=true"  fxLayout="row" fxFlex="100">
+        <input class="take_a_note" formControlName="Description" type="text" placeholder="Take a note..."
+          aria-label="Take a note" fxLayout="row">
       </div>
       <!-- style="width: 560px; outline: none" -->
       <div *ngIf=isOpen class="card" >
-        <div class="cards">
+        <div class="cards" >
 
-          <textarea class="title" formControlName="title" style="width: 560px;border: none; outline: none"
-            placeholder="Title"></textarea>
+          <textarea  formControlName="title" 
+            placeholder="Title" ></textarea>
 
-
-          <textarea class="title" formControlName="Description" style="width: 560px; outline: none"
-            placeholder="Take a note..."></textarea>
+          <textarea  formControlName="Description" 
+            placeholder="Take a note..." ></textarea>
         </div>
         <app-icon></app-icon>
         <div>
-          <button mat-button (click)="isOpen=false" style="left:12cm" (click)="AddNotes()">close</button>
+          <button mat-button (click)="isOpen=false"  (click)="AddNotes()">close</button>
         </div>
 
       </div>

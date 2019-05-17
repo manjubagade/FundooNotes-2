@@ -21,6 +21,7 @@ export class NoteService {
   }
 
   getNotesById(UserId: string) {
+    console.log("In Main Components"+UserId);
     return this.http.get(environment.BaseURI + '/Notes/viewNotes/' + UserId);
   }
 

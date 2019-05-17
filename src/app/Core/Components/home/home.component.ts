@@ -6,13 +6,14 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/internal/operators/first';
 import { HttpBackend } from '@angular/common/http';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { EditComponent } from '../edit/edit.component';
 import { LabelComponent } from '../label/label.component';
 import { NoteService } from '../../services/NoteService/note.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs'
 import { DataService } from '../../services/DataService/data.service';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -33,13 +34,23 @@ export class HomeComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    if(this.mobileQuery=media.matchMedia('(max-width: 600px)')){
+      
+    }
   }
 
   @Input() cards;
   UserId = localStorage.getItem('token');
-  Label;
+   Label;
   userId;
   ngOnInit() {
+    var token=localStorage.getItem('token');  
+  
+      var jwt_token=jwt_decode(token);
+      console.log("User="+jwt_token.UserID);
+     
+      
     this.Label = this.Label;
     var UserID = localStorage.getItem("UserId");
     this.service.getLabelsById(UserID).subscribe(
@@ -74,11 +85,11 @@ export class HomeComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(LabelComponent, {
       data: this.Label
-      // var UserId= localStorage.getItem('UserId');
-      // this.service.AddLabel(this.Label,UserId).subscribe(data =>{
-      //   console.log("In AddLabel"+UserId);
-      //   console.log(data);
-      //   // this.Delete.emit({});
+      //  var UserId= localStorage.getItem('UserId');
+      //  this.service.AddLabel(this.Label,UserId).subscribe(data =>{
+      //  console.log("In AddLabel"+UserId);
+      //  console.log(data);
+      //  // this.Delete.emit({});
       //   },err =>{
       //   console.log(err);
       //   })
@@ -100,12 +111,14 @@ export class HomeComponent implements OnInit {
 
           })
         }
+        
         else {
           var UserId = localStorage.getItem('UserId');
           console.log("Result=" + Abc, UserId);
           console.log("in Home Label execute", Abc);
          
         }
+       
       
     })
 

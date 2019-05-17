@@ -1,8 +1,10 @@
 .textArea{
     border: none;
     outline: none;
+    display: flex;
 }
 .notesImage{
 height: auto;
 width: 560px;
+display: flex;
 }

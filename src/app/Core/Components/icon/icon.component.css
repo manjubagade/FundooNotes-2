@@ -2,3 +2,10 @@
     border: none;
     outline: none;
   }
+  .hower:hover{
+    opacity: 1 !important;
+  }
+  .matlabelmenu{
+    min-width: 121px;
+    max-width: 280px;
+  }

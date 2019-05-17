@@ -27,7 +27,7 @@ css='row wrap'
   ngOnInit() {
     this.dataService.currentMessage.subscribe(data => {
       console.log(data);
-      
+      console.log(this.css);
        
  this.css=data?'row wrap':'column'
 

@@ -1,6 +1,4 @@
-/* .ref{
-  margin-left: 300px;
-} */
+
 .settingButton{
   margin-left: 12px;
 }
@@ -12,12 +10,14 @@ mat-sidenav {
     width: 250px;
     height: 100%;
     visibility: collapse;
+    
 }
 .basic-container
 {
 padding: 30px;
 height: 20px;
 width: 50%;
+
 }
 .Dropdown{
   top:50px;
@@ -52,7 +52,8 @@ html, body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 0;
+    
+  top: 0; 
     bottom: 0;
     left: 0;
     right: 0;
@@ -61,6 +62,7 @@ html, body {
   .example-is-mobile .example-toolbar {
     position: fixed;
     z-index: 2;
+   
   }
   
   h1.example-app-name {
@@ -69,6 +71,7 @@ html, body {
   
   .example-sidenav-container {
     flex: 1;
+    background-color: white;
   }
   
   .example-is-mobile .example-sidenav-container {
@@ -88,11 +91,12 @@ html, body {
     visibility: collapse;
 }
 .devider{
+  top:10px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   height: 1px;
-  background-color:rgb(95, 99, 99);
+  background-color:rgba(0,0,0,.28);
   opacity: 0.5;
 }
 .mat-raised-button {
@@ -120,33 +124,46 @@ html, body {
   transform: translate3d(0,0,0);
   transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
 }
-
-/* .search{
-  margin-left: 100px; */
-  /* width: 500px;
+/* .mat-form-field-infix {
+  display: block;
+  position: relative;
+  flex: auto;
+  min-width: 0px;
+  width: 500px;
 } */
+/* .mat-form-field-appearance-outline .mat-form-field-outline {
+  display: flex;
+  position: absolute;
+  top: 2.25em;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  pointer-events: none;
+} */
+
 .main {
   width: 50%;
   margin: 50px auto;
 }
 
 /* Bootstrap 4 text input with search icon */
-
+/* 
 .has-search .form-control {
   padding-left: 2.375rem;
-}
-
+} */
+/* 
 .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
   display: block;
-  width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
-  text-align: center;
-  pointer-events: none;
-  color: #aaa;
-}
+  /* width: 2.375rem;
+  height: 2.375rem; */
+  /* line-height: 2.375rem; */
+  /* text-align: center; */
+  /* pointer-events: none; */
+  /* color: #aaa; */
+  /* height: 20px;; */
+/* }  */
 .basic-container {
   padding: 30px;
 }
@@ -182,6 +199,7 @@ button, input, optgroup, select, textarea {
   height: 100%;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
+
 }
 .archive{
   margin-top: 10px;
@@ -200,4 +218,21 @@ button, input, optgroup, select, textarea {
 .togle{
   border: none;
   outline: none;
+}
+.search{
+  /* top:5px; */
+  width: 720px;
+}
+
+.searchbar{
+  width: 520px;
+   height: 125px;
+  /* top: 56px; */
+ bottom: 23px;
+}
+
+@media only screen and (max-width: 600px) {
+     .example-sidenav-container{
+       width: 2;
+     }
 }

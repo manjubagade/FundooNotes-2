@@ -1,18 +1,18 @@
-<mat-card [style.background-color]=note.color fxLayout="row"  fxFlex="100">
+<mat-card [style.background-color]=note.color fxFlex='100'>
 
-<div>
+  <div>
     <div>
       <img src="{{note.image}}" class="notesImage" />
     </div>
-    
+
     <div>
-     <mat-card-title class="textArea" [(ngModel)]='note.title' ></mat-card-title>
+      <textarea class="textArea" [(ngModel)]='note.title'></textarea>
     </div>
-    
+
     <div>
-        <mat-card-content mat-card-content class="textArea" [(ngModel)]='note.description'></mat-card-content>
+      <textarea class="textArea" [(ngModel)]='note.description'></textarea>
     </div>
-  
+
   </div>
   <app-icon [cards]="note"></app-icon>
   <button mat-button (click)="Update()">close</button>

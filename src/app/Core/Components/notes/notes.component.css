@@ -7,6 +7,7 @@
         padding: 30px;
         outline: none;
         display: flex;
+       
     }
 
     .example-card{
@@ -14,12 +15,14 @@
         height: auto;
         width: 600px;
         outline: none;
+        border: none;
         display: flex;
     }
   
 .take_a_note{
     outline: none;
     border: none;
+    display: flex;
 }
 .card{
     outline: none;
@@ -28,6 +31,22 @@
 }
 .title
 {
+    display: flex;
     outline: none;
     border: none;
 }
+.textarea{
+    
+        /* box-sizing: padding-box; */
+        overflow:hidden;
+        /* demo only: */
+        padding:10px;
+        width:250px;
+        font-size:14px;
+        margin:50px auto;
+        outline:none;
+        border:none;
+        display:block;
+        border-radius:10px;
+        border:6px solid #556677;
+      }

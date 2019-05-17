@@ -2,43 +2,52 @@
 
   <mat-toolbar color="primary" class="example-toolbar" fxLayout="row">
 
-    <div> <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10'>
+    <div> <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10' fxFlexOffset.sm='5'
+        fxFlexOffset.xs='2'>
         <mat-icon>menu</mat-icon>
       </button></div>
-    <img class="logo" src="/assets/download.png">
+    <img class="logo" src="/assets/download.png" fxHide.sm=true fxHide.xs=true>
     <div fxFlex='10'>
-      <h1 class="example-app-name" >{{ Header }}</h1>
+      <div [ngStyle.xs]="{'font-size.px': 15 }" [ngStyle.sm]="{'font-size.px': 20 }"
+        [ngStyle.md]="{'font-size.px': 30}">{{Header }}
+        <!-- <h1 class="example-app-name" fxFlexOffset.sm='4' fxFlexOffset.xs='1'>{{ Header }}</h1> -->
+      </div>
     </div>
 
-    <div fxHide.xs=true fxFlexOffset='10' fxLayout="row"  fxFlex='50'>
-      <mat-form-field appearance="outline" [style.fontsize.px]="2"  class="search">
-        <button class="togle" mat-icon-button>
+    <div fxHide.md=true fxHide.sm=true fxHide.xs=true fxFlexOffset='5' fxLayout="row" fxFlex='50'>
+
+      <mat-form-field appearance="outline" [style.fontsize.px]="2" class="searchbar">
+        <button mat-icon-button class="togle">
           <div>
             <mat-icon fxLayoutAlign="center center">search</mat-icon>
           </div>
         </button>
         <input matInput placeholder="search.." class="searchkey" autocomplete="off">
       </mat-form-field>
+      <!-- [style.height.px]='22' -->
     </div>
-    <div fxFlexOffset='40' fxFlexOffset.md='15' fxFlexOffset.sm='20' fxFlexOffset.xs='15' class="ref">
+    <div fxFlexOffset='16' fxFlexOffset.md='25' fxFlexOffset.sm='24' fxFlexOffset.xs='22' class="ref" fxFlex='10'>
       <div fxLayoutAlign="end center" fxLayout="row">
         <button mat-icon-button class="togle">
-          <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'black'}"
+          <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
             (click)="refresh()">refresh
           </mat-icon>
         </button>
       </div>
     </div>
- <div fxFlex="10" >
-    <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()' fxFlex="row" >
-      <mat-icon>grid_view</mat-icon>
-    </button>
+    <div fxFlex="10">
+      <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()' fxFlex="row">
+        <mat-icon>grid_view</mat-icon>
+      </button>
 
-    <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()' fxFlex="row">
-      <mat-icon>list_view</mat-icon>
-    </button>
-  </div>
-    <div class="settingButton" fxLayout="row" fxFlex='10' >
+      <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()' fxFlex="row">
+
+        <mat-icon>view_agenda_outline</mat-icon>
+
+        <!-- <img src="./assets/list.svg"> -->
+      </button>
+    </div>
+    <div class="settingButton" fxLayout="row" fxFlex='10' fxFlexOffset.xs='2'>
       <button class="togle" mat-icon-button fxLayoutAlign="end center">
         <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
           data-toggle="dropdown">settings
@@ -46,7 +55,7 @@
       </button>
     </div>
 
-    <div class="Logout" fxFlex="row" >
+    <div class="Logout" fxFlex="row" fxFlexOffset.xs='3'>
       <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
         data-toggle="dropdown">A</button>
       <div class="Dropdown" style="top:10px">
@@ -62,10 +71,10 @@
 
   <div class="devider"></div>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  <mat-sidenav-container class="example-sidenav-container">
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56">
+      fixedTopGap="56" style="border:0px">
       <div class="mat-drawer-inner-container">
         <mat-nav-list>
           <a mat-list-item routerLink="./note" (click)="Header='Notes'">
@@ -112,4 +121,4 @@
     </mat-sidenav-content>
 
   </mat-sidenav-container>
-  </div>
+</div>
