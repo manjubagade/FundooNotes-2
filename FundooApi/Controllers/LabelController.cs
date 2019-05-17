@@ -30,7 +30,7 @@ namespace FundooApi.Controllers
         /// Creates the label.
         /// </summary>
         /// <param name="labelmodel">The labelmodel.</param>
-        /// <returns></returns>
+        /// <returns>return result in IActionresult</returns>
         [HttpPost]
         [Route("add")]
         public async Task<IActionResult> CreateLabel(Label labelmodel)
@@ -50,7 +50,7 @@ namespace FundooApi.Controllers
         /// Deletes the Label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>return result</returns>
+        /// <returns>return result in IActionresult</returns>
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<IActionResult> DeleteLabel(int id)

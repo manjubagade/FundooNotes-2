@@ -36,13 +36,18 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                //// Add Notes
-                var addLabel = new Label()
-                {
-                    UserId = LabelModel.UserId,
-                    Labels = LabelModel.Labels
-                };
-                var result = this.registrationControl.Labels.Add(addLabel);
+               // var flag = this.registrationControl.Notes.Find(LabelModel.Labels);
+                //if (flag.Equals(false))
+                //{
+                    //// Add Notes
+                    var addLabel = new Label()
+                    {
+                        UserId = LabelModel.UserId,
+                        Labels = LabelModel.Labels
+                    };
+                    var result = this.registrationControl.Labels.Add(addLabel);
+             //   }
+               
             }
             catch (Exception e)
             {
@@ -53,7 +58,7 @@ namespace RepositoryLayer.Services
         /// <summary>
         /// Saves the changes asynchronous.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Result Int int</returns>
         public Task<int> SaveChangesAsync()
         {
             var result = this.registrationControl.SaveChangesAsync();
@@ -90,11 +95,13 @@ namespace RepositoryLayer.Services
             return label.ToArray();
         }
 
+       
+
         /// <summary>
         /// Deletes the label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>result in int</returns>
         public async Task<int> DeleteLabel(int id)
         {
             Label label = await this.registrationControl.Labels.FindAsync(id);

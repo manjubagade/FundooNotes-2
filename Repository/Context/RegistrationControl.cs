@@ -49,6 +49,8 @@ namespace FundooApi
 
         public DbSet<Image> Images { get; set; }
 
+        public DbSet<NotesLabel> NotesLabels { get; set; }
+
         /// <summary>
         /// Asynchronously saves all changes made in this context to the database.
         /// </summary>
