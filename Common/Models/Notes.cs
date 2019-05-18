@@ -49,6 +49,7 @@ namespace FundooApi
         /// The created date.
         /// </value>
         public DateTime CreatedDate { get; set; }
+        
 
         /// <summary>
         /// Gets or sets the modified date.
