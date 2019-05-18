@@ -19,6 +19,7 @@ import * as jwt_decode from 'jwt-decode';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
+  
 })
 export class HomeComponent implements OnInit {
   view: boolean = true;
@@ -34,10 +35,6 @@ export class HomeComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-
-    if(this.mobileQuery=media.matchMedia('(max-width: 600px)')){
-      
-    }
   }
 
   @Input() cards;
@@ -103,7 +100,7 @@ export class HomeComponent implements OnInit {
       }
 
         if (Abc.labels != null) {
-          console.log("<<<<<<<<< Chasnged"+Abc)
+          console.log("<<<<<<<<< Changed"+Abc)
           console.log("In Home Component", result);
           console.log("In Home Component", FormData);
           console.log("take action here");

@@ -1,11 +1,13 @@
 .note{
-    /* min-width: 250px; */
+    min-height: 30px;
+     /* min-width: 240px; */
     margin-top:15px;
     margin-left: 25px;
     flex-wrap: wrap;
     height: auto;
-    width: 320px;
+    width: 250px;
     border: none;
+    overflow: hidden;
     outline: none;
 }
 .inputArea{

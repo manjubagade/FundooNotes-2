@@ -12,6 +12,7 @@ mat-sidenav {
     visibility: collapse;
     
 }
+
 .basic-container
 {
 padding: 30px;
@@ -52,17 +53,11 @@ html, body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    
-  top: 0; 
+    overflow: hidden;
+    top: 0; 
     bottom: 0;
     left: 0;
     right: 0;
-  }
-  
-  .example-is-mobile .example-toolbar {
-    position: fixed;
-    z-index: 2;
-   
   }
   
   h1.example-app-name {
@@ -71,15 +66,20 @@ html, body {
   
   .example-sidenav-container {
     flex: 1;
+
     background-color: white;
   }
   
   .example-is-mobile .example-sidenav-container {
     flex: 1 0 auto;
+    overflow: hidden;
+    border-radius: 15px 30px 30px 15px;
   }
+
   toggle-button {
     margin: 0 auto;
   } 
+
   .matdrawerbackdrop {
     top: 0;
     left: 0;
@@ -151,19 +151,19 @@ html, body {
 .has-search .form-control {
   padding-left: 2.375rem;
 } */
-/* 
-.has-search .form-control-feedback {
+
+/* .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
   display: block;
-  /* width: 2.375rem;
-  height: 2.375rem; */
-  /* line-height: 2.375rem; */
-  /* text-align: center; */
-  /* pointer-events: none; */
-  /* color: #aaa; */
-  /* height: 20px;; */
-/* }  */
+  width: 2.375rem;
+  height: 2.375rem; 
+   line-height: 2.375rem; 
+   text-align: center; 
+   pointer-events: none; 
+   color: #aaa; 
+   height: 20px;
+ }  */
 .basic-container {
   padding: 30px;
 }
@@ -187,6 +187,7 @@ margin-bottom: 10px;
 .RemidersIcon
 {
   margin-bottom: 10px;
+  
 }
 button, input, optgroup, select, textarea {
   margin: 0px;
@@ -219,20 +220,24 @@ button, input, optgroup, select, textarea {
   border: none;
   outline: none;
 }
-.search{
-  /* top:5px; */
-  width: 720px;
-}
 
 .searchbar{
   width: 520px;
-   height: 125px;
-  /* top: 56px; */
- bottom: 23px;
+  
 }
-
+/* 
 @media only screen and (max-width: 600px) {
      .example-sidenav-container{
        width: 2;
      }
+} */
+.abc{
+  width: 129px;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: black;
+}
+.round{
+  border-radius: 15px 30px 30px 15px;
+  /* background: yellow; */
 }

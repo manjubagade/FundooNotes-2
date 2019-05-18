@@ -11,14 +11,14 @@
         <div class="cards" >
 
           <textarea  formControlName="title" 
-            placeholder="Title" ></textarea>
-
+            placeholder="Title" style="width: 560px; outline: none;border:none;overflow:hidden;" [mat-autosize]></textarea>
+           
           <textarea  formControlName="Description" 
-            placeholder="Take a note..." ></textarea>
+            placeholder="Take a note..." style="width: 560px; outline: none; overflow: hidden; border:none" [mat-autosize]></textarea>
         </div>
         <app-icon></app-icon>
-        <div>
-          <button mat-button (click)="isOpen=false"  (click)="AddNotes()">close</button>
+        <div class="closeButton">
+          <button mat-button (click)="isOpen=false" (click)="AddNotes()">close</button>
         </div>
 
       </div>

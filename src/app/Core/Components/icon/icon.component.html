@@ -28,10 +28,10 @@
 
                   <div *ngIf="flag==true">
                         <button mat-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="label"
-                              [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
+                          (click)='mat-menu.hide'  [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
 
                   </div>
-                  
+
             </mat-menu>
 
       </button>

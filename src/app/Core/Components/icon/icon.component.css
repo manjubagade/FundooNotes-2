@@ -1,9 +1,11 @@
 .togle{
     border: none;
     outline: none;
+    min-width: 10%;
   }
   .hower:hover{
     opacity: 1 !important;
+  
   }
   .matlabelmenu{
     min-width: 121px;
