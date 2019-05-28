@@ -1,15 +1,28 @@
-<mat-form-field>
-  <div class="arrow">
-    <button mat-icon-button (click)="AddLabel(Label.labels)" class="togle" [ngStyle]="{'background-color':'white'}">
-      <mat-icon>done</mat-icon>
-    </button>
-  </div>
-  <input matInput [(ngModel)]='Label.labels' placeholder="Create New Label" autofocus='false'>
-</mat-form-field>
-<div *ngFor="let labels of Label">
-  <a mat-list-item (click)="Header='Archieve'"><button mat-icon-button (click)="DeleteLabel(labels.id)">
-      <mat-icon>delete</mat-icon>
-    </button>{{labels.labels}}</a>
+<div>
+    <input matInput [(ngModel)]='Label.labels' placeholder="Create New Label" autofocus='false'>
+    <div class="arrow">
+      <button mat-icon-button (click)="AddLabel(Label.labels)" class="togle" [ngStyle]="{'background-color':'white'}">
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+
+    
+  
 </div>
+<div *ngFor="let labels of Label">
+
+  <button mat-icon-button (click)="DeleteLabel(labels.id)">
+    <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">delete</mat-icon>
+  </button>
+  <div fxLayoutAlign="center center">
+    {{labels.labels}}
+  </div>
+  <button mat-icon-button class="togle" fxFlexOffset='30' (click)="EditLabel(labels.id)">
+    <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">edit</mat-icon>
+  </button>
+</div>
+
 <div class="devider"></div>
-<button class="togle" mat-button (click)="AddLabel(Label.labels)" fxLayoutAlign="center end">Done</button>
+<div fxLayout="row" fxLayoutAlign="end center">
+  <button class="togle" mat-button (click)="AddLabel(Label.labels)">Done</button>
+</div>

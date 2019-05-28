@@ -8,7 +8,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./label.component.css']
 })
 export class LabelComponent implements OnInit {
-  Label;
+  Label:{
+    labels,
+  }
+  
   constructor(public dialog: MatDialogRef<LabelComponent>, @Inject(MAT_DIALOG_DATA) public data,public service:NoteService) { }
 
   ngOnInit() {

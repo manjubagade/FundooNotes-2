@@ -22,7 +22,6 @@
       <input matInput [style.fontSize.px]=14 placeholder="Search">
       </div>
       </mat-form-field>
-     
     
     <div fxFlexOffset='18' fxFlexOffset.md='30' fxFlexOffset.sm='48' fxFlexOffset.xs='22' class="ref" fxFlex='10'>
       <div fxLayoutAlign="end center" fxLayout="row">
@@ -45,19 +44,20 @@
         <!-- <img src="./assets/list.svg"> -->
       </button>
     </div>
-    <!-- <div class="settingButton" fxLayout="row" fxFlex='10' fxFlexOffset.xs='2'>
-      <button class="togle" mat-icon-button fxLayoutAlign="end center">
-        <mat-icon class="Setting" aria-label="setting Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
-          data-toggle="dropdown">settings
-        </mat-icon>
-      </button>
-    </div> -->
-
+    
     <div class="Logout" fxFlex="row" fxFlexOffset.xs='3' fxFlex="20">
       <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
         data-toggle="dropdown">A</button>
+        <div *ngFor="let note of cards" >
+        <img src="{{note.image}}" class="notesImage" />
+        </div> 
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
+            <button mat-mini-fab (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
+                <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
+                <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">image</mat-icon>
+                <br />
+          </button>
           <li class="devider"></li>
           <li><button mat-raised-button routerLink=".">Add Account</button>
             <button mat-raised-button (click)="onLogout()">Logout</button></li>
@@ -92,7 +92,7 @@
           <div *ngFor="let labels of Label">
             <a mat-list-item routerLink="./Label" class="round" (click)="Header='Archieve'"><img src="./assets/outline-label-24px.svg"
                 fxFlex='30'>{{labels.labels}}</a>
-
+                
           </div>
           <div class=" EditLabelIcon">
             <a mat-list-item class="round" (click)="openDialog()">

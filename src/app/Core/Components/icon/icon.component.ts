@@ -24,7 +24,7 @@ export class IconComponent implements OnInit {
     console.log("gjhgj"+this.Label);
   }
   @Input() cards;
-
+ 
    color;
   ngOnInit() {
     var UserID=localStorage.getItem('UserId');
@@ -52,7 +52,8 @@ console.log(err);
 public uploadFile = (files) => {
   if (files.length === 0) {
     console.log(files);
-   return }
+   return
+   }
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
@@ -84,8 +85,21 @@ console.log(err);
 })
 }
 checkBox(label){
-  this.Label.labels=label;
-  // this.service.
+  var UserId=localStorage.getItem('UserId');
+  this.cards.label=label;
+  console.log(this.cards.id)
   console.log("After Check"+this.Label.labels);
-}
+ 
+  this.service.UpdateNotes(this.cards,this.cards.id).subscribe(
+    (res: any) => {
+     console.log("In Icon="+UserId,this.Label)
+    },
+    // err => {
+    //   if (err.status == 400)
+    //     this.toastr.error('Insert Correct Data');
+    //   else
+    //     console.log(err);
+    // }
+  );
+  }
 }

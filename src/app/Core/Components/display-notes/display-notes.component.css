@@ -9,6 +9,7 @@
     border: none;
     overflow: hidden;
     outline: none;
+    border-radius: 10px 10px 10px 10px; 
 }
 .inputArea{
     border: none;
@@ -19,3 +20,7 @@
     width: 100%;
     display: flex;
 }
+ .round{
+     border-radius: 10px 25px 25px 10px; 
+     /* background: yellow;  */
+   } 

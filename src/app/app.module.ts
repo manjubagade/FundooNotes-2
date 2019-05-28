@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,Component,ElementRef } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,10 +18,12 @@ import { ResetpasswordComponent } from './Core/Components/user/resetpassword/res
 import{  MatSidenavModule,MatTabsModule,
   MatToolbarModule,MatIconModule,MatListModule, MatButtonModule,MatButtonToggleModule, MatProgressSpinnerModule,
   MatTooltipModule, MatInputModule,
-  MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule, MatMenuModule, MatCheckboxModule, MatChipsModule} from '@angular/material';
+  MatExpansionPanel,MatExpansionModule, MatOption, MatFormFieldModule, MatMenuModule, MatCheckboxModule, MatSelectModule,MatChipInputEvent, MatChipsModule} from '@angular/material';
   import {MatDialogModule} from '@angular/material/dialog';
   import { NgMatSearchBarModule } from 'ng-mat-search-bar';
   import {MatCardModule} from '@angular/material/card';
+  import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
   import { FlexLayoutModule } from '@angular/flex-layout';
   import {MediaMatcher} from '@angular/cdk/layout';
   import { NgxSpinnerModule } from 'ngx-spinner';
@@ -66,9 +68,9 @@ import { LabelComponent } from './Core/Components/label/label.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatSelectModule,
     MatTabsModule,
     MatInputModule,
-    MatChipsModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatToolbarModule,
@@ -80,6 +82,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     MatExpansionModule,
     FlexLayoutModule,
     MatMenuModule,
+    MatChipsModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     ToastrModule.forRoot({

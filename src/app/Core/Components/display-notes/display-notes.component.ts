@@ -9,6 +9,8 @@ import { EditComponent } from '../edit/edit.component';
 import { IconComponent } from '../icon/icon.component';
 import { NoteService } from '../../services/NoteService/note.service';
 import { DataService } from '../../services/DataService/data.service';
+import { MatChipInputEvent } from '@angular/material';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -17,48 +19,62 @@ import { DataService } from '../../services/DataService/data.service';
   styleUrls: ['./display-notes.component.css']
 })
 export class DisplayNotesComponent implements OnInit {
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  constructor(private service: NoteService, private dataService: DataService, route: Router, private toastr: ToastrService, public dialog: MatDialog) {
 
-  constructor(private service:NoteService,private dataService:DataService, route:Router,private toastr:ToastrService,public dialog: MatDialog) { 
   }
   grid;
   @Input() cards;
-  flag=true;
-css='row wrap'
+
+  flag = true;
+  css = 'row wrap'
   ngOnInit() {
+
     this.dataService.currentMessage.subscribe(data => {
       console.log(data);
       console.log(this.css);
-       
- this.css=data?'row wrap':'column'
 
-      this.flag=data;
-      });
+      this.css = data ? 'row wrap' : 'column'
+
+      this.flag = data;
+    });
   }
-  openDialog(note){
+  openDialog(note) {
     console.log(note);
     // const dialogRef = this.dialog.open(EditNotes);
     const dialogRef = this.dialog.open(EditComponent,
       {
-      data:note,
-      //  height:auto,
-      //  width:'auto
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if(result==='change'){
-      console.log("take action here");
-    }
-    else{
-      
-  console.log("execute");
-  console.log(note);
-  console.log(note.id);
- this.service.UpdateNotes(note,note.id).subscribe(data =>{
-  console.log(data);
-  // this.Delete.emit({});
-  },err =>{
-  console.log(err);
-  })
+        data: note,
+        //  height:auto,
+        //  width:'auto
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'change') {
+        console.log("take action here");
+      }
+      else {
+        console.log("execute");
+        console.log(note);
+
+        console.log(note.id);
+        this.service.UpdateNotes(note, note.id).subscribe(data => {
+          console.log(data);
+          // this.Delete.emit({});
+        }, err => {
+          console.log(err);
+        })
+      }
+    })
   }
-})
+
+  remove(note) {
+    //  this.cards.label=note.label;
+    console.log("00000000000"+note,note.label.id);
+    this.service.UpdateNotes(note.label, note.id).subscribe(data => {
+      console.log("88888888" + note.label, note.id)
+    })
   }
 }

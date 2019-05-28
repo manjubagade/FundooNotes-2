@@ -23,12 +23,12 @@
 
             <mat-menu #menu="matMenu" #more>
                   <div>
-                        <button mat-menu-item (click)="Delete(cards)">Delete</button>
+                        <button mat-menu-item (click)="Delete(cards)">Delete note</button>
                   </div>
 
                   <div *ngIf="flag==true">
                         <button mat-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="label"
-                          (click)='mat-menu.hide'  [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
+                              (click)='mat-menu.hide' [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
 
                   </div>
 
@@ -51,7 +51,6 @@
 
             </mat-menu>
       </div>
-
 
       <mat-menu #MenuColors="matMenu">
             <div fxLayout="row">

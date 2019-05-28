@@ -5,7 +5,7 @@ import { Services } from '@angular/core/src/view';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/internal/operators/first';
-import { HttpBackend } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { EditComponent } from '../edit/edit.component';
 import { LabelComponent } from '../label/label.component';
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs'
 import { DataService } from '../../services/DataService/data.service';
 import * as jwt_decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -30,23 +31,23 @@ export class HomeComponent implements OnInit {
 
   Header = 'FundooNotes';
 
-  constructor(public dataService: DataService, private router: Router, spinner: NgxSpinnerService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public userService: UserService, public service: NoteService, public dialog: MatDialog, private toastr: ToastrService) {
+  constructor(public dataService: DataService,private http:HttpClient, private router: Router, spinner: NgxSpinnerService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public userService: UserService, public service: NoteService, public dialog: MatDialog, private toastr: ToastrService) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    
   }
 
   @Input() cards;
   UserId = localStorage.getItem('token');
-   Label;
+  Label;
   userId;
   ngOnInit() {
     var token=localStorage.getItem('token');  
-  
+    
       var jwt_token=jwt_decode(token);
       console.log("User="+jwt_token.UserID);
-     
       
     this.Label = this.Label;
     var UserID = localStorage.getItem("UserId");
@@ -82,14 +83,6 @@ export class HomeComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(LabelComponent, {
       data: this.Label
-      //  var UserId= localStorage.getItem('UserId');
-      //  this.service.AddLabel(this.Label,UserId).subscribe(data =>{
-      //  console.log("In AddLabel"+UserId);
-      //  console.log(data);
-      //  // this.Delete.emit({});
-      //   },err =>{
-      //   console.log(err);
-      //   })
 
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -118,6 +111,29 @@ export class HomeComponent implements OnInit {
        
       
     })
+    
 
   }
+  public uploadFile = (files) => {
+    var UserId=localStorage.getItem('UserId');
+    if (files.length === 0) {
+      console.log(files);
+     return }
+  
+      let fileToUpload = <File>files[0];
+      const formData = new FormData();
+      formData.append('file', fileToUpload, fileToUpload.name);
+      // var id=this.cards.id;
+      this.http.post(environment.BaseURI+'/User/profilepic/'+UserId, formData, {reportProgress: true, observe: 'events'})
+      .subscribe(event => {
+        console.log(formData);
+        
+        // if (event.type === HttpEventType.UploadProgress)
+        //   this.progress = Math.round(100 * event.loaded / event.total);
+        // else if (event.type === HttpEventType.Response) {
+        //   this.message = 'Upload success.';
+        //   this.onUploadFinished.emit(event.body);
+        // }
+      });
+    }
 }

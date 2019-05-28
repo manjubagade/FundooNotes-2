@@ -26,7 +26,7 @@ export class NoteService {
   }
 
   UpdateNotes(note, id) {
-    console.log("In Service Update" + note, id);
+    console.log("In Service Update 55555" + note, id);
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, note);
   }
 

@@ -13,15 +13,14 @@ export class DataService {
   private messageSource = new BehaviorSubject(true);
   currentMessage = this.messageSource.asObservable();
 
-  private msg=new BehaviorSubject({type:''});
-  current=this.msg.asObservable();
+  // private msg=new BehaviorSubject({type:''});
+  // current=this.msg.asObservable();
 
   constructor() { }
-  
+   
   changeMessage(current:boolean){
   this.messageSource.next(current);
   }
-  change(msg:any){
-    this.msg.next(msg);
-  }
+  // change(msg:any){
+  //   this.msg.next(msg);
   }
