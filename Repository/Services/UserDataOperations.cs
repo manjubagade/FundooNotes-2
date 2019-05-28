@@ -10,10 +10,14 @@ namespace RepositoryLayer.Services
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
     using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using FundooApi;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Distributed;
@@ -27,8 +31,10 @@ namespace RepositoryLayer.Services
         private SignInManager<ApplicationUser> signInManager;
         private readonly ApplicationSettings applicationSettings;
         private readonly IDistributedCache distributedCache;
-        public UserDataOperations(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> applicationSettings, IDistributedCache distributedCache)
+        private RegistrationControl registrationControl;
+        public UserDataOperations(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, RegistrationControl registrationControl, IOptions<ApplicationSettings> applicationSettings, IDistributedCache distributedCache)
         {
+            this.registrationControl = registrationControl;
             this.userManager = userManager;
              this.signInManager = signInManager;
              this.applicationSettings = applicationSettings.Value;
@@ -122,20 +128,38 @@ namespace RepositoryLayer.Services
             var user = await this.userManager.GenerateEmailConfirmationTokenAsync(result);
             return user;
         }
-        //[HttpGet]
-        //[Authorize]
-        //public async Task<IActionResult> GetUserProfile()
-        //{
-        //    ////Get As Per Valide UserId
-        //    string userId = User.Claims.First(c => c.Type == "UserId").Value;
-        //    var user = await this.userManager.FindByIdAsync(userId);
-        //    return new
-        //    {
-        //        user.UserName,
-        //        user.Email,
-        //        user.FirstName
-        //    };
-        //}
-       
+
+        /// <summary>
+        /// Profilepics the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        public string Profilepic(IFormFile file, Guid userId)
+        {
+            var stream = file.OpenReadStream();
+            var name = file.FileName;
+            Account account = new Account("dc1kbrrhk", "383789512449669", "fqD5389o6BAzQiFaUk56zQzsYyM");
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(name, stream)
+            };
+            var uploadResult = cloudinary.Upload(uploadParams);
+           
+          //  var data = this.registrationControl.Application.Where(t => t.user == userId).FirstOrDefault();
+           // data.Images = uploadResult.Uri.ToString();
+            int result = 0;
+            try
+            {
+                result = this.registrationControl.SaveChanges();
+                // return data.Images;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

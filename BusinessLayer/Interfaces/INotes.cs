@@ -53,5 +53,7 @@ namespace BusinessLayer.Interfaces
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
         string AddImage(IFormFile file, int id);
+
+        
     }
 }

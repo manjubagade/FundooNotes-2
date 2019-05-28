@@ -4,14 +4,16 @@ using FundooApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(RegistrationControl))]
-    partial class RegistrationControlModelSnapshot : ModelSnapshot
+    [Migration("20190528062004_Images")]
+    partial class Images
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,8 +89,6 @@ namespace RepositoryLayer.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Image");
-
-                    b.Property<string>("Label");
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -279,8 +279,6 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired();
-
-                    b.Property<string>("Image");
 
                     b.Property<DateTime>("ModifiedDate");
 

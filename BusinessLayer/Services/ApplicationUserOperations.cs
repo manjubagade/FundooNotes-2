@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using FundooApi;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
@@ -92,6 +93,17 @@ namespace BusinessLayer.Interfaces
         {
             this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
             return true;
+        }
+
+        /// <summary>
+        /// Adds the profile.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        public string addProfile(IFormFile file, Guid userId)
+        {
+            return this.applicationRepository.Profilepic(file, userId);
         }
     }
 }

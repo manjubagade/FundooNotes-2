@@ -23,6 +23,14 @@ namespace Common.Models
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the user identifier.
+        /// </summary>
+        /// <value>
+        /// The user identifier.
+        /// </value>
+        public Guid UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the images.
         /// </summary>
         /// <value>

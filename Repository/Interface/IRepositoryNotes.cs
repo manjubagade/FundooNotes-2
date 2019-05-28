@@ -42,7 +42,7 @@ namespace RepositoryLayer.Interface
         /// Deletes the notes.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>int result</returns>
         Task<int> DeleteNotes(int id);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>Uri string</returns>
         string Image(IFormFile file, int id);
     }
 }

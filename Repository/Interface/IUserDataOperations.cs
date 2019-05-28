@@ -8,6 +8,7 @@
 namespace RepositoryLayer.Interface
 {
     using FundooApi;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -53,5 +54,13 @@ namespace RepositoryLayer.Interface
         /// <param name="resetPasswordmodel">The reset passwordmodel.</param>
         /// <returns></returns>
         Task<object> ResetPasswordAsync(ResetPassword resetPasswordmodel);
+
+        /// <summary>
+        /// Profilepics the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        string Profilepic(IFormFile file, Guid userId);
     }
 }

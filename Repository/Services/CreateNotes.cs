@@ -49,7 +49,8 @@ namespace RepositoryLayer.Services
                         Title = notes.Title,
                         Description = notes.Description,
                         CreatedDate = notes.CreatedDate,
-                        ModifiedDate = notes.ModifiedDate
+                        ModifiedDate = notes.ModifiedDate,
+                        Label=notes.Label
                     };
                     var result = this.registrationControl.Notes.Add(addnotes);
                 }
@@ -83,6 +84,7 @@ namespace RepositoryLayer.Services
             notes.Description = model.Description;
             notes.Image = model.Image;
             notes.Color = model.Color;
+            notes.Label = model.Label;
         }
 
         /// <summary>
@@ -147,5 +149,8 @@ namespace RepositoryLayer.Services
                 return ex.Message;
             }
         }
+
+       
+       
     }
  }

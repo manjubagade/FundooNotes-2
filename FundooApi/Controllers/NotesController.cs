@@ -98,7 +98,7 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Views all.
+        /// Views all Notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return notes</returns>
@@ -118,11 +118,17 @@ namespace FundooApi.Controllers
             }
         }
 
+        /// <summary>
+        /// methos for uploading Image
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("image/{id}")]
         public IActionResult Image(IFormFile file, int id)
         {
-            if (file == null) //business Layer
+            if (file == null) 
             {
                 return this.NotFound("The file couldn't be found");
             }
@@ -130,5 +136,7 @@ namespace FundooApi.Controllers
             var result = this.notesHandler.AddImage(file, id);
             return this.Ok(new { result });
         }
+
+
     }
 }

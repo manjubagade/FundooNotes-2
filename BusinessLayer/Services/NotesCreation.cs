@@ -90,5 +90,8 @@ namespace BusinessLayer.Services
 
             return this.repositoryNotes.Image(file, id);
         }
+
+        
+       
     }
 }

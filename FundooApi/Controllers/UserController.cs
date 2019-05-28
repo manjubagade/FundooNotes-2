@@ -297,6 +297,25 @@ namespace FundooNotesBackEnd.Controllers
                 return this.BadRequest();
             }
         }
-       
+
+        /// <summary>
+        /// Profilepics the specified file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("profilepic/{userId}")]
+        public IActionResult Profilepic(IFormFile file, Guid userId)
+        {
+            if (file == null) //business Layer
+            {
+                return this.NotFound("The file couldn't be found");
+            }
+
+            var result = this.applicationUserOperation.addProfile(file, userId);
+            return this.Ok(new { result });
+        }
+
     }
 }

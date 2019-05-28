@@ -1,4 +1,5 @@
 ﻿using FundooApi;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace BusinessLayer.Interfaces
         /// <returns>bool result</returns>
         bool ResetPasswordAsync(ResetPassword resetPasswordmodel);
 
-        
+        /// <summary>
+        /// Adds the profile.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        string addProfile(IFormFile file, Guid userId);
     }
 }
