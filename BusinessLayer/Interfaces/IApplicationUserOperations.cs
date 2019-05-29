@@ -44,6 +44,13 @@ namespace BusinessLayer.Interfaces
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        string addProfile(IFormFile file, Guid userId);
+        string addProfile(IFormFile file, string userId);
+
+        /// <summary>
+        /// Gets the profile.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        string getProfile(string userId);
     }
 }

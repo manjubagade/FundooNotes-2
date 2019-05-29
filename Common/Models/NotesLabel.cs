@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Common.Models
+﻿namespace Common.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class NotesLabel
     {
         /// <summary>

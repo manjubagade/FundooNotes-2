@@ -61,6 +61,13 @@ namespace RepositoryLayer.Interface
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        string Profilepic(IFormFile file, Guid userId);
+        string Profilepic(IFormFile file, string userId);
+
+        /// <summary>
+        /// Gets the profilepic.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        string GetProfilepic(string userId);
     }
 }

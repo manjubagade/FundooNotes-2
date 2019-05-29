@@ -306,7 +306,7 @@ namespace FundooNotesBackEnd.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("profilepic/{userId}")]
-        public IActionResult Profilepic(IFormFile file, Guid userId)
+        public IActionResult Profilepic(IFormFile file, string userId)
         {
             if (file == null) //business Layer
             {
@@ -314,6 +314,15 @@ namespace FundooNotesBackEnd.Controllers
             }
 
             var result = this.applicationUserOperation.addProfile(file, userId);
+            return this.Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("getprofilepic/{userId}")]
+        public IActionResult GetProfilepic(string userId)
+        {
+            var result = this.applicationUserOperation.getProfile(userId);
+            
             return this.Ok(new { result });
         }
 

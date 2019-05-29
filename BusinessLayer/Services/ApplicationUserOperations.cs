@@ -101,9 +101,14 @@ namespace BusinessLayer.Interfaces
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public string addProfile(IFormFile file, Guid userId)
+        public string addProfile(IFormFile file, string userId)
         {
             return this.applicationRepository.Profilepic(file, userId);
+        }
+
+         public string getProfile(string userId)
+        {
+            return this.applicationRepository.GetProfilepic(userId);
         }
     }
 }

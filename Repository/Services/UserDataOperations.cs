@@ -135,7 +135,7 @@ namespace RepositoryLayer.Services
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public string Profilepic(IFormFile file, Guid userId)
+        public string Profilepic(IFormFile file, string userId)
         {
             var stream = file.OpenReadStream();
             var name = file.FileName;
@@ -147,18 +147,36 @@ namespace RepositoryLayer.Services
             };
             var uploadResult = cloudinary.Upload(uploadParams);
            
-          //  var data = this.registrationControl.Application.Where(t => t.user == userId).FirstOrDefault();
-           // data.Images = uploadResult.Uri.ToString();
+            var data = this.registrationControl.Application.Where(t => t.Id==userId).FirstOrDefault();
+            data.Image = uploadResult.Uri.ToString();
             int result = 0;
             try
             {
                 result = this.registrationControl.SaveChanges();
-                // return data.Images;
-                return null;
+                 return data.Image;
+              
             }
             catch (Exception ex)
             {
                 return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Gets the profilepic.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        public string GetProfilepic(string userId)
+        {
+            try
+            {
+             ApplicationUser profile = this.registrationControl.Application.Where<ApplicationUser>(c => c.Id == userId).SingleOrDefault();
+                return profile.Image.ToString();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }
