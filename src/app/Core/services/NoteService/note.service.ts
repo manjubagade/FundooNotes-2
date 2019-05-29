@@ -42,7 +42,11 @@ export class NoteService {
     console.log("In Service AddLabel fvgggfvvvvvvvvvvvvvvvvv" + label);
     return this.http.post(environment.BaseURI+ '/Label/add',label);
   }
-
+  
+UpdateLabel(label,UserId){
+  console.log("In Service UpdateLabel +++++++++" + label,UserId);
+  return this.http.put(environment.BaseURI+ '/Label/updateLabel/'+UserId,label);
+}
   SetColor(card, id) {
     console.log("In Service" + id, card);
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)

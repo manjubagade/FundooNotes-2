@@ -71,9 +71,7 @@ public uploadFile = (files) => {
       }
     });
   }
-  // setcolor(color,cards){
-  //   this.service.SetColor(color,this.cards);
-  // }
+  
   setcolor(color,cards)
 {
   this.cards.color=color;

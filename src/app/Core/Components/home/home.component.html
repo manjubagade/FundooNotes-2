@@ -48,8 +48,9 @@
     <div class="Logout" fxFlex="row" fxFlexOffset.xs='3' fxFlex="20">
       <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
         data-toggle="dropdown">A</button>
+        
         <div *ngFor="let note of cards" >
-        <img src="{{note.image}}" class="notesImage" />
+        <!-- <img src="{{note.image}}" class="notesImage" /> -->
         </div> 
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
@@ -84,7 +85,7 @@
               <span class="nav-caption">Reminders</span>
             </a>
           </div>
-
+          
           <div class="devider"></div>
           <div>
             <mat-card-title>LABELS</mat-card-title>

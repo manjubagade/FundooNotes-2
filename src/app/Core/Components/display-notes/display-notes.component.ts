@@ -10,7 +10,9 @@ import { IconComponent } from '../icon/icon.component';
 import { NoteService } from '../../services/NoteService/note.service';
 import { DataService } from '../../services/DataService/data.service';
 import { MatChipInputEvent } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -23,15 +25,26 @@ export class DisplayNotesComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  separatorKeysCodes = [ENTER, COMMA];
   constructor(private service: NoteService, private dataService: DataService, route: Router, private toastr: ToastrService, public dialog: MatDialog) {
 
   }
   grid;
   @Input() cards;
-
+  profile;
   flag = true;
   css = 'row wrap'
   ngOnInit() {
+    
+    var profile=localStorage.getItem('profilePic');
+    this.dataService.currentMessage.subscribe(data => {
+      console.log(data);
+      console.log(this.css);
+
+      this.css = data ? 'row wrap' : 'column'
+
+      this.flag = data;
+    });
 
     this.dataService.currentMessage.subscribe(data => {
       console.log(data);
@@ -42,6 +55,7 @@ export class DisplayNotesComponent implements OnInit {
       this.flag = data;
     });
   }
+
   openDialog(note) {
     console.log(note);
     // const dialogRef = this.dialog.open(EditNotes);
@@ -51,6 +65,7 @@ export class DisplayNotesComponent implements OnInit {
         //  height:auto,
         //  width:'auto
       });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'change') {
         console.log("take action here");
@@ -70,11 +85,11 @@ export class DisplayNotesComponent implements OnInit {
     })
   }
 
-  remove(note) {
-    //  this.cards.label=note.label;
-    console.log("00000000000"+note,note.label.id);
-    this.service.UpdateNotes(note.label, note.id).subscribe(data => {
-      console.log("88888888" + note.label, note.id)
+  remove(note, id) {
+    note.label = null;
+    console.log("00000000000" + note.label, id);
+    this.service.UpdateNotes(note, id).subscribe(data => {
+      console.log("88888888" + note, id)
     })
   }
 }

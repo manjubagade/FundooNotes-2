@@ -62,7 +62,9 @@ export class UserService {
   AddProfile(){
     return this.http.post(environment.BaseURI + '/User/profilepic','');
   }
-  getUserProfile() {
+  
+  getUserProfile(id) {
+    return this.http.get(environment.BaseURI+'/User/getprofilepic/'+id);
    // var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   //  return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
   }

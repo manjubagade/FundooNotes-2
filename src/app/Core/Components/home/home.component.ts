@@ -42,15 +42,33 @@ export class HomeComponent implements OnInit {
   @Input() cards;
   UserId = localStorage.getItem('token');
   Label;
+  result;
   userId;
+  data:{
+    result,
+    id
+  }
   ngOnInit() {
     var token=localStorage.getItem('token');  
     
-      var jwt_token=jwt_decode(token);
-      console.log("User="+jwt_token.UserID);
+    var jwt_token=jwt_decode(token);
+    console.log("User="+jwt_token.UserID);
+    
+  this.Label = this.Label;
+
+  var UserID = localStorage.getItem("UserId");
+  var Profilepic=localStorage.getItem("profilePic");
+  console.log("99999999"+Profilepic);
+
+    this.userService.getUserProfile(UserID).subscribe(data => {
+      var Profilepic=data['result'];
+      localStorage.setItem('profilePic',Profilepic);
       
-    this.Label = this.Label;
-    var UserID = localStorage.getItem("UserId");
+    }, err => {
+      console.log(err);
+    });
+
+   
     this.service.getLabelsById(UserID).subscribe(
       data => {
         this.Label = data;
@@ -66,6 +84,7 @@ export class HomeComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('UserID');
+    localStorage.removeItem('profilePic');
     alert("successfully logout");
     this.router.navigate(['/user/login']);
   }
@@ -119,14 +138,16 @@ export class HomeComponent implements OnInit {
     if (files.length === 0) {
       console.log(files);
      return }
-  
+     
       let fileToUpload = <File>files[0];
       const formData = new FormData();
       formData.append('file', fileToUpload, fileToUpload.name);
       // var id=this.cards.id;
       this.http.post(environment.BaseURI+'/User/profilepic/'+UserId, formData, {reportProgress: true, observe: 'events'})
-      .subscribe(event => {
-        console.log(formData);
+      .subscribe(data => {
+        
+       console.log("Image ew="+data['result']);
+        console.log("Image Im="+data['Image']);
         
         // if (event.type === HttpEventType.UploadProgress)
         //   this.progress = Math.round(100 * event.loaded / event.total);
