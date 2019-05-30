@@ -29,6 +29,7 @@ export class EditComponent implements OnInit {
   }
   Update(){
     console.log(this.data);
+    this.image=this.note.image=null;
     if(this.title!==this.note.title ||  this.description!=this.note.description || this.image!=this.note.image){
       console.log("it entered here");
       this.dialog.close('change');

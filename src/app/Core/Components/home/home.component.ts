@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
-  
+
 })
 export class HomeComponent implements OnInit {
   view: boolean = true;
@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit {
 
   Header = 'FundooNotes';
 
-  constructor(public dataService: DataService,private http:HttpClient, private router: Router, spinner: NgxSpinnerService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public userService: UserService, public service: NoteService, public dialog: MatDialog, private toastr: ToastrService) {
+  constructor(public dataService: DataService, private http: HttpClient, private router: Router, spinner: NgxSpinnerService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public userService: UserService, public service: NoteService, public dialog: MatDialog, private toastr: ToastrService) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    
+
   }
 
   @Input() cards;
@@ -44,31 +44,31 @@ export class HomeComponent implements OnInit {
   Label;
   result;
   userId;
-  data:{
+  data: {
     result,
     id
   }
   ngOnInit() {
-    var token=localStorage.getItem('token');  
-    
-    var jwt_token=jwt_decode(token);
-    console.log("User="+jwt_token.UserID);
-    
-  this.Label = this.Label;
+    var token = localStorage.getItem('token');
 
-  var UserID = localStorage.getItem("UserId");
-  var Profilepic=localStorage.getItem("profilePic");
-  console.log("99999999"+Profilepic);
+    var jwt_token = jwt_decode(token);
+    console.log("User=" + jwt_token.UserID);
+
+    this.Label = this.Label;
+
+    var UserID = localStorage.getItem("UserId");
+    var Profilepic = localStorage.getItem("profilePic");
+    console.log("9999999900000000" + Profilepic);
 
     this.userService.getUserProfile(UserID).subscribe(data => {
-      var Profilepic=data['result'];
-      localStorage.setItem('profilePic',Profilepic);
-      
+      var Profilepic = data['result'];
+      localStorage.setItem('profilePic', Profilepic);
+
     }, err => {
       console.log(err);
     });
 
-   
+
     this.service.getLabelsById(UserID).subscribe(
       data => {
         this.Label = data;
@@ -105,56 +105,51 @@ export class HomeComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(">>>>>>>>>>>>> "+result)
+      console.log(">>>>>>>>>>>>> " + result)
       var Abc = {
         labels: result,
         UserId: localStorage.getItem('UserId')
       }
 
-        if (Abc.labels != null) {
-          console.log("<<<<<<<<< Changed"+Abc)
-          console.log("In Home Component", result);
-          console.log("In Home Component", FormData);
-          console.log("take action here");
-          this.service.AddLabel(Abc).subscribe(data=>{
+      if (Abc.labels != null) {
+        console.log("<<<<<<<<< Changed" + Abc)
+        console.log("In Home Component", result);
+        console.log("In Home Component", FormData);
+        console.log("take action here");
+        this.service.AddLabel(Abc).subscribe(data => {
 
-          })
-        }
-        
-        else {
-          var UserId = localStorage.getItem('UserId');
-          console.log("Result=" + Abc, UserId);
-          console.log("in Home Label execute", Abc);
-         
-        }
-       
-      
+        })
+      }
+
+      else {
+        var UserId = localStorage.getItem('UserId');
+        console.log("Result=" + Abc, UserId);
+        console.log("in Home Label execute", Abc);
+
+      }
+
+
     })
-    
+
 
   }
   public uploadFile = (files) => {
-    var UserId=localStorage.getItem('UserId');
+    var UserId = localStorage.getItem('UserId');
     if (files.length === 0) {
       console.log(files);
-     return }
-     
-      let fileToUpload = <File>files[0];
-      const formData = new FormData();
-      formData.append('file', fileToUpload, fileToUpload.name);
-      // var id=this.cards.id;
-      this.http.post(environment.BaseURI+'/User/profilepic/'+UserId, formData, {reportProgress: true, observe: 'events'})
-      .subscribe(data => {
-        
-       console.log("Image ew="+data['result']);
-        console.log("Image Im="+data['Image']);
-        
-        // if (event.type === HttpEventType.UploadProgress)
-        //   this.progress = Math.round(100 * event.loaded / event.total);
-        // else if (event.type === HttpEventType.Response) {
-        //   this.message = 'Upload success.';
-        //   this.onUploadFinished.emit(event.body);
-        // }
-      });
+      return
     }
+
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    // var id=this.cards.id;
+    this.http.post(environment.BaseURI + '/User/profilepic/' + UserId, formData, { reportProgress: true, observe: 'events' })
+      .subscribe(data => {
+
+        console.log("Image ew=" + data['result']);
+        console.log("Image Im=" + data['Image']);
+
+      });
+  }
 }

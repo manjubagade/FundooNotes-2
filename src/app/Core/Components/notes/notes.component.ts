@@ -8,6 +8,7 @@ import { Token } from '@angular/compiler';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
 import { EventEmitter } from 'events';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-notes',
@@ -39,7 +40,8 @@ export class NotesComponent implements OnInit {
     } catch (error) {
       console.log('invalid token format', error);
     }
-
+    // console.log("ssssssssssss"+title);
+    
     this.service.AddNotes(this.form.value,UserId).subscribe(
       (res: any) => {
         this.router.navigateByUrl('/home');
@@ -51,6 +53,8 @@ export class NotesComponent implements OnInit {
           console.log(err);
       }
     );
+    
+  
     var textarea = document.querySelector('textarea');
 
     textarea.addEventListener('keydown', autosize);
@@ -66,4 +70,5 @@ export class NotesComponent implements OnInit {
     }
     
   }
+
 }

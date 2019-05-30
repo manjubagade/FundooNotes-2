@@ -1,24 +1,24 @@
-<div fxLayout={{css}} style="margin-top:10px" fxFlex="100" fxLayout="center" fxFlexOffset='20'>
+<div fxLayout={{css}} style="margin-top:10px" fxFlex="100" fxLayout="center" fxFlexOffset='20' >
   <div *ngFor="let note of cards">
-    <mat-card class="note" [style.background-color]=note.color>
+    <mat-card class="note"  [style.background-color]=note.color >
       <div (click)="openDialog(note)" class="element.style">
         <div>
           <img src="{{note.image}}" class="notesImage" />
         </div>
+        <!-- [style.backgroundImage]="'url(' + Profilepic + ')'" -->
         <div class="inputArea">
           <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
         </div>
         <div class="inputArea">
           <mat-card-content class="inputArea">{{note.description}}</mat-card-content>
         </div>
-       
         
-        <div>
+        <div class="chipinputArea">
             <div *ngIf="note.label!=null">
           <mat-chip-list #chipList>
             <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
               {{note.label}}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              <mat-icon matChipRemove style="opacity: 0" class="hower"  *ngIf="removable">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
         </div> 

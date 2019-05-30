@@ -43,14 +43,21 @@ export class LabelComponent implements OnInit {
 
     })
   }
-  UpdateLabelAll(Label){
-    console.log(Label.id);
+  UpdateAllLabel(Label){
+    console.log(Label);
+    var last = Label.length-1;
+    console.log(last);
+    console.log(Label[2]);
+    console.log(Label[2].id);
+    
+    
+    console.log("Last"+Label[last]);
     console.log("pppppp"+this.Label);
     
     // console.log(">>>>>>>>>>>>>>>>>>>>>>rr",Abc);
     // console.log("In LAbel Component" ,Label);
-    this.service.UpdateAllLabel(this.Label,Label.id).subscribe(data=>{
-
+    this.service.UpdateLabel(Label[last],Label[2].id).subscribe(data=>{
+      this.dialog.close();
     })
   }
 

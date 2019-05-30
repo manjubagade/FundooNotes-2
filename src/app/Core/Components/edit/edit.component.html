@@ -3,20 +3,28 @@
   <div>
     <div>
       <img src="{{note.image}}" class="notesImage" />
-    </div>
-
-    <div>
-      <textarea style="width: 560px; outline: none;border:none;background: transparent; overflow: hidden;" [mat-autosize] [(ngModel)]='note.title'></textarea>
-    </div>
-
-    <div>
-      <textarea style="width: 560px; outline: none; background: transparent; border:none;overflow: hidden;" [mat-autosize] [(ngModel)]='note.description'></textarea>
-    </div>
-    <div>
-        <mat-chip-list>
-          <mat-chip>{{note.label}}</mat-chip>
-        </mat-chip-list>
+      <div>
+        <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlexOffset='90%'
+          (click)=Update()>
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
+    </div>
+
+    <div>
+      <textarea style="width: 560px; outline: none;border:none;background: transparent; overflow: hidden;"
+        [mat-autosize] [(ngModel)]='note.title'></textarea>
+    </div>
+
+    <div>
+      <textarea style="width: 560px; outline: none; background: transparent; border:none;overflow: hidden;"
+        [mat-autosize] [(ngModel)]='note.description'></textarea>
+    </div>
+    <div>
+      <mat-chip-list>
+        <mat-chip>{{note.label}}</mat-chip>
+      </mat-chip-list>
+    </div>
   </div>
   <app-icon [cards]="note"></app-icon>
   <button mat-button (click)="Update()" class="Closebutton">close</button>

@@ -239,5 +239,25 @@ button, input, optgroup, select, textarea {
 }
 .round{
   border-radius: 15px 30px 30px 15px;
+  font-size:15px;
+    font-weight: 400;
   /* background: yellow; */
 }
+.profilepic{
+  width: 100%;
+  display: flex;
+}
+
+  .image {
+   background-color: transparent;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center center;
+   height: 100%;
+   width: 100%;
+  }
+  .matform{
+    background:rgb(243, 242, 242);
+    /* padding: 0%; */
+    
+  }

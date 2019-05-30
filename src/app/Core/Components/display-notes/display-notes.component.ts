@@ -31,10 +31,11 @@ export class DisplayNotesComponent implements OnInit {
   }
   grid;
   @Input() cards;
-  profile;
   flag = true;
   css = 'row wrap'
   ngOnInit() {
+    var Profilepic=localStorage.getItem("profilePic");
+    console.log("Display Profile pic",Profilepic);
     
     var profile=localStorage.getItem('profilePic');
     this.dataService.currentMessage.subscribe(data => {

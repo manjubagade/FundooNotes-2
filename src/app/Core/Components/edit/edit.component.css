@@ -7,4 +7,5 @@
 height: auto;
 width: 560px;
 display: flex;
+scroll-behavior: auto;
 }

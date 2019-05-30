@@ -1,12 +1,11 @@
 <div>
+  <mat-label>Edit labels</mat-label>
   <input matInput [(ngModel)]='Label.labels' placeholder="Create New Label" autofocus='false'>
   <div class="arrow">
     <button mat-icon-button (click)="AddLabel(Label.labels)" class="togle" [ngStyle]="{'background-color':'white'}">
       <mat-icon>done</mat-icon>
     </button>
   </div>
-
-
 
 </div>
 <div *ngFor="let labels of Label">
@@ -26,5 +25,5 @@
 
 <div class="devider"></div>
 <div fxLayout="row" fxLayoutAlign="end center">
-  <button class="togle" mat-button (click)="UpdateLabelAll(Label)">Done</button>
+  <button class="togle" mat-button (click)="UpdateAllLabel(Label)">Done</button>
 </div>

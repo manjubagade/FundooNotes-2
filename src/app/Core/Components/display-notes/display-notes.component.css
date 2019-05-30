@@ -2,25 +2,43 @@
     min-height: 30px;
      /* min-width: 240px; */
     margin-top:15px;
-    margin-left: 25px;
+    margin-left: 10px;
     flex-wrap: wrap;
     height: auto;
     width: 250px;
     border: none;
     overflow: hidden;
     outline: none;
+   
     border-radius: 10px 10px 10px 10px; 
+    padding-left: 25%;
+    padding: 0%;
 }
 .inputArea{
     border: none;
     outline: none;
+    padding-left: 2%;
+}
+.chipinputArea{
+    border: none;
+    outline: none;
+    background-color:transparent;
+    /* color: gray; */
+    padding-left: 2%;
 }
 .notesImage{
     /* margin-top: 0%; */
     width: 100%;
+    height: auto;
     display: flex;
+    /* padding: 0%; */
 }
  .round{
      border-radius: 10px 25px 25px 10px; 
      /* background: yellow;  */
    } 
+   .hower:hover{
+    background-color: transparent;
+    opacity: 1 !important;
+  
+  }

@@ -1,28 +1,32 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-  <mat-toolbar color="primary" class="example-toolbar" fxLayout="row" >
+  <mat-toolbar color="primary" class="example-toolbar" fxLayout="row">
 
-    <div> 
+    <div>
       <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10'>
         <mat-icon>menu</mat-icon>
       </button></div>
     <img class="logo" src="/assets/download.png">
     <div fxFlex='10'>
       <div [ngStyle.xs]="{'font-size.px': 15 }" [ngStyle.sm]="{'font-size.px': 20 }"
-      [ngStyle.md]="{'font-size.px': 22 }" >{{Header }}
+        [ngStyle.md]="{'font-size.px': 22 }">{{ Header }}
         <!-- <h1 class="example-app-name" fxFlexOffset.sm='4' fxFlexOffset.xs='1'>{{ Header }}</h1> -->
       </div>
     </div>
-
-    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.sm=true fxHide.xs=true; [style.min-width.px]='625' [style.fontSize.px]=2 fxFlexOffset='8' fxFlex='50'>
-      <div fxLayout="row">
-      <button mat-icon-button class="togle">
-      <mat-icon >search</mat-icon>
-      </button>
-      <input matInput [style.fontSize.px]=14 placeholder="Search">
-      </div>
-      </mat-form-field>
     
+    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.sm=true fxHide.xs=true;
+
+      [style.min-width.px]='625' [style.fontSize.px]=2 fxFlexOffset='8' fxFlex='50' color=black>
+      <div class="matform">
+      <div fxLayout="row" >
+        <button mat-icon-button class="togle">
+          <mat-icon >search</mat-icon>
+        </button>
+        <input matInput [style.fontSize.px]=14 placeholder="Search">
+      </div>
+    </div>
+    </mat-form-field>
+  
     <div fxFlexOffset='18' fxFlexOffset.md='30' fxFlexOffset.sm='48' fxFlexOffset.xs='22' class="ref" fxFlex='10'>
       <div fxLayoutAlign="end center" fxLayout="row">
         <button mat-icon-button class="togle">
@@ -33,32 +37,36 @@
       </div>
     </div>
     <div fxFlex="10" fxFlex="row">
-      <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()' >
+      <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()'>
         <mat-icon>grid_view</mat-icon>
       </button>
 
       <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()'>
 
-        <mat-icon>view_agenda_outline</mat-icon>
+        <!-- <mat-icon>view_agenda_outline</mat-icon> -->
 
-        <!-- <img src="./assets/list.svg"> -->
+        <img src="./assets/outline-view_agenda-24px.svg">
       </button>
     </div>
-    
+
     <div class="Logout" fxFlex="row" fxFlexOffset.xs='3' fxFlex="20">
-      <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
-        data-toggle="dropdown">A</button>
-        
-        <div *ngFor="let note of cards" >
+      <button class="togle" mat-mini-fab color="black" data-toggle="dropdown" ></button>
+        <!-- [ngStyle]="{'background-image':'url('+ Profilepic +')'}" -->
+      <div *ngFor="let note of cards">
         <!-- <img src="{{note.image}}" class="notesImage" /> -->
-        </div> 
+      </div>
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
-            <button mat-mini-fab (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
-                <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
-                <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">image</mat-icon>
-                <br />
-          </button>
+          <li> <button mat-mini-fab (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20' >
+              <input type="file" #file style="display:none;"  (change)="uploadFile(file.files)">
+              <mat-icon  [ngStyle]="{'background-image':'url('+ Profilepic +')'}">
+
+                <!-- <img class="logo" ng-src="{{Profilepic}}"> -->
+                <!-- <div><img src="{{Profilepic}}" class="profilepic"/></div> -->
+              </mat-icon>
+
+            </button></li>
+
           <li class="devider"></li>
           <li><button mat-raised-button routerLink=".">Add Account</button>
             <button mat-raised-button (click)="onLogout()">Logout</button></li>
@@ -70,30 +78,30 @@
 
   <div class="devider"></div>
 
-  <mat-sidenav-container class="example-sidenav-container" >
+  <mat-sidenav-container class="example-sidenav-container">
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56" style="border:0px">
       <div class="mat-drawer-inner-container">
         <mat-nav-list>
-          <a mat-list-item routerLink="./note" class="round" (click)="Header='Notes'">
+          <a mat-list-item routerLink="./note" class="round"   (click)="Header='Notes'">
             <mat-icon fxFlex='26'>lightbulb_outline</mat-icon>Notes
           </a>
-          <div class="RemidersIcon" >
+          <div class="RemidersIcon">
             <a mat-list-item routerLink="./reminders" (click)="Header='Reminders'" class="round">
               <mat-icon fxFlex='26'>notifications_none</mat-icon>
               <span class="nav-caption">Reminders</span>
             </a>
           </div>
-          
+
           <div class="devider"></div>
           <div>
             <mat-card-title>LABELS</mat-card-title>
           </div>
           <div *ngFor="let labels of Label">
-            <a mat-list-item routerLink="./Label" class="round" (click)="Header='Archieve'"><img src="./assets/outline-label-24px.svg"
-                fxFlex='30'>{{labels.labels}}</a>
-                
+            <a mat-list-item routerLink="./Label" class="round" (click)="Header='Archieve'"><img
+                src="./assets/outline-label-24px.svg" fxFlex='30'>{{labels.labels}}</a>
+
           </div>
           <div class=" EditLabelIcon">
             <a mat-list-item class="round" (click)="openDialog()">
