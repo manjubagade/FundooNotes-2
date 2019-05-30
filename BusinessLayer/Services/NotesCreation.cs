@@ -7,6 +7,7 @@
 using BusinessLayer.Interfaces;
 using FundooApi;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,11 @@ namespace BusinessLayer.Services
         /// <param name="notesModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Task<int> Change(Notes notesModel, int id)
+        public async Task<int> Change(Notes notesModel, int id)
         {
             
             this.repositoryNotes.UpdateNotes(notesModel,id);
-            var result = this.repositoryNotes.SaveChangesAsync();
+            var result =await this.repositoryNotes.SaveChangesAsync();
             return result;
         }
 
@@ -55,17 +56,17 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <returns></returns>
-        public Task<int> Create(Notes notesModel)
+        public async Task<int> Create(Notes notesModel)
         {
             try
             {
             this.repositoryNotes.AddNotes(notesModel);
-            var result = this.repositoryNotes.SaveChangesAsync();
+            var result =await this.repositoryNotes.SaveChangesAsync();
             return result;
             }
             catch
             {
-                return this.repositoryNotes.SaveChangesAsync();
+                return await this.repositoryNotes.SaveChangesAsync();
             }
         }
 
@@ -74,9 +75,9 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Task<int> Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            return this.repositoryNotes.DeleteNotes(id);
+            return await this.repositoryNotes.DeleteNotes(id);
         }
 
         /// <summary>

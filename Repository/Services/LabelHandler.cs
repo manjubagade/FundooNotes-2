@@ -59,9 +59,9 @@ namespace RepositoryLayer.Services
         /// Saves the changes asynchronous.
         /// </summary>
         /// <returns>Result Int int</returns>
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            var result = this.registrationControl.SaveChangesAsync();
+            var result =await this.registrationControl.SaveChangesAsync();
             return result;
         }
 

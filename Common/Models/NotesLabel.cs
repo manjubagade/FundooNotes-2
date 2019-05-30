@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
     public class NotesLabel
@@ -28,6 +29,7 @@
         /// <value>
         /// The notes identifier.
         /// </value>
+        [ForeignKey("Notes")]
         public int NotesId { get; set; }
 
         /// <summary>
@@ -36,6 +38,7 @@
         /// <value>
         /// The label identifier.
         /// </value>
+        [ForeignKey("Label")]
         public int LabelId { get; set; }
     }
 }

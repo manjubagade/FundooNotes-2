@@ -29,14 +29,14 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
         /// <returns>bool result</returns>
-        bool ForgotPasswordAsync(ForgotPassword forgotPasswordmodel);
+        Task<bool> ForgotPasswordAsync(ForgotPassword forgotPasswordmodel);
 
         /// <summary>
         /// Resets the password asynchronous.
         /// </summary>
         /// <param name="resetPasswordmodel">The reset passwordmodel.</param>
         /// <returns>bool result</returns>
-        bool ResetPasswordAsync(ResetPassword resetPasswordmodel);
+        Task<bool> ResetPasswordAsync(ResetPassword resetPasswordmodel);
 
         /// <summary>
         /// Adds the profile.

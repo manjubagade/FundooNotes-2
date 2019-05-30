@@ -30,9 +30,10 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Label> AccessLabel(Guid UserId)
+        public  IList<Label> AccessLabel(Guid UserId)
         {
             return this.repositoryLabel.ViewLabel(UserId);
+             
         }
 
         /// <summary>
@@ -41,11 +42,11 @@ namespace BusinessLayer.Services
         /// <param name="LabelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Task<int> Change(Label LabelModel, int id)
+        public async Task<int> Change(Label LabelModel, int id)
         {
 
             this.repositoryLabel.UpdateLabel(LabelModel, id);
-            var result = this.repositoryLabel.SaveChangesAsync();
+            var result = await this.repositoryLabel.SaveChangesAsync();
             return result;
         }
 
@@ -54,13 +55,13 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <returns></returns>
-        public Task<int> Create(Label LabelModel)
+        public async Task<int> Create(Label LabelModel)
         {
             try
             {
                  this.repositoryLabel.AddLabel(LabelModel);
                 
-                var result = this.repositoryLabel.SaveChangesAsync();
+                var result =await this.repositoryLabel.SaveChangesAsync();
                 return result;
             }
             catch(Exception e)
@@ -74,9 +75,9 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Task<int> Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            return this.repositoryLabel.DeleteLabel(id);
+            return await this.repositoryLabel.DeleteLabel(id);
         }
      
     }

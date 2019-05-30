@@ -67,15 +67,15 @@ namespace BusinessLayer.Interfaces
         /// <returns>
         /// bool result
         /// </returns>
-        public bool ForgotPasswordAsync(ForgotPassword forgotPasswordmodel)
+        public async Task<bool> ForgotPasswordAsync(ForgotPassword forgotPasswordmodel)
         {
-            var result = this.applicationRepository.FindByEmailAsync(forgotPasswordmodel);
+            var result =  this.applicationRepository.FindByEmailAsync(forgotPasswordmodel);
             if (result != null)
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(forgotPasswordmodel);
                 var callbackUrl = "http://localhost:4200/user/resetpassword?code=" + code;
                 
-                this.emailSender.SendEmailAsync(forgotPasswordmodel.Email, "Reset Password", $"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">here</a>");
+              await this.emailSender.SendEmailAsync(forgotPasswordmodel.Email, "Reset Password", $"Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">here</a>");
                 return true;
             }
             else
@@ -89,9 +89,9 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>return boolean</returns>
-        public bool ResetPasswordAsync(ResetPassword resetPasswordmodel)
+        public async Task<bool> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
-            this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
+           await this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
             return true;
         }
 
@@ -103,7 +103,9 @@ namespace BusinessLayer.Interfaces
         /// <returns></returns>
         public string addProfile(IFormFile file, string userId)
         {
-            return this.applicationRepository.Profilepic(file, userId);
+            var result= this.applicationRepository.Profilepic(file, userId);
+            return result;
+
         }
 
          public string getProfile(string userId)
