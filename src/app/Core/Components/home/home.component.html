@@ -13,20 +13,19 @@
         <!-- <h1 class="example-app-name" fxFlexOffset.sm='4' fxFlexOffset.xs='1'>{{ Header }}</h1> -->
       </div>
     </div>
-    
-    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.sm=true fxHide.xs=true;
 
+    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.sm=true fxHide.xs=true;
       [style.min-width.px]='625' [style.fontSize.px]=2 fxFlexOffset='8' fxFlex='50' color=black>
       <div class="matform">
-      <div fxLayout="row" >
-        <button mat-icon-button class="togle">
-          <mat-icon >search</mat-icon>
-        </button>
-        <input matInput [style.fontSize.px]=14 placeholder="Search">
+        <div fxLayout="row">
+          <button mat-icon-button class="togle">
+            <mat-icon>search</mat-icon>
+          </button>
+          <input matInput [style.fontSize.px]=14 placeholder="Search">
+        </div>
       </div>
-    </div>
     </mat-form-field>
-  
+
     <div fxFlexOffset='18' fxFlexOffset.md='30' fxFlexOffset.sm='48' fxFlexOffset.xs='22' class="ref" fxFlex='10'>
       <div fxLayoutAlign="end center" fxLayout="row">
         <button mat-icon-button class="togle">
@@ -50,23 +49,26 @@
     </div>
 
     <div class="Logout" fxFlex="row" fxFlexOffset.xs='3' fxFlex="20">
-      <button class="togle" mat-mini-fab color="black" data-toggle="dropdown" ></button>
-        <!-- [ngStyle]="{'background-image':'url('+ Profilepic +')'}" -->
-      <div *ngFor="let note of cards">
-        <!-- <img src="{{note.image}}" class="notesImage" /> -->
-      </div>
+      <button class="togle" mat-mini-fab color="black" data-toggle="dropdown"></button>
+      <!-- [ngStyle]="{'background-image':'url('+ Profilepic +')'}" -->
+      <!-- <div *ngFor="let note of cards">
+         <img src="{{note.image}}" class="notesImage" /> 
+      </div> -->
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
-          <li> <button mat-mini-fab (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20' >
-              <input type="file" #file style="display:none;"  (change)="uploadFile(file.files)">
-              <mat-icon  [ngStyle]="{'background-image':'url('+ Profilepic +')'}">
+          <li> <button mat-mini-fab (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
+              <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
+              <mat-icon>
 
                 <!-- <img class="logo" ng-src="{{Profilepic}}"> -->
                 <!-- <div><img src="{{Profilepic}}" class="profilepic"/></div> -->
               </mat-icon>
 
             </button></li>
-
+          <!-- <li> -->
+          <!-- [ngStyle]="{'background-image': 'url(' + Profilepic + ')', 'background-size': 'cover'  }" -->
+          <!-- <div><button mat-mini-fab  >{{Profilepic}}</button></div> -->
+          <!-- </li> -->
           <li class="devider"></li>
           <li><button mat-raised-button routerLink=".">Add Account</button>
             <button mat-raised-button (click)="onLogout()">Logout</button></li>
@@ -84,7 +86,7 @@
       fixedTopGap="56" style="border:0px">
       <div class="mat-drawer-inner-container">
         <mat-nav-list>
-          <a mat-list-item routerLink="./note" class="round"   (click)="Header='Notes'">
+          <a mat-list-item routerLink="./note" class="round" (click)="Header='Notes'">
             <mat-icon fxFlex='26'>lightbulb_outline</mat-icon>Notes
           </a>
           <div class="RemidersIcon">

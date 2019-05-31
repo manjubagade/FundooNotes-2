@@ -4,21 +4,24 @@
 
       <div *ngIf="!isOpen" (click)="isOpen=true"  fxLayout="row" fxFlex="100">
         <input class="take_a_note" formControlName="Description" type="text" placeholder="Take a note..."
-          aria-label="Take a note" fxLayout="row">
+          aria-label="Take a note" style="width: 560px; outline: none;border:none;overflow:hidden" fxLayout="row">
       </div>
      
       <div *ngIf=isOpen class="card" >
         <div class="cards" >
 
-          <textarea  formControlName="title" 
-            placeholder="Title" style="width: 560px; outline: none;border:none;overflow:hidden;" [mat-autosize]></textarea>
-           
+          <!-- <textarea  formControlName="title" 
+            placeholder="Title" style="width: 560px; outline: none;border:none;overflow:hidden" [mat-autosize]></textarea> -->
+
+            <input class="take_a_note" formControlName="title" type="text" placeholder="Title"
+            aria-label="Take a note" style="width: 560px; outline: none;border:none;overflow:hidden" fxLayout="row">
+
           <textarea  formControlName="Description" 
-            placeholder="Take a note..." style="width: 560px; outline: none; overflow: hidden; border:none" [mat-autosize]></textarea>
-        </div>
+            placeholder="Take a note..." style="width: 560px; outline: none; overflow: hidden; border:none" [mat-autosize] autofocus></textarea>
+          </div>
         <app-icon></app-icon>
         <div class="closeButton">
-          <button mat-button (click)="isOpen=false" (click)="AddNotes()">close</button>
+          <button mat-button (click)="isOpen=false" (click)="AddNotes()" >close</button>
         </div>
 
       </div>

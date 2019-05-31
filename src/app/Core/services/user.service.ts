@@ -64,6 +64,7 @@ export class UserService {
   }
   
   getUserProfile(id) {
+    
     return this.http.get(environment.BaseURI+'/User/getprofilepic/'+id);
    // var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
   //  return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});

@@ -12,8 +12,11 @@
     </div>
 
     <div>
-      <textarea style="width: 560px; outline: none;border:none;background: transparent; overflow: hidden;"
-        [mat-autosize] [(ngModel)]='note.title'></textarea>
+        <input [(ngModel)]='note.title' type="text" placeholder="Title"
+        aria-label="Take a note" style="width: 560px; outline: none;border:none;background: transparent;overflow:hidden" fxLayout="row">
+
+      <!-- <textarea style="width: 560px; outline: none;border:none;background: transparent; overflow: hidden;"
+        [mat-autosize] [(ngModel)]='note.title'></textarea> -->
     </div>
 
     <div>
@@ -21,9 +24,11 @@
         [mat-autosize] [(ngModel)]='note.description'></textarea>
     </div>
     <div>
+        <div *ngIf="note.label!==null">
       <mat-chip-list>
         <mat-chip>{{note.label}}</mat-chip>
       </mat-chip-list>
+      </div>
     </div>
   </div>
   <app-icon [cards]="note"></app-icon>

@@ -37,6 +37,7 @@ import { IconComponent } from './Core/Components/icon/icon.component';
 import { EditComponent } from './Core/Components/edit/edit.component';
 import { LabelComponent } from './Core/Components/label/label.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     IconComponent,
     EditComponent,
     LabelComponent,
+  
    
   ],
   imports: [
@@ -68,6 +70,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    
     MatSelectModule,
     MatTabsModule,
     MatInputModule,

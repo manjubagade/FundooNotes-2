@@ -50,17 +50,18 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     var token = localStorage.getItem('token');
-
     var jwt_token = jwt_decode(token);
-    console.log("User=" + jwt_token.UserID);
-
+    var UserId= jwt_token.UserID;
+    localStorage.setItem('UserId',UserId);
+    console.log("In Home UserId"+UserId)
     this.Label = this.Label;
 
-    var UserID = localStorage.getItem("UserId");
+    
     var Profilepic = localStorage.getItem("profilePic");
     console.log("9999999900000000" + Profilepic);
+   console.log(UserId);
 
-    this.userService.getUserProfile(UserID).subscribe(data => {
+    this.userService.getUserProfile(UserId).subscribe(data => {
       var Profilepic = data['result'];
       localStorage.setItem('profilePic', Profilepic);
 
@@ -69,7 +70,7 @@ export class HomeComponent implements OnInit {
     });
 
 
-    this.service.getLabelsById(UserID).subscribe(
+    this.service.getLabelsById(UserId).subscribe(
       data => {
         this.Label = data;
         var Abc = this.Label;

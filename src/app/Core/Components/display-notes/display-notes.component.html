@@ -1,7 +1,7 @@
-<div fxLayout={{css}} style="margin-top:10px" fxFlex="100" fxLayout="center" fxFlexOffset='20' >
+<div fxLayout={{css}} [ngClass]="{'css': true, 'css': false}" style="margin-top:10px"  fxLayout="center" fxFlexOffset='20'>
   <div *ngFor="let note of cards">
     <mat-card class="note"  [style.background-color]=note.color >
-      <div (click)="openDialog(note)" class="element.style">
+      <div (click)="openDialog(note)" class="element.style" >
         <div>
           <img src="{{note.image}}" class="notesImage" />
         </div>
@@ -14,17 +14,16 @@
         </div>
         
         <div class="chipinputArea">
-            <div *ngIf="note.label!=null">
+            <div *ngIf="note.label!==null">
           <mat-chip-list #chipList>
             <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
               {{note.label}}
               <mat-icon matChipRemove style="opacity: 0" class="hower"  *ngIf="removable">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
-        </div> 
           <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
         </div>
-
+      </div> 
       </div>
       <app-icon [cards]="note"></app-icon>
     </mat-card>

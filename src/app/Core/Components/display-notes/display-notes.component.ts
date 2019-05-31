@@ -34,18 +34,10 @@ export class DisplayNotesComponent implements OnInit {
   flag = true;
   css = 'row wrap'
   ngOnInit() {
-    var Profilepic=localStorage.getItem("profilePic");
-    console.log("Display Profile pic",Profilepic);
-    
-    var profile=localStorage.getItem('profilePic');
-    this.dataService.currentMessage.subscribe(data => {
-      console.log(data);
-      console.log(this.css);
+    var Profilepic = localStorage.getItem("profilePic");
+    console.log("Display Profile pic", Profilepic);
 
-      this.css = data ? 'row wrap' : 'column'
-
-      this.flag = data;
-    });
+    var profile = localStorage.getItem('profilePic');
 
     this.dataService.currentMessage.subscribe(data => {
       console.log(data);
@@ -55,6 +47,7 @@ export class DisplayNotesComponent implements OnInit {
 
       this.flag = data;
     });
+
   }
 
   openDialog(note) {
