@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { MatDialogRef, MAT_DIALOG_DATA, mixinColor } from '@angular/material';
+import {  MatDialogRef, MAT_DIALOG_DATA, mixinColor } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -19,6 +19,14 @@ export class IconComponent implements OnInit {
  flag=true
   @Output() public onUploadFinished = new EventEmitter();
   @Output() public setColor=new EventEmitter();
+  @Input() archivedicon
+  @Input() trashed
+@Output() setNote = new EventEmitter();
+
+trash: boolean = true;
+archive: boolean = true;
+unarchive: boolean = true;
+
   constructor(private route:Router,private service:NoteService,private http:HttpClient) { 
     this.Label = this.Label;
     console.log("gjhgj"+this.Label);
@@ -82,15 +90,74 @@ this.setColor.emit(this.setcolor);
 console.log(err);
 })
 }
+
+Archive(card) {
+  card.isArchive = true;
+  console.log(card)
+  this.service.ArchiveNote(card.id, card).subscribe(
+    data => {
+      console.log(data);
+      this.setNote.emit(this.archive)
+    },
+    err => { console.log(err); }
+  )
+}
+
+/**
+ * 
+ * @param card 
+ */
+Unarchive(card) {
+  card.isArchive = false;
+  this.service.ArchiveNote(card.id, card).subscribe(
+    data => {
+      console.log(data);
+      this.setNote.emit(this.unarchive)
+
+    },
+    err => { console.log(err); }
+  )
+}
+
+/**
+ * 
+ * @param card 
+ */
+TrashNote(card) {
+  console.log(card,card.id);
+  card.isTrash = true;
+  this.service.Trash(card.id, card).subscribe(
+    data => {
+      console.log(data);
+      this.setNote.emit(this.TrashNote)
+    },
+    err => { console.log(err); }
+  )
+}
+
+/**
+ * 
+ * @param card 
+ */
+Restore(card) {
+  console.log(card);
+  card.isTrash = false;
+  this.service.Trash(card.id, card).subscribe(
+    data => {
+      console.log(data);
+    },
+    err => { console.log(err); }
+  )
+}
 checkBox(label){
-  var UserId=localStorage.getItem('UserId');
+  // var UserId=localStorage.getItem('UserId');
   this.cards.label=label;
   console.log(this.cards.id)
   console.log("After Check"+this.Label.labels);
  
   this.service.UpdateNotes(this.cards,this.cards.id).subscribe(
     (res: any) => {
-     console.log("In Icon="+UserId,this.Label)
+    //  console.log("In Icon="+UserId,this.Label)
     },
     // err => {
     //   if (err.status == 400)

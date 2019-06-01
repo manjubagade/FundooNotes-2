@@ -37,8 +37,8 @@
      border-radius: 10px 25px 25px 10px; 
      /* background: yellow;  */
    } 
+
    .hower:hover{
     background-color: transparent;
     opacity: 1 !important;
-  
   }

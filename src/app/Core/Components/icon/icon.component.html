@@ -1,11 +1,18 @@
-<div class="hower" style="opacity: 0">
+<div>
+      <!-- class="hower" style="opacity: 0" -->
       <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
+      </button>
+
+      <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
+            <img src="./assets/images.jpg" style="width: 22px;">
+            <!-- <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon> -->
       </button>
 
       <button mat-button [matMenuTriggerFor]="MenuColors" class="togle" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">color_lens</mat-icon>
       </button>
+
 
       <button mat-button (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
             <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
@@ -23,7 +30,8 @@
 
             <mat-menu #menu="matMenu" #more>
                   <div>
-                        <button mat-menu-item (click)="Delete(cards)">Delete note</button>
+                              <button mat-menu-item (click)="TrashNote(cards)" style="outline: none">Delete note</button>
+                        <!-- <button mat-menu-item (click)="Delete(cards)">Delete note</button> -->
                   </div>
 
                   <div *ngIf="flag==true">

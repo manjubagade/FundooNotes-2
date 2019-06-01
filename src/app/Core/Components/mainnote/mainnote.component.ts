@@ -9,6 +9,7 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class MainnoteComponent implements OnInit {
   notes: any;
+  CardNotes =[];
  id: string;
  @Output() public setNotes=new EventEmitter();
  UserId=localStorage.getItem('token');
@@ -23,12 +24,18 @@ export class MainnoteComponent implements OnInit {
   }
 
   getAllNotes(){
+    this.CardNotes = [];
     var UserId=localStorage.getItem("UserId");
     this.service.getNotesById(UserId).subscribe(
       data => {
         this.notes = data;
+        for (let i = 0; i < this.notes.length; i++) {
+          if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
+            this.CardNotes.push(this.notes[i])
+}
         this.setNotes.emit(this.getAllNotes);
       }
+    }
     ), (err: any) => {
       console.log(err);
    };
@@ -37,4 +44,8 @@ export class MainnoteComponent implements OnInit {
     console.log('event');
      this.getAllNotes();
     }
+    eventOccur(event) {
+      this.getAllNotes();
+    }
+  
 }

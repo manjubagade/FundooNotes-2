@@ -23,6 +23,10 @@
     outline: none;
     border: none;
     display: flex;
+    width: 560px; 
+    outline: none;
+    border:none;
+    overflow:hidden
 }
 .card{
     outline: none;

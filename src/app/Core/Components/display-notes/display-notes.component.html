@@ -1,4 +1,4 @@
-<div fxLayout={{css}} [ngClass]="{'css': true, 'css': false}" style="margin-top:10px"  fxLayout="center" fxFlexOffset='20'>
+<div  fxLayout={{css}} style="margin-top:10px;margin-bottom: 2px"  fxLayout="center" fxFlexOffset='20'>
   <div *ngFor="let note of cards">
     <mat-card class="note"  [style.background-color]=note.color >
       <div (click)="openDialog(note)" class="element.style" >
@@ -23,9 +23,14 @@
           </mat-chip-list>
           <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
         </div>
-      </div> 
       </div>
+      </div>
+      <!-- <div class="hower" style="opacity: 0" >
       <app-icon [cards]="note"></app-icon>
+      </div> -->
+      <div>
+      <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icon>
+    </div>
     </mat-card>
   </div>
 </div>

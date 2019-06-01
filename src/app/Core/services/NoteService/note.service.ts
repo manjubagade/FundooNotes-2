@@ -30,6 +30,22 @@ export class NoteService {
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, note);
   }
 
+  Trash(id, card) {
+    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
+  }
+
+  ArchiveNote(id, card) {
+    return this.httpService.update('Notes/' + id, card)
+  }
+
+  GetArchiveNotes(UserId) {
+    return this.httpService.Get('Notes/archive/' + UserId)
+  }
+  
+  ViewInTrash(UserId) {
+    return this.http.get(environment.BaseURI + '/Notes/viewNotes/' + UserId);
+}
+
   DeleteNote(id) {
     console.log("In Service Delete" + id);
     return this.http.delete(environment.BaseURI + '/Notes/delete/' + id);

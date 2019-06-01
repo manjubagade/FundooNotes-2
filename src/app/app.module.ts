@@ -57,7 +57,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     IconComponent,
     EditComponent,
     LabelComponent,
-  
+    
    
   ],
   imports: [
@@ -86,6 +86,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     FlexLayoutModule,
     MatMenuModule,
     MatChipsModule,
+    
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     ToastrModule.forRoot({

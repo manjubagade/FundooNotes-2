@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Toast, ToastrService } from 'ngx-toastr';
@@ -18,7 +18,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-display-notes',
   templateUrl: './display-notes.component.html',
-  styleUrls: ['./display-notes.component.css']
+  styleUrls: ['./display-notes.component.css'],
+  
 })
 export class DisplayNotesComponent implements OnInit {
   visible = true;
@@ -26,12 +27,21 @@ export class DisplayNotesComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
-  constructor(private service: NoteService, private dataService: DataService, route: Router, private toastr: ToastrService, public dialog: MatDialog) {
+  
+  constructor(private service: NoteService, private dataService: DataService, route: Router,
+    private toastr: ToastrService, public dialog: MatDialog) {
 
   }
   grid;
   @Input() cards;
+  @Input() archived;
+@Input() trash;
+@Output() messageEvent = new EventEmitter<any>();
+
   flag = true;
+  unrchive: boolean;
+  archive: boolean;
+ trashNote: boolean;
   css = 'row wrap'
   ngOnInit() {
     var Profilepic = localStorage.getItem("profilePic");
@@ -56,8 +66,6 @@ export class DisplayNotesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditComponent,
       {
         data: note,
-        //  height:auto,
-        //  width:'auto
       });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -79,6 +87,20 @@ export class DisplayNotesComponent implements OnInit {
     })
   }
 
+  Archive(event) {
+    console.log('event here');
+    this.messageEvent.emit(event)
+  }
+
+  /**
+   * 
+   * @param event 
+   */
+  Trash(event) {
+    console.log('trash in');
+    this.messageEvent.emit(event);
+
+}
   remove(note, id) {
     note.label = null;
     console.log("00000000000" + note.label, id);

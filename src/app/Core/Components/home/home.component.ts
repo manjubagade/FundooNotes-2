@@ -57,14 +57,15 @@ export class HomeComponent implements OnInit {
     this.Label = this.Label;
 
     
-    var Profilepic = localStorage.getItem("profilePic");
-    console.log("9999999900000000" + Profilepic);
+    var ProfileUrl = localStorage.getItem("profilePic");
+    console.log("9999999900000000" + ProfileUrl, UserId);
    console.log(UserId);
 
     this.userService.getUserProfile(UserId).subscribe(data => {
       var Profilepic = data['result'];
       localStorage.setItem('profilePic', Profilepic);
-
+      console.log("        "+Profilepic,UserId);
+      
     }, err => {
       console.log(err);
     });
@@ -84,7 +85,7 @@ export class HomeComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('UserID');
+    localStorage.removeItem('UserId');
     localStorage.removeItem('profilePic');
     alert("successfully logout");
     this.router.navigate(['/user/login']);
@@ -141,6 +142,8 @@ export class HomeComponent implements OnInit {
       return
     }
 
+    console.log("event",event);
+    
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
