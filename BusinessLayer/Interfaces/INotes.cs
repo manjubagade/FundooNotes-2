@@ -54,6 +54,26 @@ namespace BusinessLayer.Interfaces
         /// <returns></returns>
         string AddImage(IFormFile file, int id);
 
-        
+        /// <summary>
+        /// Trashes the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<Notes> Trash(string userId);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        IList<Notes> Archive(string userId);
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        IList<Notes> Reminder(string userId);
+
     }
 }

@@ -23,7 +23,7 @@ namespace RepositoryLayer.Interface
         /// Adds the notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
-        void AddNotes(Notes notes);
+        Task<int> AddNotes(Notes notes);
 
         /// <summary>
         /// Saves the changes asynchronous.
@@ -50,7 +50,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="notes">The notes.</param>
         /// <param name="id">The identifier.</param>
-        void UpdateNotes(Notes notes, int id);
+        Task<int> UpdateNotes(Notes notes, int id);
 
         /// <summary>
         /// Images the specified file.
@@ -59,5 +59,27 @@ namespace RepositoryLayer.Interface
         /// <param name="id">The identifier.</param>
         /// <returns>Uri string</returns>
         string Image(IFormFile file, int id);
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        IList<Notes> Archive(string userId);
+
+        /// <summary>
+        /// Trashes the note.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        IList<Notes> TrashNote(string userId);
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        IList<Notes> Reminder(string userId);
+
     }
 }

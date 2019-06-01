@@ -48,8 +48,7 @@ namespace FundooApi.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return this.BadRequest();
+                return this.BadRequest(e.Message);
 
             }
         }
@@ -137,6 +136,31 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        [HttpGet]
+        [Route("archive/{userId}")]
+        public IActionResult ArchiveNotes(string userId)
+        {
+            IList<Notes> result = this.notesHandler.Archive(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
+        [HttpGet]
+        [Route("trash/{userId}")]
+        public IActionResult TrashNotes(string userId)
+        {
+            IList<Notes> result = this.notesHandler.Trash(userId);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
 
     }
 }

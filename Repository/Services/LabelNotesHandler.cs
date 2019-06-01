@@ -14,6 +14,11 @@ namespace RepositoryLayer.Services
         private readonly RegistrationControl registrationControl;
         private readonly IDistributedCache distributedCache;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelNotesHandler"/> class.
+        /// </summary>
+        /// <param name="registrationControl">The registration control.</param>
+        /// <param name="distributedCache">The distributed cache.</param>
         public LabelNotesHandler(RegistrationControl registrationControl, IDistributedCache distributedCache)
         {
             this.registrationControl = registrationControl;
@@ -25,14 +30,12 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="LabelModel">The label model.</param>
         /// <exception cref="Exception"></exception>
-        public void AddLabel(NotesLabel LabelModel)
+        public async Task<int> AddLabel(NotesLabel LabelModel)
         {
             try
             {
-                // var flag = this.registrationControl.Notes.Find(LabelModel.Labels);
-                //if (flag.Equals(false))
-                //{
-                //// Add Notes
+                
+                //// Adding Notes in database
                 var addNotesLabel = new NotesLabel()
                 {
                     UserId = LabelModel.UserId,
@@ -41,13 +44,14 @@ namespace RepositoryLayer.Services
 
                 };
                 var result = this.registrationControl.NotesLabels.Add(addNotesLabel);
-                //   }
+               
 
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+            return await SaveChangesAsync();
         }
 
         /// <summary>
@@ -56,8 +60,9 @@ namespace RepositoryLayer.Services
         /// <returns>Result Int int</returns>
         public async Task<int> SaveChangesAsync()
         {
-            var result =await this.registrationControl.SaveChangesAsync();
-            return result;
+            //// for changes the Database Entries
+            return await this.registrationControl.SaveChangesAsync();
+             
         }
 
        
@@ -89,10 +94,18 @@ namespace RepositoryLayer.Services
         /// <returns>result in int</returns>
         public async Task<int> DeleteLabel(int id)
         {
-            NotesLabel label = await this.registrationControl.NotesLabels.FindAsync(id);
-            registrationControl.NotesLabels.Remove(label);
-            var result = registrationControl.SaveChanges();
-            return result;
+            try
+            {
+                NotesLabel label = await this.registrationControl.NotesLabels.FindAsync(id);
+                registrationControl.NotesLabels.Remove(label);
+                return registrationControl.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+           
+           
         }
     }
 }

@@ -45,10 +45,7 @@ namespace BusinessLayer.Services
         /// <returns></returns>
         public async Task<int> Change(Notes notesModel, int id)
         {
-            
-            this.repositoryNotes.UpdateNotes(notesModel,id);
-            var result =await this.repositoryNotes.SaveChangesAsync();
-            return result;
+          return await this.repositoryNotes.UpdateNotes(notesModel,id);
         }
 
         /// <summary>
@@ -60,13 +57,11 @@ namespace BusinessLayer.Services
         {
             try
             {
-            this.repositoryNotes.AddNotes(notesModel);
-            var result =await this.repositoryNotes.SaveChangesAsync();
-            return result;
+                return await this.repositoryNotes.AddNotes(notesModel);
             }
-            catch
+            catch(Exception e)
             {
-                return await this.repositoryNotes.SaveChangesAsync();
+                throw new Exception(e.Message);
             }
         }
 
@@ -92,7 +87,39 @@ namespace BusinessLayer.Services
             return this.repositoryNotes.Image(file, id);
         }
 
-        
-       
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        public IList<Notes> Archive(string userId)
+        {
+            return this.repositoryNotes.Archive(userId);
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>return list</returns>
+        public IList<Notes> Trash(string userId)
+        {
+            return this.repositoryNotes.TrashNote(userId);
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>
+        /// returns list
+        /// </returns>
+        public IList<Notes> Reminder(string userId)
+        {
+            return this.repositoryNotes.Reminder(userId);
+        }
+
+
+
     }
 }

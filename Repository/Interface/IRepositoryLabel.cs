@@ -22,7 +22,7 @@ namespace RepositoryLayer.Interface
         /// Adds the label.
         /// </summary>
         /// <param name="labelModel">The label model.</param>
-        void AddLabel(Label labelModel);
+        Task<int> AddLabel(Label labelModel);
 
         /// <summary>
         /// Saves the changes asynchronous.
@@ -49,6 +49,6 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="labelModel">The label model.</param>
         /// <param name="id">The identifier.</param>
-        void UpdateLabel(Label labelModel, int id);
+        Task<int> UpdateLabel(Label labelModel, int id);
     }
 }

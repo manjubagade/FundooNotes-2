@@ -25,6 +25,10 @@ namespace RepositoryLayer.Services
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
 
+    /// <summary>
+    /// class For User Data Operations
+    /// </summary>
+    /// <seealso cref="RepositoryLayer.Interface.IUserDataOperations" />
     public class UserDataOperations : IUserDataOperations
     {
         private UserManager<ApplicationUser> userManager;
@@ -32,6 +36,15 @@ namespace RepositoryLayer.Services
         private readonly ApplicationSettings applicationSettings;
         private readonly IDistributedCache distributedCache;
         private RegistrationControl registrationControl;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserDataOperations"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="signInManager">The sign in manager.</param>
+        /// <param name="registrationControl">The registration control.</param>
+        /// <param name="applicationSettings">The application settings.</param>
+        /// <param name="distributedCache">The distributed cache.</param>
         public UserDataOperations(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, RegistrationControl registrationControl, IOptions<ApplicationSettings> applicationSettings, IDistributedCache distributedCache)
         {
             this.registrationControl = registrationControl;

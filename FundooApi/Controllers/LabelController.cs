@@ -105,7 +105,6 @@ namespace FundooApi.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 return this.BadRequest();
             }
         }

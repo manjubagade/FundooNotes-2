@@ -25,6 +25,11 @@ namespace RepositoryLayer.Services
         private readonly RegistrationControl registrationControl;
         private readonly IDistributedCache distributedCache;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateNotes"/> class.
+        /// </summary>
+        /// <param name="registrationControl">The registration control.</param>
+        /// <param name="distributedCache">The distributed cache.</param>
         public CreateNotes(RegistrationControl registrationControl, IDistributedCache distributedCache)
         {
             this.registrationControl = registrationControl;
@@ -36,12 +41,13 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="notes">The notes.</param>
         /// <exception cref="Exception"></exception>
-        public void AddNotes(Notes notes)
+        public async Task<int> AddNotes(Notes notes)
         {
-            if (notes.Title != null || notes.Description!=null)
+            try
             {
-                try
+                if (notes.Title != null || notes.Description != null)
                 {
+
                     //// Adding Notes in database
                     var addnotes = new Notes()
                     {
@@ -50,16 +56,19 @@ namespace RepositoryLayer.Services
                         Description = notes.Description,
                         CreatedDate = notes.CreatedDate,
                         ModifiedDate = notes.ModifiedDate,
-                        Label=notes.Label
+                        Label = notes.Label
                     };
-                    var result = this.registrationControl.Notes.Add(addnotes);
+                   this.registrationControl.Notes.Add(addnotes);
+                   
                 }
-
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+               
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return await SaveChangesAsync();
+            
         }
 
         /// <summary>
@@ -77,14 +86,24 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="id">The identifier.</param>
-        public void UpdateNotes(Notes model, int id)
+        public async Task<int> UpdateNotes(Notes model, int id)
         {
-            Notes notes = this.registrationControl.Notes.Where<Notes>(c => c.Id == id).FirstOrDefault();
-            notes.Title = model.Title;
-            notes.Description = model.Description;
-            notes.Image = model.Image;
-            notes.Color = model.Color;
-            notes.Label = model.Label;
+            try
+            {
+                Notes notes = this.registrationControl.Notes.Where<Notes>(c => c.Id == id).FirstOrDefault();
+                notes.Title = model.Title;
+                notes.Description = model.Description;
+                notes.Image = model.Image;
+                notes.Color = model.Color;
+                notes.Label = model.Label;
+                notes.IsTrash = model.IsTrash;
+                notes.IsArchive = model.IsArchive;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+           return await SaveChangesAsync();
         }
 
         /// <summary>
@@ -113,10 +132,18 @@ namespace RepositoryLayer.Services
         /// <returns>Result in Int</returns>
         public async Task<int> DeleteNotes(int id)
         {
-            Notes notes = await this.registrationControl.Notes.FindAsync(id);
-            registrationControl.Notes.Remove(notes);
-            var result = registrationControl.SaveChanges();
-            return result;
+            try
+            {
+                Notes notes = await this.registrationControl.Notes.FindAsync(id);
+                registrationControl.Notes.Remove(notes);
+                return registrationControl.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+          
+             
         }
 
         /// <summary>
@@ -149,6 +176,58 @@ namespace RepositoryLayer.Services
                 return ex.Message;
             }
         }
-       
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        public IList<Notes> Archive(string userId)
+        {
+            var list = new List<Notes>();
+            var note = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
+            foreach (var data in note)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Archives the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<Notes> TrashNote(string userId)
+        {
+            var list = new List<Notes>();
+            var note = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.IsTrash == true) select notes;
+            foreach (var data in note)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Reminders the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>returns list</returns>
+        public IList<Notes> Reminder(string userId)
+        {
+            var list = new List<Notes>();
+            var notesData = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.Reminder != null) select notes;
+            foreach (var data in notesData)
+            {
+                list.Add(data);
+            }
+
+            return list;
+        }
+
+
     }
- }
+}

@@ -90,5 +90,30 @@ namespace FundooApi
         /// The label.
         /// </value>
         public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is trash.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is trash; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsTrash { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is archive.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsArchive { get; set; }
+
+        
+        /// <summary>
+        /// Gets or sets the reminder.
+        /// </summary>
+        /// <value>
+        /// The reminder.
+        /// </value>
+        public DateTime Reminder { get; set; }
     }
 }

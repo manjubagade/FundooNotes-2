@@ -43,7 +43,7 @@ namespace BusinessLayer.Interfaces
         /// </returns>
         public async Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel)
         {
-          await this.applicationRepository.Register(userRegistrationmodel);
+            await this.applicationRepository.Register(userRegistrationmodel);
             return true;
         }
 
@@ -56,8 +56,8 @@ namespace BusinessLayer.Interfaces
         /// </returns>
         public async Task<string> LoginAsync(LoginControl loginControlmodel)
         {
-            string jsonstring = await applicationRepository.Login(loginControlmodel);
-            return jsonstring;
+            return await applicationRepository.Login(loginControlmodel);
+            
         }
 
         /// <summary>
@@ -91,8 +91,13 @@ namespace BusinessLayer.Interfaces
         /// <returns>return boolean</returns>
         public async Task<bool> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
-           await this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
-            return true;
+            var result= await this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
+           
+            if (result.Equals(true))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

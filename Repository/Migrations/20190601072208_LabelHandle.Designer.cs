@@ -4,14 +4,16 @@ using FundooApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(RegistrationControl))]
-    partial class RegistrationControlModelSnapshot : ModelSnapshot
+    [Migration("20190601072208_LabelHandle")]
+    partial class LabelHandle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,15 +90,9 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<bool>("IsArchive");
-
-                    b.Property<bool>("IsTrash");
-
                     b.Property<string>("Label");
 
                     b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<DateTime>("Reminder");
 
                     b.Property<string>("Title");
 

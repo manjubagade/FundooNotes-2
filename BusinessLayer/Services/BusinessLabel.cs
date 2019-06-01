@@ -30,7 +30,7 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public  IList<Label> AccessLabel(Guid UserId)
+        public IList<Label> AccessLabel(Guid UserId)
         {
             return this.repositoryLabel.ViewLabel(UserId);
              
@@ -45,9 +45,9 @@ namespace BusinessLayer.Services
         public async Task<int> Change(Label LabelModel, int id)
         {
 
-            this.repositoryLabel.UpdateLabel(LabelModel, id);
-            var result = await this.repositoryLabel.SaveChangesAsync();
-            return result;
+          return await this.repositoryLabel.UpdateLabel(LabelModel, id);
+           
+             
         }
 
         /// <summary>
@@ -59,10 +59,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                 this.repositoryLabel.AddLabel(LabelModel);
-                
-                var result =await this.repositoryLabel.SaveChangesAsync();
-                return result;
+               return await this.repositoryLabel.AddLabel(LabelModel);
             }
             catch(Exception e)
             {
