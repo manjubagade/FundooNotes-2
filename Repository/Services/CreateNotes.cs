@@ -114,7 +114,8 @@ namespace RepositoryLayer.Services
         public IList<Notes> ViewNotes(Guid userId)
         {
             var list = new List<Notes>();
-            var note = from notes in this.registrationControl.Notes where notes.UserId == userId orderby notes.UserId descending select notes;
+            var note = from notes in this.registrationControl.Notes where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
+           // (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) 
             foreach (var item in note)
             {
                 list.Add(item);
@@ -185,7 +186,7 @@ namespace RepositoryLayer.Services
         public IList<Notes> Archive(string userId)
         {
             var list = new List<Notes>();
-            var note = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.IsArchive == true) && (notes.IsTrash == false) select notes;
+            var note = from notes in this.registrationControl.Notes where notes.IsArchive == true orderby notes.UserId descending select notes;
             foreach (var data in note)
             {
                 list.Add(data);
@@ -202,7 +203,7 @@ namespace RepositoryLayer.Services
         public IList<Notes> TrashNote(string userId)
         {
             var list = new List<Notes>();
-            var note = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.IsTrash == true) select notes;
+            var note = from notes in this.registrationControl.Notes where notes.IsTrash == true select notes;
             foreach (var data in note)
             {
                 list.Add(data);
