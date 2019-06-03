@@ -1,12 +1,12 @@
-<div>
+<div *ngIf="trashed != 'IsTrash'">
       <!-- class="hower" style="opacity: 0" -->
       <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
       </button>
 
       <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
-            <img src="./assets/images.jpg" style="width: 22px;">
-            <!-- <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon> -->
+
+            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
       </button>
 
       <button mat-button [matMenuTriggerFor]="MenuColors" class="togle" fxFlex="row" fxFlex='20'>
@@ -20,29 +20,31 @@
             <br />
       </button>
 
-      <button mat-button class="togle" fxFlex="row" fxFlex='20'>
-            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">archive</mat-icon>
+      <button mat-button *ngIf="archivedicon != 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
+            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" (click)="Archive(cards)">archive</mat-icon>
       </button>
 
-      <button mat-button class="togle" [matMenuTriggerFor]="menu" fxFlex="row" fxFlex='20'>
+      <button mat-button *ngIf="archivedicon == 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
+            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" (click)="Unarchive(cards)">unarchive_outline</mat-icon>
+      </button>
+
+      <button mat-button class="togle" *ngIf="trashed != 'IsTrash'" [matMenuTriggerFor]="menu" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="center center">more_vert</mat-icon>
-
-
+      </button>
+      <div>
             <mat-menu #menu="matMenu" #more>
                   <div>
-                              <button mat-menu-item (click)="TrashNote(cards)" style="outline: none">Delete note</button>
-                        <!-- <button mat-menu-item (click)="Delete(cards)">Delete note</button> -->
+                        <button mat-menu-item (click)="TrashNote(cards)" style="outline: none">Delete note</button>
                   </div>
 
                   <div *ngIf="flag==true">
                         <button mat-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="label"
                               (click)='mat-menu.hide' [ngStyle]="{'color':'rgb(95, 99, 99)'}">Add Label</button>
-
                   </div>
 
             </mat-menu>
+      </div>
 
-      </button>
       <div>
             <mat-menu #label="matMenu" class="matlabelmenu">
 
@@ -95,4 +97,24 @@
                   </button>
             </div>
       </mat-menu>
+</div>
+<div *ngIf="trashed == 'IsTrash'" class="hower" style="opacity: 0">
+      <button mat-button class="togle" [matMenuTriggerFor]="menu1" fxFlex="row" fxFlex='20'>
+            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="start center">more_vert</mat-icon>
+      </button>
+      <div>
+            <mat-menu #menu1="matMenu" #more>
+                  <div>
+                        <button mat-menu-item (click)="Delete(cards)" style="outline: none">Delete forever</button>
+
+                  </div>
+
+                  <div *ngIf="flag==true">
+                        <button mat-button (click)="Restore(cards)"
+                              [ngStyle]="{'color':'rgb(95, 99, 99)'}">Restore</button>
+
+                  </div>
+
+            </mat-menu>
+      </div>
 </div>

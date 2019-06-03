@@ -6,7 +6,9 @@
       <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10'>
         <mat-icon>menu</mat-icon>
       </button></div>
+      <div fxFlexOffset.xs='-4'>
     <img class="logo" src="/assets/download.png">
+      </div>
     <div fxFlex='10'>
       <div [ngStyle.xs]="{'font-size.px': 15 }" [ngStyle.sm]="{'font-size.px': 20 }"
         [ngStyle.md]="{'font-size.px': 22 }">{{ Header }}
@@ -35,7 +37,7 @@
         </button>
       </div>
     </div>
-    <div fxFlex="10" fxFlex="row">
+    <div fxFlex="10" fxFlex="row" fxFlexOffset.xs='-2'>
       <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()'>
         <mat-icon>grid_view</mat-icon>
       </button>
@@ -48,20 +50,18 @@
       </button>
     </div>
 
-    <div class="Logout" fxFlex="row" fxFlexOffset.xs='3' fxFlex="20">
-      <button class="togle" mat-mini-fab color="black" data-toggle="dropdown"></button>
-      <!-- [ngStyle]="{'background-image':'url('+ Profilepic +')'}" -->
-      <!-- <div *ngFor="let note of cards">
-         <img src="{{note.image}}" class="notesImage" /> 
-      </div> -->
+    <div class="togle" fxFlex="row" fxFlexOffset.xs='0' fxFlex="20">
+      <button class="togle" mat-mini-fab color="white" data-toggle="dropdown"></button>
+
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
-          <li> <button mat-mini-fab [ngStyle]="{'background-image': 'url(' + Profilepic + ')', 'background-size': 'cover'  }" (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
+          <li> <button class="abc" mat-mini-fab
+              [ngStyle]="{'background-image': 'url(' + Profilepic + ')', 'background-size': 'cover'  }"
+              (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
               <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
               <mat-icon>
-                url{{Profilepic}}
-                <!-- <img class="logo" ng-src="{{Profilepic}}"> -->
-                <!-- <div><img src="{{Profilepic}}" class="profilepic"/></div> -->
+
+
               </mat-icon>
 
             </button></li>

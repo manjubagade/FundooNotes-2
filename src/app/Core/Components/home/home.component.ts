@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('UserId',UserId);
     console.log("In Home UserId"+UserId)
     this.Label = this.Label;
+  //  console.log("In Home Components Notes"+this.Label);
 
     
     var ProfileUrl = localStorage.getItem("profilePic");
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit {
       data => {
         this.Label = data;
         var Abc = this.Label;
-        console.log(Abc);
+        
       }
 
     ), (err: any) => {

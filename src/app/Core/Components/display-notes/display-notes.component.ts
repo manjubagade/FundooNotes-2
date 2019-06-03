@@ -44,6 +44,8 @@ export class DisplayNotesComponent implements OnInit {
  trashNote: boolean;
   css = 'row wrap'
   ngOnInit() {
+    console.log("***********"+this.cards);
+    
     var Profilepic = localStorage.getItem("profilePic");
     console.log("Display Profile pic", Profilepic);
 

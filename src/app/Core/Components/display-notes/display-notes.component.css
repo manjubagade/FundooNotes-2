@@ -38,7 +38,11 @@
      /* background: yellow;  */
    } 
 
-   .hower:hover{
-    background-color: transparent;
+   .ho:hover{
+    
+    opacity: 1 !important;
+  }
+.hower:hover{
+    
     opacity: 1 !important;
   }

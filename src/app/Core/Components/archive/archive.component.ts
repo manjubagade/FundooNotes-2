@@ -10,12 +10,12 @@ export class ArchiveComponent implements OnInit {
   notes = [];
   CardNotes = []
   id: string;
-  more = 'isArchive'
+  more = 'IsArchive'
 
   constructor(public notesService: NoteService) { }
 
   ngOnInit() {
-    this.id = localStorage.getItem("userid")
+    this.id = localStorage.getItem("UserId")
     this.notesService.GetArchiveNotes(this.id).subscribe(
       (data: any) => {
         console.log(data);

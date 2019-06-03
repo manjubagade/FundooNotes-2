@@ -21,7 +21,7 @@ export class IconComponent implements OnInit {
   @Output() public setColor=new EventEmitter();
   @Input() archivedicon
   @Input() trashed
-@Output() setNote = new EventEmitter();
+  @Output() setNote = new EventEmitter();
 
 trash: boolean = true;
 archive: boolean = true;
@@ -35,7 +35,11 @@ unarchive: boolean = true;
  
    color;
   ngOnInit() {
+    console.log("In Icon Components"+this.cards);
+    
+    
     var UserID=localStorage.getItem('UserId');
+    
     this.service.getLabelsById(UserID).subscribe(
       data => {
         this.Label = data;
@@ -44,12 +48,13 @@ unarchive: boolean = true;
     ), (err: any) => {
       console.log(err);
     };
+    // console.log("In Icon"+this.cards);
   }
+
 
   Delete(card)
 {
-card.delete = true;
-card.IsTrash = card.delete;
+
 this.service.DeleteNote(this.cards.id).subscribe(data =>{
 console.log(data);
 },err =>{
@@ -92,7 +97,7 @@ console.log(err);
 }
 
 Archive(card) {
-  card.isArchive = true;
+  card.IsArchive = true;
   console.log(card)
   this.service.ArchiveNote(card.id, card).subscribe(
     data => {

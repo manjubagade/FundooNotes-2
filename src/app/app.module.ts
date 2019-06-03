@@ -36,6 +36,7 @@ import { DisplayNotesComponent } from './Core/Components/display-notes/display-n
 import { IconComponent } from './Core/Components/icon/icon.component';
 import { EditComponent } from './Core/Components/edit/edit.component';
 import { LabelComponent } from './Core/Components/label/label.component';
+import { PipePipe } from './Core/Pipe/pipe.pipe';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { LabelComponent } from './Core/Components/label/label.component';
     IconComponent,
     EditComponent,
     LabelComponent,
+    PipePipe,
     
    
   ],

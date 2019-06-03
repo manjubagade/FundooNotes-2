@@ -10,9 +10,7 @@ import { environment } from 'src/environments/environment';
 export class NoteService {
   [x: string]: any;
 
-  /**
-   *
-   */
+ 
   constructor(private http: HttpClient) { }
 
   AddNotes(formData, UserId) {
@@ -35,15 +33,15 @@ export class NoteService {
   }
 
   ArchiveNote(id, card) {
-    return this.httpService.update('Notes/' + id, card)
+    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
   }
 
   GetArchiveNotes(UserId) {
-    return this.httpService.Get('Notes/archive/' + UserId)
+    return this.http.get(environment.BaseURI +'/Notes/archive/' + UserId)
   }
   
   ViewInTrash(UserId) {
-    return this.http.get(environment.BaseURI + '/Notes/viewNotes/' + UserId);
+    return this.http.get(environment.BaseURI + '/Notes/trash/' + UserId);
 }
 
   DeleteNote(id) {

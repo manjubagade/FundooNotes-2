@@ -15,26 +15,31 @@ export class MainnoteComponent implements OnInit {
  UserId=localStorage.getItem('token');
   constructor(private service:NoteService) { 
     var UserID = localStorage.getItem("UserId");
-    console.log(UserID);
+    console.log("Main "+UserID);
   }
  
   ngOnInit() {
+    console.log("Im In Main Component");
     
-    this.getAllNotes();
+   var result= this.getAllNotes();
   }
 
   getAllNotes(){
-    this.CardNotes = [];
+    // this.CardNotes = [];
     var UserId=localStorage.getItem("UserId");
+   
+    
     this.service.getNotesById(UserId).subscribe(
       data => {
         this.notes = data;
-        for (let i = 0; i < this.notes.length; i++) {
-          if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
-            this.CardNotes.push(this.notes[i])
-}
-        this.setNotes.emit(this.getAllNotes);
-      }
+        console.log(data);
+        
+//         for (let i = 0; i < this.notes.length; i++) {
+//           if (this.notes[i].isArchive == false && this.notes[i].isTrash == false) {
+//             this.CardNotes.push(this.notes[i])
+// }
+//         this.setNotes.emit(this.getAllNotes);
+//       }
     }
     ), (err: any) => {
       console.log(err);

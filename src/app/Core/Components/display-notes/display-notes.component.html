@@ -1,7 +1,7 @@
-<div  fxLayout={{css}} style="margin-top:10px;margin-bottom: 2px"  fxLayout="center" fxFlexOffset='20'>
-  <div *ngFor="let note of cards">
-    <mat-card class="note"  [style.background-color]=note.color >
-      <div (click)="openDialog(note)" class="element.style" >
+<div fxLayout={{css}} class="hower" style="opacity: 0" style="margin-top:10px;margin-bottom: 2px"  fxLayout="center" fxFlexOffset='20'>
+  <div *ngFor="let note of cards"  >
+    <mat-card class="note"  [style.background-color]=note.color fxFlexOffset.xs='-10' >
+      <div (click)="openDialog(note)" class="element.style">
         <div>
           <img src="{{note.image}}" class="notesImage" />
         </div>
@@ -25,12 +25,10 @@
         </div>
       </div>
       </div>
-      <!-- <div class="hower" style="opacity: 0" >
-      <app-icon [cards]="note"></app-icon>
-      </div> -->
+     
       <div>
-      <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Archive($event)" [trashed]='trash'></app-icon>
+      <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'></app-icon>
     </div>
-    </mat-card>
+  </mat-card>
   </div>
 </div>

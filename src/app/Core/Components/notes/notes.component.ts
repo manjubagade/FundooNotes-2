@@ -27,6 +27,7 @@ export class NotesComponent implements OnInit {
   }
   color;
   @Input() cards;
+  @Output() public notes=new EventEmitter();
   ngOnInit() {
   }
 
@@ -40,9 +41,10 @@ export class NotesComponent implements OnInit {
       var UserId = localStorage.getItem("UserId");
         console.log("qqqqqqqqqqq"+this.form.value.title.trim());
 
-        if((this.form.value.title.trim()!== '' )|| (this.form.value.Description.trim()!=='')){
+        if((this.form.value.title.trim()!== '' ) || (this.form.value.Description.trim()!=='')){
         this.service.AddNotes(this.form.value, UserId).subscribe(
           (res: any) => {
+            
             this.router.navigateByUrl('/home');
           },
           err => {

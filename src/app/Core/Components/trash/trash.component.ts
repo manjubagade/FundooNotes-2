@@ -7,10 +7,10 @@ import { NoteService } from '../../services/NoteService/note.service';
   styleUrls: ['./trash.component.css']
 })
 export class TrashComponent implements OnInit {
-  more="isTrash";
+  more="IsTrash";
   notes = [];
   CardNotes = []
-id: string;
+  id: string;
   constructor(public notesService: NoteService) { }
 
   ngOnInit() {
@@ -21,6 +21,7 @@ id: string;
       (data: any) => {
         console.log(data);
         this.notes = data['result']
+        console.log(this.notes);
         
         this.notes.forEach(element => {
           if (element.IsTrash == true) {
