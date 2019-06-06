@@ -51,14 +51,14 @@ namespace RepositoryLayer.Services
                     //// Adding Notes in database
                     var addnotes = new Notes()
                     {
-                        UserId = notes.UserId,
+                         UserId = notes.UserId,
                         Title = notes.Title,
                         Description = notes.Description,
                         CreatedDate = notes.CreatedDate,
                         ModifiedDate = notes.ModifiedDate,
                         Label = notes.Label
                     };
-                   this.registrationControl.Notes.Add(addnotes);
+                    this.registrationControl.Notes.Add(addnotes);
                    
                 }
                
@@ -111,7 +111,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
-        public IList<Notes> ViewNotes(Guid userId)
+        public IList<Notes> ViewNotes(string userId)
         {
             var list = new List<Notes>();
             var note = from notes in this.registrationControl.Notes where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;

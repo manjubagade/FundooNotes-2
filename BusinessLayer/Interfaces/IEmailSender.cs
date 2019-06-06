@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IEmailSender.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace BusinessLayer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public interface IEmailSender
     {
         /// <summary>

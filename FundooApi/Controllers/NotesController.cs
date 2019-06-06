@@ -11,10 +11,12 @@ namespace FundooApi.Controllers
     using System.Linq;
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
+   [Authorize]
     [ApiController]
     public class NotesController : ControllerBase
     {
@@ -101,20 +103,18 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return notes</returns>
+
         [HttpGet]
-        [Route("viewNotes/{UserId}")]
-        public IActionResult ViewAll(Guid userId)
+        [Route("view/{userId}")]
+        public IActionResult view(string userId)
         {
-            try
+            IList<Notes> result = this.notesHandler.AccessNotes(userId);
+            if (result == null)
             {
-                IList<Notes> note = this.notesHandler.AccessNotes(userId);
-                return this.Ok(note);
+                return this.NotFound();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return this.BadRequest();
-            }
+
+            return this.Ok(new { result });
         }
 
         /// <summary>

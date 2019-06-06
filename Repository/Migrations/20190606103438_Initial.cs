@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepositoryLayer.Migrations
 {
-    public partial class GetNotes : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,7 +44,8 @@ namespace RepositoryLayer.Migrations
                     Discriminator = table.Column<string>(nullable: false),
                     FullName = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
-                    ModifiedDate = table.Column<DateTime>(nullable: true)
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,17 +53,52 @@ namespace RepositoryLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Collaborators",
+                columns: table => new
+                {
+                    CollaboratorsId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    SenderEmail = table.Column<string>(nullable: true),
+                    ReceiverEmail = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collaborators", x => x.CollaboratorsId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Images = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Images = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Labels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Labels = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Labels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,11 +111,33 @@ namespace RepositoryLayer.Migrations
                     Description = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
+                    Label = table.Column<string>(nullable: true),
+                    IsTrash = table.Column<bool>(nullable: false),
+                    IsArchive = table.Column<bool>(nullable: false),
+                    Reminder = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NotesLabels",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<Guid>(nullable: false),
+                    NotesId = table.Column<int>(nullable: false),
+                    LabelId = table.Column<int>(nullable: false),
+                    CollaboratorsId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotesLabels", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -246,10 +304,19 @@ namespace RepositoryLayer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Collaborators");
+
+            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
+                name: "Labels");
+
+            migrationBuilder.DropTable(
                 name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "NotesLabels");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

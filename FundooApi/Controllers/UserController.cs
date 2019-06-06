@@ -31,6 +31,7 @@ namespace FundooNotesBackEnd.Controllers
     /// Class UserController
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+   [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -223,11 +224,12 @@ namespace FundooNotesBackEnd.Controllers
             this.applicationUserOperation = applicationUserOperation;
         }
 
-
+        
         [HttpPost]
+       [AllowAnonymous]
         [Route("register")]
         public async Task<IActionResult> Register(UserRegistration registrationControlModel)
-        {
+      {
             if (ModelState.IsValid)
             {
                 try
@@ -243,9 +245,10 @@ namespace FundooNotesBackEnd.Controllers
 
             return this.BadRequest();
         }
-
+        
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public async Task<string> Login(LoginControl loginControlModel)
         {
             try
@@ -262,6 +265,7 @@ namespace FundooNotesBackEnd.Controllers
             }
         }
         [HttpPost]
+        [AllowAnonymous]
         [Route("forgotPassword")]
         public IActionResult Forgot(ForgotPassword forgotPasswordModel)
         {
@@ -284,6 +288,7 @@ namespace FundooNotesBackEnd.Controllers
         /// <returns>return status code</returns>
         [HttpPost]
         [Route("resetPassword")]
+        [AllowAnonymous]
         public IActionResult Reset(ResetPassword resetPasswordmodel)
         {
             try

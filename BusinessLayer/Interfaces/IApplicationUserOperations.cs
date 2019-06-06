@@ -1,13 +1,20 @@
-﻿using FundooApi;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="IApplicationUserOperations.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace BusinessLayer.Interfaces
 {
+    using FundooApi;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public interface IApplicationUserOperations
     {
         /// <summary>
@@ -51,6 +58,6 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        string getProfile(string userId);
+        IList<ApplicationUser> getProfile(string userId);
     }
 }

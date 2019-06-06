@@ -1,14 +1,21 @@
-﻿using Common.Models;
-using FundooApi;
-using Microsoft.Extensions.Caching.Distributed;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="LabelNotesHandler.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryLayer.Services
 {
+    using Common.Models;
+    using FundooApi;
+    using Microsoft.Extensions.Caching.Distributed;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class LabelNotesHandler
     {
         private readonly RegistrationControl registrationControl;

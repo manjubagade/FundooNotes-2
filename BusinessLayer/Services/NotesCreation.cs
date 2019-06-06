@@ -30,7 +30,7 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Notes> AccessNotes(Guid UserId)
+        public IList<Notes> AccessNotes(string UserId)
         {
             return this.repositoryNotes.ViewNotes(UserId);
         }

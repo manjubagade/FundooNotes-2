@@ -180,17 +180,19 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        public string GetProfilepic(string userId)
+        public IList<ApplicationUser> GetProfilepic(string userId)
         {
             try
             {
-             ApplicationUser profile = this.registrationControl.Application.Where<ApplicationUser>(c => c.Id == userId).SingleOrDefault();
-                return profile.Image.ToString();
+                var list = new List<ApplicationUser>();
+                var profile = from user in this.registrationControl.Application where (user.Id == userId) select user;
+                return profile.ToArray();
             }
             catch(Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+       
     }
 }

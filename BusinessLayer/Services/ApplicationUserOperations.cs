@@ -113,7 +113,7 @@ namespace BusinessLayer.Interfaces
 
         }
 
-         public string getProfile(string userId)
+         public IList<ApplicationUser> getProfile(string userId)
         {
             return this.applicationRepository.GetProfilepic(userId);
         }

@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="Image.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace Common.Models
 {
-     public class Label
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
+    public class Label
     {
         /// <summary>
         /// Gets or sets the identifier.

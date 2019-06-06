@@ -51,6 +51,8 @@ namespace FundooApi
 
         public DbSet<NotesLabel> NotesLabels { get; set; }
 
+        public DbSet<Collaborators> Collaborators { get; set; }
+
         /// <summary>
         /// Asynchronously saves all changes made in this context to the database.
         /// </summary>

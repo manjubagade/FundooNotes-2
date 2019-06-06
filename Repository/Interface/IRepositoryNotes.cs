@@ -36,7 +36,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        IList<Notes> ViewNotes(Guid userId);
+        IList<Notes> ViewNotes(string userId);
 
         /// <summary>
         /// Deletes the notes.

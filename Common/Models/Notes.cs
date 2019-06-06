@@ -65,7 +65,7 @@ namespace FundooApi
         /// <value>
         /// The user identifier.
         /// </value>
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the image.
@@ -115,5 +115,21 @@ namespace FundooApi
         /// The reminder.
         /// </value>
         public DateTime Reminder { get; set; }
+
+        ///// <summary>
+        ///// Gets or sets the sender email.
+        ///// </summary>
+        ///// <value>
+        ///// The sender email.
+        ///// </value>
+        //public string SenderEmail { get; set; }
+
+        ///// <summary>
+        ///// Gets or sets the receive email.
+        ///// </summary>
+        ///// <value>
+        ///// The receive email.
+        ///// </value>
+        //public string ReceiveEmail { get; set; }
     }
 }

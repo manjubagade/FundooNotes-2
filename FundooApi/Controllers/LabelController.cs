@@ -13,11 +13,13 @@ namespace FundooApi.Controllers
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
     using Common.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LabelController : ControllerBase
     {
         private readonly ILabel label;

@@ -44,7 +44,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        IList<Notes> AccessNotes(Guid userId);
+        IList<Notes> AccessNotes(string userId);
 
         /// <summary>
         /// Adds the image.

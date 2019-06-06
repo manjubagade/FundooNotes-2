@@ -28,6 +28,8 @@ namespace FundooApi
     using Microsoft.IdentityModel.Tokens;
     using RepositoryLayer.Interface;
     using RepositoryLayer.Services;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     /// <summary>
     /// Startup class
@@ -68,6 +70,17 @@ namespace FundooApi
                 .AddEntityFrameworkStores<RegistrationControl>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Fundoo Notes", Version = "v1" });
+            });
+
+            //// Swagger code for file upload
+            services.ConfigureSwaggerGen(options =>
+            {
+                //// Register File Upload Operation Filter
+                options.OperationFilter<FileUploadOperation>();
+            });
             ////Password Authorization
             services.Configure<IdentityOptions>(options =>
             {
@@ -87,6 +100,8 @@ namespace FundooApi
             services.AddTransient<IEmailSender, EmailSenders>();
             services.AddTransient<ILabel, BusinessLabel>();
             services.AddTransient<IRepositoryLabel, LabelHandler>();
+            services.AddTransient<IRepositoryCollaborators, CollaboratorsHandler>();
+            services.AddTransient<ICollborators, CollaboratorsBusinessLayes>();
          
 
             services.AddDistributedRedisCache(option =>
@@ -125,14 +140,78 @@ namespace FundooApi
         //// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //// Enables use of swagger
+            app.UseSwagger();
+
+            //// Enable generated json document and swagger UI
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundoo");
+            });
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+                if (ctx.Response.StatusCode == 204)
+                {
+                    ctx.Response.ContentLength = 0;
+                }
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("MyPolicy");
-            app.UseMvc();
+            app.UseCors(builder =>
+            builder.WithOrigins(this.Configuration["ApplicationSettings:JWT_Secret"].ToString())
+            .AllowAnyHeader()
+            .AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
+            ////calling use authentication function
+            app.UseAuthentication();
+            app.UseMvc();
         }
+
+        public class SwaggerSecurityRequirementsDocumentFilter : IDocumentFilter
+        {
+            /// <summary>
+            /// Applies the specified document.
+            /// </summary>
+            /// <param name="document">The document.</param>
+            /// <param name="context">The context.</param>
+            public void Apply(SwaggerDocument document, DocumentFilterContext context)
+            {
+                document.Security = new List<System.Collections.Generic.IDictionary<string, IEnumerable<string>>>()
+                   {
+                      new Dictionary<string, IEnumerable<string>>()
+                      {
+                          { "Bearer", new string[] { } },
+                          { "Basic", new string[] { } }
+                      }
+                   };
+            }
+        }
+        public class FileUploadOperation : IOperationFilter
+   {
+       /// <summary>
+       /// Applies the specified operation.
+       /// </summary>
+       /// <param name="operation">The operation.</param>
+       /// <param name="context">The context.</param>
+       public void Apply(Operation operation, OperationFilterContext context)
+       {
+           if (operation.Parameters == null)
+           {
+               operation.Parameters = new List<IParameter>();
+           }
+           //// adding autherization header for api's
+           operation.Parameters.Add(new NonBodyParameter
+           {
+               Name = "Authorization",
+               In = "header",
+               Type = "string",
+               Required = true // set to false if this is optional
+           });}}
+
     }
 }

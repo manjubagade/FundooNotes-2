@@ -40,5 +40,14 @@
         /// </value>
         [ForeignKey("Label")]
         public int LabelId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collaborators identifier.
+        /// </summary>
+        /// <value>
+        /// The collaborators identifier.
+        /// </value>
+        [ForeignKey("Collaboratrors")]
+        public int CollaboratorsId { get; set; }
     }
 }

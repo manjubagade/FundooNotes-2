@@ -68,6 +68,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        string GetProfilepic(string userId);
+        IList<ApplicationUser> GetProfilepic(string userId);
+       
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(RegistrationControl))]
-    [Migration("20190601115135_data")]
-    partial class data
+    [Migration("20190606103438_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,29 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Common.Models.Collaborators", b =>
+                {
+                    b.Property<int>("CollaboratorsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Id");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("ReceiverEmail");
+
+                    b.Property<string>("SenderEmail");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("CollaboratorsId");
+
+                    b.ToTable("Collaborators");
+                });
 
             modelBuilder.Entity("Common.Models.Image", b =>
                 {
@@ -65,6 +88,8 @@ namespace RepositoryLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CollaboratorsId");
+
                     b.Property<int>("LabelId");
 
                     b.Property<int>("NotesId");
@@ -102,7 +127,7 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 

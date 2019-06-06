@@ -19,6 +19,29 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Common.Models.Collaborators", b =>
+                {
+                    b.Property<int>("CollaboratorsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Id");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("ReceiverEmail");
+
+                    b.Property<string>("SenderEmail");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("CollaboratorsId");
+
+                    b.ToTable("Collaborators");
+                });
+
             modelBuilder.Entity("Common.Models.Image", b =>
                 {
                     b.Property<string>("Id")
@@ -63,6 +86,8 @@ namespace RepositoryLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CollaboratorsId");
+
                     b.Property<int>("LabelId");
 
                     b.Property<int>("NotesId");
@@ -100,7 +125,7 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
