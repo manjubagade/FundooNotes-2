@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../../services/NoteService/note.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-trash',
@@ -16,8 +17,9 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
     this.id = localStorage.getItem("UserId")
     console.log("ssssss0"+this.id);
-    
-    this.notesService.ViewInTrash(this.id).subscribe(
+    var t=localStorage.getItem('token');
+  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+    this.notesService.ViewInTrash(this.id,headers_object).subscribe(
       (data: any) => {
         console.log(data);
         this.notes = data['result']

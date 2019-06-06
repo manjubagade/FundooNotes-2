@@ -11,6 +11,7 @@ import { EventEmitter } from 'events';
 import { Title } from '@angular/platform-browser';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 import { HomeComponent } from '../home/home.component';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-notes',
@@ -21,14 +22,24 @@ export class NotesComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl(),
     Description: new FormControl(),
-
+    
   });
-  constructor(private router: Router, public service: NoteService, private toastr: ToastrService,private home:HomeComponent) {
+  constructor(private router: Router, public service: NoteService, private toastr: ToastrService, private home: HomeComponent) {
   }
   color;
+  image;
   @Input() cards;
-  @Output() public notes=new EventEmitter();
+  @Output() public notes = new EventEmitter();
   ngOnInit() {
+    var t = localStorage.getItem('token');
+
+    var headers_object = new HttpHeaders();
+    headers_object.append('Content-Type', 'application/json');
+    headers_object.append("Authorization", "Bearer " + t);
+
+    const httpOptions = {
+      headers: headers_object
+    };
   }
 
   AddNotes() {
@@ -39,13 +50,16 @@ export class NotesComponent implements OnInit {
       console.log(jwt_token.UserID);
       localStorage.setItem("UserId", jwt_token.UserID);
       var UserId = localStorage.getItem("UserId");
-        console.log("qqqqqqqqqqq"+this.form.value.title.trim());
+      console.log("qqqqqqqqqqq" + this.form.value.title.trim());
 
-        if((this.form.value.title.trim()!== '' ) || (this.form.value.Description.trim()!=='')){
-        this.service.AddNotes(this.form.value, UserId).subscribe(
+      var t=localStorage.getItem('token');
+  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+      if ((this.form.value.title.trim() !== '') || (this.form.value.Description.trim() !== '')) {
+        this.service.AddNotes(this.form.value, UserId,headers_object).subscribe(
           (res: any) => {
-            
+           
             this.router.navigateByUrl('/home');
+          //  this.notes.emit(this.notes);
           },
           err => {
             if (err.status == 400)
@@ -54,29 +68,15 @@ export class NotesComponent implements OnInit {
               console.log(err);
           }
         );
-        }
-        else{
-           this.home.refresh();
-        }
       }
-    
+      else {
+        this.home.refresh();
+      }
+    }
+
     catch (error) {
       console.log('invalid token format', error);
     }
-   
-    // var textarea = document.querySelector('textarea');
-
-    // textarea.addEventListener('keydown', autosize);
-
-    // function autosize() {
-    //   var el = this;
-    //   setTimeout(function () {
-    //     el.style.cssText = 'height:auto; padding:0';
-    //     // for box-sizing other than "content-box" use:
-    //     // el.style.cssText = '-moz-box-sizing:content-box';
-    //     el.style.cssText = 'height:' + el.scrollHeight + 'px';
-    //   }, 0);
-    // }
 
   }
 

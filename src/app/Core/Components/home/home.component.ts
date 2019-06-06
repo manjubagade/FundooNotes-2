@@ -5,7 +5,7 @@ import { Services } from '@angular/core/src/view';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 import { first } from 'rxjs/internal/operators/first';
-import { HttpBackend, HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatSidenav } from '@angular/material';
 import { EditComponent } from '../edit/edit.component';
 import { LabelComponent } from '../label/label.component';
@@ -24,12 +24,15 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   view: boolean = true;
-
+ search:any;
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   spinner: any;
 
   Header = 'FundooNotes';
+  user = localStorage.getItem('user');
+  profilePic = localStorage.getItem('profilePic');
+
 
   constructor(public dataService: DataService, private http: HttpClient, private router: Router, spinner: NgxSpinnerService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public userService: UserService, public service: NoteService, public dialog: MatDialog, private toastr: ToastrService) {
 
@@ -41,42 +44,57 @@ export class HomeComponent implements OnInit {
 
   @Input() cards;
   UserId = localStorage.getItem('token');
+  Email = localStorage.getItem('Email')
   Label;
   result;
+  message: boolean;
   userId;
   data: {
     result,
     id
   }
   ngOnInit() {
+
     var token = localStorage.getItem('token');
     var jwt_token = jwt_decode(token);
-    var UserId= jwt_token.UserID;
-    localStorage.setItem('UserId',UserId);
-    console.log("In Home UserId"+UserId)
-    this.Label = this.Label;
-  //  console.log("In Home Components Notes"+this.Label);
-
-    
-    var ProfileUrl = localStorage.getItem("profilePic");
-    console.log("9999999900000000" + ProfileUrl, UserId);
-   console.log(UserId);
-
+    var UserId = jwt_token.UserID;
+    localStorage.setItem('UserId', UserId);
+    this.dataService.currentMessage.subscribe(message => this.message = message);
     this.userService.getUserProfile(UserId).subscribe(data => {
-      var Profilepic = data['result'];
-      localStorage.setItem('profilePic', Profilepic);
-      console.log("        "+Profilepic,UserId);
-      
-    }, err => {
-      console.log(err);
-    });
+      console.log(data);
+
+     var user = data['result'][0].fullName;
+     var Email = data['result'][0].email;
+
+
+     localStorage.setItem('user', user);
+     localStorage.setItem('Email', data['result'][0].email);
+     localStorage.setItem('profilePic', data['result'][0].image);
+
+     localStorage.removeItem(user);
+     localStorage.removeItem(Email);
+     localStorage.removeItem(user);
+   }, err => {
+     console.log(err);
+   });
+
+   
+    console.log("In Home UserId" + UserId)
+    this.Label = this.Label;
+
+    var ProfileUrl = localStorage.getItem("profilePic");
+    var user = localStorage.getItem('user');
+    console.log("9999999900000000" + ProfileUrl, user, UserId);
+    console.log(UserId);
+
+   
 
 
     this.service.getLabelsById(UserId).subscribe(
       data => {
         this.Label = data;
         var Abc = this.Label;
-        
+
       }
 
     ), (err: any) => {
@@ -88,6 +106,8 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('UserId');
     localStorage.removeItem('profilePic');
+    localStorage.removeItem('user');
+    localStorage.removeItem('Email');
     alert("successfully logout");
     this.router.navigate(['/user/login']);
   }
@@ -143,18 +163,23 @@ export class HomeComponent implements OnInit {
       return
     }
 
-    console.log("event",event);
-    
+    console.log("event", event);
+
     let fileToUpload = <File>files[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    // var id=this.cards.id;
-    this.http.post(environment.BaseURI + '/User/profilepic/' + UserId, formData, { reportProgress: true, observe: 'events' })
-      .subscribe(data => {
+    var t=localStorage.getItem('token');
+    var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+    this.userService.AddProfile(UserId,formData,t).subscribe(data=>{
+      console.log("Image ew=" + data['result']);
+       console.log("Image Im=" + data['Image']);
+    })
+    // this.http.post(environment.BaseURI + '/User/profilepic/' + UserId, formData,)
+    //   .subscribe(data => {
 
-        console.log("Image ew=" + data['result']);
-        console.log("Image Im=" + data['Image']);
+    //     console.log("Image ew=" + data['result']);
+    //     console.log("Image Im=" + data['Image']);
 
-      });
+    //   });
   }
 }

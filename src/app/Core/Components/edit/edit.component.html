@@ -3,17 +3,19 @@
   <div>
     <div>
       <img src="{{note.image}}" class="notesImage" />
-      <div>
+      <div *ngIf="note.image != null">
         <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlexOffset='90%'
           (click)=Update()>
+
           <mat-icon>delete</mat-icon>
+
         </button>
       </div>
     </div>
 
     <div>
-        <input [(ngModel)]='note.title' type="text" placeholder="Title"
-        aria-label="Take a note" style="width: 560px; outline: none;border:none;background: transparent;overflow:hidden" fxLayout="row">
+      <input [(ngModel)]='note.title' type="text" placeholder="Title" aria-label="Take a note"
+        style="width: 560px; outline: none;border:none;background: transparent;overflow:hidden" fxLayout="row">
 
       <!-- <textarea style="width: 560px; outline: none;border:none;background: transparent; overflow: hidden;"
         [mat-autosize] [(ngModel)]='note.title'></textarea> -->
@@ -24,13 +26,19 @@
         [mat-autosize] [(ngModel)]='note.description'></textarea>
     </div>
     <div>
-        <div *ngIf="note.label!==null">
-      <mat-chip-list>
-        <mat-chip>{{note.label}}</mat-chip>
-      </mat-chip-list>
+      <div *ngIf="note.label!==null">
+        <mat-chip-list>
+          <mat-chip>{{note.label}}</mat-chip>
+        </mat-chip-list>
       </div>
     </div>
   </div>
-  <app-icon [cards]="note"></app-icon>
-  <button mat-button (click)="Update()" class="Closebutton">close</button>
+
+  <div fxLayout="row" [ngStyle]="{'width':'225px'}">
+    <app-icon [cards]="note"></app-icon>
+    <div fxFlexOffset='80' fxFlex="row" fxFlexOffset.md='50' fxFlexOffset.sm='30' fxFlexOffset.xs='22'>
+      <button mat-button (click)="isOpen=false" (click)="Update()">Close</button>
+    </div>
+  </div>
+  <!-- <button mat-button (click)="Update()" class="Closebutton">close</button> -->
 </mat-card>

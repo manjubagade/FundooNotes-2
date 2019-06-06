@@ -1,10 +1,10 @@
 <div *ngIf="trashed != 'IsTrash'">
-      <!-- class="hower" style="opacity: 0" -->
+
       <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
       </button>
 
-      <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
+      <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20' (click)="openDialog(cards)">
 
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
       </button>

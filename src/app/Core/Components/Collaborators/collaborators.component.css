@@ -1,0 +1,13 @@
+.devider{
+    top:10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1px;
+    background-color:rgba(0,0,0,.28);
+    opacity: 0.5;
+  }
+  .togle{
+      outline: none;
+      border: none;
+  }

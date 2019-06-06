@@ -16,6 +16,7 @@ import { DisplayNotesComponent } from './Core/Components/display-notes/display-n
 import { IconComponent } from './Core/Components/icon/icon.component';
 import { EditComponent } from './Core/Components/edit/edit.component';
 import { LabelComponent } from './Core/Components/label/label.component';
+import { CollaboratorsComponent } from './Core/Components/Collaborators/collaborators.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -59,6 +60,10 @@ const routes: Routes = [
 {
   path:'icon',
   component:IconComponent
+},
+{
+  path:'collaborator',
+  component:CollaboratorsComponent
 },
 
 ]

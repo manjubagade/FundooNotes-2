@@ -1,34 +1,42 @@
 <mat-card class="front" style="width: 400px; height:auto;margin-top:25px;" fxFlex="row">
   <div fxLayoutAlign='center center'>
-    <img src="./assets/festisite_google.png" style="width: 100px" >
+    <img src="./assets/festisite_google.png" style="width: 100px">
   </div>
-    <mat-label fxLayoutAlign='center center'><h5>Sign in</h5></mat-label>
-    <mat-label fxLayoutAlign='center center'><h6>with your Fundoo Account</h6></mat-label><br>
-<form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
-  <div class="form-group">
-    <label>Email</label>
-    <input class="form-control" #Email="ngModel" name="Email" placeholder="Email" [(ngModel)]="formModel.Email" required>
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" #Password="ngModel" name="Password" placeholder="Password" [(ngModel)]="formModel.Password" required>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-8 offset-md-2">
-      <button type="submit" class="button btn-lg btn-block" [disabled]="form.invalid">Login</button>
+  <mat-label fxLayoutAlign='center center'>
+    <h5>Sign in</h5>
+  </mat-label>
+  <mat-label fxLayoutAlign='center center'>
+    <h6>with your Fundoo Account</h6>
+  </mat-label><br>
+  <form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" #Email="ngModel" name="Email" placeholder="Email" [(ngModel)]="formModel.Email"
+        required>
     </div>
-  </div>
-    <div>
-    <small >
-        <h6 routerLink='/user/forgot-password' fxLayout="row" fxLayoutAlign="start center" routerLinkActive='active'>Reset Password</h6>
-       </small>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" #Password="ngModel" name="Password" placeholder="Password"
+        [(ngModel)]="formModel.Password" required>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" class="button btn-lg btn-block" [disabled]="form.invalid">Login</button>
       </div>
-       <br/>
-       <div>
-       <small>
-          <h6 routerLink='/user/registration' fxLayout="row" fxLayoutAlign="start center" routerLinkActive='active'>Create account</h6>
-         </small>
-        </div>
-  
-</form>
+    </div>
+    <div>
+      <small>
+        <h6 routerLink='/user/forgot-password' fxLayout="row" fxLayoutAlign="start center" routerLinkActive='active'>
+          Reset Password</h6>
+      </small>
+    </div>
+    <br />
+    <div>
+      <small>
+        <h6 routerLink='/user/registration' fxLayout="row" fxLayoutAlign="start center" routerLinkActive='active'>Create
+          account</h6>
+      </small>
+    </div>
+
+  </form>
 </mat-card>

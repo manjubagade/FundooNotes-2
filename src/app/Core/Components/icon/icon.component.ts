@@ -1,21 +1,27 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import {  MatDialogRef, MAT_DIALOG_DATA, mixinColor } from '@angular/material';
+import {  MatDialogRef, MAT_DIALOG_DATA, mixinColor, MatDialog } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CollaboratorsComponent } from '../Collaborators/collaborators.component';
+import { EditComponent } from '../edit/edit.component';
 
+var t=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
 
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.css']
+  
 })
 export class IconComponent implements OnInit {
   public progress: number;
   public message: string;
   Label;
+  Email;
  flag=true
   @Output() public onUploadFinished = new EventEmitter();
   @Output() public setColor=new EventEmitter();
@@ -27,15 +33,17 @@ trash: boolean = true;
 archive: boolean = true;
 unarchive: boolean = true;
 
-  constructor(private route:Router,private service:NoteService,private http:HttpClient) { 
+  constructor(private route:Router,private service:NoteService,private http:HttpClient,public dialog: MatDialog) { 
     this.Label = this.Label;
     console.log("gjhgj"+this.Label);
   }
   @Input() cards;
  
    color;
+
   ngOnInit() {
     console.log("In Icon Components"+this.cards);
+    console.log("Trash="+this.trashed);
     
     
     var UserID=localStorage.getItem('UserId');
@@ -160,7 +168,7 @@ checkBox(label){
   console.log(this.cards.id)
   console.log("After Check"+this.Label.labels);
  
-  this.service.UpdateNotes(this.cards,this.cards.id).subscribe(
+  this.service.UpdateNotes(this.cards,this.cards.id,headers_object).subscribe(
     (res: any) => {
     //  console.log("In Icon="+UserId,this.Label)
     },
@@ -171,5 +179,34 @@ checkBox(label){
     //     console.log(err);
     // }
   );
+  }
+  openDialog(cards) {
+     Email:localStorage.getItem('Email');
+     console.log(cards);
+     
+    // const dialogRef = this.dialog.open(EditNotes);
+    const dialogRef = this.dialog.open(CollaboratorsComponent,
+      {
+       data:cards
+        
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'change') {
+        console.log("take action here");
+      }
+      else {
+        console.log("execute");
+        // console.log(note);
+
+        // console.log(note.id);
+        this.service.UpdateNotes(this.Email,this.Email,headers_object).subscribe(data => {
+          console.log(data);
+          // this.Delete.emit({});
+        }, err => {
+          console.log(err);
+        })
+      }
+    })
   }
 }

@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { NoteService } from '../../services/NoteService/note.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { HttpHeaders } from '@angular/common/http';
+
+
+var t=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
 
 @Component({
   selector: 'app-label',
@@ -39,7 +44,7 @@ export class LabelComponent implements OnInit {
     }
     console.log(">>>>>>>>>>>>>>>>>>>>>>rr",Abc);
     console.log("In LAbel Component" ,Label);
-    this.service.UpdateLabel(Abc,Label.id).subscribe(data=>{
+    this.service.UpdateLabel(Abc,Label.id,headers_object).subscribe(data=>{
 
     })
   }
@@ -47,23 +52,19 @@ export class LabelComponent implements OnInit {
     console.log(Label);
     var last = Label.length-1;
     console.log(last);
-    console.log(Label[2]);
-    console.log(Label[2].id);
-    
-    
     console.log("Last"+Label[last]);
     console.log("pppppp"+this.Label);
     
     // console.log(">>>>>>>>>>>>>>>>>>>>>>rr",Abc);
     // console.log("In LAbel Component" ,Label);
-    this.service.UpdateLabel(Label[last],Label[2].id).subscribe(data=>{
+    this.service.UpdateLabel(Label[last],Label[2].id,headers_object).subscribe(data=>{
       this.dialog.close();
     })
   }
 
   DeleteLabel(id){
     console.log("?????In LAbel Component" ,id);
-    this.service.deleteLabel(id).subscribe(data=>{
+    this.service.deleteLabel(id,headers_object).subscribe(data=>{
       console.log(data);
     });
   }

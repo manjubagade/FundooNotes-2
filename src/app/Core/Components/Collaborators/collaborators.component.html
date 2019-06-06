@@ -1,0 +1,23 @@
+<h5 [ngStyle]="{'color':'black'}">Collaborators<br></h5>
+<div class="devider"></div>
+<br>
+<div>
+  <button class="togle" mat-mini-fab color="white"
+    [ngStyle]="{'background-image': 'url(' + profilePic + ')', 'background-size': 'cover'  }"></button>
+  <div [ngStyle]="{'font-size':'15px' ,'color':'black'} ">{{user}}</div>(Owner)
+
+  <div fxFlexOffset="-39" [ngStyle]="{'font-size':'15px' ,'color':'gray'} "><br>{{Email}}<br></div>
+</div>
+
+<button class="togle" mat-mini-fab color="white">
+  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+</button>
+
+<input class="togle" type="text" [(ngModel)]='AddPerson' placeholder=" Person or Email to Share"><br><br>
+
+<div class="devider"></div>
+
+<div fxLayout='row' fxLayoutAlign='end center' style="background-color: rgb(247, 243, 243)">
+  <button mat-button (click)="Cancle()" class="Closebutton">Cancle</button>
+  <button mat-button (click)="Update(AddPerson)" class="Closebutton">Save</button>
+</div>

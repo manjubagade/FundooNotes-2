@@ -9,6 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class DataService {
+  private searchMessage = new BehaviorSubject<string>('');
+  currentSearchmsg = this.searchMessage.asObservable();
 
   private messageSource = new BehaviorSubject(true);
   currentMessage = this.messageSource.asObservable();
@@ -18,6 +20,9 @@ export class DataService {
   changeMessage(current:boolean){
   this.messageSource.next(current);
   }
-  // change(msg:any){
-  //   this.msg.next(msg);
+  changeSearchMsg(view: string){
+    console.log("in dataService search",view);
+this.searchMessage.next(view);
+
   }
+}

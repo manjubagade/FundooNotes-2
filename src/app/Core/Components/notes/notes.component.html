@@ -11,15 +11,15 @@
       <div *ngIf=isOpen class="card">
         <div class="cards">
           <input class="take_a_note" formControlName="title" type="text" placeholder="Title" aria-label="Take a note"
-            style="width: 560px; outline: none;border:none;overflow:hidden" fxLayout="row" [ngStyle.xs]="{'width.px': 100 }" [ngStyle.sm]="{'width.px': 100 }"
-            [ngStyle.md]="{'width.px': 100 }">
+            style="width: 560px; outline: none;border:none;overflow:hidden" fxLayout="row"
+            [ngStyle.xs]="{'width.px': 100 }" [ngStyle.sm]="{'width.px': 100 }" [ngStyle.md]="{'width.px': 100 }">
 
-          <textarea formControlName="Description" placeholder="Take a note..." fxLayout="row" [ngStyle.xs]="{'width.px': 100 }" [ngStyle.sm]="{'width.px': 100 }"
-          [ngStyle.md]="{'width.px': 100 }" style="width: 560px; outline: none; overflow: hidden; border:none"
-             [mat-autosize] autofocus></textarea>
-             <!--  -->
+          <textarea formControlName="Description" placeholder="Take a note..." fxLayout="row"
+            [ngStyle.xs]="{'width.px': 100 }" [ngStyle.sm]="{'width.px': 100 }" [ngStyle.md]="{'width.px': 100 }"
+            style="width: 560px; outline: none; overflow: hidden; border:none" [mat-autosize] autofocus></textarea>
+          <!--  -->
         </div>
-        <div fxLayout="row" [ngStyle]="{'width':'225px'}" >
+        <div fxLayout="row" [ngStyle]="{'width':'225px'}">
           <app-icon></app-icon>
           <div fxFlexOffset='80' fxFlex="row" fxFlexOffset.md='50' fxFlexOffset.sm='30' fxFlexOffset.xs='22'>
             <button mat-button (click)="isOpen=false" (click)="AddNotes()">Close</button>

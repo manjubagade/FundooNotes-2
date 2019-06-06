@@ -59,8 +59,8 @@ export class UserService {
     return this.http.post(environment.BaseURI + '/User/login', formData);
   }
 
-  AddProfile(){
-    return this.http.post(environment.BaseURI + '/User/profilepic','');
+  AddProfile(UserId, formData,t){
+    return this.http.post(environment.BaseURI + '/User/profilepic/'+UserId, formData);
   }
   
   getUserProfile(id) {

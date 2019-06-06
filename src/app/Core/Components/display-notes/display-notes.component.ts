@@ -12,8 +12,11 @@ import { DataService } from '../../services/DataService/data.service';
 import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 
+var t=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
 
 @Component({
   selector: 'app-display-notes',
@@ -25,6 +28,7 @@ export class DisplayNotesComponent implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
+  pipe;
   addOnBlur = true;
   separatorKeysCodes = [ENTER, COMMA];
   
@@ -33,22 +37,25 @@ export class DisplayNotesComponent implements OnInit {
 
   }
   grid;
+  @Input() search;
   @Input() cards;
   @Input() archived;
-@Input() trash;
-@Output() messageEvent = new EventEmitter<any>();
+  @Input() trash;
+  @Output() messageEvent = new EventEmitter<any>();
 
   flag = true;
   unrchive: boolean;
   archive: boolean;
- trashNote: boolean;
+  trashNote: boolean;
   css = 'row wrap'
   ngOnInit() {
     console.log("***********"+this.cards);
+  
+  
     
     var Profilepic = localStorage.getItem("profilePic");
     console.log("Display Profile pic", Profilepic);
-
+    var UserId=localStorage.getItem('UserId');
     var profile = localStorage.getItem('profilePic');
 
     this.dataService.currentMessage.subscribe(data => {
@@ -58,9 +65,16 @@ export class DisplayNotesComponent implements OnInit {
       this.css = data ? 'row wrap' : 'column'
 
       this.flag = data;
+      
+      
     });
+    // this.service.ViewCollaborators(UserId).subscribe(data=>{
+    // console.log(data);
+
+    // })
 
   }
+
 
   openDialog(note) {
     console.log(note);
@@ -79,7 +93,8 @@ export class DisplayNotesComponent implements OnInit {
         console.log(note);
 
         console.log(note.id);
-        this.service.UpdateNotes(note, note.id).subscribe(data => {
+        
+        this.service.UpdateNotes(note, note.id,headers_object).subscribe(data => {
           console.log(data);
           // this.Delete.emit({});
         }, err => {
@@ -104,9 +119,10 @@ export class DisplayNotesComponent implements OnInit {
 
 }
   remove(note, id) {
+    
     note.label = null;
     console.log("00000000000" + note.label, id);
-    this.service.UpdateNotes(note, id).subscribe(data => {
+    this.service.UpdateNotes(note, id,headers_object).subscribe(data => {
       console.log("88888888" + note, id)
     })
   }
