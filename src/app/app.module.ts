@@ -39,9 +39,27 @@ import { LabelComponent } from './Core/Components/label/label.component';
 import { PipePipe } from './Core/Pipe/pipe.pipe';
 import { CollaboratorsComponent } from './Core/Components/Collaborators/collaborators.component';
 import { SearchComponent } from './Core/Components/search/search.component';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from 'angular-6-social-login';
 
-
-
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("558981037962992")
+  }
+]);
+ 
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -78,7 +96,7 @@ import { SearchComponent } from './Core/Components/search/search.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    
+    SocialLoginModule,
     MatSelectModule,
     MatTabsModule,
     MatInputModule,
@@ -106,7 +124,12 @@ import { SearchComponent } from './Core/Components/search/search.component';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+  {
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

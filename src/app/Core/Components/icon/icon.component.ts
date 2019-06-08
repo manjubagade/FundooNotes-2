@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 import { CollaboratorsComponent } from '../Collaborators/collaborators.component';
 import { EditComponent } from '../edit/edit.component';
 
-var t=localStorage.getItem('token');
-var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+var token=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 
 @Component({
   selector: 'app-icon',
@@ -25,6 +25,7 @@ export class IconComponent implements OnInit {
  flag=true
   @Output() public onUploadFinished = new EventEmitter();
   @Output() public setColor=new EventEmitter();
+  
   @Input() archivedicon
   @Input() trashed
   @Output() setNote = new EventEmitter();
@@ -48,7 +49,7 @@ unarchive: boolean = true;
     
     var UserID=localStorage.getItem('UserId');
     
-    this.service.getLabelsById(UserID).subscribe(
+    this.service.getLabelsById(UserID,headers_object).subscribe(
       data => {
         this.Label = data;
       }
@@ -80,25 +81,20 @@ public uploadFile = (files) => {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     var id=this.cards.id;
-    this.http.post(environment.BaseURI+'/Notes/image/'+id, formData, {reportProgress: true, observe: 'events'})
-    .subscribe(event => {
-      console.log(formData);
-      
-      if (event.type === HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.total);
-      else if (event.type === HttpEventType.Response) {
-        this.message = 'Upload success.';
-        this.onUploadFinished.emit(event.body);
-      }
-    });
+    this.service.AddImage(id, formData).subscribe(data=>{
+      this.setColor.emit(this.uploadFile);
+     console.log(data);
+    })
+    
+    
   }
   
   setcolor(color,cards)
 {
   this.cards.color=color;
-  
-this.service.SetColor(this.cards,this.cards.id).subscribe(data =>{
+this.service.UpdateNotes(this.cards.id,this.cards,headers_object).subscribe(data =>{
 this.setColor.emit(this.setcolor);
+
 },err =>{
 console.log(err);
 })
@@ -107,7 +103,7 @@ console.log(err);
 Archive(card) {
   card.IsArchive = true;
   console.log(card)
-  this.service.ArchiveNote(card.id, card).subscribe(
+  this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
       this.setNote.emit(this.archive)
@@ -122,7 +118,7 @@ Archive(card) {
  */
 Unarchive(card) {
   card.isArchive = false;
-  this.service.ArchiveNote(card.id, card).subscribe(
+  this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
       this.setNote.emit(this.unarchive)
@@ -139,7 +135,7 @@ Unarchive(card) {
 TrashNote(card) {
   console.log(card,card.id);
   card.isTrash = true;
-  this.service.Trash(card.id, card).subscribe(
+  this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
       this.setNote.emit(this.TrashNote)
@@ -155,9 +151,11 @@ TrashNote(card) {
 Restore(card) {
   console.log(card);
   card.isTrash = false;
-  this.service.Trash(card.id, card).subscribe(
+  this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
+      this.setNote.emit(this.Restore);
+      
     },
     err => { console.log(err); }
   )
@@ -168,7 +166,7 @@ checkBox(label){
   console.log(this.cards.id)
   console.log("After Check"+this.Label.labels);
  
-  this.service.UpdateNotes(this.cards,this.cards.id,headers_object).subscribe(
+  this.service.UpdateNotes(this.cards.id,this.cards,headers_object).subscribe(
     (res: any) => {
     //  console.log("In Icon="+UserId,this.Label)
     },

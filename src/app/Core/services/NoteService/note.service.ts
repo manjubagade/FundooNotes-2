@@ -29,17 +29,9 @@ export class NoteService {
     return this.http.get(environment.BaseURI + '/Notes/view/' + UserId,t);
   }
 
-  UpdateNotes(note, id,headers_object) {
-    console.log("In Service Update 55555" + note, id);
+  UpdateNotes(id, note,headers_object) {
+    console.log("In Service Update 55555 " + id, note);
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, note,headers_object);
-  }
-
-  Trash(id, card) {
-    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
-  }
-
-  ArchiveNote(id, card) {
-    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
   }
 
   GetArchiveNotes(UserId) {
@@ -55,9 +47,10 @@ export class NoteService {
     return this.http.delete(environment.BaseURI + '/Notes/delete/' + id);
   }
 
-  // UploadImage(formData){
-  // console.log("In Service UploadImage"+formData);
-  // }
+  AddImage(id, formData){
+  return this.http.post(environment.BaseURI+'/Notes/image/'+id, formData);
+}
+
   AddLabel(label) {
     console.log("In Service AddLabel fvgggfvvvvvvvvvvvvvvvvv" + label);
     return this.http.post(environment.BaseURI+ '/Label/add',label);
@@ -67,12 +60,9 @@ UpdateLabel(label,UserId,headers_object){
   console.log("In Service UpdateLabel +++++++++" + label,UserId);
   return this.http.put(environment.BaseURI+ '/Label/updateLabel/'+UserId,label,headers_object);
 }
-  SetColor(card, id) {
-    console.log("In Service" + id, card);
-    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, card)
-  }
-  getLabelsById(UserId: string){
-    return this.http.get(environment.BaseURI + '/Label/viewLabel/' + UserId);
+ 
+  getLabelsById(UserId: string,headers_object){
+    return this.http.get(environment.BaseURI + '/Label/viewLabel/' + UserId,headers_object);
   }
   deleteLabel(id,headers_object){
     console.log("................"+id);
@@ -85,7 +75,7 @@ UpdateLabel(label,UserId,headers_object){
     return this.http.post(environment.BaseURI+ '/Collaborators/addCollaborators',data);
 
   }
-  ViewCollaborators(UserId) {
-    return this.http.get(environment.BaseURI + '/Collaborators/viewcollaborators/' + UserId);
+  ViewCollaborators(UserId,headers_object) {
+    return this.http.get(environment.BaseURI + '/Collaborators/viewcollaborators/' + UserId,headers_object);
 }
 }

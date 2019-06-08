@@ -15,8 +15,8 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 
-var t=localStorage.getItem('token');
-var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+var token=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 
 @Component({
   selector: 'app-display-notes',
@@ -42,7 +42,7 @@ export class DisplayNotesComponent implements OnInit {
   @Input() archived;
   @Input() trash;
   @Output() messageEvent = new EventEmitter<any>();
-
+abc;
   flag = true;
   unrchive: boolean;
   archive: boolean;
@@ -68,10 +68,12 @@ export class DisplayNotesComponent implements OnInit {
       
       
     });
-    // this.service.ViewCollaborators(UserId).subscribe(data=>{
-    // console.log(data);
 
-    // })
+    this.service.ViewCollaborators(UserId,headers_object).subscribe(data=>{
+      console.log(data);
+      this.abc=data;
+    })
+    
 
   }
 

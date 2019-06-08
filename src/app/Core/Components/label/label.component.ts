@@ -4,8 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpHeaders } from '@angular/common/http';
 
 
-var t=localStorage.getItem('token');
-var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+var token=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 
 @Component({
   selector: 'app-label',

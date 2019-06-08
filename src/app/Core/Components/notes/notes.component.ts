@@ -23,6 +23,7 @@ export class NotesComponent implements OnInit {
     title: new FormControl(),
     Description: new FormControl(),
     
+    
   });
   constructor(private router: Router, public service: NoteService, private toastr: ToastrService, private home: HomeComponent) {
   }
@@ -31,11 +32,11 @@ export class NotesComponent implements OnInit {
   @Input() cards;
   @Output() public notes = new EventEmitter();
   ngOnInit() {
-    var t = localStorage.getItem('token');
+    var token = localStorage.getItem('token');
 
     var headers_object = new HttpHeaders();
     headers_object.append('Content-Type', 'application/json');
-    headers_object.append("Authorization", "Bearer " + t);
+    headers_object.append("Authorization", "Bearer " + token);
 
     const httpOptions = {
       headers: headers_object
@@ -52,14 +53,16 @@ export class NotesComponent implements OnInit {
       var UserId = localStorage.getItem("UserId");
       console.log("qqqqqqqqqqq" + this.form.value.title.trim());
 
-      var t=localStorage.getItem('token');
-  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+      var token=localStorage.getItem('token');
+      var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
+
       if ((this.form.value.title.trim() !== '') || (this.form.value.Description.trim() !== '')) {
         this.service.AddNotes(this.form.value, UserId,headers_object).subscribe(
           (res: any) => {
            
             this.router.navigateByUrl('/home');
-          //  this.notes.emit(this.notes);
+            this.notes.emit(res);
+            
           },
           err => {
             if (err.status == 400)
@@ -77,7 +80,5 @@ export class NotesComponent implements OnInit {
     catch (error) {
       console.log('invalid token format', error);
     }
-
   }
-
 }

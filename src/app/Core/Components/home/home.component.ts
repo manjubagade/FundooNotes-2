@@ -16,6 +16,8 @@ import { DataService } from '../../services/DataService/data.service';
 import * as jwt_decode from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 
+var token=localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -58,9 +60,11 @@ export class HomeComponent implements OnInit {
     var token = localStorage.getItem('token');
     var jwt_token = jwt_decode(token);
     var UserId = jwt_token.UserID;
+    console.log(UserId);
+    
     localStorage.setItem('UserId', UserId);
     this.dataService.currentMessage.subscribe(message => this.message = message);
-    this.userService.getUserProfile(UserId).subscribe(data => {
+    this.userService.getUserProfile(UserId,headers_object).subscribe(data => {
       console.log(data);
 
      var user = data['result'][0].fullName;
@@ -90,7 +94,7 @@ export class HomeComponent implements OnInit {
    
 
 
-    this.service.getLabelsById(UserId).subscribe(
+    this.service.getLabelsById(UserId,headers_object).subscribe(
       data => {
         this.Label = data;
         var Abc = this.Label;
@@ -171,8 +175,8 @@ export class HomeComponent implements OnInit {
     var t=localStorage.getItem('token');
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
     this.userService.AddProfile(UserId,formData,t).subscribe(data=>{
-      console.log("Image ew=" + data['result']);
-       console.log("Image Im=" + data['Image']);
+   console.log("Image ew=" + data['result']);
+   console.log("Image Im=" + data['Image']);
     })
     // this.http.post(environment.BaseURI + '/User/profilepic/' + UserId, formData,)
     //   .subscribe(data => {

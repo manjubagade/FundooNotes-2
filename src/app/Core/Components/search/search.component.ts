@@ -27,10 +27,10 @@ export class SearchComponent implements OnInit {
 this.getallCards();
   }
 getallCards(){
-  var t=localStorage.getItem('token');
-  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+  var token=localStorage.getItem('token');
+  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 
-  this.notesService.getNotesById(this.userId,t).subscribe(data =>{
+  this.notesService.getNotesById(this.userId,headers_object).subscribe(data =>{
     this.noteCards=[];
     console.log(data);
     this.SearchCard=data;

@@ -17,8 +17,8 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
     this.id = localStorage.getItem("UserId")
     console.log("ssssss0"+this.id);
-    var t=localStorage.getItem('token');
-  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+    var token=localStorage.getItem('token');
+  var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     this.notesService.ViewInTrash(this.id,headers_object).subscribe(
       (data: any) => {
         console.log(data);

@@ -22,7 +22,7 @@ export class DataService {
   }
   changeSearchMsg(view: string){
     console.log("in dataService search",view);
-this.searchMessage.next(view);
+    this.searchMessage.next(view);
 
   }
 }

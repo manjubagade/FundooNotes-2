@@ -55,19 +55,18 @@ export class UserService {
     return this.http.post(environment.BaseURI + '/User/resetPassword', formData);
   }
 
-  login(formData) {
-    return this.http.post(environment.BaseURI + '/User/login', formData);
+  login(formData,FbStatus) {
+    console.log(formData,FbStatus);
+    return this.http.post(environment.BaseURI + '/User/login', formData,FbStatus);
   }
 
-  AddProfile(UserId, formData,t){
-    return this.http.post(environment.BaseURI + '/User/profilepic/'+UserId, formData);
+  AddProfile(UserId, formData,headers_object){
+    return this.http.post(environment.BaseURI + '/User/profilepic/'+UserId, formData,headers_object);
   }
   
-  getUserProfile(id) {
-    
-    return this.http.get(environment.BaseURI+'/User/getprofilepic/'+id);
-   // var tokenHeader=new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
-  //  return this.http.get(environment.BaseURI + '/UserProfile',{headers:tokenHeader});
+
+  getUserProfile(id,headers_object) {
+    return this.http.get(environment.BaseURI+'/User/getprofilepic/'+id,headers_object);
   }
 
 }
