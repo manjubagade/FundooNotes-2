@@ -13,7 +13,7 @@ namespace RepositoryLayer.Interface
 
         Task<int> SaveChangesAsync();
         
-        IList<CollaboratorMap> ViewCollaborators(Guid userId);
+        IList<CollaboratorMap> ViewCollaborators(string userId);
         
         Task<int> DeleteCollaborators(int id);
        

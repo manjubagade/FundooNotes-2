@@ -36,5 +36,7 @@ namespace FundooApi
         [Required]
         [MinLength(5)]
         public string Password { get; set; }
+
+        public string FbStatus { get; set; }
     }
 }

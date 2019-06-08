@@ -32,7 +32,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="loginControlmodel">The login controlmodel.</param>
         /// <returns></returns>
-        Task<string> Login(LoginControl loginControlmodel);
+        Task<string> Login(LoginControl loginControlmodel, string FbStatus);
 
         /// <summary>
         /// Finds the by email asynchronous.

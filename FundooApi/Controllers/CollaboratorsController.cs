@@ -93,7 +93,7 @@ using Microsoft.AspNetCore.Mvc;
 
         [HttpGet]
         [Route("viewcollaborators/{UserId}")]
-        public IActionResult ViewAll(Guid userId)
+        public IActionResult ViewAll(string userId)
         {
             try
             {

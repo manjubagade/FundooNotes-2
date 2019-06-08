@@ -116,6 +116,7 @@ namespace FundooApi
         /// </value>
         public DateTime Reminder { get; set; }
 
+         
         ///// <summary>
         ///// Gets or sets the sender email.
         ///// </summary>

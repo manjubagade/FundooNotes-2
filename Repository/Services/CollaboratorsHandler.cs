@@ -94,13 +94,13 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
-        public IList<CollaboratorMap> ViewCollaborators(Guid userId)
+        public IList<CollaboratorMap> ViewCollaborators(string userId)
         {
             try
             {
                 var list = new List<CollaboratorMap>();
                 var innerJoin = from e in registrationControl.Notes
-                                join d in registrationControl.Collaborators on e.UserId equals d.UserId
+                                join d in registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString()==d.Id
                                 //Convert.ToInt32(e.Id) equals Convert.ToInt32(d.Id)
                                 select new CollaboratorMap
                                 {
@@ -118,7 +118,7 @@ namespace RepositoryLayer.Services
                 //    list.Add(data);
                 //};
 
-                return innerJoin.ToList();
+                return innerJoin.Distinct().ToList();
             }
 
             catch(Exception e)

@@ -21,7 +21,7 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<CollaboratorMap> AccessNotes(Guid UserId)
+        public IList<CollaboratorMap> AccessNotes(string UserId)
         {
             return this.repositoryCollaborator.ViewCollaborators(UserId);
         }
@@ -66,7 +66,7 @@ namespace BusinessLayer.Services
             return await this.repositoryCollaborator.DeleteCollaborators(id);
         }
 
-        public IList<CollaboratorMap> AccessCollaborators(Guid UserId)
+        public IList<CollaboratorMap> AccessCollaborators(string UserId)
         {
             return this.repositoryCollaborator.ViewCollaborators(UserId);
         }

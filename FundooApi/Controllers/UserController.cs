@@ -249,11 +249,11 @@ namespace FundooNotesBackEnd.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<string> Login(LoginControl loginControlModel)
+        public async Task<string> Login(LoginControl loginControlModel,string FbStatus)
         {
             try
             {
-                var result = await applicationUserOperation.LoginAsync(loginControlModel);
+                var result = await applicationUserOperation.LoginAsync(loginControlModel, FbStatus);
                 if(result==null){
                     return "Invalide Email And Password";
                 }
@@ -288,7 +288,7 @@ namespace FundooNotesBackEnd.Controllers
         /// <returns>return status code</returns>
         [HttpPost]
         [Route("resetPassword")]
-        [AllowAnonymous]
+        
         public IActionResult Reset(ResetPassword resetPasswordmodel)
         {
             try

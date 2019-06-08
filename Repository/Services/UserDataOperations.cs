@@ -78,10 +78,10 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="loginControlmodel">The login controlmodel.</param>
         /// <returns></returns>
-        public async Task<string> Login(LoginControl loginControlmodel)
+        public async Task<string> Login(LoginControl loginControlmodel,string FbStatus)
         {
-           
-                var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
+            if (loginControlmodel.FbStatus == "false") { 
+            var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
                 if (user != null && await this.userManager.CheckPasswordAsync(user, loginControlmodel.Password))
                 {
                     var tokenDescriptor = new SecurityTokenDescriptor
@@ -102,8 +102,46 @@ namespace RepositoryLayer.Services
                 }
                 else
                 {
-                    return null;
+                    return "Invalide UserName And Password";
                 }
+            }
+            else if (loginControlmodel.FbStatus == "true")
+            {
+                var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
+                if(user != null)
+                {
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                    var token = tokenHandler.WriteToken(securityToken);
+                    var cacheKey = token;
+                    this.distributedCache.GetString(cacheKey);
+                    this.distributedCache.SetString(cacheKey, token);
+
+                    string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
+                    return jsonString;
+                }
+                else
+                {
+                    var applicationUser = new ApplicationUser()
+                    {
+                        //FullName = userRegistration.FullName,
+                       // Email = userRegistration.Email,
+                      //  UserName = userRegistration.UserName
+                    };
+                }
+                
+            }
+            else
+            {
+                return "Bad Input";
+            }
+            return "Invalid";
             }
 
         /// <summary>

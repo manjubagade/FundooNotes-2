@@ -54,9 +54,9 @@ namespace BusinessLayer.Interfaces
         /// <returns>
         /// bool result
         /// </returns>
-        public async Task<string> LoginAsync(LoginControl loginControlmodel)
+        public async Task<string> LoginAsync(LoginControl loginControlmodel, string FbStatus)
         {
-            return await applicationRepository.Login(loginControlmodel);
+            return await applicationRepository.Login(loginControlmodel, FbStatus);
             
         }
 

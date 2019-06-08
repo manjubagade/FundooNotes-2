@@ -17,7 +17,7 @@ namespace BusinessLayer.Interfaces
         Task<int> Change(Collaborators collaboratorsModel, int id);
 
 
-        IList<CollaboratorMap> AccessCollaborators(Guid userId);
+        IList<CollaboratorMap> AccessCollaborators(string userId);
 
     }
 }

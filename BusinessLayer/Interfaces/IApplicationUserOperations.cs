@@ -29,7 +29,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="loginControlmodel">The login controlmodel.</param>
         /// <returns>bool result</returns>
-        Task<string> LoginAsync(LoginControl loginControlmodel);
+        Task<string> LoginAsync(LoginControl loginControlmodel, string FbStatus);
 
         /// <summary>
         /// Forgots the password asynchronous.
