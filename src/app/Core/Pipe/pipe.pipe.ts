@@ -10,10 +10,12 @@ export class PipePipe implements PipeTransform {
       return value;
     }
     if (!value) return null;
-    if (!args) return value.note;
+    console.log(value.result);
+    
+    if (!args) return value.result;
 
-    console.log('in pipe', value.note, args);
+    console.log('in pipe', value.result, args);
 
-    return value.note.filter(Array => Array.title.toLowerCase().indexOf(args.toLowerCase()) !== -1 || Array.description.toLowerCase().toLowerCase().indexOf(args.toLowerCase()) !== -1)
+    return value.result.filter(Array => Array.title.toLowerCase().indexOf(args.toLowerCase()) !== -1 || Array.description.toLowerCase().toLowerCase().indexOf(args.toLowerCase()) !== -1)
 }
 }

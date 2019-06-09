@@ -1,7 +1,7 @@
-<div fxLayout={{css}} style="margin-top:10px;margin-bottom: 2px" fxLayout="center" fxFlexOffset='20'>
+<div fxLayout={{css}} style="margin-top:10px;margin-bottom: 2px" fxLayout="center" fxFlexOffset='20' fxLayout='row'>
   <div *ngFor="let note of cards|search:search">
 
-    <mat-card class="note" [style.background-color]=note.color fxFlexOffset.xs='-10'>
+    <mat-card class="note" [style.background-color]=note.color [ngClass]="{'note':flag==true,'notes':flag==false }" fxFlexOffset.xs='-10'>
       <div (click)="openDialog(note)" class="element.style">
         <div>
           <img src="{{note.image}}" class="notesImage" />
@@ -39,6 +39,18 @@
         </div>
       </div> 
      -->
+     <div class="chipinputArea">
+        <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
+          <mat-chip-list #chipList>
+            <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
+              {{note.reminder}}
+              <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+          <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+        </div>
+      </div>
+    
 
       <div class="hower" style="opacity: 0">
         <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'></app-icon>

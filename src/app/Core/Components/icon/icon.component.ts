@@ -22,6 +22,7 @@ export class IconComponent implements OnInit {
   public message: string;
   Label;
   Email;
+  reminder;
  flag=true
   @Output() public onUploadFinished = new EventEmitter();
   @Output() public setColor=new EventEmitter();
@@ -66,6 +67,7 @@ unarchive: boolean = true;
 
 this.service.DeleteNote(this.cards.id).subscribe(data =>{
 console.log(data);
+this.setNote.emit(data);
 },err =>{
 console.log(err);
 })
@@ -106,7 +108,7 @@ Archive(card) {
   this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
-      this.setNote.emit(this.archive)
+      this.setNote.emit(card);
     },
     err => { console.log(err); }
   )
@@ -121,7 +123,7 @@ Unarchive(card) {
   this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
-      this.setNote.emit(this.unarchive)
+      this.setNote.emit(card)
 
     },
     err => { console.log(err); }
@@ -138,7 +140,7 @@ TrashNote(card) {
   this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
-      this.setNote.emit(this.TrashNote)
+      this.setNote.emit(card)
     },
     err => { console.log(err); }
   )
@@ -154,7 +156,7 @@ Restore(card) {
   this.service.UpdateNotes(card.id, card,headers_object).subscribe(
     data => {
       console.log(data);
-      this.setNote.emit(this.Restore);
+      this.setNote.emit(card);
       
     },
     err => { console.log(err); }
@@ -178,6 +180,44 @@ checkBox(label){
     // }
   );
   }
+  Today(card)
+{
+  var date = new Date();
+  date.setHours(20,0,0)
+  card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  this.service.UpdateNotes(card.id,card,headers_object).subscribe(data =>{
+    console.log(data);
+    this.setNote.emit({});
+  },err =>{
+    console.log(err);
+  })
+}
+
+Tomorrow(card)
+  {
+    var date = new Date();
+    date.setHours(8,0,0)
+    card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate()+1) + " " +  date.getHours() + ":" + date.getMinutes();
+    this.service.UpdateNotes(card.id,card,headers_object).subscribe(data =>{
+      console.log(data);
+      this.setNote.emit({});
+    },err =>{
+      console.log(err);
+    })
+  }
+
+  nextWeek(card)
+  {
+    var date = new Date();
+    date.setHours(8,0,0)
+    card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate()+7) + " " +  date.getHours() + ":" + date.getMinutes();
+    this.service.UpdateNotes(card.id,card,headers_object).subscribe(data =>{
+      console.log(data);
+      this.setNote.emit({});
+    },err =>{
+      console.log(err);
+    })
+}
   openDialog(cards) {
      Email:localStorage.getItem('Email');
      console.log(cards);

@@ -59,8 +59,8 @@ export class NotesComponent implements OnInit {
       if ((this.form.value.title.trim() !== '') || (this.form.value.Description.trim() !== '')) {
         this.service.AddNotes(this.form.value, UserId,headers_object).subscribe(
           (res: any) => {
-           
-            this.router.navigateByUrl('/home');
+           this.form.reset();
+            //  this.router.navigateByUrl('/home');
             this.notes.emit(res);
             
           },

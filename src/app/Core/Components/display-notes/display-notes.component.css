@@ -46,3 +46,100 @@
     
     opacity: 1 !important;
   }
+  .note{
+    min-height: 30px;
+    /* min-width: 240px; */
+   margin-top:15px;
+   margin-left: 10px;
+   flex-wrap: wrap;
+   height: auto;
+   width: 250px;
+   border: none;
+   overflow: hidden;
+   outline: none;
+  
+   border-radius: 10px 10px 10px 10px; 
+   padding-left: 25%;
+   padding: 0%;
+}
+.notes{
+    width: 550px;
+    margin-left: 6em;
+    margin-right: 5em;
+    margin-top: 1em;
+    padding: 0.5%
+}
+@media screen and (max-width: 600px) {
+    .note{
+        width: 500px;
+        margin-top: 5px;
+    }
+    .notes{
+        width: 500px;
+        margin-top: 5px;
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .note{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%;
+       
+    }
+    .notes{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%;
+        
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .note{
+        width: 415px;
+        margin-top: 5px;
+        margin-left: 1%;
+        
+    }
+    .notes{
+        width: 415px;
+        margin-top: 5px;
+        margin-left: 1%;
+        
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .note{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .notes{
+        width: 365px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .note{
+        width: 310px;
+        margin-top: 5px;
+        margin-left: 1%
+    }
+    .notes{
+        width: 310px;
+        margin-top: 5px;
+        margin-left: 1%
+}
+}

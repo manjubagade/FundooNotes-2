@@ -23,7 +23,7 @@
           <button mat-icon-button class="togle">
             <mat-icon>search</mat-icon>
           </button>
-          <input matInput [style.fontSize.px]=14 placeholder="Search" [(ngModel)]="search">
+          <input matInput [style.fontSize.px]=14 placeholder="Search"  [(ngModel)]="value" (keyup)="lookfor()" (click)='goSearch()'>
         </div>
       </div>
     </mat-form-field>
@@ -37,6 +37,7 @@
         </button>
       </div>
     </div>
+   
     <div fxFlex="10" fxFlex="row" fxFlexOffset.xs='-2'>
       <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()'>
         <mat-icon>grid_view</mat-icon>

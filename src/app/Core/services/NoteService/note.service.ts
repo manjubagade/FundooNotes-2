@@ -51,6 +51,10 @@ export class NoteService {
   return this.http.post(environment.BaseURI+'/Notes/image/'+id, formData);
 }
 
+reminders(UserId,headers_object)
+  {
+    return this.http.get(environment.BaseURI+'/Notes/reminder/'+UserId,headers_object);
+}
   AddLabel(label) {
     console.log("In Service AddLabel fvgggfvvvvvvvvvvvvvvvvv" + label);
     return this.http.post(environment.BaseURI+ '/Label/add',label);

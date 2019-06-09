@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
+    form.value.FbStatus='false';
     this.FbStatus='false';
     this.service.login(form.value,this.FbStatus).subscribe(
       (res: any) => {

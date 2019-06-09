@@ -50,8 +50,7 @@ abc;
   css = 'row wrap'
   ngOnInit() {
     console.log("***********"+this.cards);
-  
-  
+    
     
     var Profilepic = localStorage.getItem("profilePic");
     console.log("Display Profile pic", Profilepic);
@@ -77,7 +76,7 @@ abc;
 
   }
 
-
+ 
   openDialog(note) {
     console.log(note);
     // const dialogRef = this.dialog.open(EditNotes);
@@ -128,4 +127,17 @@ abc;
       console.log("88888888" + note, id)
     })
   }
+  
+  Reminder(id,note) {
+    console.log(note);
+    
+    note.reminder = '0001-01-01T00:00:00';
+    console.log(note);
+    
+    console.log("00000000000" + id, note);
+    this.service.UpdateNotes(id,note,headers_object).subscribe(data => {
+      console.log("88888888" + note, id)
+    })
+  }
+  
 }

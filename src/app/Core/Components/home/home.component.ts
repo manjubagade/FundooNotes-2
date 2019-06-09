@@ -51,9 +51,11 @@ export class HomeComponent implements OnInit {
   result;
   message: boolean;
   userId;
+  value: any;
   data: {
     result,
     id
+    
   }
   ngOnInit() {
 
@@ -125,7 +127,16 @@ export class HomeComponent implements OnInit {
     this.view = !this.view;
     this.dataService.changeMessage(this.view);
   }
-
+  lookfor() {
+    this.dataService.changeSearchMsg(this.value)
+  }
+  /**
+   * 
+   */
+  goSearch() {
+    this.router.navigate(['./home/search'])
+  }
+  
   openDialog() {
     const dialogRef = this.dialog.open(LabelComponent, {
       data: this.Label

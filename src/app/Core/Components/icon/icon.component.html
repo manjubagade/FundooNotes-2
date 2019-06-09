@@ -1,8 +1,17 @@
 <div *ngIf="trashed != 'IsTrash'">
 
-      <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
+      <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="menureminder" style="outline: none">
+            <mat-icon class="material-icons" >add_alert</mat-icon>
+            </button>
+            <mat-menu #menureminder="matMenu">
+            <button mat-menu-item (click)="Today(cards)" style="outline: none">Later today 8:00PM </button>
+            <button mat-menu-item (click)="Tomorrow(cards)" style="outline: none">Tomorrow 8:00AM</button>
+            <button mat-menu-item (click)="nextWeek(cards)" style="outline: none">Next Week 8:00AM</button>
+            <button mat-menu-item style="outline: none">Pick date & time</button>
+            </mat-menu>
+      <!-- <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
-      </button>
+      </button> -->
 
       <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'
             (click)="openDialog(cards)">

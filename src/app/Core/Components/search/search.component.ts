@@ -17,15 +17,16 @@ export class SearchComponent implements OnInit {
   constructor(public dataServices: DataService, public notesService:NoteService) { }
 
   ngOnInit() {
-    this.userId = localStorage.getItem("userid")
-  this.dataServices.currentSearchmsg.subscribe(response => {
-    console.log('message in search',typeof response);
-    
-    this.searchText=response;
-    
+    this.userId = localStorage.getItem("UserId")
+    this.dataServices.currentSearchmsg.subscribe(response => {
+      console.log('message in search',typeof response);
+      
+      this.searchText=response;
+this.getallCards();
 })
 this.getallCards();
   }
+  
 getallCards(){
   var token=localStorage.getItem('token');
   var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
