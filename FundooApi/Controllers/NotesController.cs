@@ -162,5 +162,19 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        [HttpGet]
+        [Route("reminder/{userId}")]
+        public IActionResult Reminder(string userId)
+        {
+            IList<Notes> result = this.notesHandler.Reminder(userId);
+            if (result == null)
+            {
+                return this.NotFound("no reminder");
+            }
+
+            return this.Ok(new { result });
+        }
+
+
     }
 }

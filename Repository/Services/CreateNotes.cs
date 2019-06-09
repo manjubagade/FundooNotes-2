@@ -56,7 +56,8 @@ namespace RepositoryLayer.Services
                         Description = notes.Description,
                         CreatedDate = notes.CreatedDate,
                         ModifiedDate = notes.ModifiedDate,
-                        Label = notes.Label
+                        Label = notes.Label,
+                        Reminder=notes.Reminder
                     };
                     this.registrationControl.Notes.Add(addnotes);
                    
@@ -98,6 +99,7 @@ namespace RepositoryLayer.Services
                 notes.Label = model.Label;
                 notes.IsTrash = model.IsTrash;
                 notes.IsArchive = model.IsArchive;
+                notes.Reminder = model.Reminder;
             }
             catch(Exception e)
             {
@@ -219,7 +221,7 @@ namespace RepositoryLayer.Services
         public IList<Notes> Reminder(string userId)
         {
             var list = new List<Notes>();
-            var notesData = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (notes.Reminder != null) select notes;
+            var notesData = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (!notes.Reminder.Year.Equals(0001)) select notes;
             foreach (var data in notesData)
             {
                 list.Add(data);
