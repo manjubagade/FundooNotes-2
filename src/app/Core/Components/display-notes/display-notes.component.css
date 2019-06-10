@@ -63,11 +63,25 @@
    padding: 0%;
 }
 .notes{
-    width: 550px;
-    margin-left: 6em;
+    width: 580px;
+    margin-left: 5em;
     margin-right: 5em;
-    margin-top: 1em;
+    margin-top: 0.5em;
     padding: 0.5%
+}
+@media screen and (max-width: 900px) {
+    .note{
+        width: 500px;
+        margin-top: 5px;
+    }
+    .notes{
+        width: 500px;
+        margin-top: 5px;
+        margin-left: 1%;
+    }
+    .outer-div-style{
+        margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
+    }
 }
 @media screen and (max-width: 600px) {
     .note{
@@ -77,6 +91,7 @@
     .notes{
         width: 500px;
         margin-top: 5px;
+        margin-left: 1%;
     }
     .outer-div-style{
         margin-top:15px; margin-left: 0%; margin-right: 0%; margin-bottom:20px;
@@ -86,13 +101,13 @@
     .note{
         width: 365px;
         margin-top: 5px;
-        margin-left: 1%;
+        margin-left: 0%;
        
     }
     .notes{
         width: 365px;
         margin-top: 5px;
-        margin-left: 1%;
+        margin-left: 0%;
         
     }
     .outer-div-style{
@@ -138,8 +153,8 @@
         margin-left: 1%
     }
     .notes{
-        width: 310px;
+        width: 300px;
         margin-top: 5px;
-        margin-left: 1%
+        /* margin-left: 0% */
 }
 }

@@ -1,7 +1,7 @@
 <div *ngIf="trashed != 'IsTrash'">
 
-      <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="menureminder" style="outline: none">
-            <mat-icon class="material-icons" >add_alert</mat-icon>
+      <button mat-icon-button matTooltip="Reminde me" [matMenuTriggerFor]="menureminder" style="outline: none">
+            <mat-icon class="material-icons" [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
             </button>
             <mat-menu #menureminder="matMenu">
             <button mat-menu-item (click)="Today(cards)" style="outline: none">Later today 8:00PM </button>
@@ -13,31 +13,31 @@
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">add_alert</mat-icon>
       </button> -->
 
-      <button mat-button class="togle" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'
+      <button mat-button class="togle" matTooltip="Collaborator" fxFlex="row" fxLayoutAlign="start center" fxFlex='20'
             (click)="openDialog(cards)">
 
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
       </button>
 
-      <button mat-button [matMenuTriggerFor]="MenuColors" class="togle" fxFlex="row" fxFlex='20'>
+      <button mat-button matTooltip="change Color" [matMenuTriggerFor]="MenuColors" class="togle" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">color_lens</mat-icon>
       </button>
 
-      <button mat-button (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
+      <button mat-button (click)="file.click(file)" matTooltip="Add Image" class="togle" fxFlex="row" fxFlex='20'>
             <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">image</mat-icon>
             <br />
       </button>
 
-      <button mat-button *ngIf="archivedicon != 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
+      <button mat-button matTooltip="Archive" *ngIf="archivedicon != 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" (click)="Archive(cards)">archive</mat-icon>
       </button>
 
-      <button mat-button *ngIf="archivedicon == 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
+      <button mat-button matTooltip="Unarchive" *ngIf="archivedicon == 'IsArchive'" class="togle" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" (click)="Unarchive(cards)">unarchive_outline</mat-icon>
       </button>
 
-      <button mat-button class="togle" *ngIf="trashed != 'IsTrash'" [matMenuTriggerFor]="menu" fxFlex="row" fxFlex='20'>
+      <button mat-button matTooltip="More" class="togle" *ngIf="trashed != 'IsTrash'" [matMenuTriggerFor]="menu" fxFlex="row" fxFlex='20'>
             <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxLayoutAlign="center center">more_vert</mat-icon>
       </button>
       <div>
@@ -72,6 +72,7 @@
       </div>
 
       <mat-menu #MenuColors="matMenu">
+                 
             <div fxLayout="row">
                   <button mat-mini-fab (click)="setcolor('rgb(147, 235, 235)',card)" class="color"
                         style="background-color:rgb(147, 235, 235);outline: none">
@@ -105,7 +106,9 @@
                         style="background-color:rgb(13, 129, 129);outline: none">
                   </button>
             </div>
+     
       </mat-menu>
+      
 </div>
 <div *ngIf="trashed == 'IsTrash'" class="hower" style="opacity: 0">
       <button mat-button class="togle" [matMenuTriggerFor]="menu1" fxFlex="row" fxFlex='20'>

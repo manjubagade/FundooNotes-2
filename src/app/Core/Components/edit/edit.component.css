@@ -10,7 +10,7 @@ display: flex;
 scroll-behavior: auto;
 }
 .note{
-    min-height: 30px;
+    min-height: 20px;
      /* min-width: 240px; */
     margin-top:15px;
     margin-left: 10px;
@@ -18,7 +18,7 @@ scroll-behavior: auto;
     height: auto;
     width: 250px;
     border: none;
-    overflow: hidden;
+    overflow: auto;
     outline: none;
    
     border-radius: 10px 10px 10px 10px; 

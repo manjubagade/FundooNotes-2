@@ -9,6 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class TrashComponent implements OnInit {
   more="IsTrash";
+  moree="IsUnTrash";
   notes = [];
   CardNotes = []
   id: string;

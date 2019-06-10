@@ -31,7 +31,7 @@ export class NoteService {
 
   UpdateNotes(id, note,headers_object) {
     console.log("In Service Update 55555 " + id, note);
-    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, note,headers_object);
+    return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id,note, headers_object);
   }
 
   GetArchiveNotes(UserId) {

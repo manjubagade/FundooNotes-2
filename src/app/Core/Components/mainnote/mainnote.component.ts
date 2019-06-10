@@ -54,6 +54,7 @@ export class MainnoteComponent implements OnInit {
     console.log('event');
     this.ViewCollaborators();
   }
+  
   eventOccur(event) {
     this.ViewCollaborators();
   }

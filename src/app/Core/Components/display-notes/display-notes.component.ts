@@ -13,6 +13,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { notEqual } from 'assert';
 
 
 var token=localStorage.getItem('token');
@@ -41,6 +42,7 @@ export class DisplayNotesComponent implements OnInit {
   @Input() cards;
   @Input() archived;
   @Input() trash;
+  @Input() untrash;
   @Output() messageEvent = new EventEmitter<any>();
 abc;
   flag = true;
@@ -80,6 +82,8 @@ abc;
   openDialog(note) {
     console.log(note);
     // const dialogRef = this.dialog.open(EditNotes);
+    console.log("opendialog");
+    
     const dialogRef = this.dialog.open(EditComponent,
       {
         data: note,
@@ -95,7 +99,7 @@ abc;
 
         console.log(note.id);
         
-        this.service.UpdateNotes(note, note.id,headers_object).subscribe(data => {
+        this.service.UpdateNotes(note.id,note,headers_object).subscribe(data => {
           console.log(data);
           // this.Delete.emit({});
         }, err => {
@@ -119,12 +123,26 @@ abc;
     this.messageEvent.emit(event);
 
 }
-  remove(note, id) {
+
+Untrash(event){
+  console.log('trash in');
+    this.messageEvent.emit(event);
+}
+
+  remove(id,note) {
     
     note.label = null;
     console.log("00000000000" + note.label, id);
-    this.service.UpdateNotes(note, id,headers_object).subscribe(data => {
+    this.service.UpdateNotes(id,note,headers_object).subscribe(data => {
       console.log("88888888" + note, id)
+    })
+  }
+  Pin(card){
+    card.Pin=true;
+    console.log(card.id,card);
+    
+    this.service.UpdateNotes(card,card.id,headers_object).subscribe(data=>{
+
     })
   }
   

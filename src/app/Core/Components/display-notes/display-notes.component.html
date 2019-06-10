@@ -6,7 +6,7 @@
         <div>
           <img src="{{note.image}}" class="notesImage" />
         </div>
-        <!-- [style.backgroundImage]="'url(' + Profilepic + ')'" -->
+       
         <div class="inputArea">
           <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
         </div>
@@ -26,19 +26,7 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="chipinputArea">
-    <div *ngIf="note.receiverEmail!==null">
-          <mat-chip-list #chipList>
-            <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
-              {{note.receiverEmail}}
-              <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-          <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-        </div>
-      </div> 
-     -->
+     
      <div class="chipinputArea">
         <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
           <mat-chip-list #chipList>

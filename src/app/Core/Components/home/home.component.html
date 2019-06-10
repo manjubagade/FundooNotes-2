@@ -102,7 +102,7 @@
             <mat-card-title>LABELS</mat-card-title>
           </div>
           <div *ngFor="let labels of Label">
-            <a mat-list-item routerLink="./Label" class="round" (click)="Header='Archieve'"><img
+            <a mat-list-item routerLink="../label" class="round" (click)="Header='Archieve'"><img
                 src="./assets/outline-label-24px.svg" fxFlex='30'>{{labels.labels}}</a>
 
           </div>
@@ -113,8 +113,8 @@
           </div>
           <div class="devider"></div>
           <div class="archive">
-            <a mat-list-item routerLink="./archieve" class="round" (click)="Header='Archieve'">
-              <mat-icon fxFlex='26'>archive_outline</mat-icon>archive
+            <a mat-list-item routerLink="./archieve" class="round" (click)="Header='Archive'">
+              <mat-icon fxFlex='26'>archive_outline</mat-icon>Archive
             </a>
           </div>
           <a mat-list-item routerLink="./trash" class="round" (click)="Header='Trash'">
