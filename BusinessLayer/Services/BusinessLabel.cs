@@ -16,10 +16,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
+    /// <summary>
+    /// class for Business Layer
+    /// </summary>
+    /// <seealso cref="BusinessLayer.Interfaces.ILabel" />
     public class BusinessLabel : ILabel
     {
         private readonly IRepositoryLabel repositoryLabel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessLabel"/> class.
+        /// </summary>
+        /// <param name="repositoryLabel">The repository label.</param>
         public BusinessLabel(IRepositoryLabel repositoryLabel)
         {
             this.repositoryLabel = repositoryLabel;

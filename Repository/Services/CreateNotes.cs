@@ -91,6 +91,7 @@ namespace RepositoryLayer.Services
         {
             try
             {
+                //// Update notes as per Id
                 Notes notes = this.registrationControl.Notes.Where<Notes>(c => c.Id == id).FirstOrDefault();
                 notes.Title = model.Title;
                 notes.Description = model.Description;
@@ -100,6 +101,7 @@ namespace RepositoryLayer.Services
                 notes.IsTrash = model.IsTrash;
                 notes.IsArchive = model.IsArchive;
                 notes.Reminder = model.Reminder;
+                notes.Pin = model.Pin;
             }
             catch(Exception e)
             {
@@ -154,7 +156,7 @@ namespace RepositoryLayer.Services
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>Result in string</returns>
-        public string Image(IFormFile file, int id)
+        public async Task<string> Image(IFormFile file, int id)
         {
             var stream = file.OpenReadStream();
             var name = file.FileName;
@@ -170,7 +172,7 @@ namespace RepositoryLayer.Services
             int result = 0;
             try
             {
-                result = this.registrationControl.SaveChanges();
+                result = await this.registrationControl.SaveChangesAsync();
                 return data.Image;
             }
             catch (Exception ex)

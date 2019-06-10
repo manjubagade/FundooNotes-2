@@ -35,7 +35,7 @@ namespace Common.Models
         /// <value>
         /// The labels.
         /// </value>
-       
+       [Required]
         public string Labels { get; set; }
 
         /// <summary>

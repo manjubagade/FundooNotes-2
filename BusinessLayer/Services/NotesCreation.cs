@@ -16,10 +16,18 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
+    /// <summary>
+    /// Class Notes For Notes Operations
+    /// </summary>
+    /// <seealso cref="BusinessLayer.Interfaces.INotes" />
     public class NotesCreation : INotes
     {
         private readonly IRepositoryNotes repositoryNotes;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotesCreation"/> class.
+        /// </summary>
+        /// <param name="repositoryNotes">The repository notes.</param>
         public NotesCreation(IRepositoryNotes repositoryNotes)
         {
             this.repositoryNotes = repositoryNotes;
@@ -81,10 +89,9 @@ namespace BusinessLayer.Services
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public string AddImage(IFormFile file, int id)
+        public async Task<string> AddImage(IFormFile file, int id)
         {
-
-            return this.repositoryNotes.Image(file, id);
+            return await this.repositoryNotes.Image(file, id);
         }
 
         /// <summary>
@@ -118,8 +125,6 @@ namespace BusinessLayer.Services
         {
             return this.repositoryNotes.Reminder(userId);
         }
-
-
-
+        
     }
 }

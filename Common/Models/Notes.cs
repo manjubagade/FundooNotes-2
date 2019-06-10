@@ -116,21 +116,12 @@ namespace FundooApi
         /// </value>
         public DateTime Reminder { get; set; }
 
-         
-        ///// <summary>
-        ///// Gets or sets the sender email.
-        ///// </summary>
-        ///// <value>
-        ///// The sender email.
-        ///// </value>
-        //public string SenderEmail { get; set; }
-
-        ///// <summary>
-        ///// Gets or sets the receive email.
-        ///// </summary>
-        ///// <value>
-        ///// The receive email.
-        ///// </value>
-        //public string ReceiveEmail { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="Notes"/> is pin.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if pin; otherwise, <c>false</c>.
+        /// </value>
+        public bool Pin { get; set; }
     }
 }

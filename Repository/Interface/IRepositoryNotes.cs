@@ -58,7 +58,7 @@ namespace RepositoryLayer.Interface
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>Uri string</returns>
-        string Image(IFormFile file, int id);
+        Task<string> Image(IFormFile file, int id);
 
         /// <summary>
         /// Archives the specified user identifier.

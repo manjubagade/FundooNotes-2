@@ -17,6 +17,10 @@ using RepositoryLayer.Interface;
 
 namespace BusinessLayer.Interfaces
 {
+    /// <summary>
+    /// Class For User Operations
+    /// </summary>
+    /// <seealso cref="BusinessLayer.Interfaces.IApplicationUserOperations" />
     public class ApplicationUserOperations:IApplicationUserOperations
     {
         private readonly IUserDataOperations applicationRepository;
@@ -113,7 +117,12 @@ namespace BusinessLayer.Interfaces
 
         }
 
-         public IList<ApplicationUser> getProfile(string userId)
+        /// <summary>
+        /// Gets the profile.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
+        public IList<ApplicationUser> getProfile(string userId)
         {
             return this.applicationRepository.GetProfilepic(userId);
         }

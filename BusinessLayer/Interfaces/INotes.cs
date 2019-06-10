@@ -52,7 +52,7 @@ namespace BusinessLayer.Interfaces
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        string AddImage(IFormFile file, int id);
+        Task<string> AddImage(IFormFile file, int id);
 
         /// <summary>
         /// Trashes the specified user identifier.

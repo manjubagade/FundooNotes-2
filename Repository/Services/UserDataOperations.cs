@@ -130,10 +130,26 @@ namespace RepositoryLayer.Services
                 {
                     var applicationUser = new ApplicationUser()
                     {
-                        //FullName = userRegistration.FullName,
-                       // Email = userRegistration.Email,
-                      //  UserName = userRegistration.UserName
+                        
+                        Email = loginControlmodel.Email,
+                      
                     };
+                    await this.userManager.CreateAsync(applicationUser, loginControlmodel.Password);
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                    var token = tokenHandler.WriteToken(securityToken);
+                    var cacheKey = token;
+                    this.distributedCache.GetString(cacheKey);
+                    this.distributedCache.SetString(cacheKey, token);
+
+                    string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
+                    return jsonString;
                 }
                 
             }
@@ -141,7 +157,7 @@ namespace RepositoryLayer.Services
             {
                 return "Bad Input";
             }
-            return "Invalid";
+           // return "Invalid";
             }
 
         /// <summary>

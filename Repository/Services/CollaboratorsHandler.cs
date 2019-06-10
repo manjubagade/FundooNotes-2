@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Services
 {
+    /// <summary>
+    /// Class Collaborator for Colaborator operations
+    /// </summary>
+    /// <seealso cref="RepositoryLayer.Interface.IRepositoryCollaborators" />
     public class CollaboratorsHandler : IRepositoryCollaborators
     {
         private readonly RegistrationControl registrationControl;
@@ -26,7 +30,12 @@ namespace RepositoryLayer.Services
             this.distributedCache = distributedCache;
         }
 
-
+        /// <summary>
+        /// Adds the collaborators.
+        /// </summary>
+        /// <param name="collaboratorsModel">The collaborators model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<int> AddCollaborators(Collaborators collaboratorsModel)
         {
             try
@@ -101,7 +110,7 @@ namespace RepositoryLayer.Services
                 var list = new List<CollaboratorMap>();
                 var innerJoin = from e in registrationControl.Notes
                                 join d in registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString()==d.Id
-                                //Convert.ToInt32(e.Id) equals Convert.ToInt32(d.Id)
+                                
                                 select new CollaboratorMap
                                 {
                                     UserId=e.UserId,
@@ -113,12 +122,9 @@ namespace RepositoryLayer.Services
                                    Image=e.Image,
 
                                };
-                //foreach (var data in innerJoin)
-                //{
-                //    list.Add(data);
-                //};
+               
 
-                return innerJoin.Distinct().ToList();
+                return innerJoin.ToList();
             }
 
             catch(Exception e)

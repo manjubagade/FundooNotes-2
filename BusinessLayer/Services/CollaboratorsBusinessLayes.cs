@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
+    /// <summary>
+    /// Colaborator Business Layer
+    /// </summary>
+    /// <seealso cref="BusinessLayer.Interfaces.ICollborators" />
     public class CollaboratorsBusinessLayes:ICollborators
     {
         private readonly IRepositoryCollaborators repositoryCollaborator;
@@ -66,6 +70,11 @@ namespace BusinessLayer.Services
             return await this.repositoryCollaborator.DeleteCollaborators(id);
         }
 
+        /// <summary>
+        /// Accesses the collaborators.
+        /// </summary>
+        /// <param name="UserId">The user identifier.</param>
+        /// <returns>List of Data</returns>
         public IList<CollaboratorMap> AccessCollaborators(string UserId)
         {
             return this.repositoryCollaborator.ViewCollaborators(UserId);

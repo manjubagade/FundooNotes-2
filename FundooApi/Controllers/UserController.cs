@@ -218,13 +218,20 @@ namespace FundooNotesBackEnd.Controllers
 
         private readonly IApplicationUserOperations applicationUserOperation;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="applicationUserOperation">The application user operation.</param>
         public UserController(IApplicationUserOperations applicationUserOperation)
         {
             this.applicationUserOperation = applicationUserOperation;
         }
 
-        
+        /// <summary>
+        /// Registers the specified registration control model.
+        /// </summary>
+        /// <param name="registrationControlModel">The registration control model.</param>
+        /// <returns></returns>
         [HttpPost]
        [AllowAnonymous]
         [Route("register")]
@@ -245,7 +252,14 @@ namespace FundooNotesBackEnd.Controllers
 
             return this.BadRequest();
         }
-        
+
+        /// <summary>
+        /// Logins the specified login control model.
+        /// </summary>
+        /// <param name="loginControlModel">The login control model.</param>
+        /// <param name="FbStatus">The fb status.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -264,6 +278,12 @@ namespace FundooNotesBackEnd.Controllers
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// Forgots the specified forgot password model.
+        /// </summary>
+        /// <param name="forgotPasswordModel">The forgot password model.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [Route("forgotPassword")]
@@ -322,6 +342,11 @@ namespace FundooNotesBackEnd.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Gets the profilepic.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("getprofilepic/{userId}")]
         public IActionResult GetProfilepic(string userId)

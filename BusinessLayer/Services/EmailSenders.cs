@@ -11,11 +11,23 @@ namespace BusinessLayer.Services
     using System;
     using System.Net;
     using System.Net.Mail;
-
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Class For Sending Email 
+    /// </summary>
+    /// <seealso cref="BusinessLayer.IEmailSender" />
     public class EmailSenders : IEmailSender
     {
+        /// <summary>
+        /// Sends the email asynchronous.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <param name="subject">The subject.</param>
+        /// <param name="body">The body.</param>
+        /// <returns>
+        /// result
+        /// </returns>
         public Task SendEmailAsync(string Email, string subject, string body)
         {
             SmtpClient client = new SmtpClient();

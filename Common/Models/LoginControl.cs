@@ -37,6 +37,12 @@ namespace FundooApi
         [MinLength(5)]
         public string Password { get; set; }
 
+        /// <summary>
+        /// Gets or sets the fb status.
+        /// </summary>
+        /// <value>
+        /// The fb status.
+        /// </value>
         public string FbStatus { get; set; }
     }
 }
