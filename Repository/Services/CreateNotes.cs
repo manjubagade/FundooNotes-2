@@ -57,7 +57,8 @@ namespace RepositoryLayer.Services
                         CreatedDate = notes.CreatedDate,
                         ModifiedDate = notes.ModifiedDate,
                         Label = notes.Label,
-                        Reminder=notes.Reminder
+                        Reminder=notes.Reminder,
+                        Pin=notes.Pin
                     };
                     this.registrationControl.Notes.Add(addnotes);
                    
