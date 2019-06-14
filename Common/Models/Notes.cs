@@ -6,14 +6,17 @@
 // ---------------------------------------------------------------------------------------------------------------------------
 namespace FundooApi
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
 
+    /// <summary>
+    /// Notes model
+    /// </summary>
     public class Notes
     {
         /// <summary>
@@ -31,7 +34,6 @@ namespace FundooApi
         /// <value>
         /// The description.
         /// </value>
-        
         public string Title { get; set; }
 
         /// <summary>
@@ -49,7 +51,6 @@ namespace FundooApi
         /// The created date.
         /// </value>
         public DateTime CreatedDate { get; set; }
-        
 
         /// <summary>
         /// Gets or sets the modified date.
@@ -106,7 +107,6 @@ namespace FundooApi
         ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
         /// </value>
         public bool IsArchive { get; set; }
-
         
         /// <summary>
         /// Gets or sets the reminder.

@@ -22,26 +22,27 @@ namespace RepositoryLayer.Interface
         /// Adds the label.
         /// </summary>
         /// <param name="labelModel">The label model.</param>
+        /// <returns>add result</returns>
         Task<int> AddLabel(Label labelModel);
 
         /// <summary>
         /// Saves the changes asynchronous.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>data result</returns>
         Task<int> SaveChangesAsync();
 
         /// <summary>
         /// Views the label.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>Label Data</returns>
         IList<Label> ViewLabel(Guid userId);
 
         /// <summary>
         /// Deletes the label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>data value</returns>
         Task<int> DeleteLabel(int id);
 
         /// <summary>
@@ -49,6 +50,11 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="labelModel">The label model.</param>
         /// <param name="id">The identifier.</param>
+        /// <returns>updated success result</returns>
         Task<int> UpdateLabel(Label labelModel, int id);
+
+        Task<int> AddNotesLabel(NotesLabel notesLabel);
+        IList<NotesLabel> ViewNotesLabels(string userid);
+        Task<int> DeleteNotesLabel(int id);
     }
 }

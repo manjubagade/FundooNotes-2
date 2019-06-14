@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="Image.cs" company="Bridgelabz">
+// <copyright file="Label.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
@@ -12,6 +12,9 @@ namespace Common.Models
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
+    /// <summary>
+    /// Label model
+    /// </summary>
     public class Label
     {
         /// <summary>
@@ -21,6 +24,7 @@ namespace Common.Models
         /// The identifier.
         /// </value>
         public int Id { get; set; }
+
         /// <summary>
         /// Gets or sets the user identifier.
         /// </summary>

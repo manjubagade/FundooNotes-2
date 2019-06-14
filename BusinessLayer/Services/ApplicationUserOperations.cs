@@ -4,27 +4,34 @@
 // </copyright>
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using FundooApi;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
-using RepositoryLayer.Interface;
 
 namespace BusinessLayer.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using FundooApi;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Options;
+    using RepositoryLayer.Interface;
+
     /// <summary>
     /// Class For User Operations
     /// </summary>
     /// <seealso cref="BusinessLayer.Interfaces.IApplicationUserOperations" />
-    public class ApplicationUserOperations:IApplicationUserOperations
+    public class ApplicationUserOperations : IApplicationUserOperations
     {
+        /// <summary>
+        /// The application repository
+        /// </summary>
         private readonly IUserDataOperations applicationRepository;
 
+        /// <summary>
+        /// The email sender
+        /// </summary>
         private readonly IEmailSender emailSender;
 
         /// <summary>
@@ -32,7 +39,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="applicationRepository">The application repository.</param>
         /// <param name="email">The email.</param>
-        public ApplicationUserOperations(IUserDataOperations applicationRepository,IEmailSender email)
+        public ApplicationUserOperations(IUserDataOperations applicationRepository, IEmailSender email)
         {
             this.applicationRepository = applicationRepository;
             this.emailSender = email;
@@ -41,9 +48,9 @@ namespace BusinessLayer.Interfaces
         /// <summary>
         /// Posts the application user asynchronous.
         /// </summary>
-        /// <param name="userRegistrationmodel">The user registrationmodel.</param>
+        /// <param name="userRegistrationmodel">The UserRegistration.</param>
         /// <returns>
-        /// bool result
+        /// data result
         /// </returns>
         public async Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel)
         {
@@ -52,11 +59,11 @@ namespace BusinessLayer.Interfaces
         }
 
         /// <summary>
-        /// Logins the asynchronous.
+        /// Logins the asynchronous LoginControl.
         /// </summary>
-        /// <param name="loginControlmodel">The login controlmodel.</param>
+        /// <param name="loginControlmodel">The LoginControl.</param>
         /// <returns>
-        /// bool result
+        /// data result
         /// </returns>
         public async Task<string> LoginAsync(LoginControl loginControlmodel, string FbStatus)
         {
@@ -65,11 +72,11 @@ namespace BusinessLayer.Interfaces
         }
 
         /// <summary>
-        /// Forgots the password asynchronous.
+        /// Forgot the password asynchronous.
         /// </summary>
-        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
+        /// <param name="forgotPasswordmodel">The ForgotPassword.</param>
         /// <returns>
-        /// bool result
+        /// data result
         /// </returns>
         public async Task<bool> ForgotPasswordAsync(ForgotPassword forgotPasswordmodel)
         {
@@ -89,18 +96,19 @@ namespace BusinessLayer.Interfaces
         }
 
         /// <summary>
-        /// Resets the password asynchronous.
+        /// Resets the ResetPassword asynchronous.
         /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>return boolean</returns>
+        /// <param name="resetPasswordmodel">The ResetPassword.</param>
+        /// <returns>return result data</returns>
         public async Task<bool> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
-            var result= await this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
+            var result = await this.applicationRepository.ResetPasswordAsync(resetPasswordmodel);
            
             if (result.Equals(true))
             {
                 return true;
             }
+
             return false;
         }
 
@@ -109,10 +117,10 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
-        public string addProfile(IFormFile file, string userId)
+        /// <returns>string url data</returns>
+        public string AddProfile(IFormFile file, string userId)
         {
-            var result= this.applicationRepository.Profilepic(file, userId);
+            var result = this.applicationRepository.Profilepic(file, userId);
             return result;
 
         }
@@ -121,8 +129,8 @@ namespace BusinessLayer.Interfaces
         /// Gets the profile.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
-        public IList<ApplicationUser> getProfile(string userId)
+        /// <returns>user data</returns>
+        public IList<ApplicationUser> GetProfile(string userId)
         {
             return this.applicationRepository.GetProfilepic(userId);
         }

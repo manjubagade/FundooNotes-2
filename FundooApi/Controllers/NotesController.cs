@@ -15,6 +15,10 @@ namespace FundooApi.Controllers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// NotesController controller
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
    [Authorize]
     [ApiController]
@@ -51,7 +55,6 @@ namespace FundooApi.Controllers
             catch (Exception e)
             {
                 return this.BadRequest(e.Message);
-
             }
         }
 
@@ -103,7 +106,6 @@ namespace FundooApi.Controllers
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return notes</returns>
-
         [HttpGet]
         [Route("view/{userId}")]
         public IActionResult view(string userId)
@@ -118,11 +120,11 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// methos for uploading Image
+        /// methods for uploading Image
         /// </summary>
-        /// <param name="file"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="file">The IFormFile.</param>
+        /// <param name="id">The id.</param>
+        /// <returns>string url</returns>
         [HttpPost]
         [Route("image/{id}")]
         public async Task<IActionResult> Image(IFormFile file, int id)
@@ -132,7 +134,7 @@ namespace FundooApi.Controllers
                 return this.NotFound("The file couldn't be found");
             }
 
-            var result =await this.notesHandler.AddImage(file, id);
+            var result = await this.notesHandler.AddImage(file, id);
             return this.Ok(new { result });
         }
 
@@ -140,7 +142,7 @@ namespace FundooApi.Controllers
         /// Archives the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>notes data</returns>
         [HttpGet]
         [Route("archive/{userId}")]
         public IActionResult ArchiveNotes(string userId)
@@ -158,7 +160,7 @@ namespace FundooApi.Controllers
         /// Trashes the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>notes data</returns>
         [HttpGet]
         [Route("trash/{userId}")]
         public IActionResult TrashNotes(string userId)
@@ -176,7 +178,7 @@ namespace FundooApi.Controllers
         /// Reminders the specified user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>reminder data</returns>
         [HttpGet]
         [Route("reminder/{userId}")]
         public IActionResult Reminder(string userId)
@@ -190,6 +192,17 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        [HttpGet]
+        [Route("Alarm/{userId}")]
+        public IActionResult Alarrm(string userId)
+        {
+            IList<Notes> result = this.notesHandler.Alarm(userId);
+            if (result == null)
+            {
+                return this.NotFound("no reminder");
+            }
 
+            return this.Ok(new { result });
+        }
     }
 }

@@ -31,11 +31,30 @@ namespace RepositoryLayer.Services
     /// <seealso cref="RepositoryLayer.Interface.IUserDataOperations" />
     public class UserDataOperations : IUserDataOperations
     {
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private UserManager<ApplicationUser> userManager;
+
+        /// <summary>
+        /// The sign in manager
+        /// </summary>
         private SignInManager<ApplicationUser> signInManager;
+
+        /// <summary>
+        /// The application settings
+        /// </summary>
         private readonly ApplicationSettings applicationSettings;
+
+        /// <summary>
+        /// The distributed cache
+        /// </summary>
         private readonly IDistributedCache distributedCache;
-        private RegistrationControl registrationControl;
+
+        /// <summary>
+        /// The registration control
+        /// </summary>
+        private readonly RegistrationControl registrationControl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserDataOperations"/> class.
@@ -45,7 +64,7 @@ namespace RepositoryLayer.Services
         /// <param name="registrationControl">The registration control.</param>
         /// <param name="applicationSettings">The application settings.</param>
         /// <param name="distributedCache">The distributed cache.</param>
-        public UserDataOperations(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, RegistrationControl registrationControl, IOptions<ApplicationSettings> applicationSettings, IDistributedCache distributedCache)
+        public UserDataOperations(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RegistrationControl registrationControl, IOptions<ApplicationSettings> applicationSettings, IDistributedCache distributedCache)
         {
             this.registrationControl = registrationControl;
             this.userManager = userManager;
@@ -58,7 +77,7 @@ namespace RepositoryLayer.Services
         /// Registers the specified user registration.
         /// </summary>
         /// <param name="userRegistration">The user registration.</param>
-        /// <returns></returns>
+        /// <returns>register task data</returns>
         public Task Register(UserRegistration userRegistration)
         {
             ////Assign Variables
@@ -74,97 +93,120 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Logins the specified login controlmodel.
+        /// Logins the specified LoginControl.
         /// </summary>
-        /// <param name="loginControlmodel">The login controlmodel.</param>
-        /// <returns></returns>
-        public async Task<string> Login(LoginControl loginControlmodel,string FbStatus)
+        /// <param name="loginControlmodel">The LoginControl.</param>
+        /// <returns>string data</returns>
+        public async Task<string> Login(LoginControl loginControlmodel, string FbStatus)
         {
-            if (loginControlmodel.FbStatus == "false") { 
-            var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
-                if (user != null && await this.userManager.CheckPasswordAsync(user, loginControlmodel.Password))
-                {
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(securityToken);
-                    var cacheKey = token;
-                    this.distributedCache.GetString(cacheKey);
-                    this.distributedCache.SetString(cacheKey, token);
-                
-                    string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
-                    return jsonString;
-                }
-                else
-                {
-                    return "Invalide UserName And Password";
-                }
+            //// Check user is regular user or Social User
+            if (loginControlmodel.FbStatus == "false")
+            {
+               return await this.LoginUser(loginControlmodel);
             }
             else if (loginControlmodel.FbStatus == "true")
             {
-                var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
-                if(user != null)
-                {
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(securityToken);
-                    var cacheKey = token;
-                    this.distributedCache.GetString(cacheKey);
-                    this.distributedCache.SetString(cacheKey, token);
-
-                    string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
-                    return jsonString;
-                }
-                else
-                {
-                    var applicationUser = new ApplicationUser()
-                    {
-                        
-                        Email = loginControlmodel.Email,
-                      
-                    };
-                    await this.userManager.CreateAsync(applicationUser, loginControlmodel.Password);
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(securityToken);
-                    var cacheKey = token;
-                    this.distributedCache.GetString(cacheKey);
-                    this.distributedCache.SetString(cacheKey, token);
-
-                    string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
-                    return jsonString;
-                }
-                
+                return await this.SocialLoginUser(loginControlmodel);
             }
             else
             {
                 return "Bad Input";
             }
-           // return "Invalid";
             }
+
+        /// <summary>
+        /// Logins the user.
+        /// </summary>
+        /// <param name="loginControlmodel">The LoginControl.</param>
+        /// <returns>String data</returns>
+        public async Task<string> LoginUser(LoginControl loginControlmodel)
+        {
+            //// check userName and Password for Regular User
+            var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
+            if (user != null && await this.userManager.CheckPasswordAsync(user, loginControlmodel.Password))
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                var cacheKey = token;
+                this.distributedCache.GetString(cacheKey);
+                this.distributedCache.SetString(cacheKey, token);
+
+                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
+                return jsonString;
+            }
+            else
+            {
+                return "Invalide UserName And Password";
+            }
+        }
+
+        /// <summary>
+        /// Socials the login user.
+        /// </summary>
+        /// <param name="loginControlmodel">The LoginControl.</param>
+        /// <returns>String data</returns>
+        public async Task<string> SocialLoginUser(LoginControl loginControlmodel)
+    {
+            //// check userName Social User
+            var user = await this.userManager.FindByEmailAsync(loginControlmodel.Email);
+            if (user != null)
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                var cacheKey = token;
+                this.distributedCache.GetString(cacheKey);
+                this.distributedCache.SetString(cacheKey, token);
+
+                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
+                return jsonString;
+            }
+            else
+            {
+                //// if Social User is New
+                var applicationUser = new ApplicationUser()
+                {
+                    Email = loginControlmodel.Email,
+
+                };
+
+                await this.userManager.CreateAsync(applicationUser, loginControlmodel.Password);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[] { new Claim("UserID", user.Id.ToString()) }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.applicationSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                var cacheKey = token;
+                this.distributedCache.GetString(cacheKey);
+                this.distributedCache.SetString(cacheKey, token);
+
+                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(token);
+                return jsonString;
+            }
+        }
 
         /// <summary>
         /// Finds the by email asynchronous.
         /// </summary>
-        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
-        /// <returns></returns>
+        /// <param name="forgotPasswordmodel">The ForgotPassword.</param>
+        /// <returns>result of task</returns>
         public Task FindByEmailAsync(ForgotPassword forgotPasswordmodel)
         {
             var result = this.userManager.FindByEmailAsync(forgotPasswordmodel.Email);
@@ -174,7 +216,7 @@ namespace RepositoryLayer.Services
         /// <summary>
         /// Resets the password asynchronous.
         /// </summary>
-        /// <param name="resetPasswordmodel">The reset passwordmodel.</param>
+        /// <param name="resetPasswordmodel">The ResetPassword.</param>
         /// <returns>Result for reset</returns>
         public async Task<object> ResetPasswordAsync(ResetPassword resetPasswordmodel)
         {
@@ -187,8 +229,8 @@ namespace RepositoryLayer.Services
         /// <summary>
         /// Generates the password reset token asynchronous.
         /// </summary>
-        /// <param name="forgotPasswordmodel">The forgot passwordmodel.</param>
-        /// <returns></returns>
+        /// <param name="forgotPasswordmodel">The ForgotPassword.</param>
+        /// <returns>result string</returns>
         public async Task<string> GeneratePasswordResetTokenAsync(ForgotPassword forgotPasswordmodel)
         {
             var result = await this.userManager.FindByEmailAsync(forgotPasswordmodel.Email);
@@ -197,15 +239,16 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Profilepics the specified file.
+        /// ProfilePic the specified file.
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>result string</returns>
         public string Profilepic(IFormFile file, string userId)
         {
             var stream = file.OpenReadStream();
             var name = file.FileName;
+            //// Add details of cloudinary account
             Account account = new Account("dc1kbrrhk", "383789512449669", "fqD5389o6BAzQiFaUk56zQzsYyM");
             Cloudinary cloudinary = new Cloudinary(account);
             var uploadParams = new ImageUploadParams()
@@ -214,7 +257,7 @@ namespace RepositoryLayer.Services
             };
             var uploadResult = cloudinary.Upload(uploadParams);
            
-            var data = this.registrationControl.Application.Where(t => t.Id==userId).FirstOrDefault();
+            var data = this.registrationControl.Application.Where(t => t.Id == userId).FirstOrDefault();
             data.Image = uploadResult.Uri.ToString();
             int result = 0;
             try
@@ -230,10 +273,10 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Gets the profilepic.
+        /// Gets the pic.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>list of user data</returns>
         public IList<ApplicationUser> GetProfilepic(string userId)
         {
             try
@@ -242,11 +285,10 @@ namespace RepositoryLayer.Services
                 var profile = from user in this.registrationControl.Application where (user.Id == userId) select user;
                 return profile.ToArray();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-       
     }
 }

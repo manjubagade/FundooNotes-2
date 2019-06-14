@@ -11,6 +11,9 @@ namespace Common.Models
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
+    /// <summary>
+    /// Image model
+    /// </summary>
     public class Image
     {
         /// <summary>

@@ -5,15 +5,15 @@
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
 
-using FundooApi;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace RepositoryLayer.Interface
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using FundooApi;
+    using Microsoft.AspNetCore.Http;
+
     /// <summary>
     /// Interface IRepositoryNotes for Handling Notes Operations
     /// </summary>
@@ -23,26 +23,27 @@ namespace RepositoryLayer.Interface
         /// Adds the notes.
         /// </summary>
         /// <param name="notes">The notes.</param>
+        /// <returns>success result</returns>
         Task<int> AddNotes(Notes notes);
 
         /// <summary>
         /// Saves the changes asynchronous.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>data value</returns>
         Task<int> SaveChangesAsync();
 
         /// <summary>
         /// Views the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>Notes Data</returns>
         IList<Notes> ViewNotes(string userId);
 
         /// <summary>
         /// Deletes the notes.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>int result</returns>
+        /// <returns>data result</returns>
         Task<int> DeleteNotes(int id);
 
         /// <summary>
@@ -50,6 +51,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="notes">The notes.</param>
         /// <param name="id">The identifier.</param>
+        /// <returns>success result</returns>
         Task<int> UpdateNotes(Notes notes, int id);
 
         /// <summary>
@@ -64,22 +66,23 @@ namespace RepositoryLayer.Interface
         /// Archives the specified user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>Notes Data</returns>
         IList<Notes> Archive(string userId);
 
         /// <summary>
         /// Trashes the note.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>Notes Data</returns>
         IList<Notes> TrashNote(string userId);
 
         /// <summary>
         /// Reminders the specified user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>Notes Data</returns>
         IList<Notes> Reminder(string userId);
 
+        IList<Notes> Alarm(string Userid);
     }
 }

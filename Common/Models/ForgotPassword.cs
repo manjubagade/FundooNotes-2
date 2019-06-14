@@ -12,8 +12,17 @@ namespace FundooApi
     using System.Linq;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// ForgotPassword model
+    /// </summary>
     public class ForgotPassword
     {
+        /// <summary>
+        /// Gets or sets the email.
+        /// </summary>
+        /// <value>
+        /// The email.
+        /// </value>
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }

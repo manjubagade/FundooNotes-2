@@ -12,6 +12,9 @@ namespace BusinessLayer
     using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// IEmailSender interface
+    /// </summary>
     public interface IEmailSender
     {
         /// <summary>
@@ -20,7 +23,7 @@ namespace BusinessLayer
         /// <param name="Email">The email.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="body">The body.</param>
-        /// <returns>result</returns>
+        /// <returns>token link</returns>
         Task SendEmailAsync(string Email, string subject, string body);
     }
 }

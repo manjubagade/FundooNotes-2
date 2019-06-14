@@ -7,28 +7,30 @@
 
 namespace BusinessLayer.Interfaces
 {
-
-    using FundooApi;
-    using Microsoft.AspNetCore.Http;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+    using FundooApi;
+    using Microsoft.AspNetCore.Http;
 
+    /// <summary>
+    /// INotes interface
+    /// </summary>
     public interface INotes
     {
         /// <summary>
         /// Creates the specified notes model.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        /// <returns></returns>
+        /// <returns>result of data</returns>
         Task<int> Create(Notes notesModel);
 
         /// <summary>
         /// Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>result data</returns>
         Task<int> Delete(int id);
 
         /// <summary>
@@ -36,14 +38,14 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>result data</returns>
         Task<int> Change(Notes notesModel, int id);
 
         /// <summary>
         /// Accesses the notes.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>result of notes data</returns>
         IList<Notes> AccessNotes(string userId);
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>string url</returns>
         Task<string> AddImage(IFormFile file, int id);
 
         /// <summary>
@@ -72,8 +74,9 @@ namespace BusinessLayer.Interfaces
         /// Reminders the specified user identifier.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns></returns>
+        /// <returns>notes data</returns>
         IList<Notes> Reminder(string userId);
 
+        IList<Notes> Alarm(string Userid);
     }
 }

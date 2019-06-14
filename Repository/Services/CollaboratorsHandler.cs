@@ -1,26 +1,40 @@
-﻿using Common.Models;
-using FundooApi;
-using Microsoft.Extensions.Caching.Distributed;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorsHandler.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Common.Models;
+    using FundooApi;
+    using Microsoft.Extensions.Caching.Distributed;
+    using RepositoryLayer.Interface;
+
     /// <summary>
-    /// Class Collaborator for Colaborator operations
+    /// Class Collaborator for Collaborator operations
     /// </summary>
     /// <seealso cref="RepositoryLayer.Interface.IRepositoryCollaborators" />
     public class CollaboratorsHandler : IRepositoryCollaborators
     {
+        /// <summary>
+        /// The registration control
+        /// </summary>
         private readonly RegistrationControl registrationControl;
+
+        /// <summary>
+        /// The distributed cache
+        /// </summary>
         private readonly IDistributedCache distributedCache;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateNotes"/> class.
+        /// Initializes a new instance of the <see cref="CollaboratorsHandler"/> class.
         /// </summary>
         /// <param name="registrationControl">The registration control.</param>
         /// <param name="distributedCache">The distributed cache.</param>
@@ -34,15 +48,14 @@ namespace RepositoryLayer.Services
         /// Adds the collaborators.
         /// </summary>
         /// <param name="collaboratorsModel">The collaborators model.</param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <returns>data data</returns>
+        /// <exception cref="Exception">the Exception</exception>
         public async Task<int> AddCollaborators(Collaborators collaboratorsModel)
         {
             try
             {
                 if (collaboratorsModel.ReceiverEmail != null)
                 {
-
                     //// Adding Notes in database
                     var addCollaborators = new Collaborators()
                     {
@@ -54,21 +67,19 @@ namespace RepositoryLayer.Services
                     this.registrationControl.Collaborators.Add(addCollaborators);
 
                 }
-
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }
-             return await SaveChangesAsync();
-           
 
+            return await this.SaveChangesAsync();
         }
 
         /// <summary>
         /// Saves the changes asynchronous.
         /// </summary>
-        /// <returns>Result int</returns>
+        /// <returns>Result data</returns>
         public async Task<int> SaveChangesAsync()
         {
             var result = await this.registrationControl.SaveChangesAsync();
@@ -76,10 +87,12 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Updates the notes.
+        /// Updates the collaborators.
         /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="collaboratorsmodel">The Collaborators.</param>
+        /// <param name="id">The id.</param>
+        /// <returns>updated result</returns>
+        /// <exception cref="Exception">The Exception</exception>
         public async Task<int> UpdateCollaborators(Collaborators collaboratorsmodel, int id)
         {
             try
@@ -89,13 +102,49 @@ namespace RepositoryLayer.Services
                 collaborator.ReceiverEmail = collaboratorsmodel.ReceiverEmail;
                 collaborator.Id = collaboratorsmodel.Id;
                 collaborator.UserId = collaboratorsmodel.UserId;
-
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return await SaveChangesAsync();
+
+            return await this.SaveChangesAsync();
+        }
+
+        public IList<Notes> CollaboratorNote(string receiverEmail)
+        {
+            try
+            {
+                var sharednotes = new List<Notes>();
+                var data = from coll in this.registrationControl.Collaborators
+                           where coll.ReceiverEmail == receiverEmail
+                           select new
+                           {
+                               coll.SenderEmail,
+                               coll.Id
+                           };
+                foreach (var result in data)
+                {
+                    var collnotes = from notes in this.registrationControl.Notes
+                                    where notes.Id.Equals(result.Id)
+                                    select new Notes
+                                    {
+                                        Id = notes.Id,
+                                        Title = notes.Title,
+                                        Description = notes.Description,
+                                    };
+                    foreach (var collaborator in collnotes)
+                    {
+                        sharednotes.Add(collaborator);
+                    }
+                }
+
+                return sharednotes;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -108,26 +157,23 @@ namespace RepositoryLayer.Services
             try
             {
                 var list = new List<CollaboratorMap>();
-                var innerJoin = from e in registrationControl.Notes
-                                join d in registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString()==d.Id
+                var innerJoin = from e in this.registrationControl.Notes
+                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString() == d.Id
                                 
                                 select new CollaboratorMap
                                 {
-                                    UserId=e.UserId,
+                                    UserId = e.UserId,
                                     Title = e.Title,
                                     Description = e.Description,
                                     Label = e.Label,
                                     SenderEmail = d.SenderEmail,
                                     ReceiverEmail = d.ReceiverEmail,
-                                   Image=e.Image,
-
+                                   Image = e.Image,
                                };
-               
 
                 return innerJoin.ToList();
             }
-
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -137,22 +183,19 @@ namespace RepositoryLayer.Services
             /// Deletes the notes.
             /// </summary>
             /// <param name="id">The identifier.</param>
-            /// <returns>Result in Int</returns>
+            /// <returns>Result data</returns>
             public async Task<int> DeleteCollaborators(int id)
         {
             try
             {
                 Collaborators collaboratorsModel = await this.registrationControl.Collaborators.FindAsync(id);
-                registrationControl.Collaborators.Remove(collaboratorsModel);
-                return registrationControl.SaveChanges();
+                this.registrationControl.Collaborators.Remove(collaboratorsModel);
+                return this.registrationControl.SaveChanges();
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-
-
         }
-
     }
 }

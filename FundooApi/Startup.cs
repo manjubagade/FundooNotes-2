@@ -91,10 +91,10 @@ namespace FundooApi
                 options.Password.RequiredLength = 3;
             });
 
-          //  services.Configure<EmailSender>(this.Configuration.GetSection("EmailSender"));
+          ////  services.Configure<EmailSender>(this.Configuration.GetSection("EmailSender"));
             services.AddTransient<IApplicationUserOperations, ApplicationUserOperations>();
             services.AddTransient<IUserDataOperations, UserDataOperations>();
-            //services.AddTransient<IEmailSender, EmailSender>();
+           ////services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<INotes, NotesCreation>();
             services.AddTransient<IRepositoryNotes, CreateNotes>();
             services.AddTransient<IEmailSender, EmailSenders>();
@@ -103,7 +103,6 @@ namespace FundooApi
             services.AddTransient<IRepositoryCollaborators, CollaboratorsHandler>();
             services.AddTransient<ICollborators, CollaboratorsBusinessLayes>();
          
-
             services.AddDistributedRedisCache(option =>
             {
                 option.Configuration = "localhost";
@@ -172,6 +171,10 @@ namespace FundooApi
             app.UseMvc();
         }
 
+        /// <summary>
+        /// swagger config class
+        /// </summary>
+        /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
         public class SwaggerSecurityRequirementsDocumentFilter : IDocumentFilter
         {
             /// <summary>
@@ -185,12 +188,19 @@ namespace FundooApi
                    {
                       new Dictionary<string, IEnumerable<string>>()
                       {
+
                           { "Bearer", new string[] { } },
                           { "Basic", new string[] { } }
+
                       }
                    };
             }
         }
+
+        /// <summary>
+        /// swagger FileUploadOperation config
+        /// </summary>
+        /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
         public class FileUploadOperation : IOperationFilter
    {
        /// <summary>
@@ -211,7 +221,8 @@ namespace FundooApi
                In = "header",
                Type = "string",
                Required = true // set to false if this is optional
-           });}}
-
+           });
+            }
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace FundooApi
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
+    /// <summary>
+    /// EmailSender class
+    /// </summary>
     public class EmailSender
     {
         /// <summary>

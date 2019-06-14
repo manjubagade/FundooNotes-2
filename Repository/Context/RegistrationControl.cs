@@ -45,12 +45,36 @@ namespace FundooApi
         /// </value>
         public DbSet<Notes> Notes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the labels.
+        /// </summary>
+        /// <value>
+        /// The labels.
+        /// </value>
         public DbSet<Label> Labels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the images.
+        /// </summary>
+        /// <value>
+        /// The images.
+        /// </value>
         public DbSet<Image> Images { get; set; }
 
+        /// <summary>
+        /// Gets or sets the notes labels.
+        /// </summary>
+        /// <value>
+        /// The notes labels.
+        /// </value>
         public DbSet<NotesLabel> NotesLabels { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collaborators.
+        /// </summary>
+        /// <value>
+        /// The collaborators.
+        /// </value>
         public DbSet<Collaborators> Collaborators { get; set; }
 
         /// <summary>

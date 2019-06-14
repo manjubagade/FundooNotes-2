@@ -1,17 +1,17 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmailSender.cs" company="Bridgelabz">
+// <copyright file="EmailSenders.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Services
 {
-    using Experimental.System.Messaging;
-    using Microsoft.Extensions.Configuration;
     using System;
     using System.Net;
     using System.Net.Mail;
     using System.Threading.Tasks;
+    using Experimental.System.Messaging;
+    using Microsoft.Extensions.Configuration;
 
     /// <summary>
     /// Class For Sending Email 
@@ -26,7 +26,7 @@ namespace BusinessLayer.Services
         /// <param name="subject">The subject.</param>
         /// <param name="body">The body.</param>
         /// <returns>
-        /// result
+        /// result data
         /// </returns>
         public Task SendEmailAsync(string Email, string subject, string body)
         {
@@ -49,9 +49,6 @@ namespace BusinessLayer.Services
             client.Send(msg);
             return Task.FromResult(0);
         }
-
-
-
 
         ///// <summary>
         ///// Sends the email asynchronous.

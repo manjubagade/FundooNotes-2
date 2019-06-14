@@ -7,18 +7,28 @@
 
 namespace RepositoryLayer.Services
 {
-    using Common.Models;
-    using FundooApi;
-    using Microsoft.Extensions.Caching.Distributed;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Common.Models;
+    using FundooApi;
+    using Microsoft.Extensions.Caching.Distributed;
 
+    /// <summary>
+    /// LabelNotesHandler class
+    /// </summary>
     public class LabelNotesHandler
     {
+        /// <summary>
+        /// The registration control
+        /// </summary>
         private readonly RegistrationControl registrationControl;
+
+        /// <summary>
+        /// The distributed cache
+        /// </summary>
         private readonly IDistributedCache distributedCache;
 
         /// <summary>
@@ -36,42 +46,58 @@ namespace RepositoryLayer.Services
         /// Adds the label.
         /// </summary>
         /// <param name="LabelModel">The label model.</param>
-        /// <exception cref="Exception"></exception>
+        /// <returns>Success result</returns>
+        /// <exception cref="Exception">The Exception</exception>
         public async Task<int> AddLabel(NotesLabel LabelModel)
         {
             try
             {
-                
                 //// Adding Notes in database
                 var addNotesLabel = new NotesLabel()
                 {
                     UserId = LabelModel.UserId,
                     NotesId = LabelModel.NotesId,
-                    LabelId=LabelModel.LabelId
+                    LabelId = LabelModel.LabelId
 
                 };
-                var result = this.registrationControl.NotesLabels.Add(addNotesLabel);
-               
 
+                var result = this.registrationControl.NotesLabels.Add(addNotesLabel);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return await SaveChangesAsync();
+
+            return await this.SaveChangesAsync();
         }
+
+        public IList<NotesLabel> ViewLabel(Guid userId)
+        {
+            var list = new List<NotesLabel>();
+            var label = from Label in this.registrationControl.NotesLabels where Label.UserId.Equals(userId) orderby Label.UserId descending select Label;
+            foreach (var item in label)
+            {
+                list.Add(item);
+            }
+
+            var cacheKey = label.ToString();
+            this.distributedCache.GetString(cacheKey);
+            this.distributedCache.SetString(cacheKey, label.ToString());
+            return label.ToArray();
+          
+        }
+
 
         /// <summary>
         /// Saves the changes asynchronous.
         /// </summary>
-        /// <returns>Result Int int</returns>
+        /// <returns>Result data</returns>
         public async Task<int> SaveChangesAsync()
         {
             //// for changes the Database Entries
             return await this.registrationControl.SaveChangesAsync();
              
         }
-
        
         ///// <summary>
         ///// Gets the Labels.
@@ -91,14 +117,12 @@ namespace RepositoryLayer.Services
         //    this.distributedCache.SetString(cacheKey, label.ToString());
         //    return label.ToArray();
         //}
-
-
-
+        
         /// <summary>
         /// Deletes the label.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>result in int</returns>
+        /// <returns>result data</returns>
         public async Task<int> DeleteLabel(int id)
         {
             try
@@ -107,7 +131,7 @@ namespace RepositoryLayer.Services
                 registrationControl.NotesLabels.Remove(label);
                 return registrationControl.SaveChanges();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

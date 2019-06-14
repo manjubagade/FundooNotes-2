@@ -11,6 +11,9 @@ namespace FundooApi
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
+    /// <summary>
+    /// ResetPassword model
+    /// </summary>
     public class ResetPassword
     {
         /// <summary>
@@ -23,8 +26,11 @@ namespace FundooApi
         public string Email { get; set; }
 
         /// <summary>
-        /// UserName
+        /// Gets or sets the name of the user.
         /// </summary>
+        /// <value>
+        /// The name of the user.
+        /// </value>
         [Required]
         public string UserName { get; set; }
 

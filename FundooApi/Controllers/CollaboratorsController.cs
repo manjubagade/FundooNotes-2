@@ -1,36 +1,49 @@
-﻿using BusinessLayer.Interfaces;
-using Common.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Threading.Tasks;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorsController.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
-         namespace FundooApi.Controllers
-        {
-            [Route("api/[controller]")]
+namespace FundooApi.Controllers
+  {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using BusinessLayer.Interfaces;
+    using Common.Models;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    /// <summary>
+    /// CollaboratorsController class
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    [Route("api/[controller]")]
             [ApiController]
             [Authorize]
-            public class CollaboratorsController: ControllerBase
+            public class CollaboratorsController : ControllerBase
             {
 
-         private readonly ICollborators collborators;
+        /// <summary>
+        /// The collborators
+        /// </summary>
+        private readonly ICollborators collborators;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotesController"/> class.
+        /// Initializes a new instance of the <see cref="CollaboratorsController"/> class.
         /// </summary>
-        /// <param name="notesHandler">The notes creation.</param>
+        /// <param name="collborators">The ICollborators.</param>
         public CollaboratorsController(ICollborators collborators)
         {
             this.collborators = collborators;
         }
-
-
+        
         /// <summary>
-        /// Creates the notes.
+        /// Creates the Collaborator.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
+        /// <param name="collaboratorsModel">The Collaborators.</param>
         /// <returns>return result</returns>
         [HttpPost]
         [Route("addCollaborators")]
@@ -44,12 +57,11 @@ using Microsoft.AspNetCore.Mvc;
             catch (Exception e)
             {
                 return this.BadRequest(e.Message);
-
             }
         }
 
         /// <summary>
-        /// Deletes the notes.
+        /// Deletes the Collaborator.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
@@ -70,9 +82,9 @@ using Microsoft.AspNetCore.Mvc;
         }
 
         /// <summary>
-        /// Updates the notes.
+        /// Updates the collaboretor.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
+        /// <param name="collaboratorsModel">The Collaborators.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>return result</returns>
         [HttpPut]
@@ -91,6 +103,11 @@ using Microsoft.AspNetCore.Mvc;
             }
         }
 
+        /// <summary>
+        /// Views all.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>List of Result</returns>
         [HttpGet]
         [Route("viewcollaborators/{UserId}")]
         public IActionResult ViewAll(string userId)

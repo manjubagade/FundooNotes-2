@@ -1,10 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿// -------------------------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorMap.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Aniket Kamble"/>
+// ---------------------------------------------------------------------------------------------------------------------------
 
 namespace Common.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Text;
+
+    /// <summary>
+    /// CollaboratorMap model
+    /// </summary>
     public class CollaboratorMap
     {
         /// <summary>
@@ -82,7 +92,12 @@ namespace Common.Models
         /// </value>
         public string ReceiverEmail { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image.
+        /// </summary>
+        /// <value>
+        /// The image.
+        /// </value>
         public string Image { get; set; }
-
     }
 }

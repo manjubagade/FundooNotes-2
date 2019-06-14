@@ -5,23 +5,26 @@
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
 
-using BusinessLayer.Interfaces;
-using Common.Models;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BusinessLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using BusinessLayer.Interfaces;
+    using Common.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using RepositoryLayer.Interface;
+
     /// <summary>
     /// class for Business Layer
     /// </summary>
     /// <seealso cref="BusinessLayer.Interfaces.ILabel" />
     public class BusinessLabel : ILabel
     {
+        /// <summary>
+        /// The repository label
+        /// </summary>
         private readonly IRepositoryLabel repositoryLabel;
 
         /// <summary>
@@ -44,32 +47,41 @@ namespace BusinessLayer.Services
              
         }
 
+        public async Task<int> addLabel(NotesLabel notesLabel)
+        {
+            try
+            {
+                return await this.repositoryLabel.AddNotesLabel(notesLabel);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         /// <summary>
         /// Changes the specified notes model.
         /// </summary>
         /// <param name="LabelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>updated data</returns>
         public async Task<int> Change(Label LabelModel, int id)
         {
-
           return await this.repositoryLabel.UpdateLabel(LabelModel, id);
-           
-             
         }
 
         /// <summary>
-        /// Creates the specified notes model.
+        /// Creates the specified Label.
         /// </summary>
-        /// <param name="notesModel">The notes model.</param>
-        /// <returns></returns>
+        /// <param name="LabelModel">The Label.</param>
+        /// <returns>addition success data</returns>
         public async Task<int> Create(Label LabelModel)
         {
             try
             {
                return await this.repositoryLabel.AddLabel(LabelModel);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -79,11 +91,30 @@ namespace BusinessLayer.Services
         /// Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>result data</returns>
         public async Task<int> Delete(int id)
         {
             return await this.repositoryLabel.DeleteLabel(id);
         }
-     
+
+        /// <summary>
+        /// Views the notes label.
+        /// </summary>
+        /// <param name="userid">The userid.</param>
+        /// <returns>NotesLabel Data</returns>
+        public IList<NotesLabel> ViewNotesLabel(string userid)
+        {
+            return this.repositoryLabel.ViewNotesLabels(userid);
+        }
+
+        /// <summary>
+        /// Deletes the notes label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Success result</returns>
+        public async Task<int> DeleteNotesLabel(int id)
+        {
+            return await this.repositoryLabel.DeleteNotesLabel(id);
+        }
     }
 }

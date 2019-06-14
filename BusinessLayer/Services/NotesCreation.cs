@@ -4,24 +4,28 @@
 // </copyright>
 // <creator name="Aniket Kamble"/>
 // ---------------------------------------------------------------------------------------------------------------------------
-using BusinessLayer.Interfaces;
-using FundooApi;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+    using BusinessLayer.Interfaces;
+    using FundooApi;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using RepositoryLayer.Interface;
+
     /// <summary>
     /// Class Notes For Notes Operations
     /// </summary>
     /// <seealso cref="BusinessLayer.Interfaces.INotes" />
     public class NotesCreation : INotes
     {
+        /// <summary>
+        /// The repository notes
+        /// </summary>
         private readonly IRepositoryNotes repositoryNotes;
 
         /// <summary>
@@ -43,31 +47,29 @@ namespace BusinessLayer.Services
             return this.repositoryNotes.ViewNotes(UserId);
         }
 
-        
-
         /// <summary>
         /// Changes the specified notes model.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>updated result</returns>
         public async Task<int> Change(Notes notesModel, int id)
         {
-          return await this.repositoryNotes.UpdateNotes(notesModel,id);
+          return await this.repositoryNotes.UpdateNotes(notesModel, id);
         }
 
         /// <summary>
         /// Creates the specified notes model.
         /// </summary>
         /// <param name="notesModel">The notes model.</param>
-        /// <returns></returns>
+        /// <returns>create result</returns>
         public async Task<int> Create(Notes notesModel)
         {
             try
             {
                 return await this.repositoryNotes.AddNotes(notesModel);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -77,7 +79,7 @@ namespace BusinessLayer.Services
         /// Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>delete success result</returns>
         public async Task<int> Delete(int id)
         {
             return await this.repositoryNotes.DeleteNotes(id);
@@ -88,7 +90,7 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="file">The file.</param>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>string url data</returns>
         public async Task<string> AddImage(IFormFile file, int id)
         {
             return await this.repositoryNotes.Image(file, id);
@@ -125,6 +127,10 @@ namespace BusinessLayer.Services
         {
             return this.repositoryNotes.Reminder(userId);
         }
-        
+
+        public IList<Notes> Alarm(string Userid)
+        {
+            return this.repositoryNotes.Alarm(Userid);
+        }
     }
 }
