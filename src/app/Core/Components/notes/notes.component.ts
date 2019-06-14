@@ -12,7 +12,8 @@ import { Title } from '@angular/platform-browser';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 import { HomeComponent } from '../home/home.component';
 import { HttpHeaders } from '@angular/common/http';
-
+import { empty } from 'rxjs';
+import { InputTrimModule } from 'ng2-trim-directive';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -27,7 +28,7 @@ export class NotesComponent implements OnInit {
   });
   constructor(private router: Router, public service: NoteService, private toastr: ToastrService, private home: HomeComponent) {
   }
-  color;
+  color='#ffffff';
   image;
   @Input() cards;
   @Output() public notes = new EventEmitter();
@@ -51,12 +52,15 @@ export class NotesComponent implements OnInit {
       console.log(jwt_token.UserID);
       localStorage.setItem("UserId", jwt_token.UserID);
       var UserId = localStorage.getItem("UserId");
-      console.log("qqqqqqqqqqq" + this.form.value.title.trim());
+     
 
       var token=localStorage.getItem('token');
       var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
-
-      if ((this.form.value.title.trim() !== '') || (this.form.value.Description.trim() !== '')) {
+     this.form.value.title!=null&&this.form.value.Description!=null&&this.form.value.title.trim()!=''
+      if ((this.form.value.title!==null||this.form.value.title.trim()!==''||this.form.value.title.trim!==''||this.form.value.title!=='')||(this.form.value.title.trim()!=='' || this.form.value.title!==''|| this.form.value.title!== 'undefined'|| this.form.value.Description.trim()!=='')||(this.form.value.title.length>0 ||this.form.value.Description.length>0)) {
+       console.log('yhfsayu');
+       
+        
         this.service.AddNotes(this.form.value, UserId,headers_object).subscribe(
           (res: any) => {
            this.form.reset();
@@ -73,10 +77,10 @@ export class NotesComponent implements OnInit {
         );
       }
       else {
-        this.home.refresh();
+        // this.home.refresh();
       }
     }
-
+  
     catch (error) {
       console.log('invalid token format', error);
     }

@@ -1,49 +1,152 @@
-<div fxLayout={{css}} style="margin-top:10px;margin-bottom: 2px" fxLayout="center" fxFlexOffset='20' fxLayout='row'>
-  <div *ngFor="let note of cards|search:search">
+<div fxLayout={{css}} class="outer-div" fxFlexOffset='20' fxFlex="100">
 
-    <mat-card class="note" [style.background-color]=note.color [ngClass]="{'note':flag==true,'notes':flag==false }" fxFlexOffset.xs='-10'>
-      <div (click)="openDialog(note)" class="element.style">
-        <div>
-          <img src="{{note.image}}" class="notesImage" />
+  <div *ngFor="let note of cards|search:search" cdkDrag style="overflow:hidden ;">
+
+    <div *ngIf="note.pin == true">
+      <div>
+        <mat-label style="font-size: 11px">PINNED<br></mat-label>
+
+        <mat-card class="note" [style.background-color]=note.color [ngClass]="{'note':flag==true,'notes':flag==false }"
+          fxFlexOffset.xs='-10'>
+
+          <div fxLayout="row" fxLayoutAlign="end start" class="hower" style="opacity: 0">
+            <div style="position: absolute">
+              <button mat-icon-button (click)="UnPin(note)">
+
+                <img src="../../../assets/pinsvg.svg" />
+
+              </button>
+            </div>
+          </div>
+
+          <div (click)="openDialog(note)" class="element.style">
+            <div>
+
+              <div>
+                <img src="{{note.image}}" class="notesImage" />
+              </div>
+            </div>
+
+            <div class="inputArea">
+              <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
+            </div>
+            <div>
+              <textarea
+                style="width: 560px; outline: none; background: transparent; border:none;overflow: hidden;padding-left: 2%;"
+                [mat-autosize] [(ngModel)]='note.description' autofocus='false'></textarea>
+            </div>
+
+            <div fxLayoutAlign="row" class="label">
+              <div *ngFor="let notelables of cardLabel">
+                <div *ngIf="notelables.notesId == note.id">
+                  <div *ngFor="let labels of Label">
+                    <div *ngIf="notelables.labelId==labels.id">
+                      <mat-chip-list>
+                        <mat-chip [selectable]="selectable" [removable]="removable">
+                          {{labels.labels}}
+                          <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chipinputArea">
+            <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
+              <mat-chip-list #chipList>
+                <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
+                  {{note.reminder}}
+                  <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+              <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+            </div>
+          </div>
+
+
+          <div class="hower" style="opacity: 0">
+            <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'></app-icon>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <!----------------------------------------------Unpin----------------------------------------------------->
+
+    <div *ngIf="note.pin == false" fxLayout="row">
+
+      <div>
+        <mat-label style="font-size: 11px">Others<br></mat-label>
+      </div>
+
+      <mat-card class="note" [style.background-color]=note.color [ngClass]="{'note':flag==true,'notes':flag==false }"
+        fxFlexOffset.xs='-10'>
+
+        <div fxLayout="row" fxLayoutAlign="end start" class="hower" style="opacity: 0">
+          <div style="position: absolute">
+            <button mat-icon-button (click)="Pin(note)">
+              <img src="../../../assets/unpin.svg" /> </button>
+          </div>
         </div>
-       
-        <div class="inputArea">
-          <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
-        </div>
-        <div class="inputArea">
-          <mat-card-content class="inputArea">{{note.description}}</mat-card-content>
+
+        <div (click)="openDialog(note)" class="element.style">
+
+          <div>
+            <div>
+              <img src="{{note.image}}" class="notesImage" />
+            </div>
+          </div>
+          <div class="profile-pic">
+            <img src="{{note.image}}" class="notesImage" />
+            <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div>
+          </div>
+
+          <div class="inputArea">
+            <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
+          </div>
+          <div class="inputArea" fxLayout="column">
+            <mat-card-content class="inputArea">{{note.description}}</mat-card-content>
+          </div>
+
+          <div fxLayout="row">
+            <div *ngFor="let notelables of cardLabel">
+              <div *ngIf="notelables.notesId == note.id">
+                <div *ngFor="let labels of Label">
+                  <div *ngIf="notelables.labelId==labels.id">
+                    <mat-chip-list>
+                      <mat-chip [selectable]="selectable" [removable]="removable">
+                        {{labels.labels}}
+                        <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="chipinputArea">
-          <div *ngIf="note.label!==null">
+          <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
             <mat-chip-list #chipList>
-              <mat-chip [selectable]="selectable" [removable]="removable" (removed)="remove(note,note.id)">
-                {{note.label}}
+              <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
+                {{note.reminder}}
                 <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
             <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
           </div>
         </div>
-      </div>
-     
-     <div class="chipinputArea">
-        <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
-          <mat-chip-list #chipList>
-            <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
-              {{note.reminder}}
-              <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-          <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-        </div>
-      </div>
-    
 
-      <div class="hower" style="opacity: 0">
-        <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'></app-icon>
-      </div>
-    </mat-card>
+        <div class="hower" style="opacity: 0">
+          <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'
+            (messageEvent)="receiveMessage($event)"></app-icon>
+        </div>
+
+      </mat-card>
+    </div>
 
   </div>
 </div>

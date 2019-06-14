@@ -6,6 +6,10 @@
 html {
   background-color: #56baed;
 }
+
+ .updateDialog .mat-dialog-container{
+   padding: 0px;
+ }
  
 body {
   font-family: "Poppins", sans-serif;

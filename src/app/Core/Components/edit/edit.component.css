@@ -4,11 +4,13 @@
     display: flex;
 }
 .notesImage{
-height: auto;
+
+max-height: 380px;
 width: 560px;
 display: flex;
 scroll-behavior: auto;
 }
+
 .note{
     min-height: 20px;
      /* min-width: 240px; */
@@ -20,8 +22,12 @@ scroll-behavior: auto;
     border: none;
     overflow: auto;
     outline: none;
-   
+  
     border-radius: 10px 10px 10px 10px; 
     padding-left: 25%;
     padding: 0%;
 }
+
+.how:hover{
+    opacity: 1 !important;
+  }

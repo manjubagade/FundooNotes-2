@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('token', res);
         
-        console.log(res);
+        //console.log(res);
         this.router.navigateByUrl('/home');
       },
       err => {

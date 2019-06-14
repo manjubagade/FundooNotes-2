@@ -25,7 +25,7 @@ export class NoteService {
   }
 
   getNotesById(UserId: string,t) {
-    console.log("In Main Components"+UserId);
+    
     return this.http.get(environment.BaseURI + '/Notes/view/' + UserId,t);
   }
 
@@ -64,10 +64,27 @@ UpdateLabel(label,UserId,headers_object){
   console.log("In Service UpdateLabel +++++++++" + label,UserId);
   return this.http.put(environment.BaseURI+ '/Label/updateLabel/'+UserId,label,headers_object);
 }
- 
+// Notes Label Handling
+ viewNotesLabel(UserId,headers_object){
+   return this.http.get(environment.BaseURI + '/Label/viewalllabel/' + UserId,headers_object)
+
+ }
+
+ DeleteNotesLabel(id){
+
+   return this.http.delete(environment.BaseURI + '/Label/deletenoteslabel/'+ id,this.headers_object)
+ }
+
+ AddNotesLabel(data,headers_object){
+   console.log(data);
+   
+  return this.http.post(environment.BaseURI + '/Label/addlabel', data,headers_object)
+
+}
   getLabelsById(UserId: string,headers_object){
     return this.http.get(environment.BaseURI + '/Label/viewLabel/' + UserId,headers_object);
   }
+  // 
   deleteLabel(id,headers_object){
     console.log("................"+id);
     return this.http.delete(environment.BaseURI + '/Label/delete/' + id,headers_object);

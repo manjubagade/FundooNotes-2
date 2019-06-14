@@ -45,6 +45,8 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from 'angular-6-social-login';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { InputTrimModule } from 'ng2-trim-directive';
 
 let config = new AuthServiceConfig([
   {
@@ -67,6 +69,7 @@ export function provideConfig() {
     UserComponent,
     RegistrationComponent,
     LoginComponent,
+    
     HomeComponent,
     ForgotPasswordComponent,
     ModelComponent,
@@ -83,8 +86,8 @@ export function provideConfig() {
     PipePipe,
     CollaboratorsComponent,
     SearchComponent,
+ 
     
-   
   ],
   imports: [
     BrowserModule,
@@ -99,6 +102,7 @@ export function provideConfig() {
     SocialLoginModule,
     MatSelectModule,
     MatTabsModule,
+    DragDropModule,
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -107,6 +111,7 @@ export function provideConfig() {
     MatTooltipModule,
     NgMatSearchBarModule,
     MatCardModule,
+    InputTrimModule,
     MatButtonModule,
     MatExpansionModule,
     FlexLayoutModule,

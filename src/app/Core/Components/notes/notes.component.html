@@ -5,9 +5,9 @@
       <div *ngIf="!isOpen" (click)="isOpen=true" fxLayout="row" fxFlexOffset.sm='10' fxFlexOffset.xs='5' fxFlex="100">
         <input class="take_a_note" formControlName="Description" type="text" placeholder="Take a note..."
           aria-label="Take a note" [ngStyle.xs]="{'width.px': 100 }" [ngStyle.sm]="{'width.px': 100 }"
-          [ngStyle.md]="{'width.px': 100 }">
+          [ngStyle.md]="{'width.px': 100 }" trim>
       </div>
-      <!-- style="width: 560px; outline: none;border:none;overflow:hidden" -->
+      
       <div *ngIf=isOpen class="card">
         <div class="cards">
           <input class="take_a_note" formControlName="title" type="text" placeholder="Title" aria-label="Take a note"

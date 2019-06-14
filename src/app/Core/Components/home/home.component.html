@@ -2,6 +2,7 @@
 
   <mat-toolbar color="primary" class="example-toolbar" fxLayout="row">
 
+    <!----------------------------------------------Menu Button----------------------------------------------------->
     <div>
       <button class="togle" mat-icon-button (click)="snav.toggle()" fxLayout="row" fxFlex='10'>
         <mat-icon>menu</mat-icon>
@@ -12,23 +13,26 @@
     <div fxFlex='10'>
       <div [ngStyle.xs]="{'font-size.px': 15 }" [ngStyle.sm]="{'font-size.px': 20 }"
         [ngStyle.md]="{'font-size.px': 22 }">{{ Header }}
-        
+
       </div>
     </div>
 
-    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.sm=true fxHide.xs=true;
+    <!----------------------------------------------Search----------------------------------------------------->
+    <mat-form-field (click)="$event.stopPropagation()" fxFlex appearance="outline" fxHide.md=true  fxHide.sm=true fxHide.xs=true
       [style.min-width.px]='625' [style.fontSize.px]=2 fxFlexOffset='8' fxFlex='50' color=black>
       <div class="matform">
         <div fxLayout="row">
           <button mat-icon-button class="togle">
             <mat-icon>search</mat-icon>
           </button>
-          <input matInput [style.fontSize.px]=14 placeholder="Search"  [(ngModel)]="value" (keyup)="lookfor()" (click)='goSearch()'>
+          <input matInput [style.fontSize.px]=14 placeholder="Search" [(ngModel)]="value" (keyup)="lookfor()"
+            (click)='goSearch()'>
         </div>
       </div>
     </mat-form-field>
 
-    <div fxFlexOffset='18' fxFlexOffset.md='30' fxFlexOffset.sm='48' fxFlexOffset.xs='22' class="ref" fxFlex='10'>
+    <!-----------------------------------------Refresh----------------------------------------------------->
+    <div fxFlexOffset='18' fxFlexOffset.md='30' fxFlexOffset.lg='20' fxFlexOffset.sm='48' fxFlexOffset.xs='40' class="ref" fxFlex='10'>
       <div fxLayoutAlign="end center" fxLayout="row">
         <button mat-icon-button class="togle">
           <mat-icon class="Refresh" aria-label="refresh Button" color="accent" [ngStyle]="{'color':'rgb(95, 99, 99)'}"
@@ -37,39 +41,39 @@
         </button>
       </div>
     </div>
-   
-    <div fxFlex="10" fxFlex="row" fxFlexOffset.xs='-2'>
+
+    <!------------------------------------------View----------------------------------------------------->
+    <div fxFlex="10" fxFlex="row" fxFlexOffset.xs='-2' fxHide.xs=true>
       <button class="togle" mat-icon-button *ngIf='view==false' (click)='changeView()'>
         <mat-icon>grid_view</mat-icon>
       </button>
 
       <button class="togle" mat-icon-button *ngIf='view==true' (click)='changeView()'>
 
-       
+
 
         <img src="./assets/outline-view_agenda-24px.svg">
       </button>
     </div>
 
+    <!-------------------------------------Profile And logged out----------------------------------------------------->
     <div class="togle" fxFlex="row" fxFlexOffset.xs='0' fxFlex="20">
-      <button class="togle" mat-mini-fab color="white"
-        
-        data-toggle="dropdown" [ngStyle]="{'background-image': 'url(' + profilePic + ')', 'background-size': 'cover'  }"></button>
+      <button class="togle" mat-mini-fab color="white" data-toggle="dropdown"
+        [ngStyle]="{'background-image': 'url(' + profilePic + ')', 'background-size': 'cover'  }"></button>
 
       <div class="Dropdown" style="top:10px">
         <ul class="dropdown-menu">
-          <li> <button mat-mini-fab [ngStyle]="{'background-image': 'url(' + profilePic + ')', 'background-size': 'cover','size':'50px'  }" 
-              
+          <li> <button mat-mini-fab [ngStyle]="{'background-image': 'url(' + profilePic + ')', 'background-size': 'cover','size':'50px' }"
               (click)="file.click(file)" class="togle" fxFlex="row" fxFlex='20'>
-              <input type="file" #file style="display:none;" (change)="uploadFile(file.files)" >
+              <input type="file" #file style="display:none;" (change)="uploadFile(file.files)">
 
 
             </button>
             <div>
-            <h2 [ngStyle]="{'font-size':'15px' ,'color':'black'} ">{{user}}</h2>
-            <h1 [ngStyle]="{'font-size':'15px' ,'color':'gray'} ">{{Email}}</h1>
-          
-          </div>
+              <h2 [ngStyle]="{'font-size':'15px' ,'color':'black'} ">{{user}}</h2>
+              <h1 [ngStyle]="{'font-size':'15px' ,'color':'gray'} ">{{Email}}</h1>
+
+            </div>
           <li class="devider"></li>
           <li><button mat-raised-button routerLink=".">Add Account</button>
             <button mat-raised-button (click)="onLogout()">Logout</button></li>
@@ -80,7 +84,7 @@
   </mat-toolbar>
 
   <div class="devider"></div>
-
+<!----------------------------------------------Side Navigation----------------------------------------------------->
   <mat-sidenav-container class="example-sidenav-container">
 
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
@@ -102,7 +106,7 @@
             <mat-card-title>LABELS</mat-card-title>
           </div>
           <div *ngFor="let labels of Label">
-            <a mat-list-item routerLink="../label" class="round" (click)="Header='Archieve'"><img
+            <a mat-list-item routerLink="./label" class="round" (click)="Header='Label'"><img
                 src="./assets/outline-label-24px.svg" fxFlex='30'>{{labels.labels}}</a>
 
           </div>

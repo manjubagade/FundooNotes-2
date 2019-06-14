@@ -1,15 +1,21 @@
-<mat-card [style.background-color]=note.color fxFlex='100' style="overflow: hidden">
 
-  <div>
+<mat-card [style.background-color]=note.color fxFlex='100' fxLayout="column" class="edit">
+
+ 
     <div>
+      
       <img src="{{note.image}}" class="notesImage" />
+   
       <div *ngIf="note.image != null">
+        
         <button class="togle" mat-mini-fab color="black" [ngStyle]="{'color':'rgb(95, 99, 99)'}" fxFlexOffset='90%'
           (click)=Update()>
-
+       
           <mat-icon>delete</mat-icon>
-
         </button>
+       
+
+       
       </div>
     </div>
 
@@ -32,7 +38,7 @@
         </mat-chip-list>
       </div>
     </div>
-  </div>
+ 
 
   <div fxLayout="row" [ngStyle]="{'width':'225px'}">
     <app-icon [cards]="note"></app-icon>
