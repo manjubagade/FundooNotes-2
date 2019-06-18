@@ -44,9 +44,5 @@ export class CollaboratorsComponent implements OnInit {
     
    })
 
-   
-   
-   this.service.ad
- 
  }
 }

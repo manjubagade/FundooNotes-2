@@ -7,6 +7,8 @@ import { UserService } from '../../services/user.service';
 import { NoteService } from '../../services/NoteService/note.service';
 import { HttpHeaders } from '@angular/common/http';
 
+var token = localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -19,6 +21,8 @@ export class EditComponent implements OnInit {
    title;
    description;
    image;
+   Label;
+   cardLabel;
 
   ngOnInit() {
     console.log(this.data);
@@ -26,8 +30,28 @@ export class EditComponent implements OnInit {
     this.title=this.note.title;
     this.description=this.note.description;
     this.image=this.note.image;
-    
+    var UserId = localStorage.getItem('UserId');
+
+    this.service.viewNotesLabel(UserId,headers_object).subscribe(data=>{
+      this.cardLabel=data['result'];
+      console.log(this.cardLabel,"labeldata");
+
+      this.service.getLabelsById(UserId,headers_object).subscribe(
+        data => {
+          this.Label = data;
+         
+          console.log(this.Label,"aniket");
+  
+        }
+  
+      ), (err: any) => {
+        console.log(err);
+      };
+  
+
+    })
   }
+
   Update(){
    
     console.log(this.data);

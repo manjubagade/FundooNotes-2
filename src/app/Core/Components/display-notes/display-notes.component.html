@@ -1,6 +1,6 @@
 <div fxLayout={{css}} class="outer-div" fxFlexOffset='20' fxFlex="100">
 
-  <div *ngFor="let note of cards|search:search" cdkDrag style="overflow:hidden ;">
+  <div *ngFor="let note of cards|search:search" cdkDrag style="overflow:hidden;" fxLayout="row">
 
     <div *ngIf="note.pin == true">
       <div>
@@ -36,7 +36,7 @@
                 [mat-autosize] [(ngModel)]='note.description' autofocus='false'></textarea>
             </div>
 
-            <div fxLayoutAlign="row" class="label">
+            <div fxLayout="row">
               <div *ngFor="let notelables of cardLabel">
                 <div *ngIf="notelables.notesId == note.id">
                   <div *ngFor="let labels of Label">
@@ -52,19 +52,33 @@
                 </div>
               </div>
             </div>
+
+            <!-- <div>
+                <div *ngFor="let collaborator of Collaborator.Collaborator">
+                    <div *ngIf="note.id == collaborator.notesId">
+                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
+                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                 {{collaborator.receiverEmail}}
+                </button>
+                </div>
+                </div>
+               </div> -->
+        
+            <div class="chipinputArea">
+              <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
+                <mat-chip-list #chipList>
+                  <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
+                    {{note.reminder|date:medium}}
+                    <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+                <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+              </div>
+            </div>
+  
           </div>
 
-          <div class="chipinputArea">
-            <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
-              <mat-chip-list #chipList>
-                <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
-                  {{note.reminder}}
-                  <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-              </mat-chip-list>
-              <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-            </div>
-          </div>
+          
 
 
           <div class="hower" style="opacity: 0">
@@ -76,7 +90,6 @@
     <!----------------------------------------------Unpin----------------------------------------------------->
 
     <div *ngIf="note.pin == false" fxLayout="row">
-
       <div>
         <mat-label style="font-size: 11px">Others<br></mat-label>
       </div>
@@ -103,7 +116,7 @@
             <div class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></div>
           </div>
 
-          <div class="inputArea">
+          <div>
             <mat-card-title class="inputArea">{{note.title}}</mat-card-title>
           </div>
           <div class="inputArea" fxLayout="column">
@@ -127,18 +140,32 @@
             </div>
           </div>
         </div>
+       
+
+          <!-- <div>
+            <div *ngFor="let collaborator of Collaborator.Collaborator">
+                <div *ngIf="note.id == collaborator.notesId">
+            <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
+              <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+             {{collaborator.receiverEmail}}
+            </button>
+            </div>
+            </div>
+           </div> -->
+
 
         <div class="chipinputArea">
           <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
             <mat-chip-list #chipList>
               <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
-                {{note.reminder}}
+                {{note.reminder|date:medium}}
                 <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
             <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
           </div>
         </div>
+
 
         <div class="hower" style="opacity: 0">
           <app-icon [cards]="note" [archivedicon]='archived' (setNote)="Trash($event)" [trashed]='trash'

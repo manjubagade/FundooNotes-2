@@ -100,6 +100,24 @@
          margin-bottom:20px;
     }
 }
+@media screen and (max-width: 680px) {
+    .note{
+        width: 250px;
+        margin-top: 5px;
+        margin-left: 1px;
+    }
+    .notes{
+        width: 450px;
+        margin-top: 5px;
+        margin-left: 1px;
+    }
+    .outer-div-style{
+        margin-top:15px;
+         margin-left: 1%; 
+         margin-right: 1%; 
+         margin-bottom:20px;
+    }
+}
 @media screen and (max-width: 600px) {
     .note{
         width: 400px;
@@ -118,15 +136,33 @@
         margin-bottom:20px;
     }
 }
+@media screen and (max-width: 505px) {
+    .note{
+        width: 320px;
+        margin-top: 5px;
+        margin-left: 1px;
+    }
+    .notes{
+        width: 320px;
+        margin-top: 5px;
+        margin-left: 1%;
+    }
+    .outer-div-style{
+        margin-top:15px;
+        margin-left: 0%;
+        margin-right: 0%; 
+        margin-bottom:20px;
+    }
+}
 @media screen and (max-width: 450px) {
     .note{
-        width: 365px;
+        width: 305px;
         margin-top: 5px;
         margin-left: 0%;
        
     }
     .notes{
-        width: 365px;
+        width: 305px;
         margin-top: 5px;
         margin-left: 0%;
         
@@ -140,13 +176,13 @@
 }
 @media screen and (max-width: 425px) {
     .note{
-        width: 415px;
+        width: 305px;
         margin-top: 5px;
         margin-left: 1%;
         
     }
     .notes{
-        width: 415px;
+        width: 305px;
         margin-top: 5px;
         margin-left: 1%;
         
@@ -160,12 +196,12 @@
 }
 @media screen and (max-width: 375px) {
     .note{
-        width: 365px;
+        width: 225px;
         margin-top: 5px;
         margin-left: 1%
     }
     .notes{
-        width: 365px;
+        width: 5px;
         margin-top: 5px;
         margin-left: 1%
     }
@@ -178,12 +214,12 @@
 }
 @media screen and (max-width: 320px) {
     .note{
-        width: 290px;
+        width: 190px;
         margin-top: 5px;
         margin-left: 0px;
     }
     .notes{
-        width: 290px;
+        width: 220px;
         margin-top: 5px;
         margin-left: 0px;
 }
@@ -192,11 +228,11 @@
 .how:hover{
     opacity: 1 !important;
   }
-  .outer-div{
+  /* .outer-div{
       overflow: hidden;
       max-width: 45px;
   }
   .label{
       position: relative;
       overflow: hidden;
-  }
+  } */

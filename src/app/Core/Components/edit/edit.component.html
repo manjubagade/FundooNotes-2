@@ -31,13 +31,32 @@
       <textarea style="width: 560px; outline: none; background: transparent; border:none;overflow: hidden;"
         [mat-autosize] [(ngModel)]='note.description'></textarea>
     </div>
-    <div>
+    <!-- <div>
       <div *ngIf="note.label!==null">
         <mat-chip-list>
           <mat-chip>{{note.label}}</mat-chip>
         </mat-chip-list>
       </div>
+    </div> -->
+
+    <div fxLayoutAlign="row" class="label">
+      <div *ngFor="let notelables of cardLabel">
+        <div *ngIf="notelables.notesId == note.id">
+          <div *ngFor="let labels of Label">
+            <div *ngIf="notelables.labelId==labels.id">
+              <mat-chip-list>
+                <mat-chip [selectable]="selectable" [removable]="removable">
+                  {{labels.labels}}
+                  <mat-icon matChipRemove (click)="remove(notelables.id)">cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  
+
  
 
   <div fxLayout="row" [ngStyle]="{'width':'225px'}">

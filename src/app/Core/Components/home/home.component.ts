@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+     
+
 
     this.Label = this.Label;
 

@@ -20,6 +20,7 @@ export class DataService {
   changeMessage(current:boolean){
   this.messageSource.next(current);
   }
+  
   changeSearchMsg(view: string){
     console.log("in dataService search",view);
     this.searchMessage.next(view);

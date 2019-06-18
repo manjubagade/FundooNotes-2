@@ -180,12 +180,12 @@ console.log(LabelOnNotes,"sdfghjk");
 
     this.service.AddNotesLabel(LabelOnNotes, headers_object).subscribe(
       (res:any) => {
-       // this.Label=res;
-         console.log("In Icon="+this.Label)
+        this.setNote.emit({res});
       },
     
     )
   }
+  
   Today(card) {
     var date = new Date();
     date.setHours(20, 0, 0)

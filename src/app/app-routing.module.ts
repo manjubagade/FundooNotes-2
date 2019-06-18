@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path:'',
     redirectTo:'note',
-    pathMatch:'full'
+    pathMatch:'full' 
   },
 {
   path:'note',

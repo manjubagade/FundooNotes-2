@@ -46,8 +46,6 @@ export class DisplayNotesComponent implements OnInit {
   }
   constructor(private service: NoteService, private dataService: DataService, route: Router,
     private toastr: ToastrService, public dialog: MatDialog) {
-// this.cardLabel=this.cardLabel;      
-// console.log(this.cardLabel);
 
   }
   grid;
@@ -57,10 +55,11 @@ export class DisplayNotesComponent implements OnInit {
   @Input() trash;
   @Input() untrash;
   @Output() messageEvent = new EventEmitter<any>();
-  abc;
+  Collaborator:any;
   flag = true;
-label:any;
+  label:any;
   unrchive: boolean;
+  receiverEmail;
   archive: boolean;
   trashNote: boolean;
   Label:any;
@@ -83,19 +82,26 @@ label:any;
 
 
     });
+   
+
     this.service.viewNotesLabel(UserId, headers_object).subscribe(data=>{
       this.cardLabel=data['result'];
-      
       console.log(this.cardLabel,"labeldata");
-
     })
-    console.log(this.cardLabel,"labeldata123");
-    
-    
 
     this.service.ViewCollaborators(UserId, headers_object).subscribe(data => {
-
-      this.abc = data;
+        
+         this.Collaborator={
+             Collaborator:data,
+       }
+      //  if(this.Collaborator.receiverEmail==localStorage.getItem('Email'))
+       console.log(this.Collaborator);
+      //  if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
+        if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
+         console.log("Success");
+         
+       }
+       
     })
     this.service.getLabelsById(UserId,headers_object).subscribe(
       data => {
