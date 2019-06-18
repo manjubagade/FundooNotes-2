@@ -28,9 +28,10 @@ namespace BusinessLayer.Interfaces
         Task<bool> PostApplicationUserAsync(UserRegistration userRegistrationmodel);
 
         /// <summary>
-        /// Logins the asynchronous LoginControl.
+        /// Logins the asynchronous.
         /// </summary>
         /// <param name="loginControlmodel">The LoginControl.</param>
+        /// <param name="FbStatus">The FbStatus.</param>
         /// <returns>data result</returns>
         Task<string> LoginAsync(LoginControl loginControlmodel, string FbStatus);
 

@@ -41,13 +41,20 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Label> AccessLabel(Guid UserId)
+        public IList<Label> AccessLabel(Guid userId)
         {
-            return this.repositoryLabel.ViewLabel(UserId);
-             
+            return this.repositoryLabel.ViewLabel(userId);
         }
 
-        public async Task<int> addLabel(NotesLabel notesLabel)
+        /// <summary>
+        /// Adds the label.
+        /// </summary>
+        /// <param name="notesLabel">The notes label.</param>
+        /// <returns>
+        /// success result
+        /// </returns>
+        /// <exception cref="Exception">The Exception</exception>
+        public async Task<int> AddLabel(NotesLabel notesLabel)
         {
             try
             {
@@ -62,24 +69,24 @@ namespace BusinessLayer.Services
         /// <summary>
         /// Changes the specified notes model.
         /// </summary>
-        /// <param name="LabelModel">The notes model.</param>
+        /// <param name="labelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>updated data</returns>
-        public async Task<int> Change(Label LabelModel, int id)
+        public async Task<int> Change(Label labelModel, int id)
         {
-          return await this.repositoryLabel.UpdateLabel(LabelModel, id);
+          return await this.repositoryLabel.UpdateLabel(labelModel, id);
         }
 
         /// <summary>
         /// Creates the specified Label.
         /// </summary>
-        /// <param name="LabelModel">The Label.</param>
+        /// <param name="labelModel">The Label.</param>
         /// <returns>addition success data</returns>
-        public async Task<int> Create(Label LabelModel)
+        public async Task<int> Create(Label labelModel)
         {
             try
             {
-               return await this.repositoryLabel.AddLabel(LabelModel);
+               return await this.repositoryLabel.AddLabel(labelModel);
             }
             catch (Exception e)
             {

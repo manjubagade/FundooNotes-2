@@ -77,6 +77,11 @@ namespace BusinessLayer.Interfaces
         /// <returns>notes data</returns>
         IList<Notes> Reminder(string userId);
 
-        IList<Notes> Alarm(string Userid);
+        /// <summary>
+        /// Alarms the specified userid.
+        /// </summary>
+        /// <param name="Userid">The userid.</param>
+        /// <returns>list of data</returns>
+        IList<Notes> Alarm(string userid);
     }
 }

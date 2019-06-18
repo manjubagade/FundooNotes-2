@@ -9,7 +9,11 @@ namespace RepositoryLayer.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Security.Policy;
     using System.Text;
     using System.Threading.Tasks;
     using CloudinaryDotNet;
@@ -18,8 +22,9 @@ namespace RepositoryLayer.Services
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Distributed;
+    using Newtonsoft.Json;
     using RepositoryLayer.Interface;
-   
+
     /// <summary>
     /// CreateNotes class
     /// </summary>
@@ -35,6 +40,9 @@ namespace RepositoryLayer.Services
         /// </summary>
         private readonly IDistributedCache distributedCache;
 
+        private Uri FireBasePushNotificationsURL = new Uri("https://fcm.googleapis.com/fcm/send");
+        private string ServerKey = "AAAAb2HcBc0:APA91bE4Xvd-kSF0p-NjHhriao0zqN6Nl4-ms93s5V15qa1RB0oc-US0O_YnVxqPwIveDbxwQJnvB5kYK54NDSfh5kh3E-04mu3rGzWV9Cjfmm3TeOBuJWh2Wja-FSaEP1e3tlu-GGY1";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateNotes"/> class.
         /// </summary>
@@ -47,7 +55,7 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Additng Notes 
+        /// Adding Notes 
         /// </summary>
         /// <param name="notes">The Notes.</param>
         /// <returns>result data</returns>
@@ -60,7 +68,7 @@ namespace RepositoryLayer.Services
                     //// Adding Notes in database
                     var addnotes = new Notes()
                     {
-                         UserId = notes.UserId,
+                        UserId = notes.UserId,
                         Title = notes.Title,
                         Description = notes.Description,
                         CreatedDate = notes.CreatedDate,
@@ -71,7 +79,6 @@ namespace RepositoryLayer.Services
                     };
 
                     this.registrationControl.Notes.Add(addnotes);
-                   
                 }
             }
             catch (Exception e)
@@ -88,7 +95,7 @@ namespace RepositoryLayer.Services
         /// <returns>Result data</returns>
         public async Task<int> SaveChangesAsync()
         {
-            var result =await this.registrationControl.SaveChangesAsync();
+            var result = await this.registrationControl.SaveChangesAsync();
             return result;
         }
 
@@ -119,7 +126,7 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
 
-           return await this.SaveChangesAsync();
+            return await this.SaveChangesAsync();
         }
 
         /// <summary>
@@ -131,16 +138,35 @@ namespace RepositoryLayer.Services
         {
             var list = new List<Notes>();
             var note = from notes in this.registrationControl.Notes where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
-           //// (notes.UserId == userId) && (notes.IsArchive == true) && (notes.IsTrash == false) 
+           
             foreach (var item in note)
             {
                 list.Add(item);
+            }
+            var user = from users in registrationControl.Application where users.Id == userId select users;
+            foreach(var users in user) { 
+             var innerJoin = from e in this.registrationControl.Notes
+                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString() == d.Id && d.ReceiverEmail==users.Email
+                                
+                                select new Notes
+                                {
+                                    Id=e.Id,
+                                    UserId = e.UserId,
+                                    Title = e.Title,
+                                    Description = e.Description,
+                                    Label = e.Label,
+                                   Image = e.Image,
+                               };
+            foreach(var collaborator in innerJoin)
+            {
+                list.Add(collaborator);
+            }
             }
 
             var cacheKey = note.ToString();
             this.distributedCache.GetString(cacheKey);
             this.distributedCache.SetString(cacheKey, note.ToString());
-            return note.ToArray();
+            return list.ToArray();
         }
 
         /// <summary>
@@ -235,7 +261,7 @@ namespace RepositoryLayer.Services
         public IList<Notes> Reminder(string userId)
         {
             var list = new List<Notes>();
-            var notesData = from notes in this.registrationControl.Notes where (notes.UserId.Equals(userId)) && (!notes.Reminder.Year.Equals(0001)) select notes;
+            var notesData = from notes in this.registrationControl.Notes where notes.UserId.Equals(userId) && (!notes.Reminder.Year.Equals(0001)) select notes;
             foreach (var data in notesData)
             {
                 list.Add(data);
@@ -244,17 +270,141 @@ namespace RepositoryLayer.Services
             return list;
         }
 
-        public IList<Notes> Alarm(string Userid)
+        /// <summary>
+        /// Alarms the specified userid.
+        /// </summary>
+        /// <param name="userid">The userid.</param>
+        /// <returns>
+        /// Notes data
+        /// </returns>
+        public IList<Notes> Alarm(string userid)
         {
-            var list = new List<Notes>();
-            var Alarm = from notes in this.registrationControl.Notes where notes.UserId == Userid select notes.Reminder;
-            //var time = DateTime.Now;
-            var time= "0001 - 01 - 01 00:00:00.0000000";
-            if (Alarm.Equals(time))
+            ////var list = new List<Notes>();
+            ////var Alarm = from notes in this.registrationControl.Notes where notes.UserId == Userid select notes.Reminder;
+            ////var time = DateTime.Now;
+            ////var time= "0001 - 01 - 01 00:00:00.0000000";
+            ////if (Alarm.Equals(time))
+            ////{
+            ////    Console.WriteLine("Alarm Is Successfully Display");
+            ////}
+
+            var a = 10;
+            var b = 20 - a;
+            if (a == b)
             {
-                Console.WriteLine("Alarm Is Successfully Display");
+                this.PushAlarmNotification();
             }
+
             return null;
         }
-    }
+
+        /// <summary>
+        /// Pushes the alarm notification.
+        /// </summary>
+        /// <returns>result data</returns>
+        public int PushAlarmNotification()
+        {
+            ////           var client = new HttpClient();
+            ////            var data = @"
+            //// notification: {
+            ////  'title': 'Hello World', 
+            ////  'body': 'This is Message from Aniket'
+            //// },
+            //// 'to' : 'cViOWmXN0FU:APA91bGoixBJQSdzn4i2xM0sq0Srb4GfcIrQh6Yvntzu4ltP7uOJaopf5QHhAtLYwDiL77czIrhjbeDt893aKjaRusTpjEwoL1y5XtjGisLwCEg9OMp7Iq_V3Mmh-WDS40aJhGHGRTcx'
+            ////}";
+            ////            var msg = new HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://fcm.googleapis.com/fcm/send");
+            ////            HttpRequestMessage()
+            ////            // msg.Headers.Add("Content-Type", "application / json");
+            ////            //msg.Headers.Add("Authorization", "'key=AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG'");
+            ////           client.DefaultRequestHeaders.Add("Authorization", "key AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
+
+            ////                msg.Content = new StringContent(
+            ////                    data,
+            ////                    UnicodeEncoding.UTF8,
+            ////                    "application/json");
+            ////                client.SendAsync(msg);
+            ////            // return new FirebaseRequest(HttpMethod.POST, https://fcm.googleapis.com/fcm/send , jsonData).Execute();
+            ////            return 1;
+            ////        }
+            ////var request="";
+            var data = @"
+   headers: 
+    { 
+       'Authorization': 'key=AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG',
+     },
+             notification: {
+              'title': 'Hello World', 
+              'body': 'This is Message from Aniket'
+             },
+             'to' : 'cViOWmXN0FU:APA91bGoixBJQSdzn4i2xM0sq0Srb4GfcIrQh6Yvntzu4ltP7uOJaopf5QHhAtLYwDiL77czIrhjbeDt893aKjaRusTpjEwoL1y5XtjGisLwCEg9OMp7Iq_V3Mmh-WDS40aJhGHGRTcx'
+            }";
+            var client = new HttpClient();
+            var msg = new HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://fcm.googleapis.com/fcm/send");
+            msg.Headers.Add("Authorization", "key = AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo - YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G - aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
+            msg.Content = new StringContent(
+                data,
+                UnicodeEncoding.UTF8,
+                "application/json");
+            return 1;
+           
+        }
+        //public void SendPushNotification(string deviceTokens, string title, string body, object data)
+        //{
+
+
+        //    bool sent = false;
+
+        //    if (deviceTokens != null)
+        //    {
+              
+
+        //        var notification = new notification()
+        //        {
+
+
+        //            title = title,
+        //            text = body,
+
+
+        //            data = data,
+        //            registration_ids = deviceTokens
+        //        };
+
+                
+        //        string jsonMessage = JsonConvert.SerializeObject(notification);
+
+        //        /*
+        //         ------ JSON STRUCTURE ------
+        //         {
+        //            notification: {
+        //                            title: "",
+        //                            text: ""
+        //                            },
+        //            data: {
+        //                    action: "Play",
+        //                    playerId: 5
+        //                    },
+        //            registration_ids = ["id1", "id2"]
+        //         }
+        //         ------ JSON STRUCTURE ------
+        //         */
+
+        //        //Create request to Firebase API
+        //        var request = new HttpRequestMessage(HttpMethod.Post, FireBasePushNotificationsURL);
+
+        //        request.Headers.TryAddWithoutValidation("Authorization", "key=" + ServerKey);
+        //        request.Content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+
+        //        HttpResponseMessage result;
+        //        using (var client = new HttpClient())
+        //        {
+        //            result = await client.SendAsync(request);
+        //            sent = sent && result.IsSuccessStatusCode;
+        //        }
+        //    }
+        //}
+        //        return sent;
+        //    }
+
+}
 }

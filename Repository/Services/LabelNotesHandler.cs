@@ -45,20 +45,19 @@ namespace RepositoryLayer.Services
         /// <summary>
         /// Adds the label.
         /// </summary>
-        /// <param name="LabelModel">The label model.</param>
+        /// <param name="labelModel">The label model.</param>
         /// <returns>Success result</returns>
         /// <exception cref="Exception">The Exception</exception>
-        public async Task<int> AddLabel(NotesLabel LabelModel)
+        public async Task<int> AddLabel(NotesLabel labelModel)
         {
             try
             {
                 //// Adding Notes in database
                 var addNotesLabel = new NotesLabel()
                 {
-                    UserId = LabelModel.UserId,
-                    NotesId = LabelModel.NotesId,
-                    LabelId = LabelModel.LabelId
-
+                    UserId = labelModel.UserId,
+                    NotesId = labelModel.NotesId,
+                    LabelId = labelModel.LabelId
                 };
 
                 var result = this.registrationControl.NotesLabels.Add(addNotesLabel);
@@ -71,6 +70,11 @@ namespace RepositoryLayer.Services
             return await this.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Views the label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>list of label</returns>
         public IList<NotesLabel> ViewLabel(Guid userId)
         {
             var list = new List<NotesLabel>();
@@ -84,9 +88,7 @@ namespace RepositoryLayer.Services
             this.distributedCache.GetString(cacheKey);
             this.distributedCache.SetString(cacheKey, label.ToString());
             return label.ToArray();
-          
         }
-
 
         /// <summary>
         /// Saves the changes asynchronous.
@@ -96,28 +98,8 @@ namespace RepositoryLayer.Services
         {
             //// for changes the Database Entries
             return await this.registrationControl.SaveChangesAsync();
-             
         }
        
-        ///// <summary>
-        ///// Gets the Labels.
-        ///// </summary>
-        ///// <param name="userId">The user identifier.</param>
-        ///// <returns>return LabelModel</returns>
-        //public IList<Label> ViewLabel(Guid userId)
-        //{
-        //    var list = new List<Label>();
-        //    var label = from Label in this.registrationControl.Labels where Label.UserId == userId orderby Label.UserId descending select Label;
-        //    foreach (var item in label)
-        //    {
-        //        list.Add(item);
-        //    }
-        //    var cacheKey = label.ToString();
-        //    this.distributedCache.GetString(cacheKey);
-        //    this.distributedCache.SetString(cacheKey, label.ToString());
-        //    return label.ToArray();
-        //}
-        
         /// <summary>
         /// Deletes the label.
         /// </summary>
@@ -128,15 +110,13 @@ namespace RepositoryLayer.Services
             try
             {
                 NotesLabel label = await this.registrationControl.NotesLabels.FindAsync(id);
-                registrationControl.NotesLabels.Remove(label);
-                return registrationControl.SaveChanges();
+                this.registrationControl.NotesLabels.Remove(label);
+                return this.registrationControl.SaveChanges();
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-           
-           
         }
     }
 }

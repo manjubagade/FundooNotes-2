@@ -53,8 +53,25 @@ namespace RepositoryLayer.Interface
         /// <returns>updated success result</returns>
         Task<int> UpdateLabel(Label labelModel, int id);
 
+        /// <summary>
+        /// Adds the notesLabel.
+        /// </summary>
+        /// <param name="notesLabel">The NotesLabel.</param>
+        /// <returns>success data</returns>
         Task<int> AddNotesLabel(NotesLabel notesLabel);
+
+        /// <summary>
+        /// Views the notes labels.
+        /// </summary>
+        /// <param name="userid">The userid.</param>
+        /// <returns>List of data</returns>
         IList<NotesLabel> ViewNotesLabels(string userid);
+
+        /// <summary>
+        /// Deletes the notes label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result data</returns>
         Task<int> DeleteNotesLabel(int id);
     }
 }

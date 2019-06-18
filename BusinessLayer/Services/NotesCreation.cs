@@ -42,9 +42,9 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Notes> AccessNotes(string UserId)
+        public IList<Notes> AccessNotes(string userId)
         {
-            return this.repositoryNotes.ViewNotes(UserId);
+            return this.repositoryNotes.ViewNotes(userId);
         }
 
         /// <summary>
@@ -128,9 +128,16 @@ namespace BusinessLayer.Services
             return this.repositoryNotes.Reminder(userId);
         }
 
-        public IList<Notes> Alarm(string Userid)
+        /// <summary>
+        /// Alarms the specified userid.
+        /// </summary>
+        /// <param name="Userid">The userid.</param>
+        /// <returns>
+        /// list of data
+        /// </returns>
+        public IList<Notes> Alarm(string userid)
         {
-            return this.repositoryNotes.Alarm(Userid);
+            return this.repositoryNotes.Alarm(userid);
         }
     }
 }

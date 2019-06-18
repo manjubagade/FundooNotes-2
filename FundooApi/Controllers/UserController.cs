@@ -194,17 +194,17 @@ namespace FundooNotesBackEnd.Controllers
         /// Logins the specified login control model.
         /// </summary>
         /// <param name="loginControlModel">The LoginControl.</param>
-        /// <param name="FbStatus">The FbStatus.</param>
+        /// <param name="fbStatus">The FbStatus.</param>
         /// <returns>login success result</returns>
         /// <exception cref="Exception">The Exception</exception>
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<string> Login(LoginControl loginControlModel, string FbStatus)
+        public async Task<string> Login(LoginControl loginControlModel, string fbStatus)
         {
             try
             {
-                var result = await this.applicationUserOperation.LoginAsync(loginControlModel, FbStatus);
+                var result = await this.applicationUserOperation.LoginAsync(loginControlModel, fbStatus);
                 if (result == null)
                 {
                     return "Invalide Email And Password";
@@ -241,13 +241,13 @@ namespace FundooNotesBackEnd.Controllers
         }
 
         /// <summary>
-        /// Resets the specified resetPasswordmodel.
+        /// Resets the specified ResetPassword.
         /// </summary>
         /// <param name="resetPasswordmodel">The ResetPassword.</param>
         /// <returns>return status code</returns>
         [HttpPost]
         [Route("resetPassword")]
-        
+        [AllowAnonymous]
         public IActionResult Reset(ResetPassword resetPasswordmodel)
         {
             try
@@ -283,7 +283,7 @@ namespace FundooNotesBackEnd.Controllers
         }
 
         /// <summary>
-        /// Gets the Profilepic.
+        /// Gets the GetProfilepic.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>IActionResult Data</returns>

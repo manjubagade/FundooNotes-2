@@ -28,7 +28,7 @@ namespace Testing
         {
             var service = new Mock<IRepositoryNotes>();
             var notes = new NotesCreation(service.Object);
-            var Note = new Notes()
+            var note = new Notes()
             {
                 Id = 5,
                 Title = "Abc",
@@ -37,7 +37,7 @@ namespace Testing
                 ModifiedDate = DateTime.Now
             };
          
-            var data = notes.Create(Note);
+            var data = notes.Create(note);
            
             Assert.NotNull(data);
         }
@@ -84,7 +84,6 @@ namespace Testing
         [Fact]
         public void GetNotes()
         {
-            
             var service = new Mock<IRepositoryNotes>();
             var notes = new NotesCreation(service.Object);
             var data = notes.AccessNotes(Guid.NewGuid().ToString());

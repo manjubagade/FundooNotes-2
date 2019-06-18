@@ -25,9 +25,8 @@ namespace FundooApi.Controllers
             [Authorize]
             public class CollaboratorsController : ControllerBase
             {
-
         /// <summary>
-        /// The collborators
+        /// The collaborators
         /// </summary>
         private readonly ICollborators collborators;
 
@@ -82,7 +81,7 @@ namespace FundooApi.Controllers
         }
 
         /// <summary>
-        /// Updates the collaboretor.
+        /// Updates the Collaborators.
         /// </summary>
         /// <param name="collaboratorsModel">The Collaborators.</param>
         /// <param name="id">The identifier.</param>

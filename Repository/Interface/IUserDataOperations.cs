@@ -28,16 +28,16 @@ namespace RepositoryLayer.Interface
         Task Register(UserRegistration userRegistration);
 
         /// <summary>
-        /// Logins the specified LoginControl.
+        /// Logins the specified loginControlmodel.
         /// </summary>
         /// <param name="loginControlmodel">The LoginControl.</param>
         /// <returns>string data</returns>
-        Task<string> Login(LoginControl loginControlmodel, string FbStatus);
+        Task<string> Login(LoginControl loginControlmodel, string fbStatus);
 
         /// <summary>
         /// Finds the by email asynchronous.
         /// </summary>
-        /// <param name="forgotPasswordmodel">The forgotPasswordmodel.</param>
+        /// <param name="forgotPasswordmodel">The ForgotPassword.</param>
         /// <returns>token data</returns>
         Task FindByEmailAsync(ForgotPassword forgotPasswordmodel);
 

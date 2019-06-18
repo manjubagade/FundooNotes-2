@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
-// <copyright file="fb.cs" company="Bridgelabz">
+// <copyright file="20190608052429.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Aniket Kamble"/>
@@ -10,7 +10,7 @@ namespace RepositoryLayer.Migrations
     using Microsoft.EntityFrameworkCore.Migrations;
 
     /// <summary>
-    /// fb class
+    /// Migration class 
     /// </summary>
     /// <seealso cref="Microsoft.EntityFrameworkCore.Migrations.Migration" />
     public partial class fb : Migration

@@ -83,6 +83,11 @@ namespace RepositoryLayer.Interface
         /// <returns>Notes Data</returns>
         IList<Notes> Reminder(string userId);
 
-        IList<Notes> Alarm(string Userid);
+        /// <summary>
+        /// Alarms the specified userid.
+        /// </summary>
+        /// <param name="Userid">The userid.</param>
+        /// <returns>Notes data</returns>
+        IList<Notes> Alarm(string userid);
     }
 }

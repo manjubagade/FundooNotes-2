@@ -60,14 +60,19 @@ namespace FundooApi.Controllers
             }
         }
 
-      
+        /// <summary>
+        /// Adds the notes label.
+        /// </summary>
+        /// <param name="labelmodel">The NotesLabel.</param>
+        /// <returns>result data</returns>
+        /// <exception cref="Exception">The Exception</exception>
         [HttpPost]
         [Route("addlabel")]
         public async Task<IActionResult> AddNotesLabel(NotesLabel labelmodel)
         {
             try
             {
-                var result = await this.label.addLabel(labelmodel);
+                var result = await this.label.AddLabel(labelmodel);
                 return this.Ok(result);
             }
             catch (Exception e)
@@ -75,6 +80,12 @@ namespace FundooApi.Controllers
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// DeletenotesLabel the label.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result data</returns>
         [HttpDelete]
         [Route("deletenoteslabel/{id}")]
         public async Task<IActionResult> DeletenotesLabel(int id)
@@ -90,10 +101,15 @@ namespace FundooApi.Controllers
                 return this.BadRequest();
             }
         }
-      
+
+        /// <summary>
+        /// Views all notes label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>list of notes</returns>
         [HttpGet]
         [Route("viewalllabel/{userId}")]
-        public IActionResult viewAllNotesLabel(string userId)
+        public IActionResult ViewAllNotesLabel(string userId)
         {
             IList<NotesLabel> result = this.label.ViewNotesLabel(userId);
             if (result == null)

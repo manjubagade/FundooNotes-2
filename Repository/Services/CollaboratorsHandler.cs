@@ -10,6 +10,7 @@ namespace RepositoryLayer.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Mail;
     using System.Text;
     using System.Threading.Tasks;
     using Common.Models;
@@ -65,7 +66,7 @@ namespace RepositoryLayer.Services
                         UserId = collaboratorsModel.UserId
                     };
                     this.registrationControl.Collaborators.Add(addCollaborators);
-
+                    this.SendEmail(collaboratorsModel.ReceiverEmail,collaboratorsModel.SenderEmail);
                 }
             }
             catch(Exception e)
@@ -84,6 +85,30 @@ namespace RepositoryLayer.Services
         {
             var result = await this.registrationControl.SaveChangesAsync();
             return result;
+        }
+
+        public void SendEmail(string receiver,string sender)
+        {
+                SmtpClient client = new SmtpClient();
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = false;
+                client.Host = "smtp.gmail.com";
+                client.Port = 587;                 //// setup Smtp authentication    
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("privateuser1199@gmail.com", "private252");
+                client.Credentials = credentials;
+                MailMessage msg = new MailMessage();
+                string fromaddress = "FundooApp<Fundoo@gmail.com>";
+                msg.From = new MailAddress(fromaddress);
+                msg.To.Add(new MailAddress(receiver));
+
+                msg.Subject = "sender+ 'shared a note with you'";
+                msg.IsBodyHtml = true;
+               var callbackUrl = "http://localhost:4200/home/note";
+
+            
+              msg.Body ="clicking here: < a href =\"" + callbackUrl + "\">here</a>";
+                client.EnableSsl = true;
+                client.Send(msg);
         }
 
         /// <summary>
@@ -111,6 +136,12 @@ namespace RepositoryLayer.Services
             return await this.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Collaborators the note.
+        /// </summary>
+        /// <param name="receiverEmail">The receiver email.</param>
+        /// <returns>result data</returns>
+        /// <exception cref="Exception">The Exception</exception>
         public IList<Notes> CollaboratorNote(string receiverEmail)
         {
             try
@@ -152,7 +183,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
-        public IList<CollaboratorMap> ViewCollaborators(string userId)
+        public IList<CollaboratorMap> ViewCollaborators(string email)
         {
             try
             {
@@ -197,5 +228,64 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
-    }
+
+        //public void SendPushNotification(string deviceTokens, string title, string body, object data)
+        //{
+
+
+        //    bool sent = false;
+
+        //    if (deviceTokens != null)
+        //    {
+        //        //Object creation
+
+
+        //        var notification = new notification()
+        //        {
+
+        //            title = title,
+        //            text = body,
+
+
+        //            data = data,
+        //            registration_ids = deviceTokens
+        //        };
+
+        //        //Object to JSON STRUCTURE => using Newtonsoft.Json;
+        //        string jsonMessage = JsonConvert.SerializeObject(notification);
+
+        //        /*
+        //         ------ JSON STRUCTURE ------
+        //         {
+        //            notification: {
+        //                            title: "",
+        //                            text: ""
+        //                            },
+        //            data: {
+        //                    action: "Play",
+        //                    playerId: 5
+        //                    },
+        //            registration_ids = ["id1", "id2"]
+        //         }
+        //         ------ JSON STRUCTURE ------
+        //         */
+
+        //        //Create request to Firebase API
+        //        var request = new HttpRequestMessage(HttpMethod.Post, FireBasePushNotificationsURL);
+
+        //        request.Headers.TryAddWithoutValidation("Authorization", "key=" + ServerKey);
+        //        request.Content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
+
+        //        HttpResponseMessage result;
+        //        using (var client = new HttpClient())
+        //        {
+        //            result = await client.SendAsync(request);
+        //            sent = sent && result.IsSuccessStatusCode;
+        //        }
+        //    }
+        //}
+        //        return sent;
+        //    }
+
+}
 }

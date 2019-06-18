@@ -188,10 +188,8 @@ namespace FundooApi
                    {
                       new Dictionary<string, IEnumerable<string>>()
                       {
-
                           { "Bearer", new string[] { } },
                           { "Basic", new string[] { } }
-
                       }
                    };
             }

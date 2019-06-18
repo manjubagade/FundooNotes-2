@@ -23,7 +23,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="LabelModel">The notes model.</param>
         /// <returns>result data</returns>
-        Task<int> Create(Label LabelModel);
+        Task<int> Create(Label labelModel);
 
         /// <summary>
         /// Deletes the specified identifier.
@@ -38,7 +38,7 @@ namespace BusinessLayer.Interfaces
         /// <param name="LabelModel">The notes model.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>result data</returns>
-        Task<int> Change(Label LabelModel, int id);
+        Task<int> Change(Label labelModel, int id);
 
         /// <summary>
         /// Accesses the notes.
@@ -52,7 +52,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="notesLabel">The notes label.</param>
         /// <returns>success result</returns>
-        Task<int> addLabel(NotesLabel notesLabel);
+        Task<int> AddLabel(NotesLabel notesLabel);
 
         /// <summary>
         /// Views the notes label.

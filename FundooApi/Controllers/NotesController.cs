@@ -108,7 +108,7 @@ namespace FundooApi.Controllers
         /// <returns>return notes</returns>
         [HttpGet]
         [Route("view/{userId}")]
-        public IActionResult view(string userId)
+        public IActionResult View(string userId)
         {
             IList<Notes> result = this.notesHandler.AccessNotes(userId);
             if (result == null)
@@ -192,6 +192,11 @@ namespace FundooApi.Controllers
             return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Alarms the specified user identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>data of notification</returns>
         [HttpGet]
         [Route("Alarm/{userId}")]
         public IActionResult Alarrm(string userId)

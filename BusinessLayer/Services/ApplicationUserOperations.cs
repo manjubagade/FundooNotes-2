@@ -59,16 +59,16 @@ namespace BusinessLayer.Interfaces
         }
 
         /// <summary>
-        /// Logins the asynchronous LoginControl.
+        /// Logins the asynchronous.
         /// </summary>
         /// <param name="loginControlmodel">The LoginControl.</param>
+        /// <param name="FbStatus">The FbStatus.</param>
         /// <returns>
         /// data result
         /// </returns>
-        public async Task<string> LoginAsync(LoginControl loginControlmodel, string FbStatus)
+        public async Task<string> LoginAsync(LoginControl loginControlmodel, string fbStatus)
         {
-            return await applicationRepository.Login(loginControlmodel, FbStatus);
-            
+            return await this.applicationRepository.Login(loginControlmodel, fbStatus);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace BusinessLayer.Interfaces
         /// </returns>
         public async Task<bool> ForgotPasswordAsync(ForgotPassword forgotPasswordmodel)
         {
-            var result =  this.applicationRepository.FindByEmailAsync(forgotPasswordmodel);
+            var result = this.applicationRepository.FindByEmailAsync(forgotPasswordmodel);
             if (result != null)
             {
                 var code = this.applicationRepository.GeneratePasswordResetTokenAsync(forgotPasswordmodel);
@@ -122,7 +122,6 @@ namespace BusinessLayer.Interfaces
         {
             var result = this.applicationRepository.Profilepic(file, userId);
             return result;
-
         }
 
         /// <summary>

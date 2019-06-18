@@ -20,10 +20,10 @@ namespace BusinessLayer
         /// <summary>
         /// Sends the email asynchronous.
         /// </summary>
-        /// <param name="Email">The email.</param>
+        /// <param name="email">The email.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="body">The body.</param>
         /// <returns>token link</returns>
-        Task SendEmailAsync(string Email, string subject, string body);
+        Task SendEmailAsync(string email, string subject, string body);
     }
 }

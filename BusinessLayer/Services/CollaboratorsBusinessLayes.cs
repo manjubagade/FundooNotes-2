@@ -40,9 +40,9 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<CollaboratorMap> AccessNotes(string UserId)
+        public IList<CollaboratorMap> AccessNotes(string userId)
         {
-            return this.repositoryCollaborator.ViewCollaborators(UserId);
+            return this.repositoryCollaborator.ViewCollaborators(userId);
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>List of Data</returns>
-        public IList<CollaboratorMap> AccessCollaborators(string UserId)
+        public IList<CollaboratorMap> AccessCollaborators(string userId)
         {
-            return this.repositoryCollaborator.ViewCollaborators(UserId);
+            return this.repositoryCollaborator.ViewCollaborators(userId);
         }
     }
 }

@@ -31,15 +31,6 @@ namespace RepositoryLayer.Services
     /// <seealso cref="RepositoryLayer.Interface.IUserDataOperations" />
     public class UserDataOperations : IUserDataOperations
     {
-        /// <summary>
-        /// The user manager
-        /// </summary>
-        private UserManager<ApplicationUser> userManager;
-
-        /// <summary>
-        /// The sign in manager
-        /// </summary>
-        private SignInManager<ApplicationUser> signInManager;
 
         /// <summary>
         /// The application settings
@@ -55,6 +46,16 @@ namespace RepositoryLayer.Services
         /// The registration control
         /// </summary>
         private readonly RegistrationControl registrationControl;
+
+        /// <summary>
+        /// The user manager
+        /// </summary>
+        private UserManager<ApplicationUser> userManager;
+
+        /// <summary>
+        /// The sign in manager
+        /// </summary>
+        private SignInManager<ApplicationUser> signInManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserDataOperations"/> class.
@@ -88,16 +89,16 @@ namespace RepositoryLayer.Services
                 UserName = userRegistration.UserName
             };
             ////Encrypted Password Assign Here
-            var result =  this.userManager.CreateAsync(applicationUser, userRegistration.Password);
+            var result = this.userManager.CreateAsync(applicationUser, userRegistration.Password);
             return result;
         }
 
         /// <summary>
-        /// Logins the specified LoginControl.
+        /// Logins the specified loginControlmodel.
         /// </summary>
         /// <param name="loginControlmodel">The LoginControl.</param>
         /// <returns>string data</returns>
-        public async Task<string> Login(LoginControl loginControlmodel, string FbStatus)
+        public async Task<string> Login(LoginControl loginControlmodel, string fbStatus)
         {
             //// Check user is regular user or Social User
             if (loginControlmodel.FbStatus == "false")
@@ -180,7 +181,6 @@ namespace RepositoryLayer.Services
                 var applicationUser = new ApplicationUser()
                 {
                     Email = loginControlmodel.Email,
-
                 };
 
                 await this.userManager.CreateAsync(applicationUser, loginControlmodel.Password);
@@ -264,7 +264,6 @@ namespace RepositoryLayer.Services
             {
                 result = this.registrationControl.SaveChanges();
                  return data.Image;
-              
             }
             catch (Exception ex)
             {

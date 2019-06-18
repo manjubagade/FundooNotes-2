@@ -48,9 +48,9 @@ namespace RepositoryLayer.Interface
         /// <summary>
         /// Updates the collaborators.
         /// </summary>
-        /// <param name="CollaboratorslModel">The Collaborators.</param>
+        /// <param name="collaboratorslModel">The Collaborators.</param>
         /// <param name="id">The identifier.</param>
         /// <returns>result data</returns>
-        Task<int> UpdateCollaborators(Collaborators CollaboratorslModel, int id);
+        Task<int> UpdateCollaborators(Collaborators collaboratorslModel, int id);
     }
 }
