@@ -228,11 +228,6 @@
 .how:hover{
     opacity: 1 !important;
   }
-  /* .outer-div{
-      overflow: hidden;
-      max-width: 45px;
-  }
-  .label{
-      position: relative;
-      overflow: hidden;
-  } */
+ .collaborator{
+     position: absolute;
+ }

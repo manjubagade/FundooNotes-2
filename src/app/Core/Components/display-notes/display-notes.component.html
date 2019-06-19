@@ -1,6 +1,6 @@
 <div fxLayout={{css}} class="outer-div" fxFlexOffset='20' fxFlex="100">
 
-  <div *ngFor="let note of cards|search:search" cdkDrag style="overflow:hidden;" fxLayout="row">
+  <div *ngFor="let note of cards|search:search" cdkDrag style="overflow:hidden;">
 
     <div *ngIf="note.pin == true">
       <div>
@@ -53,26 +53,30 @@
               </div>
             </div>
 
-            <!-- <div>
-                <div *ngFor="let collaborator of Collaborator.Collaborator">
+            <div class="collaborator">
+                <div *ngFor="let collaborator of collaborator">
+                    
                     <div *ngIf="note.id == collaborator.notesId">
-                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
+                        
+                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.senderEmail}}">
                   <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-                 {{collaborator.receiverEmail}}
+                 
                 </button>
+                
                 </div>
+                
                 </div>
-               </div> -->
-        
+                
+           </div>
+         
             <div class="chipinputArea">
               <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
-                <mat-chip-list #chipList>
+                <mat-chip-list >
                   <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
                     {{note.reminder|date:medium}}
                     <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
-                <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
               </div>
             </div>
   
@@ -142,16 +146,36 @@
         </div>
        
 
-          <!-- <div>
-            <div *ngFor="let collaborator of Collaborator.Collaborator">
+        <div>
+          <div *ngFor="let collaborator of collaborator">
+              <div *ngIf="note.id == collaborator.notesId">
+              <div *ngIf="xyz.Email == collaborator.receiverEmail">
+              
+          <button mat-mini-fab style="background-color: white" matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(cards)">
+            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+          </button>
+       
+          </div>
+        </div>
+      </div>
+         </div>
+
+         <div>
+            <div *ngFor="let collaborator of collaborator">
                 <div *ngIf="note.id == collaborator.notesId">
+                <div *ngIf="xyz.Email == collaborator.senderEmail">
+                
             <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
               <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-             {{collaborator.receiverEmail}}
             </button>
+           
             </div>
-            </div>
-           </div> -->
+            
+          </div>
+        </div>
+           </div>
+
+         
 
 
         <div class="chipinputArea">

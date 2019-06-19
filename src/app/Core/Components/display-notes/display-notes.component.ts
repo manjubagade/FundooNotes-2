@@ -31,6 +31,8 @@ export class DisplayNotesComponent implements OnInit {
   selectable = true;
   removable = true;
   pipe;
+  xyz;
+  
   LabelOnNotes:any;
   addOnBlur = true;
   timePeriods = [
@@ -49,8 +51,10 @@ export class DisplayNotesComponent implements OnInit {
 
   }
   grid;
+  
   @Input() search;
   @Input() cards;
+  @Input() collaborator;
   @Input() archived;
   @Input() trash;
   @Input() untrash;
@@ -69,7 +73,7 @@ export class DisplayNotesComponent implements OnInit {
   
   ngOnInit() {
     var Profilepic = localStorage.getItem("profilePic");
-
+   var Email=localStorage.getItem('Email');
     var UserId = localStorage.getItem('UserId');
     var profile = localStorage.getItem('profilePic');
 
@@ -80,10 +84,11 @@ export class DisplayNotesComponent implements OnInit {
 
       this.flag = data;
 
-
     });
    
-
+    this.xyz={
+Email: localStorage.getItem('Email')
+    }
     this.service.viewNotesLabel(UserId, headers_object).subscribe(data=>{
       this.cardLabel=data['result'];
       console.log(this.cardLabel,"labeldata");
@@ -94,9 +99,9 @@ export class DisplayNotesComponent implements OnInit {
          this.Collaborator={
              Collaborator:data,
        }
-      //  if(this.Collaborator.receiverEmail==localStorage.getItem('Email'))
+      
        console.log(this.Collaborator);
-      //  if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
+     
         if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
          console.log("Success");
          
@@ -117,7 +122,7 @@ export class DisplayNotesComponent implements OnInit {
 
 
   }
-
+ 
 
   openDialog(note) {
 

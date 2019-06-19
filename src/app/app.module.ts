@@ -47,6 +47,7 @@ import {
 } from 'angular-6-social-login';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { InputTrimModule } from 'ng2-trim-directive';
+import { DisplayLabelsComponent } from './Core/Components/display-labels/display-labels.component';
 
 let config = new AuthServiceConfig([
   {
@@ -86,8 +87,7 @@ export function provideConfig() {
     PipePipe,
     CollaboratorsComponent,
     SearchComponent,
- 
-    
+    DisplayLabelsComponent,
   ],
   imports: [
     BrowserModule,

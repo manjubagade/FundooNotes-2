@@ -18,6 +18,7 @@ import { EditComponent } from './Core/Components/edit/edit.component';
 import { LabelComponent } from './Core/Components/label/label.component';
 import { CollaboratorsComponent } from './Core/Components/Collaborators/collaborators.component';
 import { SearchComponent } from './Core/Components/search/search.component';
+import { DisplayLabelsComponent } from './Core/Components/display-labels/display-labels.component';
 
 const routes: Routes = [
   { path:'',redirectTo:'/user/login',pathMatch:'full' },
@@ -70,7 +71,10 @@ const routes: Routes = [
   path:'collaborator',
   component:CollaboratorsComponent
 },
-
+{
+  path:'displaylabels',
+  component:DisplayLabelsComponent
+},
 ]
 
 },

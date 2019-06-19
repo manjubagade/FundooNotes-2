@@ -87,6 +87,9 @@ export class NoteService {
   getLabelsById(UserId: string, headers_object) {
     return this.http.get(environment.BaseURI + '/Label/viewLabel/' + UserId, headers_object);
   }
+  displayLabels(){
+    
+  }
   // 
   deleteLabel(id, headers_object) {
     console.log("................" + id);

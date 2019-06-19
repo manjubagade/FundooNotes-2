@@ -10,6 +10,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class MainnoteComponent implements OnInit {
   notes: any;
+  Collaborator:any;
   CardNotes = [];
   id: string;
   @Output() public setNotes = new EventEmitter();
@@ -32,8 +33,11 @@ export class MainnoteComponent implements OnInit {
     this.service.getNotesById(UserId,headers_object).subscribe(
       data => {
         console.log(data);
-        this.notes = data['result'];
+        this.notes = data['result'].item1;
+        this.Collaborator=data['result'].item2;
        console.log(this.notes);
+       console.log(this.Collaborator);
+       
       }
     ), (err: any) => {
       console.log(err);

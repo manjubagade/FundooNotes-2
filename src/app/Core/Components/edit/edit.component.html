@@ -56,6 +56,17 @@
       </div>
     </div>
   
+    <div class="chipinputArea">
+      <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
+        <mat-chip-list #chipList>
+          <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
+            {{note.reminder|date:medium}}
+            <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+        <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+      </div>
+    </div>
 
  
 
