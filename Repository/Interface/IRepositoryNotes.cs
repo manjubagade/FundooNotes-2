@@ -11,6 +11,7 @@ namespace RepositoryLayer.Interface
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+    using Common.Models;
     using FundooApi;
     using Microsoft.AspNetCore.Http;
 
@@ -37,7 +38,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>Notes Data</returns>
-        IList<Notes> ViewNotes(string userId);
+        (IList<Notes>, IList<CollaboratorMap>) ViewNotes(string userId);
 
         /// <summary>
         /// Deletes the notes.

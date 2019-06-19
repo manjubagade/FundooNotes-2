@@ -41,7 +41,6 @@ namespace FundooApi
         /// <value>
         /// The name of the user.
         /// </value>
-        [Required]
         public string UserName { get; set; }
 
         /// <summary>

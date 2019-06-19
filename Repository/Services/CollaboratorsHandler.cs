@@ -66,7 +66,7 @@ namespace RepositoryLayer.Services
                         UserId = collaboratorsModel.UserId
                     };
                     this.registrationControl.Collaborators.Add(addCollaborators);
-                    this.SendEmail(collaboratorsModel.ReceiverEmail,collaboratorsModel.SenderEmail);
+                   // this.SendEmail(collaboratorsModel.ReceiverEmail,collaboratorsModel.SenderEmail);
                 }
             }
             catch(Exception e)
@@ -101,12 +101,15 @@ namespace RepositoryLayer.Services
                 msg.From = new MailAddress(fromaddress);
                 msg.To.Add(new MailAddress(receiver));
 
-                msg.Subject = "sender+ 'shared a note with you'";
+                msg.Subject = sender+"'shared a note with you'";
                 msg.IsBodyHtml = true;
                var callbackUrl = "http://localhost:4200/home/note";
 
-            
-              msg.Body ="clicking here: < a href =\"" + callbackUrl + "\">here</a>";
+
+            msg.Body = "Hi,"+ @"<br />"+sender+" "+ @" <br />"+
+
+            "added you as a collaraberator in his note, please " + "" + "clicking here: '<a href =\"" + callbackUrl + "\">here</a>'" + "" + " to see note";
+         
                 client.EnableSsl = true;
                 client.Send(msg);
         }

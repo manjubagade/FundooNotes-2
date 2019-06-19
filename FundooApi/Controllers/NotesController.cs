@@ -11,6 +11,7 @@ namespace FundooApi.Controllers
     using System.Linq;
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
+    using Common.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -110,8 +111,8 @@ namespace FundooApi.Controllers
         [Route("view/{userId}")]
         public IActionResult View(string userId)
         {
-            IList<Notes> result = this.notesHandler.AccessNotes(userId);
-            if (result == null)
+            (IList<Notes>, IList<CollaboratorMap>) result = this.notesHandler.AccessNotes(userId);
+            if (result.Equals(null))
             {
                 return this.NotFound();
             }

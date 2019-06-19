@@ -11,6 +11,7 @@ namespace BusinessLayer.Interfaces
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+    using Common.Models;
     using FundooApi;
     using Microsoft.AspNetCore.Http;
 
@@ -46,7 +47,7 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>result of notes data</returns>
-        IList<Notes> AccessNotes(string userId);
+        (IList<Notes>, IList<CollaboratorMap>) AccessNotes(string userId);
 
         /// <summary>
         /// Adds the image.

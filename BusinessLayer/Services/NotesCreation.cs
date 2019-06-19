@@ -12,6 +12,7 @@ namespace BusinessLayer.Services
     using System.Text;
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
+    using Common.Models;
     using FundooApi;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns>The List</returns>
-        public IList<Notes> AccessNotes(string userId)
+        public (IList<Notes>, IList<CollaboratorMap>) AccessNotes(string userId)
         {
             return this.repositoryNotes.ViewNotes(userId);
         }

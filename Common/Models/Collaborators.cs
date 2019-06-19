@@ -75,5 +75,7 @@ namespace Common.Models
         /// The modified date.
         /// </value>
         public DateTime ModifiedDate { get; set; }
+
+
     }
 }

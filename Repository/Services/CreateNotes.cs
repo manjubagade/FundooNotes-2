@@ -18,6 +18,7 @@ namespace RepositoryLayer.Services
     using System.Threading.Tasks;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using Common.Models;
     using FundooApi;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -134,9 +135,10 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
-        public IList<Notes> ViewNotes(string userId)
+        public (IList<Notes>,IList<CollaboratorMap>) ViewNotes(string userId)
         {
             var list = new List<Notes>();
+            var list1 = new List<CollaboratorMap>();
             var note = from notes in this.registrationControl.Notes where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
            
             foreach (var item in note)
@@ -144,29 +146,43 @@ namespace RepositoryLayer.Services
                 list.Add(item);
             }
             var user = from users in registrationControl.Application where users.Id == userId select users;
-            foreach(var users in user) { 
-             var innerJoin = from e in this.registrationControl.Notes
-                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId where e.Id.ToString() == d.Id && d.ReceiverEmail==users.Email
-                                
+            foreach(var users in user) {
+                var innerJoin = from e in this.registrationControl.Notes
+                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
+                                where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email
+
                                 select new Notes
                                 {
-                                    Id=e.Id,
+                                    Id = e.Id,
                                     UserId = e.UserId,
                                     Title = e.Title,
                                     Description = e.Description,
                                     Label = e.Label,
-                                   Image = e.Image,
-                               };
-            foreach(var collaborator in innerJoin)
-            {
-                list.Add(collaborator);
-            }
+                                    Image = e.Image,
+                                    Color = e.Color
+                                };
+                var Join = from e in this.registrationControl.Notes
+                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
+                                where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email || d.SenderEmail == users.Email
+
+                           select new CollaboratorMap
+                                {
+                                    NotesId = int.Parse(d.Id),
+                                   SenderEmail = d.SenderEmail,
+                                   ReceiverEmail = d.ReceiverEmail
+                                };
+
+                foreach (var notes in innerJoin)
+                {
+                list.Add(notes);
+                }
+                foreach (var collaborator in Join)
+                {
+                    list1.Add(collaborator);
+                }
             }
 
-            var cacheKey = note.ToString();
-            this.distributedCache.GetString(cacheKey);
-            this.distributedCache.SetString(cacheKey, note.ToString());
-            return list.ToArray();
+            return (list.ToArray(),list1.ToArray());
         }
 
         /// <summary>
@@ -178,9 +194,14 @@ namespace RepositoryLayer.Services
         {
             try
             {
+                var collaborator = from coll in this.registrationControl.Collaborators where coll.Id.Equals(id) select coll;
+                if(collaborator == null)
+            { 
                 Notes notes = await this.registrationControl.Notes.FindAsync(id);
                 registrationControl.Notes.Remove(notes);
+             }
                 return registrationControl.SaveChanges();
+               
             }
             catch (Exception e)
             {

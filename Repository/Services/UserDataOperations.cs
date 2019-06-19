@@ -82,11 +82,12 @@ namespace RepositoryLayer.Services
         public Task Register(UserRegistration userRegistration)
         {
             ////Assign Variables
+           
             var applicationUser = new ApplicationUser()
             {
                 FullName = userRegistration.FullName,
                 Email = userRegistration.Email,
-                UserName = userRegistration.UserName
+                //UserName = userRegistration.UserName
             };
             ////Encrypted Password Assign Here
             var result = this.userManager.CreateAsync(applicationUser, userRegistration.Password);
