@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, Output } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output ,EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -7,7 +7,6 @@ import * as jwt_decode from 'jwt-decode';
 import { Token } from '@angular/compiler';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
-import { EventEmitter } from 'events';
 import { Title } from '@angular/platform-browser';
 import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 import { HomeComponent } from '../home/home.component';
@@ -31,7 +30,7 @@ export class NotesComponent implements OnInit {
   color='#ffffff';
   image;
   @Input() cards;
-  @Output() public notes = new EventEmitter();
+  // @Output()  messageEvent = new EventEmitter();
   ngOnInit() {
     var token = localStorage.getItem('token');
 
@@ -43,6 +42,7 @@ export class NotesComponent implements OnInit {
       headers: headers_object
     };
   }
+  @Output() public notes = new EventEmitter<any>();
 
   AddNotes() {
     try {
@@ -62,10 +62,14 @@ export class NotesComponent implements OnInit {
        
         
         this.service.AddNotes(this.form.value, UserId,headers_object).subscribe(
-          (res: any) => {
+          data => {
+            console.log(this.form.value);
+            this.notes.emit(this.form.value)
+            console.log(data);
+            
            this.form.reset();
             //  this.router.navigateByUrl('/home');
-            this.notes.emit(res);
+            
             
           },
           err => {

@@ -8,10 +8,12 @@
 
   <div fxFlexOffset="-39" [ngStyle]="{'font-size':'15px' ,'color':'gray'} "><br>{{Email}}<br></div>
 </div>
-
+<div let collaborator of Collaborator>
+<!-- {{collaborator.Collaborator[0].senderEmail}} -->
 <button class="togle" mat-mini-fab color="white">
   <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
 </button>
+</div>
 
 <input class="togle" type="text" [(ngModel)]='AddPerson' placeholder=" Person or Email to Share"><br><br>
 

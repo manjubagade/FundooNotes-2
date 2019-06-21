@@ -3,12 +3,9 @@ import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 
-var t = localStorage.getItem('token');
-var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
+var token = localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 
-var x=localStorage.getItem('notiToken');
-var Authorize=new HttpHeaders().set("Authorization","key=AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
-var Authorize=new HttpHeaders().set("Content-Type","application/json");
 
 @Injectable({
   providedIn: 'root'
@@ -23,21 +20,23 @@ export class NoteService {
 
   }
 
-  AddNotes(formData, UserId, t) {
+  AddNotes(formData, UserId, token) {
     formData.UserId = UserId;
-    return this.http.post(environment.BaseURI + '/Notes/addNotes', formData, t);
+    return this.http.post(environment.BaseURI + '/Notes/addNotes', formData, token);
   }
 
-  getNotesById(UserId: string, t) {
+  getNotesById(UserId: string, token) {
 
-    return this.http.get(environment.BaseURI + '/Notes/view/' + UserId, t);
+    return this.http.get(environment.BaseURI + '/Notes/view/' + UserId, token);
   }
 
   UpdateNotes(id, note, headers_object) {
     console.log("In Service Update 55555 " + id, note);
     return this.http.put(environment.BaseURI + '/Notes/updateNotes/' + id, note, headers_object);
   }
-
+  pushNotification(UserId,headers_object){
+    return this.http.get(environment.BaseURI + '/Notes/reminder/' + UserId,headers_object);
+  }
   GetArchiveNotes(UserId) {
     return this.http.get(environment.BaseURI + '/Notes/archive/' + UserId)
   }
@@ -96,6 +95,16 @@ export class NoteService {
     return this.http.delete(environment.BaseURI + '/Label/delete/' + id, headers_object);
 
   }
+  LabelNotes(id,data){
+    var  headers_object = {
+      headers: new HttpHeaders({
+        'Authorization' : 'bearer'+ localStorage.getItem('token')
+      })
+    };
+    console.log("Labesssssssssssssssssss",id,data);
+    
+    return this.http.get(environment.BaseURI + '/Label/viewlabelnotes/' + id, data);
+  }
   AddCollaborator(data) {
     console.log(data);
 
@@ -105,7 +114,8 @@ export class NoteService {
     ViewCollaborators(UserId,headers_object) {
       return this.http.get(environment.BaseURI + '/Collaborators/viewcollaborators/' + UserId,headers_object);
   }
-  
+
+ 
   // Pushnotification(){
   //  var url= 'https://fcm.googleapis.com/fcm/send'
   //  var data={

@@ -83,7 +83,11 @@ export class HomeComponent implements OnInit {
 
     var ProfileUrl = localStorage.getItem("profilePic");
     var user = localStorage.getItem('user');
+this.service.pushNotification(UserId,headers_object).subscribe(data=>{
+  console.log(data);
+  
 
+})
     this.service.getLabelsById(UserId, headers_object).subscribe(
       data => {
         this.Label = data;
@@ -94,6 +98,11 @@ export class HomeComponent implements OnInit {
     ), (err: any) => {
       console.log(err);
     };
+  }
+
+  EditLabel(labelid){
+    this.dataService.changeSearchMsg(labelid);
+    this.router.navigateByUrl('home/displaylabels');
   }
 
   onLogout() {

@@ -170,7 +170,7 @@ export class IconComponent implements OnInit {
   var UserId=localStorage.getItem('UserId');
 
 var LabelOnNotes={
-  LabelId:label,
+  labelId:label,
   NotesId:this.cards.id,
   UserId,
 }
@@ -180,7 +180,7 @@ console.log(LabelOnNotes,"sdfghjk");
 
     this.service.AddNotesLabel(LabelOnNotes, headers_object).subscribe(
       (res:any) => {
-        this.setNote.emit({res});
+        this.setNote.emit(LabelOnNotes);
       },
     
     )
@@ -192,7 +192,7 @@ console.log(LabelOnNotes,"sdfghjk");
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     this.service.UpdateNotes(card.id, card, headers_object).subscribe(data => {
     
-      this.setNote.emit({});
+      // this.setNote.emit({});
     }, err => {
       console.log(err);
     })
@@ -204,7 +204,7 @@ console.log(LabelOnNotes,"sdfghjk");
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 1) + " " + date.getHours() + ":" + date.getMinutes();
     this.service.UpdateNotes(card.id, card, headers_object).subscribe(data => {
       
-      this.setNote.emit({});
+      // this.setNote.emit({});
     }, err => {
       console.log(err);
     })
@@ -216,7 +216,7 @@ console.log(LabelOnNotes,"sdfghjk");
     card.reminder = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() + 7) + " " + date.getHours() + ":" + date.getMinutes();
     this.service.UpdateNotes(card.id, card, headers_object).subscribe(data => {
       
-      this.setNote.emit({});
+      // this.setNote.emit({});
     }, err => {
       console.log(err);
     })

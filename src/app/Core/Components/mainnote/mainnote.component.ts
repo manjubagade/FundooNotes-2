@@ -9,6 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./mainnote.component.css']
 })
 export class MainnoteComponent implements OnInit {
+  message:any
   notes: any;
   Collaborator:any;
   CardNotes = [];
@@ -22,10 +23,10 @@ export class MainnoteComponent implements OnInit {
 
   ngOnInit() {
    
-     this.ViewCollaborators();
+     this.Notes();
   }
 
-  ViewCollaborators() {
+  Notes() {
     var UserId = localStorage.getItem("UserId");
     var t=localStorage.getItem('token');
     var headers_object = new HttpHeaders().set("Authorization", "Bearer " + t);
@@ -44,12 +45,16 @@ export class MainnoteComponent implements OnInit {
     };
   }
   closed(event) {
-    console.log('event');
-    this.ViewCollaborators();
+    console.log(event,"dfghjk");
+    this.Notes();
   }
   
   eventOccur(event) {
-    this.ViewCollaborators();
+    console.log("remove",event);
+    this.Notes();
   }
 
+  receiveMessage($event) {
+    this.Notes();
+  }
 }

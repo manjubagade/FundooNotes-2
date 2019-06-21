@@ -53,36 +53,49 @@
               </div>
             </div>
 
-            <div class="collaborator">
-                <div *ngFor="let collaborator of collaborator">
-                    
-                    <div *ngIf="note.id == collaborator.notesId">
-                        
-                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.senderEmail}}">
-                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-                 
-                </button>
-                
+            <div>
+              <div *ngFor="let collaborator of collaborator">
+                <div *ngIf="note.id == collaborator.notesId">
+                  <div *ngIf="Email == collaborator.receiverEmail">
+    
+                    <button mat-mini-fab style="background-color: white"
+                      matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(note)">
+                      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                    </button>
+    
+                  </div>
                 </div>
-                
+              </div>
+            </div>
+    
+            <div>
+              <div *ngFor="let collaborator of collaborator">
+                <div *ngIf="note.id == collaborator.notesId">
+                  <div *ngIf="Emails.Email == collaborator.senderEmail">
+    
+                    <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}" (click)="opendialogs(note)">
+                      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                    </button>
+    
+                  </div>
+    
                 </div>
-                
-           </div>
-         
+              </div>
+            </div>
+    
+
             <div class="chipinputArea">
               <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
-                <mat-chip-list >
                   <mat-chip [selectable]="selectable" [removable]="removable" (removed)="Reminder(note.id,note)">
                     {{note.reminder|date:medium}}
                     <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
-                </mat-chip-list>
               </div>
             </div>
-  
+
           </div>
 
-          
+
 
 
           <div class="hower" style="opacity: 0">
@@ -144,38 +157,39 @@
             </div>
           </div>
         </div>
-       
+
 
         <div>
           <div *ngFor="let collaborator of collaborator">
-              <div *ngIf="note.id == collaborator.notesId">
-              <div *ngIf="xyz.Email == collaborator.receiverEmail">
-              
-          <button mat-mini-fab style="background-color: white" matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(cards)">
-            <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-          </button>
-       
-          </div>
-        </div>
-      </div>
-         </div>
+            <div *ngIf="note.id == collaborator.notesId">
+              <div *ngIf="Emails.Email == collaborator.receiverEmail">
 
-         <div>
-            <div *ngFor="let collaborator of collaborator">
-                <div *ngIf="note.id == collaborator.notesId">
-                <div *ngIf="xyz.Email == collaborator.senderEmail">
-                
-            <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
-              <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-            </button>
-           
+                <button mat-mini-fab style="background-color: white"
+                  matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(note)">
+                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                </button>
+
+              </div>
             </div>
-            
           </div>
         </div>
-           </div>
 
-         
+        <div>
+          <div *ngFor="let collaborator of collaborator">
+            <div *ngIf="note.id == collaborator.notesId">
+              <div *ngIf="Emails.Email == collaborator.senderEmail">
+
+                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}" (click)="opendialogs(note)">
+                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
 
 
         <div class="chipinputArea">
@@ -186,7 +200,6 @@
                 <mat-icon matChipRemove style="opacity: 0" class="hower" *ngIf="removable">cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
           </div>
         </div>
 

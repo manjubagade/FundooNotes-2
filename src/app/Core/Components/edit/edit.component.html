@@ -55,7 +55,35 @@
         </div>
       </div>
     </div>
-  
+   <div>
+          <div *ngFor="let collaborator of collaborator">
+            <div *ngIf="note.id == collaborator.notesId">
+              <div *ngIf="xyz.Email == collaborator.receiverEmail">
+
+                <button mat-mini-fab style="background-color: white"
+                  matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(cards)">
+                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div *ngFor="let collaborator of collaborator">
+            <div *ngIf="note.id == collaborator.notesId">
+              <div *ngIf="xyz.Email == collaborator.senderEmail">
+
+                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}">
+                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
     <div class="chipinputArea">
       <div *ngIf="note.reminder!='0001-01-01T00:00:00'">
         <mat-chip-list #chipList>

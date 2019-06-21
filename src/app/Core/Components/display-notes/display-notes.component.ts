@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { notEqual } from 'assert';
 import { DragDropModule, moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DisplayLabelsComponent } from '../display-labels/display-labels.component';
+import { CollaboratorsComponent } from '../Collaborators/collaborators.component';
 
 var token = localStorage.getItem('token');
 var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
@@ -31,8 +33,8 @@ export class DisplayNotesComponent implements OnInit {
   selectable = true;
   removable = true;
   pipe;
-  xyz;
-  
+  Emails;
+  cardLabel:any;
   LabelOnNotes:any;
   addOnBlur = true;
   timePeriods = [
@@ -51,10 +53,10 @@ export class DisplayNotesComponent implements OnInit {
 
   }
   grid;
-  
+
   @Input() search;
-  @Input() cards;
-  @Input() collaborator;
+  @Input() cards: any;
+    @Input() collaborator;
   @Input() archived;
   @Input() trash;
   @Input() untrash;
@@ -67,7 +69,7 @@ export class DisplayNotesComponent implements OnInit {
   archive: boolean;
   trashNote: boolean;
   Label:any;
-  cardLabel:any;
+ // cardLabel:any;
   css = 'row wrap'
   flag1 = true;
   
@@ -86,7 +88,7 @@ export class DisplayNotesComponent implements OnInit {
 
     });
    
-    this.xyz={
+    this.Emails={
 Email: localStorage.getItem('Email')
     }
     this.service.viewNotesLabel(UserId, headers_object).subscribe(data=>{
@@ -127,10 +129,12 @@ Email: localStorage.getItem('Email')
   openDialog(note) {
 
 
+// console.log(this.collaborator);
 
     const dialogRef = this.dialog.open(EditComponent,
       {
         data: note,
+       
         panelClass: 'updateDialog'
       });
 
@@ -147,7 +151,27 @@ Email: localStorage.getItem('Email')
       }
     })
   }
+  openDialogs(notes) {
+    const dialogRef = this.dialog.open(CollaboratorsComponent,
+      {
+        data: notes
 
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'change') {
+    
+      }
+      else {
+   
+        // this.service.UpdateNotes(this.Email, this.Email, headers_object).subscribe(data => {
+         
+        // }, err => {
+        //   console.log(err);
+        // })
+      }
+    })
+  }
   Archive(event) {
 
     this.messageEvent.emit(event)
@@ -158,7 +182,12 @@ Email: localStorage.getItem('Email')
    * @param event 
    */
   Trash(event) {
-
+    console.log(event);
+    var label=event;
+    this.cardLabel.labelId=label.labelId;
+   
+    console.log(this.cardLabel.labelId);
+    
     this.messageEvent.emit(event);
 
   }
@@ -170,7 +199,7 @@ Email: localStorage.getItem('Email')
 
   remove(id) {
     this.service.DeleteNotesLabel(id).subscribe(data => {
-      this.messageEvent.emit(event);
+      this.messageEvent.emit(this.cards);
     })
   }
  

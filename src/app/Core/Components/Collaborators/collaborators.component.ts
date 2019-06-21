@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { NoteService } from '../../services/NoteService/note.service';
+import { HttpHeaders } from '@angular/common/http';
 
+var token = localStorage.getItem('token');
+var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
 @Component({
   selector: 'app-collaborators',
   templateUrl: './collaborators.component.html',
@@ -9,6 +12,7 @@ import { NoteService } from '../../services/NoteService/note.service';
 })
 export class CollaboratorsComponent implements OnInit {
   AddPerson;
+  Collaborator;
   profilePic=localStorage.getItem('profilePic');
  user=localStorage.getItem('user');
  Email=localStorage.getItem('Email');
@@ -18,7 +22,22 @@ export class CollaboratorsComponent implements OnInit {
     console.log(this.data);
     var user=localStorage.getItem('user');
     var Email=localStorage.getItem('Email');
+    var UserId=localStorage.getItem('UserId');
     
+    this.service.ViewCollaborators(UserId, headers_object).subscribe(data => {
+        
+      this.Collaborator={
+        Collaborator : data,
+    }
+   
+    console.log(this.Collaborator);
+  
+     if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
+      console.log("Success");
+      
+    }
+    
+ })
   }
 
   Cancle(){

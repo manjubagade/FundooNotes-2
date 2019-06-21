@@ -19,6 +19,7 @@ export class EditComponent implements OnInit {
   constructor(public dialog: MatDialogRef<EditComponent>, @Inject(MAT_DIALOG_DATA) public data,public service:NoteService) { }
    note;
    title;
+   collaborator;
    description;
    image;
    Label;
@@ -27,6 +28,9 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     console.log(this.data);
     this.note=this.data;
+
+console.log(this.collaborator);
+
     this.title=this.note.title;
     this.description=this.note.description;
     this.image=this.note.image;
