@@ -9,6 +9,7 @@ namespace RepositoryLayer.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -135,18 +136,19 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <returns>return NotesModel</returns>
-        public (IList<Notes>,IList<CollaboratorMap>) ViewNotes(string userId)
+        public (IList<Notes>, IList<CollaboratorMap>) ViewNotes(string userId)
         {
             var list = new List<Notes>();
             var list1 = new List<CollaboratorMap>();
             var note = from notes in this.registrationControl.Notes where (notes.UserId == userId && notes.IsTrash == false && notes.IsArchive == false) orderby notes.UserId descending select notes;
-           
+
             foreach (var item in note)
             {
                 list.Add(item);
             }
             var user = from users in registrationControl.Application where users.Id == userId select users;
-            foreach(var users in user) {
+            foreach (var users in user)
+            {
                 var innerJoin = from e in this.registrationControl.Notes
                                 join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
                                 where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email
@@ -162,19 +164,19 @@ namespace RepositoryLayer.Services
                                     Color = e.Color
                                 };
                 var Join = from e in this.registrationControl.Notes
-                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
-                                where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email || d.SenderEmail == users.Email
+                           join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
+                           where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email || d.SenderEmail == users.Email
 
                            select new CollaboratorMap
-                                {
-                                    NotesId = int.Parse(d.Id),
-                                   SenderEmail = d.SenderEmail,
-                                   ReceiverEmail = d.ReceiverEmail
-                                };
+                           {
+                               NotesId = int.Parse(d.Id),
+                               SenderEmail = d.SenderEmail,
+                               ReceiverEmail = d.ReceiverEmail
+                           };
 
                 foreach (var notes in innerJoin)
                 {
-                list.Add(notes);
+                    list.Add(notes);
                 }
                 foreach (var collaborator in Join)
                 {
@@ -182,7 +184,7 @@ namespace RepositoryLayer.Services
                 }
             }
 
-            return (list.ToArray(),list1.ToArray());
+            return (list.ToArray(), list1.ToArray());
         }
 
         /// <summary>
@@ -194,14 +196,11 @@ namespace RepositoryLayer.Services
         {
             try
             {
-                var collaborator = from coll in this.registrationControl.Collaborators where coll.Id.Equals(id) select coll;
-                if(collaborator == null)
-            { 
-                Notes notes = await this.registrationControl.Notes.FindAsync(id);
-                registrationControl.Notes.Remove(notes);
-             }
+                    Notes notes = await this.registrationControl.Notes.FindAsync(id);
+                    registrationControl.Notes.Remove(notes);
+                
                 return registrationControl.SaveChanges();
-               
+
             }
             catch (Exception e)
             {
@@ -298,22 +297,24 @@ namespace RepositoryLayer.Services
         /// <returns>
         /// Notes data
         /// </returns>
-        public IList<Notes> Alarm(string userid)
+        public async Task<IList<Notes>> Alarm(string userid)
         {
-            ////var list = new List<Notes>();
-            ////var Alarm = from notes in this.registrationControl.Notes where notes.UserId == Userid select notes.Reminder;
-            ////var time = DateTime.Now;
-            ////var time= "0001 - 01 - 01 00:00:00.0000000";
-            ////if (Alarm.Equals(time))
-            ////{
-            ////    Console.WriteLine("Alarm Is Successfully Display");
-            ////}
-
-            var a = 10;
-            var b = 20 - a;
-            if (a == b)
+            var time = from times in registrationControl.Notes.Where(c => c.UserId == userid) select times;
+            //foreach(var alarm in time)
+            //{
+            //    if (alarm.Reminder== DateTime.Now)
+            //    {
+            //       await this.PushAlarmNotification();
+            //    }
+            //}
+            string a = "2019 - 06 - 20 02:45:14.4150000";
+            string b= "2019 - 06 - 20 02:45:14.4150000";
+          // string First= a.ToShortDateString();
+          // string strDate = a.ToString("dd/MM/yyyy");
+            DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
+            if (a==b)
             {
-                this.PushAlarmNotification();
+               await this.PushAlarmNotification();
             }
 
             return null;
@@ -323,109 +324,55 @@ namespace RepositoryLayer.Services
         /// Pushes the alarm notification.
         /// </summary>
         /// <returns>result data</returns>
-        public int PushAlarmNotification()
+        public async Task<int> PushAlarmNotification()
         {
-            ////           var client = new HttpClient();
-            ////            var data = @"
-            //// notification: {
-            ////  'title': 'Hello World', 
-            ////  'body': 'This is Message from Aniket'
-            //// },
-            //// 'to' : 'cViOWmXN0FU:APA91bGoixBJQSdzn4i2xM0sq0Srb4GfcIrQh6Yvntzu4ltP7uOJaopf5QHhAtLYwDiL77czIrhjbeDt893aKjaRusTpjEwoL1y5XtjGisLwCEg9OMp7Iq_V3Mmh-WDS40aJhGHGRTcx'
-            ////}";
-            ////            var msg = new HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://fcm.googleapis.com/fcm/send");
-            ////            HttpRequestMessage()
-            ////            // msg.Headers.Add("Content-Type", "application / json");
-            ////            //msg.Headers.Add("Authorization", "'key=AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG'");
-            ////           client.DefaultRequestHeaders.Add("Authorization", "key AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
+            try
+            {
+                // Get the server key from FCM console
+                var serverKey = string.Format("key={0}", "AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
 
-            ////                msg.Content = new StringContent(
-            ////                    data,
-            ////                    UnicodeEncoding.UTF8,
-            ////                    "application/json");
-            ////                client.SendAsync(msg);
-            ////            // return new FirebaseRequest(HttpMethod.POST, https://fcm.googleapis.com/fcm/send , jsonData).Execute();
-            ////            return 1;
-            ////        }
-            ////var request="";
-            var data = @"
-   headers: 
-    { 
-       'Authorization': 'key=AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo-YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G-aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG',
-     },
-             notification: {
-              'title': 'Hello World', 
-              'body': 'This is Message from Aniket'
-             },
-             'to' : 'cViOWmXN0FU:APA91bGoixBJQSdzn4i2xM0sq0Srb4GfcIrQh6Yvntzu4ltP7uOJaopf5QHhAtLYwDiL77czIrhjbeDt893aKjaRusTpjEwoL1y5XtjGisLwCEg9OMp7Iq_V3Mmh-WDS40aJhGHGRTcx'
-            }";
-            var client = new HttpClient();
-            var msg = new HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://fcm.googleapis.com/fcm/send");
-            msg.Headers.Add("Authorization", "key = AAAAaCKwEdQ:APA91bEr4NSV6brLrqstvZfegKNimcVNN1esDfIVQ5whKo - YQ32RIr9zM2p9cCuFV5RbJe8ZJ6MCc_oSO96Zlp6eju_uRxlO5G - aDdEaWLnW1UOK35bMOvL9bEgq2o4HiT85EPnRBizG");
-            msg.Content = new StringContent(
-                data,
-                UnicodeEncoding.UTF8,
-                "application/json");
-            return 1;
-           
+                // Get the sender id from FCM console
+                var senderId = string.Format("id={0}", "447258563028");
+
+                var data = new
+                {
+                    to = "dSgnCdE3y5U:APA91bGrAp1IJfO3wJlyRH02HuL6q9wLpDzH9VZhsaippsstPaVbweLuqYhvyciy4rhMH0qnaNcPbE7gnweQnBw3ziYPjm2Zo27iTOQ4uS27C1PE3GiQMBbymog32dLuqLfl_TqLo1K9", // Recipient device token
+                    notification = new
+                    {
+                        title = "Hello Xyz",
+                        body = "This is Message from Aniket"
+                    }
+                };
+
+                // Using Newtonsoft.Json
+                var jsonBody = JsonConvert.SerializeObject(data);
+
+                using (var httpRequest = new HttpRequestMessage(System.Net.Http.HttpMethod.Post, "https://fcm.googleapis.com/fcm/send"))
+                {
+                    httpRequest.Headers.TryAddWithoutValidation("Authorization", serverKey);
+                    httpRequest.Headers.TryAddWithoutValidation("Sender", senderId);
+                    httpRequest.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        var result = await httpClient.SendAsync(httpRequest);
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
-        //public void SendPushNotification(string deviceTokens, string title, string body, object data)
-        //{
-
-
-        //    bool sent = false;
-
-        //    if (deviceTokens != null)
-        //    {
-              
-
-        //        var notification = new notification()
-        //        {
-
-
-        //            title = title,
-        //            text = body,
-
-
-        //            data = data,
-        //            registration_ids = deviceTokens
-        //        };
-
-                
-        //        string jsonMessage = JsonConvert.SerializeObject(notification);
-
-        //        /*
-        //         ------ JSON STRUCTURE ------
-        //         {
-        //            notification: {
-        //                            title: "",
-        //                            text: ""
-        //                            },
-        //            data: {
-        //                    action: "Play",
-        //                    playerId: 5
-        //                    },
-        //            registration_ids = ["id1", "id2"]
-        //         }
-        //         ------ JSON STRUCTURE ------
-        //         */
-
-        //        //Create request to Firebase API
-        //        var request = new HttpRequestMessage(HttpMethod.Post, FireBasePushNotificationsURL);
-
-        //        request.Headers.TryAddWithoutValidation("Authorization", "key=" + ServerKey);
-        //        request.Content = new StringContent(jsonMessage, Encoding.UTF8, "application/json");
-
-        //        HttpResponseMessage result;
-        //        using (var client = new HttpClient())
-        //        {
-        //            result = await client.SendAsync(request);
-        //            sent = sent && result.IsSuccessStatusCode;
-        //        }
-        //    }
-        //}
-        //        return sent;
-        //    }
-
-}
+    }
 }

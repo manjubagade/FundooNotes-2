@@ -200,9 +200,9 @@ namespace FundooApi.Controllers
         /// <returns>data of notification</returns>
         [HttpGet]
         [Route("Alarm/{userId}")]
-        public IActionResult Alarrm(string userId)
+        public async Task<IActionResult> Alarm(string userId)
         {
-            IList<Notes> result = this.notesHandler.Alarm(userId);
+            IList<Notes> result = await this.notesHandler.Alarm(userId);
             if (result == null)
             {
                 return this.NotFound("no reminder");

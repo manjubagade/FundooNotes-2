@@ -13,6 +13,7 @@ namespace BusinessLayer.Services
     using System.Threading.Tasks;
     using BusinessLayer.Interfaces;
     using Common.Models;
+    using FundooApi;
     using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer.Interface;
 
@@ -123,5 +124,11 @@ namespace BusinessLayer.Services
         {
             return await this.repositoryLabel.DeleteNotesLabel(id);
         }
+
+        public IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel)
+        {
+            return this.repositoryLabel.ViewLabelNotes(notesLabelmodel);
+        }
+        
     }
 }

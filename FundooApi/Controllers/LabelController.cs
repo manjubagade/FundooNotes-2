@@ -182,5 +182,20 @@ namespace FundooApi.Controllers
                 return this.BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("viewlabelnotes/{userId}")]
+        public IActionResult ViewLabelNotes(NotesLabel notesLabelmodel)
+        {
+            IList<Notes> result = this.label.ViewLabelNotes(notesLabelmodel);
+            if (result == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(new { result });
+        }
+
     }
 }

@@ -89,6 +89,6 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="Userid">The userid.</param>
         /// <returns>Notes data</returns>
-        IList<Notes> Alarm(string userid);
+        Task<IList<Notes>> Alarm(string userid);
     }
 }

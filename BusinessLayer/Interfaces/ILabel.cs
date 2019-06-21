@@ -12,6 +12,7 @@ namespace BusinessLayer.Interfaces
     using System.Text;
     using System.Threading.Tasks;
     using Common.Models;
+    using FundooApi;
 
     /// <summary>
     /// Interface ILabel in Business Layer
@@ -67,5 +68,7 @@ namespace BusinessLayer.Interfaces
         /// <param name="id">The identifier.</param>
         /// <returns>delete success data</returns>
         Task<int> DeleteNotesLabel(int id);
+
+        IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel);
     }
 }

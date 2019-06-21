@@ -218,5 +218,20 @@ namespace RepositoryLayer.Services
                 throw new Exception(e.Message);
             }
         }
+
+        public IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel)
+        {
+            var list = new List<Notes>();
+            var label = from labels in this.registrationControl.NotesLabels where labels.UserId == notesLabelmodel.UserId && labels.LabelId == notesLabelmodel.LabelId select labels;
+            foreach (var labels in label)
+            {
+                var notes = from note in registrationControl.Notes where note.Id == labels.NotesId select note;
+                foreach (var note in notes)
+                {
+                    list.Add(note);
+                }
+            }
+            return list.ToArray();
+        }
     }
 }

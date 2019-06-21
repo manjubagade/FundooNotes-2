@@ -136,9 +136,9 @@ namespace BusinessLayer.Services
         /// <returns>
         /// list of data
         /// </returns>
-        public IList<Notes> Alarm(string userid)
+        public async Task<IList<Notes>> Alarm(string userid)
         {
-            return this.repositoryNotes.Alarm(userid);
+            return await this.repositoryNotes.Alarm(userid);
         }
     }
 }

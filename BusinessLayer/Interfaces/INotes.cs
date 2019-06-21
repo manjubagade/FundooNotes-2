@@ -83,6 +83,6 @@ namespace BusinessLayer.Interfaces
         /// </summary>
         /// <param name="Userid">The userid.</param>
         /// <returns>list of data</returns>
-        IList<Notes> Alarm(string userid);
+        Task<IList<Notes>> Alarm(string userid);
     }
 }

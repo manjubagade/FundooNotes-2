@@ -12,6 +12,7 @@ namespace RepositoryLayer.Interface
     using System.Text;
     using System.Threading.Tasks;
     using Common.Models;
+    using FundooApi;
 
     /// <summary>
     /// IRepositoryLabel for Handling Label Operations
@@ -73,5 +74,7 @@ namespace RepositoryLayer.Interface
         /// <param name="id">The identifier.</param>
         /// <returns>result data</returns>
         Task<int> DeleteNotesLabel(int id);
+
+        IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel);
     }
 }
