@@ -69,6 +69,6 @@ namespace BusinessLayer.Interfaces
         /// <returns>delete success data</returns>
         Task<int> DeleteNotesLabel(int id);
 
-        IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel);
+        IList<Notes> ViewLabelNotes(int id);
     }
 }

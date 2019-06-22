@@ -185,10 +185,10 @@ namespace FundooApi.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("viewlabelnotes/{userId}")]
-        public IActionResult ViewLabelNotes(NotesLabel notesLabelmodel)
+        [Route("viewlabelnotes/{id}")]
+        public IActionResult ViewLabelNotes(int id)
         {
-            IList<Notes> result = this.label.ViewLabelNotes(notesLabelmodel);
+            IList<Notes> result = this.label.ViewLabelNotes(id);
             if (result == null)
             {
                 return this.NotFound();

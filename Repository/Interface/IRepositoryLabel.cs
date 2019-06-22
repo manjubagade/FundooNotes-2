@@ -75,6 +75,6 @@ namespace RepositoryLayer.Interface
         /// <returns>result data</returns>
         Task<int> DeleteNotesLabel(int id);
 
-        IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel);
+        IList<Notes> ViewLabelNotes(int id);
     }
 }

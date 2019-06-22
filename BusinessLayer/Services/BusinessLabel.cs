@@ -125,9 +125,9 @@ namespace BusinessLayer.Services
             return await this.repositoryLabel.DeleteNotesLabel(id);
         }
 
-        public IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel)
+        public IList<Notes> ViewLabelNotes(int id)
         {
-            return this.repositoryLabel.ViewLabelNotes(notesLabelmodel);
+            return this.repositoryLabel.ViewLabelNotes(id);
         }
         
     }

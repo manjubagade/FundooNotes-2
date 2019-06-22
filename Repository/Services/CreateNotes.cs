@@ -149,7 +149,7 @@ namespace RepositoryLayer.Services
             var user = from users in registrationControl.Application where users.Id == userId select users;
             foreach (var users in user)
             {
-                var innerJoin = from e in this.registrationControl.Notes
+                var ReceiveCollaboratorNotes = from e in this.registrationControl.Notes
                                 join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
                                 where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email
 
@@ -161,29 +161,27 @@ namespace RepositoryLayer.Services
                                     Description = e.Description,
                                     Label = e.Label,
                                     Image = e.Image,
-                                    Color = e.Color
                                 };
-                var Join = from e in this.registrationControl.Notes
-                           join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
-                           where e.Id.ToString() == d.Id && d.ReceiverEmail == users.Email || d.SenderEmail == users.Email
 
-                           select new CollaboratorMap
-                           {
-                               NotesId = int.Parse(d.Id),
-                               SenderEmail = d.SenderEmail,
-                               ReceiverEmail = d.ReceiverEmail
-                           };
+                var CollaboratesData = from e in this.registrationControl.Notes
+                                join d in this.registrationControl.Collaborators on e.UserId equals d.UserId
+                                where e.Id.ToString() == d.Id
 
-                foreach (var notes in innerJoin)
+                                       select new CollaboratorMap
+                                {
+                                    NotesId = e.Id,
+                                   SenderEmail = d.SenderEmail,
+                                   ReceiverEmail = d.ReceiverEmail,
+                                };
+                foreach (var notes in ReceiveCollaboratorNotes)
                 {
                     list.Add(notes);
                 }
-                foreach (var collaborator in Join)
+                foreach (var collaboratordetails in CollaboratesData)
                 {
-                    list1.Add(collaborator);
+                    list1.Add(collaboratordetails);
                 }
             }
-
             return (list.ToArray(), list1.ToArray());
         }
 
@@ -300,23 +298,15 @@ namespace RepositoryLayer.Services
         public async Task<IList<Notes>> Alarm(string userid)
         {
             var time = from times in registrationControl.Notes.Where(c => c.UserId == userid) select times;
-            //foreach(var alarm in time)
-            //{
-            //    if (alarm.Reminder== DateTime.Now)
-            //    {
-            //       await this.PushAlarmNotification();
-            //    }
-            //}
-            string a = "2019 - 06 - 20 02:45:14.4150000";
-            string b= "2019 - 06 - 20 02:45:14.4150000";
-          // string First= a.ToShortDateString();
-          // string strDate = a.ToString("dd/MM/yyyy");
-            DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
-            if (a==b)
+            foreach (var alarm in time)
             {
-               await this.PushAlarmNotification();
+                string alarmtime = alarm.Reminder.ToString("yyyy-M-dd hh:mm");
+                string currenttime = DateTime.Now.ToString("yyyy-M-dd hh:mm");
+                if (alarmtime == currenttime)
+                {
+                    await this.PushAlarmNotification(alarm);
+                }
             }
-
             return null;
         }
 
@@ -324,7 +314,7 @@ namespace RepositoryLayer.Services
         /// Pushes the alarm notification.
         /// </summary>
         /// <returns>result data</returns>
-        public async Task<int> PushAlarmNotification()
+        public async Task<int> PushAlarmNotification(Notes notes)
         {
             try
             {

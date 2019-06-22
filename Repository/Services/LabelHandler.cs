@@ -219,10 +219,10 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public IList<Notes> ViewLabelNotes(NotesLabel notesLabelmodel)
+        public IList<Notes> ViewLabelNotes(int id)
         {
             var list = new List<Notes>();
-            var label = from labels in this.registrationControl.NotesLabels where labels.UserId == notesLabelmodel.UserId && labels.LabelId == notesLabelmodel.LabelId select labels;
+            var label = from labels in this.registrationControl.NotesLabels where labels.LabelId == id select labels;
             foreach (var labels in label)
             {
                 var notes = from note in registrationControl.Notes where note.Id == labels.NotesId select note;
