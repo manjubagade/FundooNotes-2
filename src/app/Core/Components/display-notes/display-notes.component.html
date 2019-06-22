@@ -161,8 +161,8 @@
 
         <div>
           <div *ngFor="let collaborator of collaborator">
-            <div *ngIf="note.id == collaborator.notesId">
               <div *ngIf="Emails.Email == collaborator.receiverEmail">
+            <div *ngIf="note.id == collaborator.notesId">
 
                 <button mat-mini-fab style="background-color: white"
                   matTooltip="Shared from:{{collaborator.senderEmail}}" (click)="openDialogs(note)">
@@ -175,20 +175,19 @@
         </div>
 
         <div>
-          <div *ngFor="let collaborator of collaborator">
-            <div *ngIf="note.id == collaborator.notesId">
-              <div *ngIf="Emails.Email == collaborator.senderEmail">
-
-                <button mat-mini-fab style="background-color: white" matTooltip="{{collaborator.receiverEmail}}" (click)="opendialogs(note)">
-                  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-                </button>
-
+            <div *ngFor="let collaborator of collaborator">
+                <div *ngIf="Emails.Email == collaborator.senderEmail">
+              <div *ngIf="note.id == collaborator.notesId">
+  
+                  <button mat-mini-fab style="background-color: white"
+                    matTooltip="{{collaborator.receiverEmail}}" (click)="openDialogs(note)">
+                    <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+                  </button>
+  
+                </div>
               </div>
-
             </div>
           </div>
-        </div>
-
 
 
 

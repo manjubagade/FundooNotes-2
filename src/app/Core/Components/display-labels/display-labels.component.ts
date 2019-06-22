@@ -22,16 +22,16 @@ var headers_object = new HttpHeaders().set("Authorization", "Bearer " + token);
     this.dataservice.currentSearchmsg.subscribe(data=>{
       this.labelid=data;
     console.log(this.labelid);
-    this.NotesData={
-      UserId:Userid,
-      labelid:this.labelid
-    }
+    // this.NotesData={
+    //   UserId:Userid,
+    //   labelid:this.labelid
+    // }
     
     })
-//     this.service.LabelNotes(Userid,this.NotesData,headers_object).subscribe(data=>{
-// console.log(data);
-
-//     })
+    this.service.showLabelNotes(this.labelid).subscribe(data=>{
+console.log(data);
+this.NotesData=data['result'];
+    })
   }
 
  

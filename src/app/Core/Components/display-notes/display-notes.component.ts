@@ -34,8 +34,8 @@ export class DisplayNotesComponent implements OnInit {
   removable = true;
   pipe;
   Emails;
-  cardLabel:any;
-  LabelOnNotes:any;
+  cardLabel: any;
+  LabelOnNotes: any;
   addOnBlur = true;
   timePeriods = [
     'Bronze age',
@@ -56,26 +56,26 @@ export class DisplayNotesComponent implements OnInit {
 
   @Input() search;
   @Input() cards: any;
-    @Input() collaborator;
+  @Input() collaborator;
   @Input() archived;
   @Input() trash;
   @Input() untrash;
   @Output() messageEvent = new EventEmitter<any>();
-  Collaborator:any;
+  Collaborator: any;
   flag = true;
-  label:any;
+  label: any;
   unrchive: boolean;
   receiverEmail;
   archive: boolean;
   trashNote: boolean;
-  Label:any;
- // cardLabel:any;
+  Label: any;
+  // cardLabel:any;
   css = 'row wrap'
   flag1 = true;
-  
+
   ngOnInit() {
     var Profilepic = localStorage.getItem("profilePic");
-   var Email=localStorage.getItem('Email');
+    var Email = localStorage.getItem('Email');
     var UserId = localStorage.getItem('UserId');
     var profile = localStorage.getItem('profilePic');
 
@@ -87,34 +87,34 @@ export class DisplayNotesComponent implements OnInit {
       this.flag = data;
 
     });
-   
-    this.Emails={
-Email: localStorage.getItem('Email')
+
+    this.Emails = {
+      Email: localStorage.getItem('Email')
     }
-    this.service.viewNotesLabel(UserId, headers_object).subscribe(data=>{
-      this.cardLabel=data['result'];
-      console.log(this.cardLabel,"labeldata");
+    this.service.viewNotesLabel(UserId, headers_object).subscribe(data => {
+      this.cardLabel = data['result'];
+      console.log(this.cardLabel, "labeldata");
     })
 
-    this.service.ViewCollaborators(UserId, headers_object).subscribe(data => {
-        
-         this.Collaborator={
-             Collaborator:data,
-       }
-      
-       console.log(this.Collaborator);
-     
-        if(this.Collaborator.Collaborator.receiverEmail==localStorage.getItem('Email')){
-         console.log("Success");
-         
-       }
-       
-    })
-    this.service.getLabelsById(UserId,headers_object).subscribe(
+    // this.service.ViewCollaborators(UserId, headers_object).subscribe(data => {
+
+    //   this.Collaborator = {
+    //     Collaborator: data,
+    //   }
+
+    //   console.log(this.Collaborator);
+
+    //   if (this.Collaborator.Collaborator.receiverEmail == localStorage.getItem('Email')) {
+    //     console.log("Success");
+
+    //   }
+
+    // })
+    this.service.getLabelsById(UserId, headers_object).subscribe(
       data => {
         this.Label = data;
-       
-        console.log(this.Label,"aniket");
+
+        console.log(this.Label, "aniket");
 
       }
 
@@ -124,17 +124,17 @@ Email: localStorage.getItem('Email')
 
 
   }
- 
+
 
   openDialog(note) {
 
 
-// console.log(this.collaborator);
+    // console.log(this.collaborator);
 
     const dialogRef = this.dialog.open(EditComponent,
       {
         data: note,
-       
+
         panelClass: 'updateDialog'
       });
 
@@ -157,15 +157,15 @@ Email: localStorage.getItem('Email')
         data: notes
 
       });
-
+    this.dataService.changeSearchMsg(this.collaborator);
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'change') {
-    
+
       }
       else {
-   
+
         // this.service.UpdateNotes(this.Email, this.Email, headers_object).subscribe(data => {
-         
+
         // }, err => {
         //   console.log(err);
         // })
@@ -183,11 +183,11 @@ Email: localStorage.getItem('Email')
    */
   Trash(event) {
     console.log(event);
-    var label=event;
-    this.cardLabel.labelId=label.labelId;
-   
+    var label = event;
+    this.cardLabel.labelId = label.labelId;
+
     console.log(this.cardLabel.labelId);
-    
+
     this.messageEvent.emit(event);
 
   }
@@ -202,9 +202,9 @@ Email: localStorage.getItem('Email')
       this.messageEvent.emit(this.cards);
     })
   }
- 
+
   Pin(card) {
- 
+
     card.Pin = true;
 
 
@@ -227,7 +227,7 @@ Email: localStorage.getItem('Email')
   }
   receiveMessage($event) {
     this.Label = $event
-    console.log(this.Label,"Inserting here");
-    
+    console.log(this.Label, "Inserting here");
+
   }
 }

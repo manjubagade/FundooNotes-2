@@ -95,16 +95,22 @@ export class NoteService {
     return this.http.delete(environment.BaseURI + '/Label/delete/' + id, headers_object);
 
   }
-  LabelNotes(id,data){
-    var  headers_object = {
-      headers: new HttpHeaders({
-        'Authorization' : 'bearer'+ localStorage.getItem('token')
-      })
-    };
-    console.log("Labesssssssssssssssssss",id,data);
+  // LabelNotes(id,data){
+  //   var  headers_object = {
+  //     headers: new HttpHeaders({
+  //       'Authorization' : 'bearer'+ localStorage.getItem('token')
+  //     })
+  //   };
+  //   console.log("Labesssssssssssssssssss",id,data);
     
-    return this.http.get(environment.BaseURI + '/Label/viewlabelnotes/' + id, data);
+  //   return this.http.get(environment.BaseURI + '/Label/viewlabelnotes/' + id, data);
+  // }
+  showLabelNotes(id){
+    console.log(id);
+    
+return this.http.get(environment.BaseURI +'/LAbel/viewlabelnotes/'+id,this.headers_object)
   }
+
   AddCollaborator(data) {
     console.log(data);
 

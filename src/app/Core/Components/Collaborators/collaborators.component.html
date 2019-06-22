@@ -8,15 +8,43 @@
 
   <div fxFlexOffset="-39" [ngStyle]="{'font-size':'15px' ,'color':'gray'} "><br>{{Email}}<br></div>
 </div>
-<div let collaborator of Collaborator>
-<!-- {{collaborator.Collaborator[0].senderEmail}} -->
-<button class="togle" mat-mini-fab color="white">
-  <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
-</button>
+<div let collaborator of notes>
+  <div let collaborator of Collaborator>
+
+    <button class="togle" mat-mini-fab color="white">
+      <mat-icon [ngStyle]="{'color':'rgb(95, 99, 99)'}">person_add</mat-icon>
+    </button>
+
+    <div *ngFor="let collaborator of Collaborator">
+
+
+      <div *ngIf="Emails.Email == collaborator.receiverEmail">
+        <div *ngIf="data.id == collaborator.notesId">
+
+
+          <input class="togle" type="text" [(ngModel)]='collaborator.senderEmail'
+            placeholder=" Person or Email to Share"><br><br>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngFor="let collaborator of Collaborator">
+
+
+      <div *ngIf="Emails.Email == collaborator.senderEmail">
+        <div *ngIf="data.id == collaborator.notesId">
+
+
+          <input class="togle" type="text" [(ngModel)]='collaborator.receiverEmail'
+            placeholder=" Person or Email to Share"><br><br>
+        </div>
+      </div>
+
+    </div>
+    <input class="togle" type="text" [(ngModel)]='receiverEmail' placeholder=" Person or Email to Share"><br><br>
+  </div>
 </div>
-
-<input class="togle" type="text" [(ngModel)]='AddPerson' placeholder=" Person or Email to Share"><br><br>
-
 <div class="devider"></div>
 
 <div fxLayout='row' fxLayoutAlign='end center' style="background-color: rgb(247, 243, 243)">
